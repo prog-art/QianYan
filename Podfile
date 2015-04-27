@@ -9,5 +9,7 @@ end
 
 target 'QianYan_IosTests' do
 
+pod 'CocoaAsyncSocket', '~> 7.4.1'
+
 end
 

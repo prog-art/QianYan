@@ -23,6 +23,61 @@
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
+		<key>19909B421AEE985200CCB721</key>
+		<dict>
+			<key>children</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>models</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>19909B431AEE985700CCB721</key>
+		<dict>
+			<key>children</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>services</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>19909B441AEE98A500CCB721</key>
+		<dict>
+			<key>children</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>setting</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>19909B451AEE98AE00CCB721</key>
+		<dict>
+			<key>children</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>views</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>19909B461AEE98B200CCB721</key>
+		<dict>
+			<key>children</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>thirdPart_byHand</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>19ED2ED51AECF84F00E9DBEA</key>
 		<dict>
 			<key>children</key>
@@ -211,6 +266,11 @@
 		<dict>
 			<key>children</key>
 			<array>
+				<string>19909B461AEE98B200CCB721</string>
+				<string>19909B451AEE98AE00CCB721</string>
+				<string>19909B441AEE98A500CCB721</string>
+				<string>19909B431AEE985700CCB721</string>
+				<string>19909B421AEE985200CCB721</string>
 				<string>19ED2EE51AECF84F00E9DBEA</string>
 				<string>19ED2EE61AECF84F00E9DBEA</string>
 				<string>19ED2EEB1AECF84F00E9DBEA</string>
@@ -466,7 +526,9 @@
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
-			<array/>
+			<array>
+				<string>AA52CF7D27ECBDC70F67D76F</string>
+			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
@@ -489,9 +551,11 @@
 			<string>19ED2F071AECF84F00E9DBEA</string>
 			<key>buildPhases</key>
 			<array>
+				<string>6F371F6A77C18D796E56AD27</string>
 				<string>19ED2EF61AECF84F00E9DBEA</string>
 				<string>19ED2EF71AECF84F00E9DBEA</string>
 				<string>19ED2EF81AECF84F00E9DBEA</string>
+				<string>FB93D469641EAB634D98AAB5</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
@@ -828,6 +892,8 @@
 		</dict>
 		<key>19ED2F081AECF84F00E9DBEA</key>
 		<dict>
+			<key>baseConfigurationReference</key>
+			<string>4BCFE60503547709FAB2C1E5</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>BUNDLE_LOADER</key>
@@ -858,6 +924,8 @@
 		</dict>
 		<key>19ED2F091AECF84F00E9DBEA</key>
 		<dict>
+			<key>baseConfigurationReference</key>
+			<string>928F366D28C73DBE248F1F4D</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>BUNDLE_LOADER</key>
@@ -887,6 +955,8 @@
 			<array>
 				<string>3CD33F4688A6D206477B0FD6</string>
 				<string>DAFBB40752495D47105A5F5E</string>
+				<string>4BCFE60503547709FAB2C1E5</string>
+				<string>928F366D28C73DBE248F1F4D</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -937,6 +1007,7 @@ fi
 			<key>children</key>
 			<array>
 				<string>11F773AF3A6D9E59DFFC3C35</string>
+				<string>B56B755DAE30BD9D1F0F95C3</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -959,6 +1030,73 @@ fi
 			<string>Pods/Target Support Files/Pods-QianYan_Ios/Pods-QianYan_Ios.debug.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4BCFE60503547709FAB2C1E5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-QianYan_IosTests.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-QianYan_IosTests/Pods-QianYan_IosTests.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6F371F6A77C18D796E56AD27</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>928F366D28C73DBE248F1F4D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-QianYan_IosTests.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-QianYan_IosTests/Pods-QianYan_IosTests.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AA52CF7D27ECBDC70F67D76F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B56B755DAE30BD9D1F0F95C3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>B3C569F6A01DC9B0AAC632E7</key>
 		<dict>
@@ -984,6 +1122,19 @@ fi
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
 		</dict>
+		<key>B56B755DAE30BD9D1F0F95C3</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-QianYan_IosTests.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
 		<key>DAFBB40752495D47105A5F5E</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -998,6 +1149,30 @@ fi
 			<string>Pods/Target Support Files/Pods-QianYan_Ios/Pods-QianYan_Ios.release.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FB93D469641EAB634D98AAB5</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-QianYan_IosTests/Pods-QianYan_IosTests-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>
