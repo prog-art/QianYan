@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 ld/
+=======
+# Xcode
+#
+build/
+>>>>>>> 992bad77185cb2fa065fe7646cd9e5d40a556bff
 *.pbxuser
 !default.pbxuser
 *.mode1v3
