@@ -86,16 +86,16 @@
         data = [[NSData alloc] initWithBytes:testByte length:sizeof(testByte)/sizeof(Byte)] ;
     }
     
-    {
-        //第二种
-        NSString *testData = [QYUtils QY_FormatStringFromNSInteger:8 ToLength:2] ;
-        testData = [testData stringByAppendingString:[QYUtils QY_FormatStringFromNSInteger:LOGIN2JRM_REQUEST_CMD ToLength:4]] ;
-        testData = [testData stringByAppendingString:[QYUtils QY_FormatStringFromNSInteger:JOSEPH_DEVICE_JCLIENT ToLength:4]] ;
-        QYDebugLog(@"dataString = %@",testData) ;
-        //NSString *testData = @"0008000000280000001e" ;
-        data = [testData dataUsingEncoding:NSUTF8StringEncoding] ;
-    }
-
+//    {
+//        //第二种
+//        NSString *testData = [QYUtils QY_FormatStringFromNSInteger:8 ToLength:2] ;
+//        testData = [testData stringByAppendingString:[QYUtils QY_FormatStringFromNSInteger:LOGIN2JRM_REQUEST_CMD ToLength:4]] ;
+//        testData = [testData stringByAppendingString:[QYUtils QY_FormatStringFromNSInteger:JOSEPH_DEVICE_JCLIENT ToLength:4]] ;
+//        QYDebugLog(@"dataString = %@",testData) ;
+//        //NSString *testData = @"0008000000280000001e" ;
+//        data = [testData dataUsingEncoding:NSUTF8StringEncoding] ;
+//    }
+//
     
 
     QYDebugLog(@"data = %@",data) ;

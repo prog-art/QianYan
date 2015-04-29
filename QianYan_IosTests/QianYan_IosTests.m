@@ -35,14 +35,14 @@
     [super tearDown];
 }
 
-- (void)testQY_SocketService_sendMessage {
-    XCTestExpectation *exception = [self expectationWithDescription:@"High Exceptions"] ;
-    [[QY_SocketService shareInstance] sendMessage] ;
-    
-    [self waitForExpectationsWithTimeout:10.0 handler:^(NSError *error) {
-        NSLog(@"test") ;
-    }] ;
-}
+//- (void)testQY_SocketService_sendMessage {
+//    XCTestExpectation *exception = [self expectationWithDescription:@"High Exceptions"] ;
+//    [[QY_SocketService shareInstance] sendMessage] ;
+//    
+//    [self waitForExpectationsWithTimeout:10.0 handler:^(NSError *error) {
+//        NSLog(@"test") ;
+//    }] ;
+//}
 
 // ok
 //- (void)testQY_SocketService_connectToHost {

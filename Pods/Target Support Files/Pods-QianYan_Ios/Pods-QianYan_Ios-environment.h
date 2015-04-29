@@ -60,9 +60,3 @@
 #define COCOAPODS_VERSION_MINOR_GDataXML_HTML 2
 #define COCOAPODS_VERSION_PATCH_GDataXML_HTML 0
 
-// QRCodeReaderViewController
-#define COCOAPODS_POD_AVAILABLE_QRCodeReaderViewController
-#define COCOAPODS_VERSION_MAJOR_QRCodeReaderViewController 3
-#define COCOAPODS_VERSION_MINOR_QRCodeReaderViewController 3
-#define COCOAPODS_VERSION_PATCH_QRCodeReaderViewController 0
-
