@@ -98,7 +98,6 @@
 //    }
 //
     
-    [_socket ]
     QYDebugLog(@"data = %@",data) ;
     
     [_socket writeData:data withTimeout:10 tag:0] ;

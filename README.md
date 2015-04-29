@@ -36,7 +36,31 @@
 
 数据模型
 
+### ../ThirdPart_ByHand
 
+	1.QRCodeGenerator.h
+		介绍:
+			封装libqrencode库用于生成二维码图片
+		依赖:
+			<libqrencode/qrencode.h>
+		使用:
+			+ (UIImage *)qrImageForString:(NSString *)string imageSize:(CGFloat)size;
+
+	2.QRCodeReaderViewController
+		介绍:
+			一个扫描二维码的组件,通过QRCodeReaderDelegate回调通知扫描结果字符
+			串 or [QRCodeReaderViewController setCompletionWithBlock] 
+			接受结果
+
+		依赖:
+			组件内部
+		使用:
+			唤起着完成QRCodeReaderDelegate,接受通知,代码里需要加上 
+				[reader.navigationController popViewControllerAnimated:YES] ;
+			来显式的离开reader界面。
+				[reader setCompletionWithBlock:^(NSString 
+			*resultAsString)completionBlock]
+			或者使用回调block接受结果。
 
 ## 开发人员
 + 张睿 <793951781@qq.com> 18817870386
