@@ -10,7 +10,7 @@
 
 #import "QY_SocketService.h"
 
-#import <QRCodeReaderViewController/QRCodeReaderViewController.h>
+#import "QRCodeReaderViewController.h"
 
 @interface ViewController () <QRCodeReaderDelegate>
 
@@ -37,11 +37,11 @@
     QRCodeReaderViewController *reader = [QRCodeReaderViewController new];
     reader.modalPresentationStyle = UIModalPresentationFormSheet;
     reader.delegate = self;
-    __weak typeof (self) wSelf = self;
-    [reader setCompletionWithBlock:^(NSString *resultAsString) {
-        [wSelf.navigationController popViewControllerAnimated:YES];
-        [[[UIAlertView alloc] initWithTitle:@"" message:resultAsString delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil] show];
-    }];
+//    __weak typeof (self) wSelf = self;
+//    [reader setCompletionWithBlock:^(NSString *resultAsString) {
+//        [wSelf.navigationController popViewControllerAnimated:YES];
+//        [[[UIAlertView alloc] initWithTitle:@"" message:resultAsString delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil] show];
+//    }];
     
     [self.navigationController pushViewController:reader animated:YES];
 }
@@ -54,11 +54,8 @@
  * @since 1.0.0
  */
 - (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result{
-    QYDebugLog() ;
-    [self dismissViewControllerAnimated:YES completion:^{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }];
+    QYDebugLog(@"result %@",result) ;
+    [reader.navigationController popViewControllerAnimated:YES] ;
 }
 
 /**
@@ -68,7 +65,7 @@
  */
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader{
     QYDebugLog() ;
-    [self.navigationController popViewControllerAnimated:YES];
+    [reader.navigationController popViewControllerAnimated:YES] ;
 }
 
 

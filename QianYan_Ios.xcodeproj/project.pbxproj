@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADED1AF0AB2600B4E2E6 /* QRCameraSwitchButton.m */; };
+		198BADF41AF0AB2600B4E2E6 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF01AF0AB2600B4E2E6 /* QRCodeReaderView.m */; };
+		198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF21AF0AB2600B4E2E6 /* QRCodeReaderViewController.m */; };
 		19909B491AEE9F4B00CCB721 /* QY_SocketService.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B481AEE9F4B00CCB721 /* QY_SocketService.m */; };
 		19909B4E1AEEA04900CCB721 /* QYUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B4D1AEEA04900CCB721 /* QYUtils.m */; };
 		19909B5B1AEEEC4600CCB721 /* QY_dataPacketFactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B5A1AEEEC4600CCB721 /* QY_dataPacketFactor.m */; };
@@ -34,6 +37,13 @@
 
 /* Begin PBXFileReference section */
 		11F773AF3A6D9E59DFFC3C35 /* libPods-QianYan_Ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QianYan_Ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		198BADEC1AF0AB2600B4E2E6 /* QRCameraSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCameraSwitchButton.h; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCameraSwitchButton.h"; sourceTree = "<group>"; };
+		198BADED1AF0AB2600B4E2E6 /* QRCameraSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCameraSwitchButton.m; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCameraSwitchButton.m"; sourceTree = "<group>"; };
+		198BADEE1AF0AB2600B4E2E6 /* QRCodeReaderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeReaderDelegate.h; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCodeReaderDelegate.h"; sourceTree = "<group>"; };
+		198BADEF1AF0AB2600B4E2E6 /* QRCodeReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeReaderView.h; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCodeReaderView.h"; sourceTree = "<group>"; };
+		198BADF01AF0AB2600B4E2E6 /* QRCodeReaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderView.m; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCodeReaderView.m"; sourceTree = "<group>"; };
+		198BADF11AF0AB2600B4E2E6 /* QRCodeReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeReaderViewController.h; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCodeReaderViewController.h"; sourceTree = "<group>"; };
+		198BADF21AF0AB2600B4E2E6 /* QRCodeReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderViewController.m; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCodeReaderViewController.m"; sourceTree = "<group>"; };
 		19909B471AEE9F4B00CCB721 /* QY_SocketService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_SocketService.h; sourceTree = "<group>"; };
 		19909B481AEE9F4B00CCB721 /* QY_SocketService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_SocketService.m; sourceTree = "<group>"; };
 		19909B4A1AEE9F7400CCB721 /* QY_Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_Common.h; sourceTree = "<group>"; };
@@ -84,6 +94,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		198BADE91AF0AAB800B4E2E6 /* 二维码扫描 */ = {
+			isa = PBXGroup;
+			children = (
+				198BADEC1AF0AB2600B4E2E6 /* QRCameraSwitchButton.h */,
+				198BADED1AF0AB2600B4E2E6 /* QRCameraSwitchButton.m */,
+				198BADEE1AF0AB2600B4E2E6 /* QRCodeReaderDelegate.h */,
+				198BADEF1AF0AB2600B4E2E6 /* QRCodeReaderView.h */,
+				198BADF01AF0AB2600B4E2E6 /* QRCodeReaderView.m */,
+				198BADF11AF0AB2600B4E2E6 /* QRCodeReaderViewController.h */,
+				198BADF21AF0AB2600B4E2E6 /* QRCodeReaderViewController.m */,
+			);
+			name = "二维码扫描";
+			sourceTree = "<group>";
+		};
 		19909B421AEE985200CCB721 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +148,7 @@
 		19909B461AEE98B200CCB721 /* ThirdPart_byHand */ = {
 			isa = PBXGroup;
 			children = (
+				198BADE91AF0AAB800B4E2E6 /* 二维码扫描 */,
 			);
 			name = ThirdPart_byHand;
 			sourceTree = "<group>";
@@ -391,11 +416,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				198BADF41AF0AB2600B4E2E6 /* QRCodeReaderView.m in Sources */,
 				19ED2EE71AECF84F00E9DBEA /* AppDelegate.m in Sources */,
 				19909B4E1AEEA04900CCB721 /* QYUtils.m in Sources */,
 				19ED2EEA1AECF84F00E9DBEA /* QianYan_Ios.xcdatamodeld in Sources */,
+				198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */,
 				19ED2EED1AECF84F00E9DBEA /* ViewController.m in Sources */,
 				19909B491AEE9F4B00CCB721 /* QY_SocketService.m in Sources */,
+				198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */,
 				19909B5B1AEEEC4600CCB721 /* QY_dataPacketFactor.m in Sources */,
 				19ED2EE41AECF84F00E9DBEA /* main.m in Sources */,
 			);
