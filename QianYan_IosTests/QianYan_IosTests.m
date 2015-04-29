@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
+#import <CocoaAsyncSocket/AsyncSocket.h>
+
+#import "QYUtils.h"
+#import "QY_SocketService.h"
+
 @interface QianYan_IosTests : XCTestCase
 
 @end
@@ -17,24 +22,52 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    //    Byte test[] = {0x00 , 0x08 , 0x00 , 0x00 ,0x00 ,0x28 , 0x00 ,0x00,0x00 ,0x1e } ;
+    
+    //    NSLog(@"test byte = !@#!#!@#  ======== %x",test[1]) ;
+    NSError *error ;
+    [[QY_SocketService shareInstance] connectToHost:&error] ;
+    
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testQY_SocketService_sendMessage {
+    XCTestExpectation *exception = [self expectationWithDescription:@"High Exceptions"] ;
+    [[QY_SocketService shareInstance] sendMessage] ;
+    
+    [self waitForExpectationsWithTimeout:10.0 handler:^(NSError *error) {
+        NSLog(@"test") ;
+    }] ;
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
-}
+// ok
+//- (void)testQY_SocketService_connectToHost {
+//    NSError *error ;
+//    BOOL Successed = [[QY_SocketService shareInstance] connectToHost:&error] ;
+//
+//    if (Successed) {
+//        NSLog(@"成功") ;
+//    } else {
+//        NSLog(@"失败 %@",error) ;
+//    }
+//
+//    XCTAssert(Successed) ;
+//}
+
+//- (void)testExample {
+//    // This is an example of a functional test case.
+//    XCTAssert(YES, @"Pass");
+//}
+//
+//- (void)testPerformanceExample {
+//    // This is an example of a performance test case.
+//    [self measureBlock:^{
+//        // Put the code you want to measure the time of here.
+//    }];
+//}
 
 @end
