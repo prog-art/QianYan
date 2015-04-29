@@ -83,6 +83,7 @@
     {
         //第一种
         Byte testByte[] = { 0x00 , 0x08 , 0x00 , 0x00 ,0x00 ,0x28 , 0x00 ,0x00,0x00 ,0x1e } ;
+        
         data = [[NSData alloc] initWithBytes:testByte length:sizeof(testByte)/sizeof(Byte)] ;
     }
     
@@ -97,7 +98,7 @@
 //    }
 //
     
-
+    [_socket ]
     QYDebugLog(@"data = %@",data) ;
     
     [_socket writeData:data withTimeout:10 tag:0] ;

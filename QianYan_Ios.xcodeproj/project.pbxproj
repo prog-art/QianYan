@@ -10,6 +10,7 @@
 		198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADED1AF0AB2600B4E2E6 /* QRCameraSwitchButton.m */; };
 		198BADF41AF0AB2600B4E2E6 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF01AF0AB2600B4E2E6 /* QRCodeReaderView.m */; };
 		198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF21AF0AB2600B4E2E6 /* QRCodeReaderViewController.m */; };
+		198BADF91AF0B51700B4E2E6 /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF81AF0B51700B4E2E6 /* QRCodeGenerator.m */; };
 		19909B491AEE9F4B00CCB721 /* QY_SocketService.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B481AEE9F4B00CCB721 /* QY_SocketService.m */; };
 		19909B4E1AEEA04900CCB721 /* QYUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B4D1AEEA04900CCB721 /* QYUtils.m */; };
 		19909B5B1AEEEC4600CCB721 /* QY_dataPacketFactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B5A1AEEEC4600CCB721 /* QY_dataPacketFactor.m */; };
@@ -44,6 +45,8 @@
 		198BADF01AF0AB2600B4E2E6 /* QRCodeReaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderView.m; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCodeReaderView.m"; sourceTree = "<group>"; };
 		198BADF11AF0AB2600B4E2E6 /* QRCodeReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeReaderViewController.h; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCodeReaderViewController.h"; sourceTree = "<group>"; };
 		198BADF21AF0AB2600B4E2E6 /* QRCodeReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderViewController.m; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCodeReaderViewController.m"; sourceTree = "<group>"; };
+		198BADF71AF0B51700B4E2E6 /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeGenerator.h; path = "ThirdPart_ByHand/二维码生成/QRCodeGenerator.h"; sourceTree = "<group>"; };
+		198BADF81AF0B51700B4E2E6 /* QRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCodeGenerator.m; path = "ThirdPart_ByHand/二维码生成/QRCodeGenerator.m"; sourceTree = "<group>"; };
 		19909B471AEE9F4B00CCB721 /* QY_SocketService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_SocketService.h; sourceTree = "<group>"; };
 		19909B481AEE9F4B00CCB721 /* QY_SocketService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_SocketService.m; sourceTree = "<group>"; };
 		19909B4A1AEE9F7400CCB721 /* QY_Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_Common.h; sourceTree = "<group>"; };
@@ -108,6 +111,15 @@
 			name = "二维码扫描";
 			sourceTree = "<group>";
 		};
+		198BADF61AF0B4AD00B4E2E6 /* 二维码生成 */ = {
+			isa = PBXGroup;
+			children = (
+				198BADF71AF0B51700B4E2E6 /* QRCodeGenerator.h */,
+				198BADF81AF0B51700B4E2E6 /* QRCodeGenerator.m */,
+			);
+			name = "二维码生成";
+			sourceTree = "<group>";
+		};
 		19909B421AEE985200CCB721 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +160,7 @@
 		19909B461AEE98B200CCB721 /* ThirdPart_byHand */ = {
 			isa = PBXGroup;
 			children = (
+				198BADF61AF0B4AD00B4E2E6 /* 二维码生成 */,
 				198BADE91AF0AAB800B4E2E6 /* 二维码扫描 */,
 			);
 			name = ThirdPart_byHand;
@@ -425,6 +438,7 @@
 				19909B491AEE9F4B00CCB721 /* QY_SocketService.m in Sources */,
 				198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */,
 				19909B5B1AEEEC4600CCB721 /* QY_dataPacketFactor.m in Sources */,
+				198BADF91AF0B51700B4E2E6 /* QRCodeGenerator.m in Sources */,
 				19ED2EE41AECF84F00E9DBEA /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

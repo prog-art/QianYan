@@ -12,6 +12,8 @@
 
 #import "QRCodeReaderViewController.h"
 
+#import "QRCodeGenerator.h"
+
 @interface ViewController () <QRCodeReaderDelegate>
 
 @end
@@ -20,10 +22,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad] ;
+    
+    [self testQREncode] ;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)testQREncode {
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 50, 300, 300)] ;
+    imageView.image = [QRCodeGenerator qrImageForString:@"Hello, world!" imageSize:imageView.bounds.size.width] ;
+    [self.view addSubview:imageView] ;
 }
 
 - (IBAction)testSocket:(id)sender {

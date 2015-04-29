@@ -60,3 +60,9 @@
 #define COCOAPODS_VERSION_MINOR_GDataXML_HTML 2
 #define COCOAPODS_VERSION_PATCH_GDataXML_HTML 0
 
+// libqrencode
+#define COCOAPODS_POD_AVAILABLE_libqrencode
+#define COCOAPODS_VERSION_MAJOR_libqrencode 3
+#define COCOAPODS_VERSION_MINOR_libqrencode 4
+#define COCOAPODS_VERSION_PATCH_libqrencode 2
+
