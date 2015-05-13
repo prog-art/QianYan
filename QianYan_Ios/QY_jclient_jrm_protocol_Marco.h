@@ -9,6 +9,24 @@
 #ifndef QianYan_Ios_QY_jclient_jrm_protocol_Marco_h
 #define QianYan_Ios_QY_jclient_jrm_protocol_Marco_h
 
+#warning 根据文档编号设计，如有变化，请更改。
+typedef NS_ENUM (long,JRM_REQUEST_OPERATION_TYPE) {
+    JRM_REQUEST_OPERATION_TYPE_DEVICE_LOGIN = 211 ,
+    JRM_REQUEST_OPERATION_TYPE_USER_REGISTE = 251 ,
+    JRM_REQUEST_OPERATION_TYPE_USER_LOGIN = 252 ,
+};
+
+
+/**
+ *  协议版本 <<JRM通信协议(2015-4-29 10.41.11 3120)>>
+ */
+
+#define JRM_DATA_LENGTH_Len 2
+#define JRM_DATA_CMD_Len 4
+
+
+//--------------------------------------------------
+
 #define DEVICE_TYPE_SIZE 4
 #define DEVICE_PASSWD_SIZE 32
 #define DEVICE_ID_SIZE 16

@@ -1452,7 +1452,7 @@ Failed:
 	
 	// Clear queues (spurious read/write requests post disconnect)
 	[self emptyQueues];
-	
+    
 	if(![self createStreamsToHost:hostname onPort:port error:errPtr]) goto Failed;
 	if(![self attachStreamsToRunLoop:nil error:errPtr])               goto Failed;
 	if(![self configureStreamsAndReturnError:errPtr])                 goto Failed;

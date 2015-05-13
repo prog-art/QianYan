@@ -10,14 +10,18 @@
 #define QianYan_Ios_QY_CommonDefine_h
 
 typedef void (^QYBlock)();
+typedef void (^QYHostPortBlock)(NSString *hostName , NSUInteger port);
 typedef void (^QYBooleanBlock)(BOOL Successed , NSError *error);
 typedef void (^Int64Block)(int64_t num);
 
 #define QIANYAN_HOST_IP @"jdas.qycam.com"
 #define QIANYAN_HOST_PORT 50002
-#define QIANYAN_HOST_CONNECT_TIMEOUT 1.0
+#define QIANYAN_HOST_CONNECT_TIMEOUT 5.0
 
-#define WEAKSELF  typeof(self) __weak weakSelf=self;
+#define JDAS_HOST_IP @"jdas.qycam.com"
+#define JDAS_HOST_PORT 50002
+
+#define WEAKSELF  typeof(self) __weak weakSelf=self ;
 
 
 #ifdef DEBUG
@@ -26,5 +30,9 @@ typedef void (^Int64Block)(int64_t num);
 #   define QYDebugLog(...)
 #endif
 
+//JDAS获取数据后dic[key]
+#define JDAS_DATA_JRM_IP_KEY @"JRM_IP_KEY"
+#define JDAS_DATA_JRM_PORT_KEY @"JRM_PORT_KEY"
+#define JDAS_DATA_JRM_ERROR_KEY @"JRM_ERROR_KEY"
 
 #endif

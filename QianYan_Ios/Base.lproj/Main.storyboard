@@ -7,7 +7,6 @@
         <!--Navigation Controller-->
         <scene sceneID="RVT-XI-COg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sZC-dS-Y6t" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="hMr-Te-Kaq" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="On9-Hx-4xg">
@@ -18,6 +17,7 @@
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="LUN-Dz-kr2"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sZC-dS-Y6t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-651" y="292"/>
         </scene>
@@ -49,6 +49,24 @@
                                 </state>
                                 <connections>
                                     <action selector="testQRCodeReader:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="rtA-1u-UGL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wqy-MF-FV3">
+                                <rect key="frame" x="160" y="183" width="69" height="30"/>
+                                <state key="normal" title="注册账号">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="testRegiste:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ljp-Gj-Oeg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwb-bG-BkF">
+                                <rect key="frame" x="162" y="376" width="65" height="30"/>
+                                <state key="normal" title="登录账号">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="testLogin:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fKP-xj-Hrw"/>
                                 </connections>
                             </button>
                         </subviews>
