@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-#import "QY_dataPacketFactor.h"
-#import "QY_JRMDataPharser.h"
-#import "NSString+QY_dataFormat.h"
-#import "NSData+QY_dataFormat.h"
+//#import "QY_dataPacketFactor.h"
+//#import "QY_JRMDataPharser.h"
+//#import "NSString+QY_dataFormat.h"
+//#import "NSData+QY_dataFormat.h"
 
 @interface QianYan_IosTests : XCTestCase
 
@@ -34,26 +34,37 @@
 //    NSLog(@"device login data = %@",[QY_dataPacketFactor getDeviceLoginData]) ;
 //}
 
-- (void)testRegisteData {
-    NSLog(@"registe data = %@",[QY_dataPacketFactor getUserRegisteDataWithUserName:@"123456" password:@"123456"]) ;
-}
+//- (void)testFormatString {
+//    NSString *ESSID = @"" ;
+//    NSString *str = [NSString stringWithFormat:@"%02tu", ESSID.length];
+//    NSLog(@"str = %@",str) ;
+//    
+//    ESSID = @"tes" ;
+//    NSString *str2 = [NSString stringWithFormat:@"%02tu", ESSID.length];
+//    NSLog(@"str2 = %@",str2) ;
+//    
+//}
 
-- (void)testLoginData {
-    NSLog(@"login data = %@",[QY_dataPacketFactor getUserLoginDataWithUserName:@"123456" password:@"123456"]) ;
-}
-
-- (void)testPhraseData {
-    NSData *testData = [QY_dataPacketFactor getDeviceLoginData] ;
-    NSLog(@"test data = %@",testData) ;
-    
-    NSUInteger len = [QY_JRMDataPharser getLen:testData] ;
-    NSLog(@"len = %lu",(unsigned long)len) ;
-    JOSEPH_COMMAND cmd = [QY_JRMDataPharser getCmd:testData] ;
-    NSLog(@"cmd = %d",cmd) ;
-    
-    NSRange range = NSMakeRange( JRM_DATA_LENGTH_Len + JRM_DATA_CMD_Len, 4) ;
-    NSInteger value = [QY_JRMDataPharser getIngeterValue:testData range:range] ;
-    NSLog(@"value = %ld",(long)value) ;
-}
+//- (void)testRegisteData {
+//    NSLog(@"registe data = %@",[QY_dataPacketFactor getUserRegisteDataWithUserName:@"123456" password:@"123456"]) ;
+//}
+//
+//- (void)testLoginData {
+//    NSLog(@"login data = %@",[QY_dataPacketFactor getUserLoginDataWithUserName:@"123456" password:@"123456"]) ;
+//}
+//
+//- (void)testPhraseData {
+//    NSData *testData = [QY_dataPacketFactor getDeviceLoginData] ;
+//    NSLog(@"test data = %@",testData) ;
+//    
+//    NSUInteger len = [QY_JRMDataPharser getLen:testData] ;
+//    NSLog(@"len = %lu",(unsigned long)len) ;
+//    JOSEPH_COMMAND cmd = [QY_JRMDataPharser getCmd:testData] ;
+//    NSLog(@"cmd = %d",cmd) ;
+//    
+//    NSRange range = NSMakeRange( JRM_DATA_LENGTH_Len + JRM_DATA_CMD_Len, 4) ;
+//    NSInteger value = [QY_JRMDataPharser getIngeterValue:testData range:range] ;
+//    NSLog(@"value = %ld",(long)value) ;
+//}
 
 @end

@@ -11,6 +11,9 @@
 		194E391A1B00832F00BA4473 /* NSString+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */; };
 		194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */; };
 		1956BACB1AFF323C00C4A7F6 /* QY_JRMDataPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 1956BACA1AFF323C00C4A7F6 /* QY_JRMDataPacket.m */; };
+		1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1964569D1B058D4000EA4E14 /* QY_QRCodeUtils.m */; };
+		196456A01B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1964569F1B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m */; };
+		196456A41B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456A31B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m */; };
 		198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADED1AF0AB2600B4E2E6 /* QRCameraSwitchButton.m */; };
 		198BADF41AF0AB2600B4E2E6 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF01AF0AB2600B4E2E6 /* QRCodeReaderView.m */; };
 		198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF21AF0AB2600B4E2E6 /* QRCodeReaderViewController.m */; };
@@ -56,6 +59,13 @@
 		194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+QY_dataFormat.m"; sourceTree = "<group>"; };
 		1956BAC91AFF323C00C4A7F6 /* QY_JRMDataPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMDataPacket.h; sourceTree = "<group>"; };
 		1956BACA1AFF323C00C4A7F6 /* QY_JRMDataPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMDataPacket.m; sourceTree = "<group>"; };
+		196456971B0582B000EA4E14 /* QY_QRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_QRCode.h; sourceTree = "<group>"; };
+		1964569C1B058D4000EA4E14 /* QY_QRCodeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_QRCodeUtils.h; sourceTree = "<group>"; };
+		1964569D1B058D4000EA4E14 /* QY_QRCodeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_QRCodeUtils.m; sourceTree = "<group>"; };
+		1964569F1B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QianYan_QRCodeUtilsTests.m; sourceTree = "<group>"; };
+		196456A11B05BF5A00EA4E14 /* QY_QRCodeScanerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_QRCodeScanerDelegate.h; sourceTree = "<group>"; };
+		196456A21B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_QRCodeReaderDelegater.h; sourceTree = "<group>"; };
+		196456A31B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_QRCodeReaderDelegater.m; sourceTree = "<group>"; };
 		198BADEC1AF0AB2600B4E2E6 /* QRCameraSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCameraSwitchButton.h; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCameraSwitchButton.h"; sourceTree = "<group>"; };
 		198BADED1AF0AB2600B4E2E6 /* QRCameraSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCameraSwitchButton.m; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCameraSwitchButton.m"; sourceTree = "<group>"; };
 		198BADEE1AF0AB2600B4E2E6 /* QRCodeReaderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeReaderDelegate.h; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCodeReaderDelegate.h"; sourceTree = "<group>"; };
@@ -126,9 +136,7 @@
 		19382E581B0376910041F7E4 /* header */ = {
 			isa = PBXGroup;
 			children = (
-				1902EEDA1B01BDCA001E4B12 /* QY_Socket.h */,
 				19382E551B03761C0041F7E4 /* QY_SocketServiceDelegate.h */,
-				19909B521AEEE1C300CCB721 /* QY_jclient_jrm_protocol_Marco.h */,
 			);
 			name = header;
 			sourceTree = "<group>";
@@ -136,9 +144,9 @@
 		1956BAC81AFF321600C4A7F6 /* Sockets */ = {
 			isa = PBXGroup;
 			children = (
+				1902EEDA1B01BDCA001E4B12 /* QY_Socket.h */,
 				19382E581B0376910041F7E4 /* header */,
-				19909B471AEE9F4B00CCB721 /* QY_SocketService.h */,
-				19909B481AEE9F4B00CCB721 /* QY_SocketService.m */,
+				196456951B05826E00EA4E14 /* main */,
 				1963DA261AFFA36C008E9FCF /* socketDataServices */,
 				19F3AC051AFB6947002B45DD /* socketDelegaters */,
 				1956BACC1AFF324700C4A7F6 /* models */,
@@ -168,6 +176,63 @@
 				194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */,
 			);
 			name = socketDataServices;
+			sourceTree = "<group>";
+		};
+		196456951B05826E00EA4E14 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				19909B471AEE9F4B00CCB721 /* QY_SocketService.h */,
+				19909B481AEE9F4B00CCB721 /* QY_SocketService.m */,
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
+		196456961B05828B00EA4E14 /* QY_QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				196456971B0582B000EA4E14 /* QY_QRCode.h */,
+				196456A51B05CCBC00EA4E14 /* header */,
+				196456981B0582CF00EA4E14 /* main */,
+				196456A61B05CCE000EA4E14 /* delegater */,
+			);
+			name = QY_QRCode;
+			sourceTree = "<group>";
+		};
+		196456981B0582CF00EA4E14 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				1964569C1B058D4000EA4E14 /* QY_QRCodeUtils.h */,
+				1964569D1B058D4000EA4E14 /* QY_QRCodeUtils.m */,
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
+		196456A51B05CCBC00EA4E14 /* header */ = {
+			isa = PBXGroup;
+			children = (
+				196456A11B05BF5A00EA4E14 /* QY_QRCodeScanerDelegate.h */,
+			);
+			name = header;
+			sourceTree = "<group>";
+		};
+		196456A61B05CCE000EA4E14 /* delegater */ = {
+			isa = PBXGroup;
+			children = (
+				196456A21B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.h */,
+				196456A31B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m */,
+			);
+			name = delegater;
+			sourceTree = "<group>";
+		};
+		196456A71B05D00E00EA4E14 /* 其他工具 */ = {
+			isa = PBXGroup;
+			children = (
+				19909B4C1AEEA04900CCB721 /* QYUtils.h */,
+				19909B4D1AEEA04900CCB721 /* QYUtils.m */,
+				19A695391AFB44C500F60D03 /* QYNotify.h */,
+				19A6953A1AFB44C500F60D03 /* QYNotify.m */,
+			);
+			name = "其他工具";
 			sourceTree = "<group>";
 		};
 		198BADE91AF0AAB800B4E2E6 /* 二维码扫描 */ = {
@@ -203,10 +268,8 @@
 		19909B431AEE985700CCB721 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				19909B4C1AEEA04900CCB721 /* QYUtils.h */,
-				19909B4D1AEEA04900CCB721 /* QYUtils.m */,
-				19A695391AFB44C500F60D03 /* QYNotify.h */,
-				19A6953A1AFB44C500F60D03 /* QYNotify.m */,
+				196456A71B05D00E00EA4E14 /* 其他工具 */,
+				196456961B05828B00EA4E14 /* QY_QRCode */,
 				1956BAC81AFF321600C4A7F6 /* Sockets */,
 			);
 			name = Services;
@@ -215,6 +278,7 @@
 		19909B441AEE98A500CCB721 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				19909B521AEEE1C300CCB721 /* QY_jclient_jrm_protocol_Marco.h */,
 				19909B4A1AEE9F7400CCB721 /* QY_Common.h */,
 				19909B4B1AEE9F8100CCB721 /* QY_CommonDefine.h */,
 			);
@@ -300,6 +364,7 @@
 			children = (
 				19ED2F001AECF84F00E9DBEA /* QianYan_IosTests.m */,
 				19ED2EFE1AECF84F00E9DBEA /* Supporting Files */,
+				1964569F1B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m */,
 			);
 			path = QianYan_IosTests;
 			sourceTree = "<group>";
@@ -523,7 +588,9 @@
 				19909B4E1AEEA04900CCB721 /* QYUtils.m in Sources */,
 				19ED2EEA1AECF84F00E9DBEA /* QianYan_Ios.xcdatamodeld in Sources */,
 				19382E541B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.m in Sources */,
+				196456A41B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m in Sources */,
 				198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */,
+				1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */,
 				19ED2EED1AECF84F00E9DBEA /* ViewController.m in Sources */,
 				194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */,
 				19909B491AEE9F4B00CCB721 /* QY_SocketService.m in Sources */,
@@ -540,6 +607,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19ED2F011AECF84F00E9DBEA /* QianYan_IosTests.m in Sources */,
+				196456A01B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
