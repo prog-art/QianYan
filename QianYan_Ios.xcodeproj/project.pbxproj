@@ -14,6 +14,10 @@
 		1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1964569D1B058D4000EA4E14 /* QY_QRCodeUtils.m */; };
 		196456A01B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1964569F1B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m */; };
 		196456A41B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456A31B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m */; };
+		196456AB1B0617A700EA4E14 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 196456A91B0617A700EA4E14 /* pinyin.c */; };
+		196456AE1B0617D000EA4E14 /* ChineseString.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456AD1B0617D000EA4E14 /* ChineseString.m */; };
+		196456B11B0617F800EA4E14 /* QY_ChineseStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456B01B0617F800EA4E14 /* QY_ChineseStringUtils.m */; };
+		196456BA1B063A7F00EA4E14 /* QianYan_ChineseStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456B91B063A7F00EA4E14 /* QianYan_ChineseStringTests.m */; };
 		198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADED1AF0AB2600B4E2E6 /* QRCameraSwitchButton.m */; };
 		198BADF41AF0AB2600B4E2E6 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF01AF0AB2600B4E2E6 /* QRCodeReaderView.m */; };
 		198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF21AF0AB2600B4E2E6 /* QRCodeReaderViewController.m */; };
@@ -66,6 +70,14 @@
 		196456A11B05BF5A00EA4E14 /* QY_QRCodeScanerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_QRCodeScanerDelegate.h; sourceTree = "<group>"; };
 		196456A21B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_QRCodeReaderDelegater.h; sourceTree = "<group>"; };
 		196456A31B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_QRCodeReaderDelegater.m; sourceTree = "<group>"; };
+		196456A91B0617A700EA4E14 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
+		196456AA1B0617A700EA4E14 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
+		196456AC1B0617D000EA4E14 /* ChineseString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseString.h; sourceTree = "<group>"; };
+		196456AD1B0617D000EA4E14 /* ChineseString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseString.m; sourceTree = "<group>"; };
+		196456AF1B0617F800EA4E14 /* QY_ChineseStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_ChineseStringUtils.h; sourceTree = "<group>"; };
+		196456B01B0617F800EA4E14 /* QY_ChineseStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_ChineseStringUtils.m; sourceTree = "<group>"; };
+		196456B81B0639D600EA4E14 /* QY_ChineseString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_ChineseString.h; sourceTree = "<group>"; };
+		196456B91B063A7F00EA4E14 /* QianYan_ChineseStringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QianYan_ChineseStringTests.m; sourceTree = "<group>"; };
 		198BADEC1AF0AB2600B4E2E6 /* QRCameraSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCameraSwitchButton.h; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCameraSwitchButton.h"; sourceTree = "<group>"; };
 		198BADED1AF0AB2600B4E2E6 /* QRCameraSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCameraSwitchButton.m; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCameraSwitchButton.m"; sourceTree = "<group>"; };
 		198BADEE1AF0AB2600B4E2E6 /* QRCodeReaderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeReaderDelegate.h; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCodeReaderDelegate.h"; sourceTree = "<group>"; };
@@ -235,6 +247,36 @@
 			name = "其他工具";
 			sourceTree = "<group>";
 		};
+		196456A81B06177F00EA4E14 /* 中文字符串工具 */ = {
+			isa = PBXGroup;
+			children = (
+				196456B81B0639D600EA4E14 /* QY_ChineseString.h */,
+				196456B31B061C6300EA4E14 /* main */,
+				196456B21B061C5300EA4E14 /* models */,
+			);
+			name = "中文字符串工具";
+			sourceTree = "<group>";
+		};
+		196456B21B061C5300EA4E14 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				196456AC1B0617D000EA4E14 /* ChineseString.h */,
+				196456AD1B0617D000EA4E14 /* ChineseString.m */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		196456B31B061C6300EA4E14 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				196456AF1B0617F800EA4E14 /* QY_ChineseStringUtils.h */,
+				196456B01B0617F800EA4E14 /* QY_ChineseStringUtils.m */,
+				196456A91B0617A700EA4E14 /* pinyin.c */,
+				196456AA1B0617A700EA4E14 /* pinyin.h */,
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
 		198BADE91AF0AAB800B4E2E6 /* 二维码扫描 */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,6 +310,7 @@
 		19909B431AEE985700CCB721 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				196456A81B06177F00EA4E14 /* 中文字符串工具 */,
 				196456A71B05D00E00EA4E14 /* 其他工具 */,
 				196456961B05828B00EA4E14 /* QY_QRCode */,
 				1956BAC81AFF321600C4A7F6 /* Sockets */,
@@ -365,6 +408,7 @@
 				19ED2F001AECF84F00E9DBEA /* QianYan_IosTests.m */,
 				19ED2EFE1AECF84F00E9DBEA /* Supporting Files */,
 				1964569F1B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m */,
+				196456B91B063A7F00EA4E14 /* QianYan_ChineseStringTests.m */,
 			);
 			path = QianYan_IosTests;
 			sourceTree = "<group>";
@@ -581,6 +625,7 @@
 				19D6CFCE1AFE5181004A0B19 /* QY_JRMDataPharser.m in Sources */,
 				1956BACB1AFF323C00C4A7F6 /* QY_JRMDataPacket.m in Sources */,
 				19F3AC041AFB6941002B45DD /* QY_JRMSocketDelegater.m in Sources */,
+				196456B11B0617F800EA4E14 /* QY_ChineseStringUtils.m in Sources */,
 				19A695381AFB32F000F60D03 /* QY_JDASSocketDelegater.m in Sources */,
 				198BADF41AF0AB2600B4E2E6 /* QRCodeReaderView.m in Sources */,
 				194E391A1B00832F00BA4473 /* NSString+QY_dataFormat.m in Sources */,
@@ -590,9 +635,11 @@
 				19382E541B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.m in Sources */,
 				196456A41B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m in Sources */,
 				198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */,
+				196456AB1B0617A700EA4E14 /* pinyin.c in Sources */,
 				1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */,
 				19ED2EED1AECF84F00E9DBEA /* ViewController.m in Sources */,
 				194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */,
+				196456AE1B0617D000EA4E14 /* ChineseString.m in Sources */,
 				19909B491AEE9F4B00CCB721 /* QY_SocketService.m in Sources */,
 				198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */,
 				19909B5B1AEEEC4600CCB721 /* QY_dataPacketFactor.m in Sources */,
@@ -606,6 +653,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				196456BA1B063A7F00EA4E14 /* QianYan_ChineseStringTests.m in Sources */,
 				19ED2F011AECF84F00E9DBEA /* QianYan_IosTests.m in Sources */,
 				196456A01B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m in Sources */,
 			);
