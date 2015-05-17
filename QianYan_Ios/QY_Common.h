@@ -10,5 +10,6 @@
 #define QianYan_Ios_QY_Common_h
 
 #import "QY_CommonDefine.h"
+#import "QYUtils.h"
 
 #endif

@@ -8,15 +8,42 @@
 
 #import "AppDelegate.h"
 
+#define RegisterAndLoginSBNibName @"Register&Login"
+
+#define LoginVCStoryBoardID @"LoginVCStoryBoardID"
+#define RegisterVCStoryBoardID @"RegisterVCStoryBoardID"
+
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
+- (void)toRegiste {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:RegisterAndLoginSBNibName bundle:nil] ;
+    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:RegisterVCStoryBoardID] ;
+    self.window.rootViewController = vc ;
+}
+
+- (void)toLogin {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:RegisterAndLoginSBNibName bundle:nil] ;
+    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:LoginVCStoryBoardID] ;
+    self.window.rootViewController = vc ;
+}
+
+- (void)toMain {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil] ;
+    UIViewController *vc = [sb instantiateInitialViewController] ;
+    self.window.rootViewController = vc ;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:RegisterAndLoginSBNibName bundle:nil] ;
+    UIViewController *vc = [sb instantiateInitialViewController] ;
+    
+    self.window.rootViewController = vc ;
+    
     return YES;
 }
 

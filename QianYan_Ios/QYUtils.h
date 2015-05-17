@@ -31,4 +31,12 @@
 
 + (void)runAfterSecs:(float)secs block:(void (^)())block ;
 
+#pragma mark - toMain && toRegiste && toLogin
+
++ (void)toMain ;
+
++ (void)toRegiste ;
+
++ (void)toLogin ;
+
 @end

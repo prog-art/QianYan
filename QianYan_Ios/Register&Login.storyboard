@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="b9N-Jd-06G">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <scenes>
+        <!--千衍用户注册-->
+        <scene sceneID="yG7-O2-heq">
+            <objects>
+                <viewController storyboardIdentifier="RegisterVCStoryBoardID" id="b9N-Jd-06G" customClass="RegisterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nQE-F8-6fQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="uan-qe-yns"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="552-Rx-GQ8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="注册背景" translatesAutoresizingMaskIntoConstraints="NO" id="HW6-XE-e1A">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="邮箱/手机号" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1Yu-cH-tB9">
+                                <rect key="frame" x="54" y="80" width="266" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码（6-20位数字或密码）" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jjO-m8-bgJ">
+                                <rect key="frame" x="54" y="140" width="266" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfI-K0-pJg" userLabel="注册按钮">
+                                <rect key="frame" x="13" y="278" width="294" height="40"/>
+                                <state key="normal" title="Button" image="注册按钮">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" image="注册按钮（不可用）"/>
+                                <state key="selected" image="注册按钮（选中）">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="注册按钮（选中）"/>
+                                <connections>
+                                    <action selector="enrollBtnClicked:" destination="b9N-Jd-06G" eventType="touchUpInside" id="DaC-ox-RnK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGa-m9-u9b" userLabel="QQ登录按钮">
+                                <rect key="frame" x="40" y="467" width="55" height="55"/>
+                                <state key="normal" image="QQ登录">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="QQLoginBtnClicked:" destination="b9N-Jd-06G" eventType="touchUpInside" id="2LD-9F-Ovz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rgn-vo-yrH" userLabel="微信登陆按钮">
+                                <rect key="frame" x="133" y="467" width="55" height="55"/>
+                                <state key="normal" image="微信登陆">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="WeixinLoginBtnClicked:" destination="b9N-Jd-06G" eventType="touchUpInside" id="lJn-nV-eS8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qrk-Zd-aDA">
+                                <rect key="frame" x="226" y="467" width="55" height="55"/>
+                                <state key="normal" title="微博登录按钮" image="微博登录">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="WeiboLoginBtnClicked:" destination="b9N-Jd-06G" eventType="touchUpInside" id="0I8-uE-bAU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPC-84-KIZ">
+                                <rect key="frame" x="91" y="328" width="139" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                <state key="normal" title="已有账号立即登录&gt;&gt;">
+                                    <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toLoginBtnClicked:" destination="b9N-Jd-06G" eventType="touchUpInside" id="By0-Bh-5iT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tg7-zb-Baa">
+                                <rect key="frame" x="49" y="230" width="14" height="14"/>
+                                <state key="normal" title="同意按钮" image="同意按钮">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="agreeBtnClicked:" destination="b9N-Jd-06G" eventType="touchUpInside" id="jyW-c5-raz"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="同意大眼客户端              和" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkM-4T-0na">
+                                <rect key="frame" x="71" y="222" width="151" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.07968482532" green="0.07968482532" blue="0.07968482532" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vz8-2B-ziF">
+                                <rect key="frame" x="150" y="223" width="60" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="服务协议">
+                                    <color key="titleColor" red="0.73333333329999995" green="0.36862745099999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="serviceProtocolBtnClicked:" destination="b9N-Jd-06G" eventType="touchUpInside" id="roT-wL-Q94"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xql-Tl-twg">
+                                <rect key="frame" x="212" y="223" width="60" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="隐私条款">
+                                    <color key="titleColor" red="0.73333333329999995" green="0.36862745099999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="privacyPolicyBtnClicked:" destination="b9N-Jd-06G" eventType="touchUpInside" id="FlL-R8-Rvo"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="千衍用户注册" id="8tu-Nt-JaG"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="agreeButton" destination="Tg7-zb-Baa" id="eso-nu-Ok6"/>
+                        <outlet property="emailOrPhoneNumberTextField" destination="1Yu-cH-tB9" id="vh9-jT-1s9"/>
+                        <outlet property="passwordTextField" destination="jjO-m8-bgJ" id="Jgm-HK-1rG"/>
+                        <outlet property="registerButton" destination="nfI-K0-pJg" id="yc5-FK-VvM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KI6-4w-ttZ" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1876" y="-382"/>
+        </scene>
+        <!--千衍账户登录-->
+        <scene sceneID="I2Z-yR-wx6">
+            <objects>
+                <viewController storyboardIdentifier="LoginVCStoryBoardID" id="VDI-yh-e3a" customClass="LoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mhW-iq-mOC"/>
+                        <viewControllerLayoutGuide type="bottom" id="Asx-2H-otf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="74p-qY-1Ku">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="登录背景" translatesAutoresizingMaskIntoConstraints="NO" id="L4P-wA-Wym">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWR-Ly-IKP">
+                                <rect key="frame" x="14" y="266" width="80" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                                <state key="normal" title="快速注册&gt;&gt;">
+                                    <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toRegisteBtnClicked:" destination="VDI-yh-e3a" eventType="touchUpInside" id="gJg-Bg-NEz"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zMn-kd-3kh">
+                                <rect key="frame" x="54" y="140" width="266" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入邮箱/手机号" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="tGk-7P-u5W">
+                                <rect key="frame" x="54" y="80" width="266" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CxA-1r-HEv" userLabel="注册按钮">
+                                <rect key="frame" x="13" y="218" width="294" height="40"/>
+                                <state key="normal" title="Button" image="登录按钮">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" image="登录（不可用）"/>
+                                <state key="selected" image="登录（选中）">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="登录（选中）"/>
+                                <connections>
+                                    <action selector="loginBtnClicked:" destination="VDI-yh-e3a" eventType="touchUpInside" id="441-dP-17m"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ya-tb-nSE" userLabel="微信登陆按钮">
+                                <rect key="frame" x="133" y="467" width="55" height="55"/>
+                                <state key="normal" image="微信登陆">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="WeixinLoginBtnClicked:" destination="VDI-yh-e3a" eventType="touchUpInside" id="1Ul-iX-hXz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wsm-Bx-eYK" userLabel="QQ登录按钮">
+                                <rect key="frame" x="40" y="467" width="55" height="55"/>
+                                <state key="normal" image="QQ登录">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="QQLoginBtnClicked:" destination="VDI-yh-e3a" eventType="touchUpInside" id="O1Q-vM-BU1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRO-ES-h3T">
+                                <rect key="frame" x="232" y="266" width="83" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                                <state key="normal" title="找回密码?">
+                                    <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="retrievePasswordBtnClicked:" destination="VDI-yh-e3a" eventType="touchUpInside" id="hR2-2m-vvH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFw-Ao-IgQ">
+                                <rect key="frame" x="226" y="467" width="55" height="55"/>
+                                <state key="normal" title="微博登录按钮" image="微博登录">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="WeiboLoginBtnClicked:" destination="VDI-yh-e3a" eventType="touchUpInside" id="WJb-Hq-4d2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="千衍账户登录" id="7zG-nx-PbP"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="inputEmailOrPhoneNumberTextField" destination="tGk-7P-u5W" id="7OC-ae-HId"/>
+                        <outlet property="inputPasswordTextField" destination="zMn-kd-3kh" id="9Rj-e4-L13"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HIC-RA-koU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2277" y="-382"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="QQ登录" width="110" height="110"/>
+        <image name="同意按钮" width="28" height="28"/>
+        <image name="微信登陆" width="110" height="110"/>
+        <image name="微博登录" width="110" height="110"/>
+        <image name="注册按钮" width="580" height="80"/>
+        <image name="注册按钮（不可用）" width="580" height="80"/>
+        <image name="注册按钮（选中）" width="580" height="80"/>
+        <image name="注册背景" width="640" height="1136"/>
+        <image name="登录按钮" width="580" height="80"/>
+        <image name="登录背景" width="640" height="1136"/>
+        <image name="登录（不可用）" width="580" height="80"/>
+        <image name="登录（选中）" width="580" height="80"/>
+    </resources>
+</document>

@@ -9,6 +9,8 @@
 #import "QYUtils.h"
 #import <UIKit/UIKit.h>
 
+#import "AppDelegate.h"
+
 @implementation QYUtils
 
 +(void)alert:(NSString*)msg{
@@ -50,6 +52,24 @@
 
 +(void)runAfterSecs:(float)secs block:(void (^)())block{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, secs*NSEC_PER_SEC), dispatch_get_main_queue(), block);
+}
+
+#pragma mark - toMain && toRegiste && toLogin
+
++ (AppDelegate *)getAppDelegate {
+    return (AppDelegate *)[UIApplication sharedApplication].delegate ;
+}
+
++ (void)toMain {
+    [[self getAppDelegate] toMain];
+}
+
++ (void)toRegiste {
+    [[self getAppDelegate] toRegiste];
+}
+
++ (void)toLogin {
+    [[self getAppDelegate] toLogin] ;
 }
 
 @end
