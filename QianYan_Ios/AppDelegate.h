@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+@class JVFloatingDrawerViewController;
+@class JVFloatingDrawerSpringAnimator;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -20,9 +23,30 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+#pragma mark - 跳转
+
 - (void)toRegiste ;
 - (void)toLogin ;
 - (void)toMain ;
+
+#pragma mark - 左右侧栏
+
+@property (nonatomic, strong) JVFloatingDrawerViewController *drawerViewController;
+@property (nonatomic, strong) JVFloatingDrawerSpringAnimator *drawerAnimator;
+
+@property (nonatomic, strong) UITableViewController *leftDrawerViewController;
+@property (nonatomic, strong) UITableViewController *rightDrawerViewController;
+@property (nonatomic, strong) UIViewController *githubViewController;
+@property (nonatomic, strong) UIViewController *drawerSettingsViewController;
+
+
+- (void)toggleLeftDrawer:(id)sender animated:(BOOL)animated;
+- (void)toggleRightDrawer:(id)sender animated:(BOOL)animated;
+
+#pragma mark - public
+
++ (AppDelegate *)globalDelegate;
+
 
 @end
 

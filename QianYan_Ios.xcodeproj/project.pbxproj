@@ -41,6 +41,15 @@
 		6E2761B91B08BF7000247CCC /* Register&Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E2761B81B08BF7000247CCC /* Register&Login.storyboard */; };
 		6E2761BE1B08C03200247CCC /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2761BB1B08C03100247CCC /* RegisterViewController.m */; };
 		6E2761BF1B08C03200247CCC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2761BD1B08C03200247CCC /* LoginViewController.m */; };
+		6E9BA94F1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BA93D1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.m */; };
+		6E9BA9501B0CB8FB009D87BE /* JVRightDrawerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BA93F1B0CB8FB009D87BE /* JVRightDrawerTableViewCell.m */; };
+		6E9BA9511B0CB8FB009D87BE /* JVLeftDrawerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BA9411B0CB8FB009D87BE /* JVLeftDrawerTableViewController.m */; };
+		6E9BA9521B0CB8FB009D87BE /* JVRightDrawerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BA9431B0CB8FB009D87BE /* JVRightDrawerTableViewController.m */; };
+		6E9BA9541B0CB8FB009D87BE /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BA9471B0CB8FB009D87BE /* CameraViewController.m */; };
+		6E9BA9551B0CB8FB009D87BE /* SKSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BA9491B0CB8FB009D87BE /* SKSTableView.m */; };
+		6E9BA9561B0CB8FB009D87BE /* SKSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BA94B1B0CB8FB009D87BE /* SKSTableViewCell.m */; };
+		6E9BA9571B0CB8FB009D87BE /* SKSTableViewCellIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BA94D1B0CB8FB009D87BE /* SKSTableViewCellIndicator.m */; };
+		6E9BA9581B0CB8FB009D87BE /* Drawers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9BA94E1B0CB8FB009D87BE /* Drawers.storyboard */; };
 		AA52CF7D27ECBDC70F67D76F /* libPods-QianYan_IosTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B56B755DAE30BD9D1F0F95C3 /* libPods-QianYan_IosTests.a */; };
 /* End PBXBuildFile section */
 
@@ -128,6 +137,23 @@
 		6E2761BB1B08C03100247CCC /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		6E2761BC1B08C03200247CCC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6E2761BD1B08C03200247CCC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6E9BA93C1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVLeftDrawerTableViewCell.h; path = ../JVLeftDrawerTableViewCell.h; sourceTree = "<group>"; };
+		6E9BA93D1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVLeftDrawerTableViewCell.m; path = ../JVLeftDrawerTableViewCell.m; sourceTree = "<group>"; };
+		6E9BA93E1B0CB8FB009D87BE /* JVRightDrawerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVRightDrawerTableViewCell.h; path = ../JVRightDrawerTableViewCell.h; sourceTree = "<group>"; };
+		6E9BA93F1B0CB8FB009D87BE /* JVRightDrawerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVRightDrawerTableViewCell.m; path = ../JVRightDrawerTableViewCell.m; sourceTree = "<group>"; };
+		6E9BA9401B0CB8FB009D87BE /* JVLeftDrawerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVLeftDrawerTableViewController.h; path = ../JVLeftDrawerTableViewController.h; sourceTree = "<group>"; };
+		6E9BA9411B0CB8FB009D87BE /* JVLeftDrawerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVLeftDrawerTableViewController.m; path = ../JVLeftDrawerTableViewController.m; sourceTree = "<group>"; };
+		6E9BA9421B0CB8FB009D87BE /* JVRightDrawerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVRightDrawerTableViewController.h; path = ../JVRightDrawerTableViewController.h; sourceTree = "<group>"; };
+		6E9BA9431B0CB8FB009D87BE /* JVRightDrawerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVRightDrawerTableViewController.m; path = ../JVRightDrawerTableViewController.m; sourceTree = "<group>"; };
+		6E9BA9461B0CB8FB009D87BE /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraViewController.h; path = ../CameraViewController.h; sourceTree = "<group>"; };
+		6E9BA9471B0CB8FB009D87BE /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CameraViewController.m; path = ../CameraViewController.m; sourceTree = "<group>"; };
+		6E9BA9481B0CB8FB009D87BE /* SKSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKSTableView.h; path = ../SKSTableView.h; sourceTree = "<group>"; };
+		6E9BA9491B0CB8FB009D87BE /* SKSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKSTableView.m; path = ../SKSTableView.m; sourceTree = "<group>"; };
+		6E9BA94A1B0CB8FB009D87BE /* SKSTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKSTableViewCell.h; path = ../SKSTableViewCell.h; sourceTree = "<group>"; };
+		6E9BA94B1B0CB8FB009D87BE /* SKSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKSTableViewCell.m; path = ../SKSTableViewCell.m; sourceTree = "<group>"; };
+		6E9BA94C1B0CB8FB009D87BE /* SKSTableViewCellIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKSTableViewCellIndicator.h; path = ../SKSTableViewCellIndicator.h; sourceTree = "<group>"; };
+		6E9BA94D1B0CB8FB009D87BE /* SKSTableViewCellIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKSTableViewCellIndicator.m; path = ../SKSTableViewCellIndicator.m; sourceTree = "<group>"; };
+		6E9BA94E1B0CB8FB009D87BE /* Drawers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Drawers.storyboard; path = ../Drawers.storyboard; sourceTree = "<group>"; };
 		928F366D28C73DBE248F1F4D /* Pods-QianYan_IosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QianYan_IosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QianYan_IosTests/Pods-QianYan_IosTests.release.xcconfig"; sourceTree = "<group>"; };
 		B56B755DAE30BD9D1F0F95C3 /* libPods-QianYan_IosTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QianYan_IosTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAFBB40752495D47105A5F5E /* Pods-QianYan_Ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QianYan_Ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-QianYan_Ios/Pods-QianYan_Ios.release.xcconfig"; sourceTree = "<group>"; };
@@ -346,6 +372,7 @@
 		19909B461AEE98B200CCB721 /* ThirdPart_byHand */ = {
 			isa = PBXGroup;
 			children = (
+				6EFEFE381B0CC171001E425B /* 可伸缩TableView */,
 				198BADF61AF0B4AD00B4E2E6 /* 二维码生成 */,
 				198BADE91AF0AAB800B4E2E6 /* 二维码扫描 */,
 			);
@@ -466,6 +493,7 @@
 		6E316D921B08D15800F864D3 /* 模块 */ = {
 			isa = PBXGroup;
 			children = (
+				6EFEFE321B0CC036001E425B /* 主界面 */,
 				6E316D931B08D16200F864D3 /* 注册登录模块 */,
 			);
 			name = "模块";
@@ -497,6 +525,77 @@
 				6E2761B81B08BF7000247CCC /* Register&Login.storyboard */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		6EFEFE321B0CC036001E425B /* 主界面 */ = {
+			isa = PBXGroup;
+			children = (
+				6EFEFE331B0CC03C001E425B /* 左侧栏 */,
+				6EFEFE341B0CC043001E425B /* 右侧栏 */,
+				6E9BA94E1B0CB8FB009D87BE /* Drawers.storyboard */,
+				6EFEFE371B0CC11E001E425B /* tab-摄像机 */,
+			);
+			name = "主界面";
+			sourceTree = "<group>";
+		};
+		6EFEFE331B0CC03C001E425B /* 左侧栏 */ = {
+			isa = PBXGroup;
+			children = (
+				6E9BA9401B0CB8FB009D87BE /* JVLeftDrawerTableViewController.h */,
+				6E9BA9411B0CB8FB009D87BE /* JVLeftDrawerTableViewController.m */,
+				6EFEFE361B0CC06D001E425B /* cell */,
+			);
+			name = "左侧栏";
+			sourceTree = "<group>";
+		};
+		6EFEFE341B0CC043001E425B /* 右侧栏 */ = {
+			isa = PBXGroup;
+			children = (
+				6E9BA9421B0CB8FB009D87BE /* JVRightDrawerTableViewController.h */,
+				6E9BA9431B0CB8FB009D87BE /* JVRightDrawerTableViewController.m */,
+				6EFEFE351B0CC060001E425B /* cell */,
+			);
+			name = "右侧栏";
+			sourceTree = "<group>";
+		};
+		6EFEFE351B0CC060001E425B /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				6E9BA93E1B0CB8FB009D87BE /* JVRightDrawerTableViewCell.h */,
+				6E9BA93F1B0CB8FB009D87BE /* JVRightDrawerTableViewCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		6EFEFE361B0CC06D001E425B /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				6E9BA93C1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.h */,
+				6E9BA93D1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		6EFEFE371B0CC11E001E425B /* tab-摄像机 */ = {
+			isa = PBXGroup;
+			children = (
+				6E9BA9461B0CB8FB009D87BE /* CameraViewController.h */,
+				6E9BA9471B0CB8FB009D87BE /* CameraViewController.m */,
+			);
+			name = "tab-摄像机";
+			sourceTree = "<group>";
+		};
+		6EFEFE381B0CC171001E425B /* 可伸缩TableView */ = {
+			isa = PBXGroup;
+			children = (
+				6E9BA9481B0CB8FB009D87BE /* SKSTableView.h */,
+				6E9BA9491B0CB8FB009D87BE /* SKSTableView.m */,
+				6E9BA94A1B0CB8FB009D87BE /* SKSTableViewCell.h */,
+				6E9BA94B1B0CB8FB009D87BE /* SKSTableViewCell.m */,
+				6E9BA94C1B0CB8FB009D87BE /* SKSTableViewCellIndicator.h */,
+				6E9BA94D1B0CB8FB009D87BE /* SKSTableViewCellIndicator.m */,
+			);
+			name = "可伸缩TableView";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -584,6 +683,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E9BA9581B0CB8FB009D87BE /* Drawers.storyboard in Resources */,
 				6E2761B91B08BF7000247CCC /* Register&Login.storyboard in Resources */,
 				19ED2EF01AECF84F00E9DBEA /* Main.storyboard in Resources */,
 				19ED2EF51AECF84F00E9DBEA /* LaunchScreen.xib in Resources */,
@@ -673,6 +773,8 @@
 				6E2761BF1B08C03200247CCC /* LoginViewController.m in Sources */,
 				19F3AC041AFB6941002B45DD /* QY_JRMSocketDelegater.m in Sources */,
 				196456B11B0617F800EA4E14 /* QY_ChineseStringUtils.m in Sources */,
+				6E9BA9521B0CB8FB009D87BE /* JVRightDrawerTableViewController.m in Sources */,
+				6E9BA9501B0CB8FB009D87BE /* JVRightDrawerTableViewCell.m in Sources */,
 				19A695381AFB32F000F60D03 /* QY_JDASSocketDelegater.m in Sources */,
 				198BADF41AF0AB2600B4E2E6 /* QRCodeReaderView.m in Sources */,
 				194E391A1B00832F00BA4473 /* NSString+QY_dataFormat.m in Sources */,
@@ -687,13 +789,19 @@
 				6E2761BE1B08C03200247CCC /* RegisterViewController.m in Sources */,
 				19ED2EED1AECF84F00E9DBEA /* ViewController.m in Sources */,
 				194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */,
+				6E9BA9561B0CB8FB009D87BE /* SKSTableViewCell.m in Sources */,
 				196456AE1B0617D000EA4E14 /* ChineseString.m in Sources */,
+				6E9BA94F1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.m in Sources */,
 				19909B491AEE9F4B00CCB721 /* QY_SocketService.m in Sources */,
+				6E9BA9551B0CB8FB009D87BE /* SKSTableView.m in Sources */,
+				6E9BA9571B0CB8FB009D87BE /* SKSTableViewCellIndicator.m in Sources */,
+				6E9BA9541B0CB8FB009D87BE /* CameraViewController.m in Sources */,
 				198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */,
 				19909B5B1AEEEC4600CCB721 /* QY_dataPacketFactor.m in Sources */,
 				198BADF91AF0B51700B4E2E6 /* QRCodeGenerator.m in Sources */,
 				19A6953B1AFB44C500F60D03 /* QYNotify.m in Sources */,
 				19ED2EE41AECF84F00E9DBEA /* main.m in Sources */,
+				6E9BA9511B0CB8FB009D87BE /* JVLeftDrawerTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

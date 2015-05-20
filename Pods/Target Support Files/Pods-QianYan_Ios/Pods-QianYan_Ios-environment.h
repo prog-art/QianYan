@@ -60,6 +60,12 @@
 #define COCOAPODS_VERSION_MINOR_GDataXML_HTML 2
 #define COCOAPODS_VERSION_PATCH_GDataXML_HTML 0
 
+// JVFloatingDrawer
+#define COCOAPODS_POD_AVAILABLE_JVFloatingDrawer
+#define COCOAPODS_VERSION_MAJOR_JVFloatingDrawer 0
+#define COCOAPODS_VERSION_MINOR_JVFloatingDrawer 1
+#define COCOAPODS_VERSION_PATCH_JVFloatingDrawer 0
+
 // libqrencode
 #define COCOAPODS_POD_AVAILABLE_libqrencode
 #define COCOAPODS_VERSION_MAJOR_libqrencode 3

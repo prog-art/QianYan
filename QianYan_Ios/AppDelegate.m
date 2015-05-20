@@ -7,17 +7,33 @@
 //
 
 #import "AppDelegate.h"
+#import "JVFloatingDrawerViewController.h"
+#import "JVFloatingDrawerSpringAnimator.h"
 
 #define RegisterAndLoginSBNibName @"Register&Login"
 
 #define LoginVCStoryBoardID @"LoginVCStoryBoardID"
 #define RegisterVCStoryBoardID @"RegisterVCStoryBoardID"
 
+static NSString * const kJVDrawersStoryboardName = @"Drawers";
+
+static NSString * const kJVLeftDrawerStoryboardID = @"JVLeftDrawerViewControllerStoryboardID";
+static NSString * const kJVRightDrawerStoryboardID = @"JVRightDrawerViewControllerStoryboardID";
+
+static NSString * const kJVGitHubProjectPageViewControllerStoryboardID = @"JVGitHubProjectPageViewControllerStoryboardID";
+static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawerSettingsViewControllerStoryboardID";
+
 @interface AppDelegate ()
+
+@property (nonatomic, strong, readonly) UIStoryboard *drawersStoryboard;
 
 @end
 
 @implementation AppDelegate
+
+@synthesize drawersStoryboard = _drawersStoryboard;
+
+#pragma mark - 跳转
 
 - (void)toRegiste {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:RegisterAndLoginSBNibName bundle:nil] ;
@@ -32,17 +48,20 @@
 }
 
 - (void)toMain {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil] ;
-    UIViewController *vc = [sb instantiateInitialViewController] ;
-    self.window.rootViewController = vc ;
+    self.window.rootViewController = self.drawerViewController ;
 }
 
+#pragma mark - Life Cycle
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:RegisterAndLoginSBNibName bundle:nil] ;
     UIViewController *vc = [sb instantiateInitialViewController] ;
-    
     self.window.rootViewController = vc ;
+    
+    [self configureDrawerViewController]; // 配置JVFloatingDrawerViewController
     
     return YES;
 }
@@ -149,6 +168,100 @@
             abort();
         }
     }
+}
+
+#pragma mark - Drawer View Controllers
+
+- (JVFloatingDrawerViewController *)drawerViewController {
+    if (!_drawerViewController) {
+        _drawerViewController = [[JVFloatingDrawerViewController alloc] init];
+        
+        _drawerViewController.leftDrawerWidth = 240.0f ;
+        _drawerViewController.rightDrawerWidth = 120.0f ;
+    }
+    
+    return _drawerViewController;
+}
+
+#pragma mark Sides
+
+- (UITableViewController *)leftDrawerViewController {
+    if (!_leftDrawerViewController) {
+        _leftDrawerViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:kJVLeftDrawerStoryboardID];
+    }
+    
+    return _leftDrawerViewController;
+}
+
+- (UITableViewController *)rightDrawerViewController {
+    if (!_rightDrawerViewController) {
+        _rightDrawerViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:kJVRightDrawerStoryboardID];
+    }
+    
+    return _rightDrawerViewController;
+}
+
+#pragma mark Center
+
+- (UIViewController *)githubViewController {
+    if (!_githubViewController) {
+        _githubViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:kJVGitHubProjectPageViewControllerStoryboardID];
+    }
+    
+    return _githubViewController;
+}
+
+- (UIViewController *)drawerSettingsViewController {
+    if (!_drawerSettingsViewController) {
+        _drawerSettingsViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:kJVDrawerSettingsViewControllerStoryboardID];
+    }
+    
+    return _drawerSettingsViewController;
+}
+
+- (JVFloatingDrawerSpringAnimator *)drawerAnimator {
+    if (!_drawerAnimator) {
+        _drawerAnimator = [[JVFloatingDrawerSpringAnimator alloc] init];
+        
+        _drawerAnimator.animationDelay = 0.0 ;
+        _drawerAnimator.animationDuration = 0.8 ;
+        _drawerAnimator.initialSpringVelocity = 9.0 ;
+        _drawerAnimator.springDamping = 2.0 ;
+    }
+    
+    return _drawerAnimator;
+}
+
+- (UIStoryboard *)drawersStoryboard {
+    if(!_drawersStoryboard) {
+        _drawersStoryboard = [UIStoryboard storyboardWithName:kJVDrawersStoryboardName bundle:nil];
+    }
+    
+    return _drawersStoryboard;
+}
+
+- (void)configureDrawerViewController {
+    self.drawerViewController.leftViewController = self.leftDrawerViewController;
+    self.drawerViewController.rightViewController = self.rightDrawerViewController;
+    self.drawerViewController.centerViewController = self.githubViewController;
+    
+    self.drawerViewController.animator = self.drawerAnimator;
+    
+    self.drawerViewController.backgroundImage = [UIImage imageNamed:@"背景.png"];
+}
+
+#pragma mark - Global Access Helper
+
++ (AppDelegate *)globalDelegate {
+    return (AppDelegate *)[UIApplication sharedApplication].delegate;
+}
+
+- (void)toggleLeftDrawer:(id)sender animated:(BOOL)animated {
+    [self.drawerViewController toggleDrawerWithSide:JVFloatingDrawerSideLeft animated:animated completion:nil];
+}
+
+- (void)toggleRightDrawer:(id)sender animated:(BOOL)animated {
+    [self.drawerViewController toggleDrawerWithSide:JVFloatingDrawerSideRight animated:animated completion:nil];
 }
 
 @end

@@ -7,6 +7,7 @@ pod 'CocoaAsyncSocket', '~> 7.4.1'
 pod 'GDataXML-HTML', '~> 1.2.0'
 pod 'AFNetworking', '~> 2.5.3'
 pod 'libqrencode', '~> 3.4.2'
+pod 'JVFloatingDrawer', '~> 0.1.0'
 
 end
 
