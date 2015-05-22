@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hMr-Te-Kaq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ULb-ka-C6H">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -20,6 +20,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sZC-dS-Y6t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-651" y="292"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ORq-fl-nuB">
+            <objects>
+                <navigationController id="ULb-ka-C6H" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sbi-K2-BfY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="RYb-cf-tSv" kind="relationship" relationship="rootViewController" id="LDE-lj-WfB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vgX-Wv-kGw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1151" y="1037"/>
+        </scene>
+        <!--Test Address Book View Controller-->
+        <scene sceneID="Lws-n5-6cZ">
+            <objects>
+                <viewController id="RYb-cf-tSv" customClass="testAddressBookViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cmu-qd-TOK"/>
+                        <viewControllerLayoutGuide type="bottom" id="kEl-T6-0Ea"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A7O-dI-eik">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LXw-gG-ZuJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lkR-ma-Dao" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-688" y="1037"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">

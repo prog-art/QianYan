@@ -37,6 +37,12 @@
 		19ED2EF51AECF84F00E9DBEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19ED2EF31AECF84F00E9DBEA /* LaunchScreen.xib */; };
 		19ED2F011AECF84F00E9DBEA /* QianYan_IosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2F001AECF84F00E9DBEA /* QianYan_IosTests.m */; };
 		19F3AC041AFB6941002B45DD /* QY_JRMSocketDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F3AC031AFB6941002B45DD /* QY_JRMSocketDelegater.m */; };
+		19F91CEE1B0E2A1800264AC0 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F91CEC1B0E2A1800264AC0 /* AddressBook.framework */; };
+		19F91CEF1B0E2A1800264AC0 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F91CED1B0E2A1800264AC0 /* AddressBookUI.framework */; };
+		19F91CF21B0E2ADF00264AC0 /* testAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F91CF11B0E2ADF00264AC0 /* testAddressBookViewController.m */; };
+		19F91CF91B0F1B1000264AC0 /* QY_AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F91CF81B0F1B1000264AC0 /* QY_AddressBook.m */; };
+		19F91CFC1B0F2D8000264AC0 /* QY_contactUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F91CFB1B0F2D8000264AC0 /* QY_contactUtils.m */; };
+		19F91D001B0F591000264AC0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F91CFF1B0F591000264AC0 /* MessageUI.framework */; };
 		2E198AB0F8530161A1BAD09F /* libPods-QianYan_Ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11F773AF3A6D9E59DFFC3C35 /* libPods-QianYan_Ios.a */; };
 		6E2761B91B08BF7000247CCC /* Register&Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E2761B81B08BF7000247CCC /* Register&Login.storyboard */; };
 		6E2761BE1B08C03200247CCC /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2761BB1B08C03100247CCC /* RegisterViewController.m */; };
@@ -130,6 +136,17 @@
 		19ED2F001AECF84F00E9DBEA /* QianYan_IosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QianYan_IosTests.m; sourceTree = "<group>"; };
 		19F3AC021AFB6941002B45DD /* QY_JRMSocketDelegater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMSocketDelegater.h; sourceTree = "<group>"; };
 		19F3AC031AFB6941002B45DD /* QY_JRMSocketDelegater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMSocketDelegater.m; sourceTree = "<group>"; };
+		19F91CEC1B0E2A1800264AC0 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		19F91CED1B0E2A1800264AC0 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		19F91CF01B0E2ADF00264AC0 /* testAddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testAddressBookViewController.h; sourceTree = "<group>"; };
+		19F91CF11B0E2ADF00264AC0 /* testAddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testAddressBookViewController.m; sourceTree = "<group>"; };
+		19F91CF41B0F19F300264AC0 /* QY_contactService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_contactService.h; sourceTree = "<group>"; };
+		19F91CF71B0F1B1000264AC0 /* QY_AddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_AddressBook.h; sourceTree = "<group>"; };
+		19F91CF81B0F1B1000264AC0 /* QY_AddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_AddressBook.m; sourceTree = "<group>"; };
+		19F91CFA1B0F2D8000264AC0 /* QY_contactUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_contactUtils.h; sourceTree = "<group>"; };
+		19F91CFB1B0F2D8000264AC0 /* QY_contactUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_contactUtils.m; sourceTree = "<group>"; };
+		19F91CFE1B0F55F900264AC0 /* QY_contactUtilsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_contactUtilsDelegate.h; sourceTree = "<group>"; };
+		19F91CFF1B0F591000264AC0 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3CD33F4688A6D206477B0FD6 /* Pods-QianYan_Ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QianYan_Ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QianYan_Ios/Pods-QianYan_Ios.debug.xcconfig"; sourceTree = "<group>"; };
 		4BCFE60503547709FAB2C1E5 /* Pods-QianYan_IosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QianYan_IosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QianYan_IosTests/Pods-QianYan_IosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E2761B81B08BF7000247CCC /* Register&Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Register&Login.storyboard"; sourceTree = "<group>"; };
@@ -164,6 +181,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19F91D001B0F591000264AC0 /* MessageUI.framework in Frameworks */,
+				19F91CEE1B0E2A1800264AC0 /* AddressBook.framework in Frameworks */,
+				19F91CEF1B0E2A1800264AC0 /* AddressBookUI.framework in Frameworks */,
 				2E198AB0F8530161A1BAD09F /* libPods-QianYan_Ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +364,7 @@
 		19909B431AEE985700CCB721 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				19F91CF31B0F19D200264AC0 /* 联系人 */,
 				196456A81B06177F00EA4E14 /* 中文字符串工具 */,
 				196456A71B05D00E00EA4E14 /* 其他工具 */,
 				196456961B05828B00EA4E14 /* QY_QRCode */,
@@ -384,6 +405,9 @@
 			children = (
 				19ED2EEB1AECF84F00E9DBEA /* ViewController.h */,
 				19ED2EEC1AECF84F00E9DBEA /* ViewController.m */,
+				19ED2EEE1AECF84F00E9DBEA /* Main.storyboard */,
+				19F91CF01B0E2ADF00264AC0 /* testAddressBookViewController.h */,
+				19F91CF11B0E2ADF00264AC0 /* testAddressBookViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -420,7 +444,6 @@
 				19ED2EE61AECF84F00E9DBEA /* AppDelegate.m */,
 				19909B5C1AEEECB400CCB721 /* ViewControllers */,
 				6E316D921B08D15800F864D3 /* 模块 */,
-				19ED2EEE1AECF84F00E9DBEA /* Main.storyboard */,
 				19ED2EF11AECF84F00E9DBEA /* Images.xcassets */,
 				19ED2EF31AECF84F00E9DBEA /* LaunchScreen.xib */,
 				19ED2EE81AECF84F00E9DBEA /* QianYan_Ios.xcdatamodeld */,
@@ -470,6 +493,43 @@
 			name = socketDelegaters;
 			sourceTree = "<group>";
 		};
+		19F91CF31B0F19D200264AC0 /* 联系人 */ = {
+			isa = PBXGroup;
+			children = (
+				19F91CF41B0F19F300264AC0 /* QY_contactService.h */,
+				19F91CFD1B0F55D200264AC0 /* delegate */,
+				19F91CF61B0F1AEC00264AC0 /* model */,
+				19F91CF51B0F19FA00264AC0 /* main */,
+			);
+			name = "联系人";
+			sourceTree = "<group>";
+		};
+		19F91CF51B0F19FA00264AC0 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				19F91CFA1B0F2D8000264AC0 /* QY_contactUtils.h */,
+				19F91CFB1B0F2D8000264AC0 /* QY_contactUtils.m */,
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
+		19F91CF61B0F1AEC00264AC0 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				19F91CF71B0F1B1000264AC0 /* QY_AddressBook.h */,
+				19F91CF81B0F1B1000264AC0 /* QY_AddressBook.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		19F91CFD1B0F55D200264AC0 /* delegate */ = {
+			isa = PBXGroup;
+			children = (
+				19F91CFE1B0F55F900264AC0 /* QY_contactUtilsDelegate.h */,
+			);
+			name = delegate;
+			sourceTree = "<group>";
+		};
 		21777B673703E293DF0B8110 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,6 +544,9 @@
 		3652C3BCAEB78CC4CE09D590 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				19F91CFF1B0F591000264AC0 /* MessageUI.framework */,
+				19F91CEC1B0E2A1800264AC0 /* AddressBook.framework */,
+				19F91CED1B0E2A1800264AC0 /* AddressBookUI.framework */,
 				11F773AF3A6D9E59DFFC3C35 /* libPods-QianYan_Ios.a */,
 				B56B755DAE30BD9D1F0F95C3 /* libPods-QianYan_IosTests.a */,
 			);
@@ -788,14 +851,17 @@
 				1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */,
 				6E2761BE1B08C03200247CCC /* RegisterViewController.m in Sources */,
 				19ED2EED1AECF84F00E9DBEA /* ViewController.m in Sources */,
+				19F91CFC1B0F2D8000264AC0 /* QY_contactUtils.m in Sources */,
 				194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */,
 				6E9BA9561B0CB8FB009D87BE /* SKSTableViewCell.m in Sources */,
+				19F91CF21B0E2ADF00264AC0 /* testAddressBookViewController.m in Sources */,
 				196456AE1B0617D000EA4E14 /* ChineseString.m in Sources */,
 				6E9BA94F1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.m in Sources */,
 				19909B491AEE9F4B00CCB721 /* QY_SocketService.m in Sources */,
 				6E9BA9551B0CB8FB009D87BE /* SKSTableView.m in Sources */,
 				6E9BA9571B0CB8FB009D87BE /* SKSTableViewCellIndicator.m in Sources */,
 				6E9BA9541B0CB8FB009D87BE /* CameraViewController.m in Sources */,
+				19F91CF91B0F1B1000264AC0 /* QY_AddressBook.m in Sources */,
 				198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */,
 				19909B5B1AEEEC4600CCB721 /* QY_dataPacketFactor.m in Sources */,
 				198BADF91AF0B51700B4E2E6 /* QRCodeGenerator.m in Sources */,

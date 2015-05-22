@@ -26,14 +26,36 @@
     [super tearDown];
 }
 
-- (void)testChineseStringDescription {
-    ChineseString *cnStr = [[ChineseString alloc] initWithString:@"张睿33三"] ;
-    QYDebugLog(@"%@",cnStr) ;
-}
+//- (void)testChineseStringDescription {
+//    ChineseString *cnStr = [[ChineseString alloc] initWithString:@"张睿33三"] ;
+//    QYDebugLog(@"%@",cnStr) ;
+//}
+//
+//- (void)testQY_getChineseStringArrWithArray {
+//    QYDebugLog(@"%@",[QY_ChineseStringUtils QY_getChineseStringArrWithArray:@[@"张睿33",@"安妮2zr"]]) ;
+//}
 
-- (void)testQY_getChineseStringArrWithArray {
-    QYDebugLog(@"%@",[QY_ChineseStringUtils QY_getChineseStringArrWithArray:@[@"张睿33",@"安妮2zr"]]) ;
-}
+- (void)testQ {
+    NSString *testString = @"400-600-8800" ;
+    
+    QYDebugLog(@"testString = %@",testString) ;
+    
+    NSRange range = [testString rangeOfString:@" "] ;
+    
+    if ( range.location != NSNotFound ) {
+        testString = [testString substringFromIndex:range.location + 1] ;
+    }
+    
+    
+    
+    while ( (range = [testString rangeOfString:@"-"]).location != NSNotFound ) {
+        NSMutableString *mString = [testString mutableCopy] ;
+        [mString replaceCharactersInRange:range withString:@""] ;
+        testString = mString ;
+    }
 
+    
+    QYDebugLog(@"testString = %@",testString) ;
+}
 
 @end
