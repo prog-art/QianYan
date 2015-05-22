@@ -131,9 +131,10 @@ typedef void(^QYBlock)() ;
         if ( nil == contact.tel ) {
             continue ;
         }
-//        if ([@"Apple (中国大陆)" isEqualToString:contact.name] ) {
-//            continue ;
-//        }
+        
+        if ( [@"4006668800" isEqualToString:contact.tel] ) {
+            continue ;
+        }
         
         [filterdContacts addObject:contact] ;
     }
@@ -145,6 +146,7 @@ typedef void(^QYBlock)() ;
 /**
  *  去掉电话号码中多余的字符
  *  例: @"+86 400-600-8800" --> @"400-600-8800"
+ *  @"1795118817870386" --> @"18817870386"
  *
  *  @param telNum 电话号码
  */
@@ -153,18 +155,24 @@ typedef void(^QYBlock)() ;
         return nil ;
     }
     NSRange range ;
-    
+    //去掉区号
     range = [telNum rangeOfString:@" "] ;
     
     if ( range.location != NSNotFound ) {
         telNum = [telNum substringFromIndex:range.location + 1] ;
     }
-    
+    //去掉-
     while ( (range = [telNum rangeOfString:@"-"] ).location != NSNotFound ) {
         NSMutableString *mString = [telNum mutableCopy] ;
         [mString replaceCharactersInRange:range withString:@""] ;
         telNum = mString ;
     }
+    //去掉17951
+    range = [telNum rangeOfString:@"17951"] ;
+    if ( range.location !=NSNotFound && range.location == 0) {
+        telNum = [telNum substringFromIndex:range.length] ;
+    }
+    
     return telNum ;
 }
 

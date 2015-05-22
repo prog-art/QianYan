@@ -47,6 +47,8 @@
 		6E2761B91B08BF7000247CCC /* Register&Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E2761B81B08BF7000247CCC /* Register&Login.storyboard */; };
 		6E2761BE1B08C03200247CCC /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2761BB1B08C03100247CCC /* RegisterViewController.m */; };
 		6E2761BF1B08C03200247CCC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2761BD1B08C03200247CCC /* LoginViewController.m */; };
+		6E67BBE21B0F81B00066C9CE /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E67BBDF1B0F81B00066C9CE /* ContactTableViewCell.m */; };
+		6E67BBE31B0F81B00066C9CE /* ContactTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E67BBE11B0F81B00066C9CE /* ContactTableViewController.m */; };
 		6E9BA94F1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BA93D1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.m */; };
 		6E9BA9501B0CB8FB009D87BE /* JVRightDrawerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BA93F1B0CB8FB009D87BE /* JVRightDrawerTableViewCell.m */; };
 		6E9BA9511B0CB8FB009D87BE /* JVLeftDrawerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BA9411B0CB8FB009D87BE /* JVLeftDrawerTableViewController.m */; };
@@ -154,6 +156,10 @@
 		6E2761BB1B08C03100247CCC /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		6E2761BC1B08C03200247CCC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6E2761BD1B08C03200247CCC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6E67BBDE1B0F81B00066C9CE /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
+		6E67BBDF1B0F81B00066C9CE /* ContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
+		6E67BBE01B0F81B00066C9CE /* ContactTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewController.h; sourceTree = "<group>"; };
+		6E67BBE11B0F81B00066C9CE /* ContactTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewController.m; sourceTree = "<group>"; };
 		6E9BA93C1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVLeftDrawerTableViewCell.h; path = ../JVLeftDrawerTableViewCell.h; sourceTree = "<group>"; };
 		6E9BA93D1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVLeftDrawerTableViewCell.m; path = ../JVLeftDrawerTableViewCell.m; sourceTree = "<group>"; };
 		6E9BA93E1B0CB8FB009D87BE /* JVRightDrawerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVRightDrawerTableViewCell.h; path = ../JVRightDrawerTableViewCell.h; sourceTree = "<group>"; };
@@ -590,9 +596,21 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		6E67BBDD1B0F81890066C9CE /* 手机通讯录 */ = {
+			isa = PBXGroup;
+			children = (
+				6E67BBDE1B0F81B00066C9CE /* ContactTableViewCell.h */,
+				6E67BBDF1B0F81B00066C9CE /* ContactTableViewCell.m */,
+				6E67BBE01B0F81B00066C9CE /* ContactTableViewController.h */,
+				6E67BBE11B0F81B00066C9CE /* ContactTableViewController.m */,
+			);
+			name = "手机通讯录";
+			sourceTree = "<group>";
+		};
 		6EFEFE321B0CC036001E425B /* 主界面 */ = {
 			isa = PBXGroup;
 			children = (
+				6E67BBDD1B0F81890066C9CE /* 手机通讯录 */,
 				6EFEFE331B0CC03C001E425B /* 左侧栏 */,
 				6EFEFE341B0CC043001E425B /* 右侧栏 */,
 				6E9BA94E1B0CB8FB009D87BE /* Drawers.storyboard */,
@@ -833,6 +851,7 @@
 			files = (
 				19D6CFCE1AFE5181004A0B19 /* QY_JRMDataPharser.m in Sources */,
 				1956BACB1AFF323C00C4A7F6 /* QY_JRMDataPacket.m in Sources */,
+				6E67BBE21B0F81B00066C9CE /* ContactTableViewCell.m in Sources */,
 				6E2761BF1B08C03200247CCC /* LoginViewController.m in Sources */,
 				19F3AC041AFB6941002B45DD /* QY_JRMSocketDelegater.m in Sources */,
 				196456B11B0617F800EA4E14 /* QY_ChineseStringUtils.m in Sources */,
@@ -840,6 +859,7 @@
 				6E9BA9501B0CB8FB009D87BE /* JVRightDrawerTableViewCell.m in Sources */,
 				19A695381AFB32F000F60D03 /* QY_JDASSocketDelegater.m in Sources */,
 				198BADF41AF0AB2600B4E2E6 /* QRCodeReaderView.m in Sources */,
+				6E67BBE31B0F81B00066C9CE /* ContactTableViewController.m in Sources */,
 				194E391A1B00832F00BA4473 /* NSString+QY_dataFormat.m in Sources */,
 				19ED2EE71AECF84F00E9DBEA /* AppDelegate.m in Sources */,
 				19909B4E1AEEA04900CCB721 /* QYUtils.m in Sources */,

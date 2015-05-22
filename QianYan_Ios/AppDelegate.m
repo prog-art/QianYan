@@ -57,9 +57,9 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
 
     
     
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:RegisterAndLoginSBNibName bundle:nil] ;
-    UIViewController *vc = [sb instantiateInitialViewController] ;
-    self.window.rootViewController = vc ;
+//    UIStoryboard *sb = [UIStoryboard storyboardWithName:RegisterAndLoginSBNibName bundle:nil] ;
+//    UIViewController *vc = [sb instantiateInitialViewController] ;
+//    self.window.rootViewController = vc ;
     
     [self configureDrawerViewController]; // 配置JVFloatingDrawerViewController
     

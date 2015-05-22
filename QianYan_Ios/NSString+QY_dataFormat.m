@@ -34,12 +34,12 @@
 }
 
 +(NSString *)QY_CMD2HexString:(JOSEPH_COMMAND)cmd {
-    NSString *resStr = [NSString stringWithFormat:@"%x",cmd] ;
+    NSString *resStr = [NSString stringWithFormat:@"%lx",(long)cmd] ;
     return resStr ;
 }
 
 +(NSString *)QY_UInteger2HexString:(NSUInteger)integer {
-    NSString *resStr = [NSString stringWithFormat:@"%x",integer] ;
+    NSString *resStr = [NSString stringWithFormat:@"%lx",(unsigned long)integer] ;
     return resStr ;
 }
 
