@@ -13,7 +13,7 @@
 #import "QY_JRMSocketDelegater.h"
 
 #import "QY_jclient_jrm_protocol_Marco.h"
-#import "QY_JRMDataPharser.h"
+#import "QY_JRMDataPhraser.h"
 #import "QY_SocketServiceDelegateNotificationCenter.h"
 
 @implementation QY_JRMSocketDelegater
@@ -43,7 +43,7 @@
     QYDebugLog(@"receive data = %@ tag = %ld",data,tag) ;
     
     //数据解析
-    QY_JRMDataPacket *packet = [QY_JRMDataPharser pharseDataWithData:data Tag:tag] ;
+    QY_JRMDataPacket *packet = [QY_JRMDataPhraser pharseDataWithData:data Tag:tag] ;
     //数据通知
     [QY_SocketServiceDelegateNotificationCenter postDelegate:self.delegate Notification:tag WithPacket:packet] ;
 }

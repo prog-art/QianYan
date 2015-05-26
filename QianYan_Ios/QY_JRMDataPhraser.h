@@ -19,7 +19,7 @@ extern NSUInteger api252FullDataLen ;
 /**
  *  协议版本 <<JRM通信协议(2015-4-29 10.41.11 3120)>>
  */
-@interface QY_JRMDataPharser : NSObject
+@interface QY_JRMDataPhraser : NSObject
 
 /**
  *  根据 JRM_REQUEST_OPERATION_TYPE tag 来确认解析data的方法。
@@ -30,16 +30,5 @@ extern NSUInteger api252FullDataLen ;
  *  @return 解析好的数据包 QY_JRMDataPacket,数据不完整时返回nil
  */
 +(QY_JRMDataPacket *)pharseDataWithData:(NSData *)data Tag:(JRM_REQUEST_OPERATION_TYPE)tag ;
-
-#pragma mark -- test
-
-#warning 测试用例中使用的方法，之后请隐藏
-+ (NSUInteger)getLen:(NSData *)data ;
-
-+ (JOSEPH_COMMAND)getCmd:(NSData *)data ;
-
-+ (NSString *)getStringValue:(NSData *)data range:(NSRange)range ;
-
-+ (NSInteger)getIngeterValue:(NSData *)data range:(NSRange)range ;
 
 @end

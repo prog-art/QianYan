@@ -56,7 +56,7 @@
 
 + (NSString *)QY_NSData2NSString:(NSData *)data {
     NSString *resStr ;
-    resStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] ;
+    resStr = [NSString stringWithUTF8String:[data bytes]] ;
     return resStr ;
 }
 

@@ -11,5 +11,6 @@
 
 #import "QY_CommonDefine.h"
 #import "QYUtils.h"
+#import "NSError+QYError.h"
 
 #endif

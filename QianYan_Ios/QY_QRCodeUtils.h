@@ -11,6 +11,10 @@
 
 #import "QY_QRCodeScanerDelegate.h"
 
+/**
+ *  1.提供生成二维码的功能。
+ *  2.提供唤起二维码扫描组件的功能。
+ */
 @interface QY_QRCodeUtils : NSObject
 
 #pragma mark - generate QRCode Image
@@ -26,16 +30,16 @@
  */
 + (UIImage *)QY_generateQRImageOfWifiWithESSID:(NSString *)ESSID Password:(NSString *)password UserId:(NSString *)userId;
 
-/**
- *  2.生成绑定摄像头的二维码
- *  [Note]:客户端预留方法，估计不会使用。
- *
- *  @param cameraId 摄像头的Id
- *  @param password 摄像头的密码
- *
- *  @return 二维码图片
- */
-+ (UIImage *)QY_generateQRImageOfBindingCameraWithCameraId:(NSString *)cameraId Password:(NSString *)password ;
+///**
+// *  2.生成绑定摄像头的二维码
+// *  [Note]:客户端预留方法，估计不会使用。
+// *
+// *  @param cameraId 摄像头的Id
+// *  @param password 摄像头的密码
+// *
+// *  @return 二维码图片
+// */
+//+ (UIImage *)QY_generateQRImageOfBindingCameraWithCameraId:(NSString *)cameraId Password:(NSString *)password ;
 
 /**
  *  3.生成千衍账户的个人名片
@@ -49,7 +53,7 @@
 #pragma mark - scan QRCode 
 
 /**
- *  进入QRCodeScaner的生命周期
+ *  唤起QRCodeScaner
  *
  *  @param sender 扫描结果结果接收者
  */

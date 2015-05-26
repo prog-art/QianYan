@@ -24,6 +24,7 @@ PODS:
   - GDataXML-HTML (1.2.0)
   - JVFloatingDrawer (0.1.0)
   - libqrencode (3.4.2)
+  - Reachability (3.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.3)
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - GDataXML-HTML (~> 1.2.0)
   - JVFloatingDrawer (~> 0.1.0)
   - libqrencode (~> 3.4.2)
+  - Reachability (~> 3.2)
 
 SPEC CHECKSUMS:
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
@@ -38,5 +40,6 @@ SPEC CHECKSUMS:
   GDataXML-HTML: dac3692417e9fc612f8e12d8baae3706fccedcc8
   JVFloatingDrawer: 4782b1df21411aef2c1818f3b346cace02cc2e24
   libqrencode: 43dc34b89af83ea4b07c409cd8e09c87aa3a1c9f
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
 
-COCOAPODS: 0.36.3
+COCOAPODS: 0.37.1

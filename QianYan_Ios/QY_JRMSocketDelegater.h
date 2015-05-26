@@ -10,7 +10,6 @@
 
 #import <CocoaAsyncSocket/AsyncSocket.h>
 #import "QY_Common.h"
-#warning 只需要@protocol 的内容，等待重构
 #import "QY_SocketService.h"
 
 @interface QY_JRMSocketDelegater : NSObject<AsyncSocketDelegate>

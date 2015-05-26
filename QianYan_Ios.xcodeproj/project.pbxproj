@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		19382E541B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 19382E531B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.m */; };
+		1938CCB11B24AC32009C4AE5 /* JRMvalueDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCB01B24AC32009C4AE5 /* JRMvalueDescription.m */; };
+		1938CCB41B24ACB4009C4AE5 /* JRMvalue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCB31B24ACB4009C4AE5 /* JRMvalue.m */; };
+		1938CCB81B24BC2B009C4AE5 /* JRMDataParseUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCB71B24BC2B009C4AE5 /* JRMDataParseUtils.m */; };
+		1938CCBB1B24BCEA009C4AE5 /* JRMDataFormatUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCBA1B24BCEA009C4AE5 /* JRMDataFormatUtils.m */; };
 		194E391A1B00832F00BA4473 /* NSString+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */; };
 		194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */; };
 		1956BACB1AFF323C00C4A7F6 /* QY_JRMDataPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 1956BACA1AFF323C00C4A7F6 /* QY_JRMDataPacket.m */; };
@@ -18,16 +22,26 @@
 		196456AE1B0617D000EA4E14 /* ChineseString.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456AD1B0617D000EA4E14 /* ChineseString.m */; };
 		196456B11B0617F800EA4E14 /* QY_ChineseStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456B01B0617F800EA4E14 /* QY_ChineseStringUtils.m */; };
 		196456BA1B063A7F00EA4E14 /* QianYan_ChineseStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456B91B063A7F00EA4E14 /* QianYan_ChineseStringTests.m */; };
+		198530321B27215500EB96F7 /* testNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530311B27215500EB96F7 /* testNetworkViewController.m */; };
+		198530351B272C3300EB96F7 /* QYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530341B272C3300EB96F7 /* QYUser.m */; };
+		198530391B28075500EB96F7 /* QY_JPROHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530381B28075500EB96F7 /* QY_JPROHttpService.m */; };
+		1985303D1B2887CD00EB96F7 /* QY_FileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1985303C1B2887CD00EB96F7 /* QY_FileService.m */; };
+		198530421B28B98B00EB96F7 /* QY_XMLService.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530411B28B98B00EB96F7 /* QY_XMLService.m */; };
+		198530471B28B9AF00EB96F7 /* QY_XMLPhraser.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530461B28B9AF00EB96F7 /* QY_XMLPhraser.m */; };
+		1985304A1B28B9BC00EB96F7 /* QY_XMLFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530491B28B9BC00EB96F7 /* QY_XMLFormatter.m */; };
+		1985304E1B29D5EA00EB96F7 /* NSError+QYError.m in Sources */ = {isa = PBXBuildFile; fileRef = 1985304D1B29D5EA00EB96F7 /* NSError+QYError.m */; };
+		198530501B2A619900EB96F7 /* fileManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1985304F1B2A619900EB96F7 /* fileManagerTest.m */; };
+		198530541B2B669900EB96F7 /* QY_JPROUrlFactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530531B2B669900EB96F7 /* QY_JPROUrlFactor.m */; };
 		198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADED1AF0AB2600B4E2E6 /* QRCameraSwitchButton.m */; };
 		198BADF41AF0AB2600B4E2E6 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF01AF0AB2600B4E2E6 /* QRCodeReaderView.m */; };
 		198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF21AF0AB2600B4E2E6 /* QRCodeReaderViewController.m */; };
 		198BADF91AF0B51700B4E2E6 /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF81AF0B51700B4E2E6 /* QRCodeGenerator.m */; };
 		19909B491AEE9F4B00CCB721 /* QY_SocketService.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B481AEE9F4B00CCB721 /* QY_SocketService.m */; };
 		19909B4E1AEEA04900CCB721 /* QYUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B4D1AEEA04900CCB721 /* QYUtils.m */; };
-		19909B5B1AEEEC4600CCB721 /* QY_dataPacketFactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B5A1AEEEC4600CCB721 /* QY_dataPacketFactor.m */; };
+		19909B5B1AEEEC4600CCB721 /* QY_JRMDataPacketFactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B5A1AEEEC4600CCB721 /* QY_JRMDataPacketFactor.m */; };
 		19A695381AFB32F000F60D03 /* QY_JDASSocketDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A695371AFB32F000F60D03 /* QY_JDASSocketDelegater.m */; };
 		19A6953B1AFB44C500F60D03 /* QYNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A6953A1AFB44C500F60D03 /* QYNotify.m */; };
-		19D6CFCE1AFE5181004A0B19 /* QY_JRMDataPharser.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D6CFCD1AFE5181004A0B19 /* QY_JRMDataPharser.m */; };
+		19D6CFCE1AFE5181004A0B19 /* QY_JRMDataPhraser.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D6CFCD1AFE5181004A0B19 /* QY_JRMDataPhraser.m */; };
 		19ED2EE41AECF84F00E9DBEA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EE31AECF84F00E9DBEA /* main.m */; };
 		19ED2EE71AECF84F00E9DBEA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EE61AECF84F00E9DBEA /* AppDelegate.m */; };
 		19ED2EEA1AECF84F00E9DBEA /* QianYan_Ios.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EE81AECF84F00E9DBEA /* QianYan_Ios.xcdatamodeld */; };
@@ -36,6 +50,8 @@
 		19ED2EF21AECF84F00E9DBEA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19ED2EF11AECF84F00E9DBEA /* Images.xcassets */; };
 		19ED2EF51AECF84F00E9DBEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19ED2EF31AECF84F00E9DBEA /* LaunchScreen.xib */; };
 		19ED2F011AECF84F00E9DBEA /* QianYan_IosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2F001AECF84F00E9DBEA /* QianYan_IosTests.m */; };
+		19F34B8C1B1E8BFD00B624C6 /* QY_SocketServiceAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F34B8B1B1E8BFD00B624C6 /* QY_SocketServiceAgent.m */; };
+		19F34B8F1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F34B8E1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.m */; };
 		19F3AC041AFB6941002B45DD /* QY_JRMSocketDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F3AC031AFB6941002B45DD /* QY_JRMSocketDelegater.m */; };
 		19F91CEE1B0E2A1800264AC0 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F91CEC1B0E2A1800264AC0 /* AddressBook.framework */; };
 		19F91CEF1B0E2A1800264AC0 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F91CED1B0E2A1800264AC0 /* AddressBookUI.framework */; };
@@ -74,9 +90,18 @@
 /* Begin PBXFileReference section */
 		11F773AF3A6D9E59DFFC3C35 /* libPods-QianYan_Ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QianYan_Ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1902EEDA1B01BDCA001E4B12 /* QY_Socket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_Socket.h; sourceTree = "<group>"; };
+		192614141B14E30100241DDC /* QY_JDASSocketDelegaterDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_JDASSocketDelegaterDelegate.h; sourceTree = "<group>"; };
 		19382E521B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_SocketServiceDelegateNotificationCenter.h; sourceTree = "<group>"; };
 		19382E531B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_SocketServiceDelegateNotificationCenter.m; sourceTree = "<group>"; };
 		19382E551B03761C0041F7E4 /* QY_SocketServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_SocketServiceDelegate.h; sourceTree = "<group>"; };
+		1938CCAF1B24AC32009C4AE5 /* JRMvalueDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRMvalueDescription.h; sourceTree = "<group>"; };
+		1938CCB01B24AC32009C4AE5 /* JRMvalueDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRMvalueDescription.m; sourceTree = "<group>"; };
+		1938CCB21B24ACB4009C4AE5 /* JRMvalue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRMvalue.h; sourceTree = "<group>"; };
+		1938CCB31B24ACB4009C4AE5 /* JRMvalue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRMvalue.m; sourceTree = "<group>"; };
+		1938CCB61B24BC2B009C4AE5 /* JRMDataParseUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRMDataParseUtils.h; sourceTree = "<group>"; };
+		1938CCB71B24BC2B009C4AE5 /* JRMDataParseUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRMDataParseUtils.m; sourceTree = "<group>"; };
+		1938CCB91B24BCEA009C4AE5 /* JRMDataFormatUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRMDataFormatUtils.h; sourceTree = "<group>"; };
+		1938CCBA1B24BCEA009C4AE5 /* JRMDataFormatUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRMDataFormatUtils.m; sourceTree = "<group>"; };
 		194E39181B00832F00BA4473 /* NSString+QY_dataFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+QY_dataFormat.h"; sourceTree = "<group>"; };
 		194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QY_dataFormat.m"; sourceTree = "<group>"; };
 		194E391B1B00DAB600BA4473 /* NSData+QY_dataFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+QY_dataFormat.h"; sourceTree = "<group>"; };
@@ -98,6 +123,26 @@
 		196456B01B0617F800EA4E14 /* QY_ChineseStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_ChineseStringUtils.m; sourceTree = "<group>"; };
 		196456B81B0639D600EA4E14 /* QY_ChineseString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_ChineseString.h; sourceTree = "<group>"; };
 		196456B91B063A7F00EA4E14 /* QianYan_ChineseStringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QianYan_ChineseStringTests.m; sourceTree = "<group>"; };
+		198530301B27215500EB96F7 /* testNetworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testNetworkViewController.h; sourceTree = "<group>"; };
+		198530311B27215500EB96F7 /* testNetworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testNetworkViewController.m; sourceTree = "<group>"; };
+		198530331B272C3300EB96F7 /* QYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYUser.h; sourceTree = "<group>"; };
+		198530341B272C3300EB96F7 /* QYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYUser.m; sourceTree = "<group>"; };
+		198530371B28075500EB96F7 /* QY_JPROHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JPROHttpService.h; sourceTree = "<group>"; };
+		198530381B28075500EB96F7 /* QY_JPROHttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JPROHttpService.m; sourceTree = "<group>"; };
+		1985303B1B2887CD00EB96F7 /* QY_FileService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_FileService.h; sourceTree = "<group>"; };
+		1985303C1B2887CD00EB96F7 /* QY_FileService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_FileService.m; sourceTree = "<group>"; };
+		1985303E1B28B33A00EB96F7 /* userInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = userInterface.h; sourceTree = "<group>"; };
+		198530401B28B98B00EB96F7 /* QY_XMLService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_XMLService.h; sourceTree = "<group>"; };
+		198530411B28B98B00EB96F7 /* QY_XMLService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_XMLService.m; sourceTree = "<group>"; };
+		198530451B28B9AF00EB96F7 /* QY_XMLPhraser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_XMLPhraser.h; sourceTree = "<group>"; };
+		198530461B28B9AF00EB96F7 /* QY_XMLPhraser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_XMLPhraser.m; sourceTree = "<group>"; };
+		198530481B28B9BC00EB96F7 /* QY_XMLFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_XMLFormatter.h; sourceTree = "<group>"; };
+		198530491B28B9BC00EB96F7 /* QY_XMLFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_XMLFormatter.m; sourceTree = "<group>"; };
+		1985304C1B29D5EA00EB96F7 /* NSError+QYError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+QYError.h"; sourceTree = "<group>"; };
+		1985304D1B29D5EA00EB96F7 /* NSError+QYError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+QYError.m"; sourceTree = "<group>"; };
+		1985304F1B2A619900EB96F7 /* fileManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fileManagerTest.m; sourceTree = "<group>"; };
+		198530521B2B669900EB96F7 /* QY_JPROUrlFactor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JPROUrlFactor.h; sourceTree = "<group>"; };
+		198530531B2B669900EB96F7 /* QY_JPROUrlFactor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JPROUrlFactor.m; sourceTree = "<group>"; };
 		198BADEC1AF0AB2600B4E2E6 /* QRCameraSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCameraSwitchButton.h; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCameraSwitchButton.h"; sourceTree = "<group>"; };
 		198BADED1AF0AB2600B4E2E6 /* QRCameraSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCameraSwitchButton.m; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCameraSwitchButton.m"; sourceTree = "<group>"; };
 		198BADEE1AF0AB2600B4E2E6 /* QRCodeReaderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeReaderDelegate.h; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCodeReaderDelegate.h"; sourceTree = "<group>"; };
@@ -114,14 +159,14 @@
 		19909B4C1AEEA04900CCB721 /* QYUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYUtils.h; sourceTree = "<group>"; };
 		19909B4D1AEEA04900CCB721 /* QYUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYUtils.m; sourceTree = "<group>"; };
 		19909B521AEEE1C300CCB721 /* QY_jclient_jrm_protocol_Marco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_jclient_jrm_protocol_Marco.h; sourceTree = "<group>"; };
-		19909B591AEEEC4600CCB721 /* QY_dataPacketFactor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_dataPacketFactor.h; sourceTree = "<group>"; };
-		19909B5A1AEEEC4600CCB721 /* QY_dataPacketFactor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_dataPacketFactor.m; sourceTree = "<group>"; };
+		19909B591AEEEC4600CCB721 /* QY_JRMDataPacketFactor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMDataPacketFactor.h; sourceTree = "<group>"; };
+		19909B5A1AEEEC4600CCB721 /* QY_JRMDataPacketFactor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMDataPacketFactor.m; sourceTree = "<group>"; };
 		19A695361AFB32F000F60D03 /* QY_JDASSocketDelegater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JDASSocketDelegater.h; sourceTree = "<group>"; };
 		19A695371AFB32F000F60D03 /* QY_JDASSocketDelegater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JDASSocketDelegater.m; sourceTree = "<group>"; };
 		19A695391AFB44C500F60D03 /* QYNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYNotify.h; sourceTree = "<group>"; };
 		19A6953A1AFB44C500F60D03 /* QYNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYNotify.m; sourceTree = "<group>"; };
-		19D6CFCC1AFE5180004A0B19 /* QY_JRMDataPharser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMDataPharser.h; sourceTree = "<group>"; };
-		19D6CFCD1AFE5181004A0B19 /* QY_JRMDataPharser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMDataPharser.m; sourceTree = "<group>"; };
+		19D6CFCC1AFE5180004A0B19 /* QY_JRMDataPhraser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMDataPhraser.h; sourceTree = "<group>"; };
+		19D6CFCD1AFE5181004A0B19 /* QY_JRMDataPhraser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMDataPhraser.m; sourceTree = "<group>"; };
 		19ED2EDE1AECF84F00E9DBEA /* QianYan_Ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QianYan_Ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19ED2EE21AECF84F00E9DBEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19ED2EE31AECF84F00E9DBEA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -136,6 +181,10 @@
 		19ED2EFA1AECF84F00E9DBEA /* QianYan_IosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QianYan_IosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19ED2EFF1AECF84F00E9DBEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19ED2F001AECF84F00E9DBEA /* QianYan_IosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QianYan_IosTests.m; sourceTree = "<group>"; };
+		19F34B8A1B1E8BFD00B624C6 /* QY_SocketServiceAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_SocketServiceAgent.h; sourceTree = "<group>"; };
+		19F34B8B1B1E8BFD00B624C6 /* QY_SocketServiceAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_SocketServiceAgent.m; sourceTree = "<group>"; };
+		19F34B8D1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.h"; sourceTree = "<group>"; };
+		19F34B8E1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.m"; sourceTree = "<group>"; };
 		19F3AC021AFB6941002B45DD /* QY_JRMSocketDelegater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMSocketDelegater.h; sourceTree = "<group>"; };
 		19F3AC031AFB6941002B45DD /* QY_JRMSocketDelegater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMSocketDelegater.m; sourceTree = "<group>"; };
 		19F91CEC1B0E2A1800264AC0 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -205,6 +254,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		192614131B14E2E400241DDC /* JDAS */ = {
+			isa = PBXGroup;
+			children = (
+				19A695361AFB32F000F60D03 /* QY_JDASSocketDelegater.h */,
+				19A695371AFB32F000F60D03 /* QY_JDASSocketDelegater.m */,
+				192614141B14E30100241DDC /* QY_JDASSocketDelegaterDelegate.h */,
+			);
+			name = JDAS;
+			sourceTree = "<group>";
+		};
+		192614151B15CE4700241DDC /* JRM */ = {
+			isa = PBXGroup;
+			children = (
+				19F3AC021AFB6941002B45DD /* QY_JRMSocketDelegater.h */,
+				19F3AC031AFB6941002B45DD /* QY_JRMSocketDelegater.m */,
+			);
+			name = JRM;
+			sourceTree = "<group>";
+		};
 		19382E581B0376910041F7E4 /* header */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,12 +281,36 @@
 			name = header;
 			sourceTree = "<group>";
 		};
+		1938CCA81B2446F9009C4AE5 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				194E39181B00832F00BA4473 /* NSString+QY_dataFormat.h */,
+				194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */,
+				194E391B1B00DAB600BA4473 /* NSData+QY_dataFormat.h */,
+				194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
+		1938CCB51B24BC1C009C4AE5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1938CCB61B24BC2B009C4AE5 /* JRMDataParseUtils.h */,
+				1938CCB71B24BC2B009C4AE5 /* JRMDataParseUtils.m */,
+				1938CCB91B24BCEA009C4AE5 /* JRMDataFormatUtils.h */,
+				1938CCBA1B24BCEA009C4AE5 /* JRMDataFormatUtils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		1956BAC81AFF321600C4A7F6 /* Sockets */ = {
 			isa = PBXGroup;
 			children = (
+				19F34B891B1E8B6600B624C6 /* Agent */,
 				1902EEDA1B01BDCA001E4B12 /* QY_Socket.h */,
 				19382E581B0376910041F7E4 /* header */,
 				196456951B05826E00EA4E14 /* main */,
+				1938CCA81B2446F9009C4AE5 /* Category */,
 				1963DA261AFFA36C008E9FCF /* socketDataServices */,
 				19F3AC051AFB6947002B45DD /* socketDelegaters */,
 				1956BACC1AFF324700C4A7F6 /* models */,
@@ -229,8 +321,13 @@
 		1956BACC1AFF324700C4A7F6 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				1938CCB51B24BC1C009C4AE5 /* Utils */,
 				1956BAC91AFF323C00C4A7F6 /* QY_JRMDataPacket.h */,
 				1956BACA1AFF323C00C4A7F6 /* QY_JRMDataPacket.m */,
+				1938CCAF1B24AC32009C4AE5 /* JRMvalueDescription.h */,
+				1938CCB01B24AC32009C4AE5 /* JRMvalueDescription.m */,
+				1938CCB21B24ACB4009C4AE5 /* JRMvalue.h */,
+				1938CCB31B24ACB4009C4AE5 /* JRMvalue.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -238,14 +335,10 @@
 		1963DA261AFFA36C008E9FCF /* socketDataServices */ = {
 			isa = PBXGroup;
 			children = (
-				19D6CFCC1AFE5180004A0B19 /* QY_JRMDataPharser.h */,
-				19D6CFCD1AFE5181004A0B19 /* QY_JRMDataPharser.m */,
-				19909B591AEEEC4600CCB721 /* QY_dataPacketFactor.h */,
-				19909B5A1AEEEC4600CCB721 /* QY_dataPacketFactor.m */,
-				194E39181B00832F00BA4473 /* NSString+QY_dataFormat.h */,
-				194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */,
-				194E391B1B00DAB600BA4473 /* NSData+QY_dataFormat.h */,
-				194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */,
+				19D6CFCC1AFE5180004A0B19 /* QY_JRMDataPhraser.h */,
+				19D6CFCD1AFE5181004A0B19 /* QY_JRMDataPhraser.m */,
+				19909B591AEEEC4600CCB721 /* QY_JRMDataPacketFactor.h */,
+				19909B5A1AEEEC4600CCB721 /* QY_JRMDataPacketFactor.m */,
 			);
 			name = socketDataServices;
 			sourceTree = "<group>";
@@ -337,6 +430,72 @@
 			name = main;
 			sourceTree = "<group>";
 		};
+		198530361B2806F300EB96F7 /* JPRO */ = {
+			isa = PBXGroup;
+			children = (
+				198530511B2B666500EB96F7 /* URL工具 */,
+				198530371B28075500EB96F7 /* QY_JPROHttpService.h */,
+				198530381B28075500EB96F7 /* QY_JPROHttpService.m */,
+			);
+			name = JPRO;
+			sourceTree = "<group>";
+		};
+		1985303A1B2887AF00EB96F7 /* QYFileSystem */ = {
+			isa = PBXGroup;
+			children = (
+				1985303B1B2887CD00EB96F7 /* QY_FileService.h */,
+				1985303C1B2887CD00EB96F7 /* QY_FileService.m */,
+			);
+			name = QYFileSystem;
+			sourceTree = "<group>";
+		};
+		1985303F1B28B96700EB96F7 /* QY_XML */ = {
+			isa = PBXGroup;
+			children = (
+				198530441B28B99F00EB96F7 /* utils */,
+				198530431B28B99500EB96F7 /* main */,
+			);
+			name = QY_XML;
+			sourceTree = "<group>";
+		};
+		198530431B28B99500EB96F7 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				198530401B28B98B00EB96F7 /* QY_XMLService.h */,
+				198530411B28B98B00EB96F7 /* QY_XMLService.m */,
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
+		198530441B28B99F00EB96F7 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				198530451B28B9AF00EB96F7 /* QY_XMLPhraser.h */,
+				198530461B28B9AF00EB96F7 /* QY_XMLPhraser.m */,
+				198530481B28B9BC00EB96F7 /* QY_XMLFormatter.h */,
+				198530491B28B9BC00EB96F7 /* QY_XMLFormatter.m */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		1985304B1B29CB3600EB96F7 /* QYError */ = {
+			isa = PBXGroup;
+			children = (
+				1985304C1B29D5EA00EB96F7 /* NSError+QYError.h */,
+				1985304D1B29D5EA00EB96F7 /* NSError+QYError.m */,
+			);
+			name = QYError;
+			sourceTree = "<group>";
+		};
+		198530511B2B666500EB96F7 /* URL工具 */ = {
+			isa = PBXGroup;
+			children = (
+				198530521B2B669900EB96F7 /* QY_JPROUrlFactor.h */,
+				198530531B2B669900EB96F7 /* QY_JPROUrlFactor.m */,
+			);
+			name = "URL工具";
+			sourceTree = "<group>";
+		};
 		198BADE91AF0AAB800B4E2E6 /* 二维码扫描 */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,6 +522,9 @@
 		19909B421AEE985200CCB721 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				198530331B272C3300EB96F7 /* QYUser.h */,
+				198530341B272C3300EB96F7 /* QYUser.m */,
+				1985303E1B28B33A00EB96F7 /* userInterface.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -370,6 +532,10 @@
 		19909B431AEE985700CCB721 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1985304B1B29CB3600EB96F7 /* QYError */,
+				1985303F1B28B96700EB96F7 /* QY_XML */,
+				1985303A1B2887AF00EB96F7 /* QYFileSystem */,
+				198530361B2806F300EB96F7 /* JPRO */,
 				19F91CF31B0F19D200264AC0 /* 联系人 */,
 				196456A81B06177F00EA4E14 /* 中文字符串工具 */,
 				196456A71B05D00E00EA4E14 /* 其他工具 */,
@@ -414,6 +580,8 @@
 				19ED2EEE1AECF84F00E9DBEA /* Main.storyboard */,
 				19F91CF01B0E2ADF00264AC0 /* testAddressBookViewController.h */,
 				19F91CF11B0E2ADF00264AC0 /* testAddressBookViewController.m */,
+				198530301B27215500EB96F7 /* testNetworkViewController.h */,
+				198530311B27215500EB96F7 /* testNetworkViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -474,6 +642,7 @@
 				19ED2EFE1AECF84F00E9DBEA /* Supporting Files */,
 				1964569F1B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m */,
 				196456B91B063A7F00EA4E14 /* QianYan_ChineseStringTests.m */,
+				1985304F1B2A619900EB96F7 /* fileManagerTest.m */,
 			);
 			path = QianYan_IosTests;
 			sourceTree = "<group>";
@@ -486,13 +655,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		19F34B891B1E8B6600B624C6 /* Agent */ = {
+			isa = PBXGroup;
+			children = (
+				19F34B8A1B1E8BFD00B624C6 /* QY_SocketServiceAgent.h */,
+				19F34B8B1B1E8BFD00B624C6 /* QY_SocketServiceAgent.m */,
+				19F34B8D1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.h */,
+				19F34B8E1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.m */,
+			);
+			name = Agent;
+			sourceTree = "<group>";
+		};
 		19F3AC051AFB6947002B45DD /* socketDelegaters */ = {
 			isa = PBXGroup;
 			children = (
-				19A695361AFB32F000F60D03 /* QY_JDASSocketDelegater.h */,
-				19A695371AFB32F000F60D03 /* QY_JDASSocketDelegater.m */,
-				19F3AC021AFB6941002B45DD /* QY_JRMSocketDelegater.h */,
-				19F3AC031AFB6941002B45DD /* QY_JRMSocketDelegater.m */,
+				192614151B15CE4700241DDC /* JRM */,
+				192614131B14E2E400241DDC /* JDAS */,
 				19382E521B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.h */,
 				19382E531B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.m */,
 			);
@@ -849,12 +1027,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19D6CFCE1AFE5181004A0B19 /* QY_JRMDataPharser.m in Sources */,
+				19D6CFCE1AFE5181004A0B19 /* QY_JRMDataPhraser.m in Sources */,
+				198530541B2B669900EB96F7 /* QY_JPROUrlFactor.m in Sources */,
 				1956BACB1AFF323C00C4A7F6 /* QY_JRMDataPacket.m in Sources */,
 				6E67BBE21B0F81B00066C9CE /* ContactTableViewCell.m in Sources */,
 				6E2761BF1B08C03200247CCC /* LoginViewController.m in Sources */,
+				198530391B28075500EB96F7 /* QY_JPROHttpService.m in Sources */,
+				19F34B8C1B1E8BFD00B624C6 /* QY_SocketServiceAgent.m in Sources */,
 				19F3AC041AFB6941002B45DD /* QY_JRMSocketDelegater.m in Sources */,
 				196456B11B0617F800EA4E14 /* QY_ChineseStringUtils.m in Sources */,
+				1938CCB81B24BC2B009C4AE5 /* JRMDataParseUtils.m in Sources */,
+				1938CCBB1B24BCEA009C4AE5 /* JRMDataFormatUtils.m in Sources */,
 				6E9BA9521B0CB8FB009D87BE /* JVRightDrawerTableViewController.m in Sources */,
 				6E9BA9501B0CB8FB009D87BE /* JVRightDrawerTableViewCell.m in Sources */,
 				19A695381AFB32F000F60D03 /* QY_JDASSocketDelegater.m in Sources */,
@@ -864,12 +1047,15 @@
 				19ED2EE71AECF84F00E9DBEA /* AppDelegate.m in Sources */,
 				19909B4E1AEEA04900CCB721 /* QYUtils.m in Sources */,
 				19ED2EEA1AECF84F00E9DBEA /* QianYan_Ios.xcdatamodeld in Sources */,
+				1985303D1B2887CD00EB96F7 /* QY_FileService.m in Sources */,
 				19382E541B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.m in Sources */,
 				196456A41B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m in Sources */,
 				198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */,
 				196456AB1B0617A700EA4E14 /* pinyin.c in Sources */,
 				1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */,
 				6E2761BE1B08C03200247CCC /* RegisterViewController.m in Sources */,
+				198530471B28B9AF00EB96F7 /* QY_XMLPhraser.m in Sources */,
+				198530351B272C3300EB96F7 /* QYUser.m in Sources */,
 				19ED2EED1AECF84F00E9DBEA /* ViewController.m in Sources */,
 				19F91CFC1B0F2D8000264AC0 /* QY_contactUtils.m in Sources */,
 				194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */,
@@ -878,15 +1064,22 @@
 				196456AE1B0617D000EA4E14 /* ChineseString.m in Sources */,
 				6E9BA94F1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.m in Sources */,
 				19909B491AEE9F4B00CCB721 /* QY_SocketService.m in Sources */,
+				198530421B28B98B00EB96F7 /* QY_XMLService.m in Sources */,
 				6E9BA9551B0CB8FB009D87BE /* SKSTableView.m in Sources */,
+				1938CCB41B24ACB4009C4AE5 /* JRMvalue.m in Sources */,
+				19F34B8F1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.m in Sources */,
 				6E9BA9571B0CB8FB009D87BE /* SKSTableViewCellIndicator.m in Sources */,
 				6E9BA9541B0CB8FB009D87BE /* CameraViewController.m in Sources */,
+				198530321B27215500EB96F7 /* testNetworkViewController.m in Sources */,
 				19F91CF91B0F1B1000264AC0 /* QY_AddressBook.m in Sources */,
 				198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */,
-				19909B5B1AEEEC4600CCB721 /* QY_dataPacketFactor.m in Sources */,
+				1938CCB11B24AC32009C4AE5 /* JRMvalueDescription.m in Sources */,
+				1985304A1B28B9BC00EB96F7 /* QY_XMLFormatter.m in Sources */,
+				19909B5B1AEEEC4600CCB721 /* QY_JRMDataPacketFactor.m in Sources */,
 				198BADF91AF0B51700B4E2E6 /* QRCodeGenerator.m in Sources */,
 				19A6953B1AFB44C500F60D03 /* QYNotify.m in Sources */,
 				19ED2EE41AECF84F00E9DBEA /* main.m in Sources */,
+				1985304E1B29D5EA00EB96F7 /* NSError+QYError.m in Sources */,
 				6E9BA9511B0CB8FB009D87BE /* JVLeftDrawerTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -898,6 +1091,7 @@
 				196456BA1B063A7F00EA4E14 /* QianYan_ChineseStringTests.m in Sources */,
 				19ED2F011AECF84F00E9DBEA /* QianYan_IosTests.m in Sources */,
 				196456A01B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m in Sources */,
+				198530501B2A619900EB96F7 /* fileManagerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

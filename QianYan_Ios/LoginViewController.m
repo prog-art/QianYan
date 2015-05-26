@@ -11,9 +11,11 @@
 #define ENGLISH_AND_NUMBERS @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@.\n"
 
 #import "QYUtils.h"
+#import "QY_Socket.h"
 
-@interface LoginViewController ()<UITextFieldDelegate>{
+@interface LoginViewController ()<UITextFieldDelegate,QY_SocketServiceDelegate>{
     
+    __weak QY_SocketService *_socketService ;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *inputEmailOrPhoneNumberTextField;
@@ -28,6 +30,13 @@
     
     self.inputEmailOrPhoneNumberTextField.delegate = self ;
     self.inputPasswordTextField.delegate = self ;
+    
+    _socketService = [QY_SocketService shareInstance] ;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated] ;
+    _socketService.delegate = self ;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,15 +51,23 @@
 
 - (IBAction)loginBtnClicked:(id)sender {
     //这里检测密码长度
-    if ([self.inputPasswordTextField.text length] < 6) {
-        //如果输入框内容小于6则弹出警告
-        [QYUtils alert:@"密码不能少于6位"] ;
-    }else if ([self.inputPasswordTextField.text length] > 20) { //如果输入框内容大于20则弹出警告
-        self.inputPasswordTextField.text = [self.inputPasswordTextField.text substringToIndex:20];
-        [QYUtils alert:@"密码不能多于20位"] ;
-    }else {
-        [QYUtils toMain];
+    
+    NSString *username = self.inputEmailOrPhoneNumberTextField.text ;
+    NSString *password = self.inputPasswordTextField.text ;
+    
+    if ( [self isPasswordAvailable:password] && ![username isEqualToString:@""]) {
+        [_socketService userLoginRequestWithName:username Psd:password] ;
     }
+    
+//    if ([self.inputPasswordTextField.text length] < 6) {
+//        //如果输入框内容小于6则弹出警告
+//        [QYUtils alert:@"密码不能少于6位"] ;
+//    }else if ([self.inputPasswordTextField.text length] > 20) { //如果输入框内容大于20则弹出警告
+//        self.inputPasswordTextField.text = [self.inputPasswordTextField.text substringToIndex:20];
+//        [QYUtils alert:@"密码不能多于20位"] ;
+//    }else {
+//        [QYUtils toMain];
+//    }
 }
 
 - (IBAction)retrievePasswordBtnClicked:(id)sender {
@@ -97,6 +114,41 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.inputEmailOrPhoneNumberTextField resignFirstResponder];
     [self.inputPasswordTextField resignFirstResponder];
+}
+
+#pragma mark - other method 
+
+- (BOOL)isPasswordAvailable:(NSString *)password {
+    
+    if ( password.length < 6 ) {
+        //如果输入框内容小于6则弹出警告
+        [QYUtils alert:@"密码不能少于6位"] ;
+        return FALSE ;
+    }
+    
+    
+    if ( password.length > 20 ) {
+        self.inputPasswordTextField.text = [self.inputPasswordTextField.text substringToIndex:20];
+        [QYUtils alert:@"密码不能多于20位"] ;
+        return FALSE ;
+    }
+    
+    return TRUE ;
+}
+
+#pragma mark - QY_SocketServiceDelegate
+
+/**
+ *  252 用户登录结果
+ *
+ *  @param successed
+ */
+- (void)QY_userLoginSuccessed:(BOOL)successed {
+    if ( successed ) {
+        [QYUtils toMain] ;
+    } else {
+        [QYUtils alert:@"登录失败"] ;
+    }
 }
 
 @end

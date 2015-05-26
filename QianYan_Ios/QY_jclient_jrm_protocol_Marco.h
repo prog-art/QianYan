@@ -9,44 +9,196 @@
 #ifndef QianYan_Ios_QY_jclient_jrm_protocol_Marco_h
 #define QianYan_Ios_QY_jclient_jrm_protocol_Marco_h
 
-#warning 根据文档编号设计，如有变化，请更改。
-typedef NS_ENUM (long,JRM_REQUEST_OPERATION_TYPE) {
-    JRM_REQUEST_OPERATION_TYPE_DEVICE_LOGIN = 211 ,
-    JRM_REQUEST_OPERATION_TYPE_USER_REGISTE = 251 ,
-    JRM_REQUEST_OPERATION_TYPE_USER_LOGIN = 252 ,
+typedef NS_ENUM (NSInteger,JRM_REQUEST_OPERATION_TYPE) {
+    JRM_REQUEST_OPERATION_TYPE_DEVICE_LOGIN                           = 211 ,
+    JRM_REQUEST_OPERATION_TYPE_USER_REGISTE                           = 251 ,
+    JRM_REQUEST_OPERATION_TYPE_USER_LOGIN                             = 252 ,
+    JRM_REQUEST_OPERATION_TYPE_USER_RESET_PASSWORD                    = 253 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_USER_JPRO                          = 254 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_USER_JSS                           = 255 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_CAMERA_JPRO                        = 256 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_CAMERA_JSS                         = 257 ,
+    JRM_REQUEST_OPERATION_TYPE_CHECK_USERNAME_B_TEL                   = 258 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_ID_BY_USERNAME                     = 259 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_ID_BY_TEL                          = 2510 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_ID_BY_EMAIL                        = 2511 ,
+    JRM_REQUEST_OPERATION_TYPE_SET_TEL_FOR_USER                       = 2512 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_TEL_BY_ID                          = 2513 ,
+    JRM_REQUEST_OPERATION_TYPE_VALIDATE_USER_TEL                      = 2514 ,
+    JRM_REQUEST_OPERATION_TYPE_SET_NICKNAME_FOR_USER                  = 2515 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_USER_NICKNAME                      = 2516 ,
+    JRM_REQUEST_OPERATION_TYPE_SET_LOCATION_FOR_USER                  = 2517 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_LOCATION_FOR_USER                  = 2518 ,
+    JRM_REQUEST_OPERATION_TYPE_SET_SIGN_FOR_USER                      = 2519 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_SIGN_FOR_USER                      = 2520 ,
+    JRM_REQUEST_OPERATION_TYPE_SET_AVATAR_FOR_USER                    = 2521 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_USER_AVATAR                        = 2522 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_USER_FRIENDLIST                    = 2523 ,
+    JRM_REQUEST_OPERATION_TYPE_ADD_FRIEND                             = 2524 ,
+    JRM_REQUEST_OPERATION_TYPE_DEL_FRIEND                             = 2525 ,
+    JRM_REQUEST_OPERATION_TYPE_SHARE_CAMERA_TO_FRIEND                 = 2526 ,
+    JRM_REQUEST_OPERATION_TYPE_CANCEL_SHARING_CAMERA_TO_FRIEND        = 2527 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_USER_CAMERALIST                    = 2528 ,
+    JRM_REQUEST_OPERATION_TYPE_BINDING_CAMERA_FOR_CURRENT_USER        = 2529 ,
+    JRM_REQUEST_OPERATION_TYPE_UNBINDING_CAMERA_FOR_CURRENT_USER      = 2530 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_CAMERA_SHARINGLISE                 = 2531 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_CAMERA_INFO                        = 2532 ,
+    JRM_REQUEST_OPERATION_TYPE_SET_NICKNAME_FOR_CAMERA                = 2533 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_CAMERA_OWNDERID                    = 2534 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_USERNAME_BY_ID                     = 2535 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_SERIES_BY_ID                       = 2536 ,
+    JRM_REQUEST_OPERATION_TYPE_REFRESH_SERIES_FOR_USER                = 2537 ,
+    JRM_REQUEST_OPERATION_TYPE_BINDING_EMAIL_FOR_USER                 = 2538 ,
+    JRM_REQUEST_OPERATION_TYPE_UNBINDING_EMAIL_FOR_USER               = 2539 ,
+    JRM_REQUEST_OPERATION_TYPE_GET_ID_FOR_THIRD_PART_LOGIN_USER       = 2540 ,
+    JRM_REQUEST_OPERATION_TYPE_NEW_ACCOUNT_FOR_THIRD_PART_LOGIN_USER  = 2541 ,
+    JRM_REQUEST_OPERATION_TYPE_SET_USERNAME_FOR_THIRD_PART_LOGIN_USER = 2542
 };
 
 
+
+
 /**
- *  协议版本 <<JRM通信协议(2015-4-29 10.41.11 3120)>>
+ *  依据协议版本 <<JRM通信协议(2015-4-29 10.41.11 3120)>>
  */
 
-#define JRM_DATA_LENGTH_Len 2
-#define JRM_DATA_CMD_Len 4
+//------------------------   宏定义个部分参数的Key   ---------------------------------------------------
+
+#define ParameterKey_username        @"username"
+#define ParameterKey_password        @"password"
+#define ParameterKey_userId          @"userId"
+#define ParameterKey_jproIp          @"jproIp"
+#define ParameterKey_jproPort        @"jproPort"
+#define ParameterKey_jproPassword    @"jpropassword"
+
+#define ParameterKey_jssId           @"jssId"
+#define ParameterKey_jssIp           @"jssIp"
+#define ParameterKey_jssPort4jipnc   @"jssPort4jipnc"
+#define ParameterKey_jssPort4jclient @"jssPort4jclient"
+#define ParameterKey_jssPassword     @"jssPassword"
+#define ParameterKey_jssPort         @"jssPort"
+
+#define ParameterKey_jipncId         @"jipncId"
+#define ParameterKey_jipncPassword   @"jipncPassword"
+#define ParameterKey_jipncNickname   @"jipncNickname"
+
+#define ParameterKey_jipncMediaAddr  @"jipncMediaAddr"
+
+#define ParameterKey_userPhone       @"userPhone"
+#define ParameterKey_userEmail       @"userEmail"
+#define ParameterKey_verifyCode      @"verifyCode"
+
+#define ParameterKey_userNickname    @"userNickname"
+
+#define ParameterKey_userLocation    @"userLocation"
+
+#define ParameterKey_userSign        @"userSign"
+
+#define ParameterKey_sculptureSize   @"sculptureSize"
+
+#define ParameterKey_friendList      @"friendList"
+#define ParameterKey_friendId        @"friendId"
+
+#define ParameterKey_jipncList       @"jipncList"
+
+#define ParameterKey_errno           @"errno"
+#define ParameterKey_ownerId         @"ownerId"
+
+#define ParameterKey_sharedList      @"sharedList"
+
+#define ParameterKey_userLoginSeries @"userLoginSeries"
+
+#define ParameterKey_accountType     @"accountType"
+#define ParameterKey_openId          @"openId"
 
 
-//--------------------------------------------------
+//------------------------   宏定义个部分参数的长度   ---------------------------------------------------
 
-#define DEVICE_TYPE_SIZE 4
-#define DEVICE_PASSWD_SIZE 32
-#define DEVICE_ID_SIZE 16
-#define USERID_SIZE 16
-#define USERNAME_SIZE 32
-#define USEREMAIL_SIZE 32
+#define JRM_DATA_LEN_OF_KEY_LEN                    2
+#define JRM_DATA_LEN_OF_KEY_CMD                    4
 
-#define USERPWD_SIZE 32
-#define USER_GENDER_SIZE 8
-#define NICKNAME_SIZE 32
-#define IP_MEM_SIZE 16
-#define PORT_MEM_SIZE 8
-#define MEDIA_SUB_SIZE 32
-#define LOCATION_SIZE 64
-#define USER_SIGN_SIZE 128
-#define SCULPTURE_NAME_SIZE 128
+#define JRM_DATA_LEN_OF_KEY_username               16
+#define JRM_DATA_LEN_OF_KEY_userPassword           32
+#define JRM_DATA_LEN_OF_KEY_userId                 16
+#define JRM_DATA_LEN_OF_KEY_jproIp                 32
+#define JRM_DATA_LEN_OF_KEY_jproPort               8
+#define JRM_DATA_LEN_OF_KEY_jproPassword           32
 
-#define USER_VERIFY_SIZE 16
+#define JRM_DATA_LEN_OF_KEY_jssId                  16
+#define JRM_DATA_LEN_OF_KEY_jssIp                  32
+#define JRM_DATA_LEN_OF_KEY_jssPort4jipnc          8
+#define JRM_DATA_LEN_OF_KEY_jssPort4jclient        8
+#define JRM_DATA_LEN_OF_KEY_jssPassword            32
+#define JRM_DATA_LEN_OF_KEY_jssPort                8
+
+
+#define JRM_DATA_LEN_OF_KEY_jipncId                16
+#define JRM_DATA_LEN_OF_KEY_jipncPassword          32
+#define JRM_DATA_LEN_OF_KEY_jipncNickname          32
+
+//jipnc的多媒体地址 如 "c000 0000 0000 001"
+#define JRM_DATA_LEN_OF_KEY_jipncMediaAddr         32
+
+
+
+#define JRM_DATA_LEN_OF_KEY_userPhone              32
+#define JRM_DATA_LEN_OF_KEY_userEmail              16
+#define JRM_DATA_LEN_OF_KEY_verifyCode             32
+
+#define JRM_DATA_LEN_OF_KEY_userNickname           32
+
+//@"江苏南京"
+#define JRM_DATA_LEN_OF_KEY_userLocation           32
+
+#define JRM_DATA_LEN_OF_KEY_userSign               128
+
+//#warning (unsigned int,4bytes)后跟4bytes描述的长度的image data.
+#define JRM_DATA_LEN_OF_KEY_sculptureSize          4
+
+#define JRM_DATA_LEN_OF_KEY_FriendList(count)      16*count
+
+#define JRM_DATA_LEN_OF_KEY_FriendId               16
+#define JRM_DATA_LEN_OF_KEY_jipncList(count)       16*count
+
+//#warning (unsigned int , 4bytes) errorCode  (1:表示参数出错，2:表示绑定出错，3:表示已绑定给其他用户)
+#define JRM_DATA_LEN_OF_KEY_errno                  4
+
+#define JRM_DATA_LEN_OF_KEY_ownerId                16
+#define JRM_DATA_LEN_OF_KEY_sharedList(count)      16*count
+
+//user的登录串号 "20150403093030 0000 0000"
+#define JRM_DATA_LEN_OF_KEY_userLoginSeries        32
+
+//#warning accountType ("1":表示QQ , "2":表示微信 , "3":表示新浪)
+#define JRM_DATA_LEN_OF_KEY_accountType            8
+#define JRM_DATA_LEN_OF_KEY_openId                 64
+
+
+
+
+
+//------------------------   协议中的:宏定义个部分参数的长度  -----------------------------------------
+
+#define DEVICE_TYPE_SIZE            4
+#define DEVICE_PASSWD_SIZE          32
+#define DEVICE_ID_SIZE              16
+#define USERID_SIZE                 16
+#define USERNAME_SIZE               32
+#define USEREMAIL_SIZE              32
+
+#define USERPWD_SIZE                32
+#define USER_GENDER_SIZE            8
+#define NICKNAME_SIZE               32
+#define IP_MEM_SIZE                 16
+#define PORT_MEM_SIZE               8
+#define MEDIA_SUB_SIZE              32
+#define LOCATION_SIZE               64
+#define USER_SIGN_SIZE              128
+#define SCULPTURE_NAME_SIZE         128
+
+#define USER_VERIFY_SIZE            16
 #define JIPNC_INJSS_STREAM_ADDR_LEN 30
-#define MAX_SINGLE_DATA_SIZE 128
+#define MAX_SINGLE_DATA_SIZE        128
 
 typedef NS_ENUM(NSInteger, JOSEPH_COMMAND) {
     //JSS

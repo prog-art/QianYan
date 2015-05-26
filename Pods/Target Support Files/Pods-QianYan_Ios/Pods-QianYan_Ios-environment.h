@@ -66,6 +66,12 @@
 #define COCOAPODS_VERSION_MINOR_JVFloatingDrawer 1
 #define COCOAPODS_VERSION_PATCH_JVFloatingDrawer 0
 
+// Reachability
+#define COCOAPODS_POD_AVAILABLE_Reachability
+#define COCOAPODS_VERSION_MAJOR_Reachability 3
+#define COCOAPODS_VERSION_MINOR_Reachability 2
+#define COCOAPODS_VERSION_PATCH_Reachability 0
+
 // libqrencode
 #define COCOAPODS_POD_AVAILABLE_libqrencode
 #define COCOAPODS_VERSION_MAJOR_libqrencode 3

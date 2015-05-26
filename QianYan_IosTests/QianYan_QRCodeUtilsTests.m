@@ -32,10 +32,6 @@
     [QY_QRCodeUtils QY_generateQRImageOfWifiWithESSID:@"NJQYWIFI" Password:@"123456" UserId:@"15018"] ;
 }
 
-- (void)testFormatString2 {
-    [QY_QRCodeUtils QY_generateQRImageOfBindingCameraWithCameraId:@"c00000000000001" Password:@"12345678"] ;
-}
-
 - (void)testFormatString3 {
     [QY_QRCodeUtils QY_generateQRImageOfPersonalCardWithUserId:@"10000001"];
 }

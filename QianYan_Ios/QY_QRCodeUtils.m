@@ -49,26 +49,26 @@ const JOSEPH_DEVICE_TYPE debug_device_type = JOSEPH_DEVICE_JCLIENT_NANJING_2 ;//
     return qrImage ;
 }
 
-+ (UIImage *)QY_generateQRImageOfBindingCameraWithCameraId:(NSString *)cameraId Password:(NSString *)password {
-    static NSString *operationTyep = @"ENTRYID" ;
-    
-    NSString *deviceType = [NSString stringWithFormat:@"%ld",(long)TargetDeviceType] ;
-    
-    NSArray *array = @[operationTyep ,
-                       [self getFormatLenStr:cameraId.length] ,
-                       [self getFormatLenStr:password.length] ,
-                       [self getFormatLenStr:deviceType.length] ,
-                       [self getFormatLenStr:@"".length] ,
-                       cameraId ,
-                       password ,
-                       deviceType ,
-                       @""] ;
-    
-    NSString *qrStr = [array componentsJoinedByString:@""] ;
-    UIImage *qrImage = [QRCodeGenerator qrImageForString:qrStr imageSize:kQRImageSize] ;
-    
-    return qrImage ;
-}
+//+ (UIImage *)QY_generateQRImageOfBindingCameraWithCameraId:(NSString *)cameraId Password:(NSString *)password {
+//    static NSString *operationTyep = @"ENTRYID" ;
+//    
+//    NSString *deviceType = [NSString stringWithFormat:@"%ld",(long)TargetDeviceType] ;
+//    
+//    NSArray *array = @[operationTyep ,
+//                       [self getFormatLenStr:cameraId.length] ,
+//                       [self getFormatLenStr:password.length] ,
+//                       [self getFormatLenStr:deviceType.length] ,
+//                       [self getFormatLenStr:@"".length] ,
+//                       cameraId ,
+//                       password ,
+//                       deviceType ,
+//                       @""] ;
+//    
+//    NSString *qrStr = [array componentsJoinedByString:@""] ;
+//    UIImage *qrImage = [QRCodeGenerator qrImageForString:qrStr imageSize:kQRImageSize] ;
+//    
+//    return qrImage ;
+//}
 
 + (UIImage *)QY_generateQRImageOfPersonalCardWithUserId:(NSString *)userId {
     static NSString *operationTyep = @"QYUSER" ;
