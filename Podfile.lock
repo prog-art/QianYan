@@ -26,6 +26,7 @@ PODS:
   - libqrencode (3.4.2)
   - Reachability (3.2)
   - SWTableViewCell (0.3.7)
+
 DEPENDENCIES:
   - AFNetworking (~> 2.5.3)
   - CocoaAsyncSocket (~> 7.4.1)
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - libqrencode (~> 3.4.2)
   - Reachability (~> 3.2)
   - SWTableViewCell (~> 0.3.7)
+
 SPEC CHECKSUMS:
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
   CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
@@ -43,4 +45,4 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.37.2
