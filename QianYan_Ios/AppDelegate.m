@@ -9,13 +9,20 @@
 #import "AppDelegate.h"
 #import "JVFloatingDrawerViewController.h"
 #import "JVFloatingDrawerSpringAnimator.h"
+#import "SettingsViewController.h"
 
 #define RegisterAndLoginSBNibName @"Register&Login"
+#define DrawersStoryBoardNibName @"Drawers"
 
 #define LoginVCStoryBoardID @"LoginVCStoryBoardID"
 #define RegisterVCStoryBoardID @"RegisterVCStoryBoardID"
+#define QRCodeCardViewControllerStrorBoardID @"QRCodeCardViewControllerStrorBoardID"
+#define SettingsViewControllerStoryBoardID @"SettingsViewControllerStoryBoardID"
+#define ContactTableViewControllerStoryBoardID @"ContactTableViewControllerStoryBoardID"
+#define MyPhotoGraphCollectionViewControllerStoryBoardID @"MyPhotoGraphCollectionViewControllerStoryBoardID"
 
-static NSString * const kJVDrawersStoryboardName = @"Drawers";
+
+//static NSString * const kJVDrawersStoryboardName = @"Drawers";
 
 static NSString * const kJVLeftDrawerStoryboardID = @"JVLeftDrawerViewControllerStoryboardID";
 static NSString * const kJVRightDrawerStoryboardID = @"JVRightDrawerViewControllerStoryboardID";
@@ -234,7 +241,7 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
 
 - (UIStoryboard *)drawersStoryboard {
     if(!_drawersStoryboard) {
-        _drawersStoryboard = [UIStoryboard storyboardWithName:kJVDrawersStoryboardName bundle:nil];
+        _drawersStoryboard = [UIStoryboard storyboardWithName:DrawersStoryBoardNibName bundle:nil];
     }
     
     return _drawersStoryboard;
@@ -250,12 +257,52 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
     self.drawerViewController.backgroundImage = [UIImage imageNamed:@"背景.png"];
 }
 
+#pragma mark - QRCodeCard View Controller
+
+- (UIViewController *)QRCodeCardViewController {
+    if (!_QRCodeCardViewController) {
+        _QRCodeCardViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:QRCodeCardViewControllerStrorBoardID];
+    }
+    return _QRCodeCardViewController;
+}
+
+#pragma mark - Contact Table View Controller
+
+- (UITableViewController *)ContactTableViewController {
+    if (!_ContactTableViewController) {
+        _ContactTableViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:ContactTableViewControllerStoryBoardID];
+    }
+    return _ContactTableViewController;
+}
+
+#pragma mark - Settings View Controller
+
+- (UITableViewController *)settingsViewController {
+    if (!_settingsViewController) {
+        _settingsViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:SettingsViewControllerStoryBoardID];
+    }
+    return _settingsViewController;
+}
+
+#pragma mark - MyPhotoGraph View Controller
+
+- (UICollectionViewController *)myPhotoGraphCollectionViewController {
+    if (!_myPhotoGraphCollectionViewController) {
+        _myPhotoGraphCollectionViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:MyPhotoGraphCollectionViewControllerStoryBoardID];
+    }
+    return _myPhotoGraphCollectionViewController;
+}
+
 #pragma mark - Global Access Helper
 
 + (AppDelegate *)globalDelegate {
     return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
+
+/*
+ *  控制弹回
+ */
 - (void)toggleLeftDrawer:(id)sender animated:(BOOL)animated {
     [self.drawerViewController toggleDrawerWithSide:JVFloatingDrawerSideLeft animated:animated completion:nil];
 }

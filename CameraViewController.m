@@ -48,8 +48,9 @@
     self.tableView.tableFooterView = [[UIView alloc] init] ;//关键语句
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning] ;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tabBarController.tabBar setHidden:NO];
 }
 
 #pragma mark - UITableViewDataSource

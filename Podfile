@@ -9,7 +9,7 @@ pod 'AFNetworking', '~> 2.5.3'
 pod 'libqrencode', '~> 3.4.2'
 pod 'JVFloatingDrawer', '~> 0.1.0'
 pod 'Reachability', '~> 3.2'
-
+pod 'SWTableViewCell', '~> 0.3.7'
 end
 
 target 'QianYan_IosTests' do

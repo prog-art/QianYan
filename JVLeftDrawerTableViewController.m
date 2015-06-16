@@ -10,6 +10,7 @@
 #import "JVLeftDrawerTableViewCell.h"
 #import "AppDelegate.h"
 #import "JVFloatingDrawerViewController.h"
+#import "SettingsViewController.h"
 
 static const CGFloat kJVTableViewTopInset = 110.0;
 static NSString * const kJVDrawerCellReuseIdentifier = @"JVLeftDrawerCellReuseIdentifier";
@@ -30,6 +31,7 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVLeftDrawerCellReuseId
     //头像按钮
     UIButton *potraitBtn = [[UIButton alloc] initWithFrame:CGRectMake(36, -40, 60, 60)];
     [potraitBtn setImage:[UIImage imageNamed:@"头像.png"] forState:UIControlStateNormal];
+    [potraitBtn addTarget:self action:@selector(potraitBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     //昵称按钮
     UIButton *nicknameBtn = [[UIButton alloc] initWithFrame:CGRectMake(98, -36, 80, 25)];
@@ -102,26 +104,56 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVLeftDrawerCellReuseId
             break;
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone ;
+    
     return cell;
 }
 
 #pragma mark - Actions
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UIViewController *destinationViewController = nil;
-//
-//    if(indexPath.row == 0) {
-//        destinationViewController = [[AppDelegate globalDelegate] drawerSettingsViewController];
-//    } else {
-//        destinationViewController = [[AppDelegate globalDelegate] githubViewController];
-//    }
-//    
-//    [[[AppDelegate globalDelegate] drawerViewController] setCenterViewController:destinationViewController];
-//    [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
-//}
-
--(void)nicknameBtnClicked:(UIButton *)sender{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    __block UIViewController *destinationViewController = nil;
     
+    if(indexPath.row == 4) {
+        destinationViewController = [[AppDelegate globalDelegate] settingsViewController];
+        
+        [self test:destinationViewController] ;
+        
+    } else if (indexPath.row == 1) {
+        destinationViewController = [[AppDelegate globalDelegate] myPhotoGraphCollectionViewController];
+        
+        [self test:destinationViewController] ;
+    } else {
+    }
+    
+    [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO] ;
+}
+
+- (void)nicknameBtnClicked:(UIButton *)sender{
+
+}
+
+- (void)potraitBtnClicked:(UIButton *)sender{
+    __block UIViewController *destinationViewController = nil;
+    destinationViewController = [[AppDelegate globalDelegate] QRCodeCardViewController];
+    
+    [self test:destinationViewController] ;
+    [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
+
+}
+
+- (void)test:(UIViewController *)destinationViewController {
+    
+    UITabBarController *tbc = (UITabBarController *)[[[AppDelegate globalDelegate] drawerViewController] centerViewController] ;
+    
+    UINavigationController *nvc = tbc.viewControllers[0] ;
+    
+    
+    UIViewController *vc = nvc.topViewController ;
+    
+    [vc.navigationController pushViewController:destinationViewController animated:NO] ;
 }
 
 

@@ -38,6 +38,10 @@
 @property (nonatomic, strong) UITableViewController *rightDrawerViewController;
 @property (nonatomic, strong) UIViewController *githubViewController;
 @property (nonatomic, strong) UIViewController *drawerSettingsViewController;
+@property (nonatomic, strong) UITableViewController *settingsViewController;
+@property (nonatomic, strong) UICollectionViewController *myPhotoGraphCollectionViewController;
+@property (nonatomic, strong) UIViewController *QRCodeCardViewController;
+@property (nonatomic, strong) UITableViewController *ContactTableViewController;
 
 
 - (void)toggleLeftDrawer:(id)sender animated:(BOOL)animated;
