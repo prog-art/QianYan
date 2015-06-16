@@ -1,6 +1,0 @@
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/CocoaAsyncSocket" "${PODS_ROOT}/Headers/Public/GDataXML-HTML" "${PODS_ROOT}/Headers/Public/JVFloatingDrawer" "${PODS_ROOT}/Headers/Public/Reachability" "${PODS_ROOT}/Headers/Public/libqrencode" $(SDKROOT)/usr/include/libxml2
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/CocoaAsyncSocket" -isystem "${PODS_ROOT}/Headers/Public/GDataXML-HTML" -isystem "${PODS_ROOT}/Headers/Public/JVFloatingDrawer" -isystem "${PODS_ROOT}/Headers/Public/Reachability" -isystem "${PODS_ROOT}/Headers/Public/libqrencode"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-QianYan_Ios-AFNetworking" -l"Pods-QianYan_Ios-CocoaAsyncSocket" -l"Pods-QianYan_Ios-GDataXML-HTML" -l"Pods-QianYan_Ios-JVFloatingDrawer" -l"Pods-QianYan_Ios-Reachability" -l"Pods-QianYan_Ios-libqrencode" -l"xml2" -framework "CFNetwork" -framework "CoreGraphics" -framework "MobileCoreServices" -framework "Security" -framework "SystemConfiguration"
-OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
-PODS_ROOT = ${SRCROOT}/Pods
