@@ -34,6 +34,9 @@
 
 #pragma mark - 下载
 
+/**
+ *  @return @"http://host:port/archives/
+ */
 + (NSString *)downloadURLWithHost:(NSString *)host
                              Port:(NSString *)port ;
 

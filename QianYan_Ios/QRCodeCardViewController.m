@@ -10,6 +10,8 @@
 #import "QRCodeCardTableViewCell.h"
 #import "AppDelegate.h"
 
+#import "QY_Common.h"
+
 @interface QRCodeCardViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *potraitImageView;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -27,8 +29,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    
+    //init QR Image
+    UIImage *image = [QY_QRCodeUtils QY_generateQRImageOfPersonalCardWithUserId:[QYUser currentUser].userId] ;
+    self.QRCodeImageView.image = image ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

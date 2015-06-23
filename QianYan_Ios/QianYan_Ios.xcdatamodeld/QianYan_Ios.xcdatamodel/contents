@@ -1,4 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14A389" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="QY_AlertMessage" representedClassName="QY_AlertMessage" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jipnc_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="msg_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pub_date" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QY_feed" inverseName="messages" inverseEntity="QY_feed" syncable="YES"/>
+    </entity>
+    <entity name="QY_attache" representedClassName="QY_attache" syncable="YES">
+        <attribute name="attach_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pub_date" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="small" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="src" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QY_feed" inverseName="attachs" inverseEntity="QY_feed" syncable="YES"/>
+    </entity>
+    <entity name="QY_comment" representedClassName="QY_comment" syncable="YES">
+        <attribute name="comment_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pub_date" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QY_feed" inverseName="comments" inverseEntity="QY_feed" syncable="YES"/>
+    </entity>
+    <entity name="QY_feed" representedClassName="QY_feed" syncable="YES">
+        <attribute name="attach_count" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="comment_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="digg" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="digg_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="feed_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="message_count" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="mod_date" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="pub_date" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="attachs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_attache" inverseName="feed" inverseEntity="QY_attache" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_comment" inverseName="feed" inverseEntity="QY_comment" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_AlertMessage" inverseName="feed" inverseEntity="QY_AlertMessage" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="QY_AlertMessage" positionX="-434" positionY="18" width="128" height="148"/>
+        <element name="QY_attache" positionX="-486" positionY="-277" width="128" height="148"/>
+        <element name="QY_comment" positionX="-63" positionY="-211" width="128" height="118"/>
+        <element name="QY_feed" positionX="-225" positionY="-220" width="128" height="253"/>
+    </elements>
 </model>

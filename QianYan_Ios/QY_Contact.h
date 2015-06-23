@@ -8,12 +8,26 @@
 
 #import <Foundation/Foundation.h>
 
-@interface QY_AddressBook : NSObject
+@interface QY_Contact : NSObject
 
 @property NSInteger sectionNumber ;
+/**
+ *  在联系人列表里的recordId
+ */
 @property NSInteger recordId ;
+
+/**
+ *  联系人姓名 @"张睿"
+ */
 @property (nonatomic , retain) NSString *name ;
+
+/**
+ *  邮箱 @"- -"
+ */
 @property (nonatomic , retain) NSString *email ;
+/**
+ *  电话号码 @"18817870386"
+ */
 @property (nonatomic , retain) NSString *tel ;
 
 /**

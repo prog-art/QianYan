@@ -13,7 +13,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <MessageUI/MessageUI.h>
 
-#import "QY_AddressBook.h"
+#import "QY_Contact.h"
 #import "QY_Common.h"
 
 typedef void(^QYBlock)() ;
@@ -25,6 +25,8 @@ typedef void(^QYBlock)() ;
     
     __weak UIViewController *_sender ;
 }
+
+@property (copy) QYContactBlock complection ;
 
 @end
 
@@ -42,6 +44,16 @@ typedef void(^QYBlock)() ;
 #pragma mark - public
 
 - (void)getContacts {
+    [self getAuthority] ;
+}
+
+/**
+ *  获取Contacts，结果用block回调
+ *
+ *  @param complection (BOOL success , NSArray *contacts)
+ */
+- (void)getContactsComplection:(QYContactBlock)complection {
+    self.complection = complection ;
     [self getAuthority] ;
 }
 
@@ -127,7 +139,7 @@ typedef void(^QYBlock)() ;
 - (void)filterPeoInBookAddress:(NSArray *)contacts {
     NSMutableArray *filterdContacts = [NSMutableArray array] ;
     
-    for ( QY_AddressBook* contact in contacts ) {
+    for ( QY_Contact* contact in contacts ) {
         if ( nil == contact.tel ) {
             continue ;
         }
@@ -190,7 +202,7 @@ typedef void(^QYBlock)() ;
     for ( NSInteger i = 0 ; i < nPeople ; i++ ) {
         //新建一个addressbook model类
         
-        QY_AddressBook *addressBook = [[QY_AddressBook alloc] init] ;
+        QY_Contact *addressBook = [[QY_Contact alloc] init] ;
         
         ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i) ;
         
@@ -292,6 +304,10 @@ typedef void(^QYBlock)() ;
 - (void)output:(BOOL)success Contacts:(NSArray *)contacts {
     if ( [self.delegate respondsToSelector:@selector(didReceiveContactsSuccess:Contacts:)]) {
         [self.delegate didReceiveContactsSuccess:success Contacts:contacts] ;
+    }
+    
+    if ( self.complection ) {
+        self.complection(success,contacts) ;
     }
 }
 

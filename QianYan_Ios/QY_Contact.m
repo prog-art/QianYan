@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 虎猫儿. All rights reserved.
 //
 
-#import "QY_AddressBook.h"
+#import "QY_Contact.h"
 
-@implementation QY_AddressBook
+@implementation QY_Contact
 
 - (NSString *)description {
     NSString *description ;

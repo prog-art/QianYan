@@ -11,11 +11,9 @@
 #define ENGLISH_AND_NUMBERS @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@.\n"
 
 #import "QYUtils.h"
-#import "QY_Socket.h"
+#import "QYUser.h"
 
-@interface LoginViewController ()<UITextFieldDelegate,QY_SocketServiceDelegate>{
-    
-    __weak QY_SocketService *_socketService ;
+@interface LoginViewController ()<UITextFieldDelegate>{
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *inputEmailOrPhoneNumberTextField;
@@ -31,12 +29,12 @@
     self.inputEmailOrPhoneNumberTextField.delegate = self ;
     self.inputPasswordTextField.delegate = self ;
     
-    _socketService = [QY_SocketService shareInstance] ;
+//    _socketService = [QY_SocketService shareInstance] ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated] ;
-    _socketService.delegate = self ;
+//    _socketService.delegate = self ;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,10 +52,21 @@
     
     NSString *username = self.inputEmailOrPhoneNumberTextField.text ;
     NSString *password = self.inputPasswordTextField.text ;
+
+    [QYUtils toMain] ;
     
-    if ( [self isPasswordAvailable:password] && ![username isEqualToString:@""]) {
-        [_socketService userLoginRequestWithName:username Psd:password] ;
-    }
+#warning 测试完，下面代码注释去掉。
+//    if ( [self isPasswordAvailable:password] && ![username isEqualToString:@""]) {
+//        [QYUser loginName:username Password:password complection:^(BOOL success, NSError *error) {
+//            if ( success ) {
+//                QYDebugLog(@"登陆成功") ;
+//                [QYUtils toMain] ;
+//            } else {
+//                QYDebugLog(@"登陆失败 error = %@",error) ;
+//                [QYUtils alert:@"登陆失败"] ;
+//            }
+//        }] ;
+//    }
     
     if ([self.inputPasswordTextField.text length] < 6) {
         //如果输入框内容小于6则弹出警告
@@ -136,19 +145,19 @@
     return TRUE ;
 }
 
-#pragma mark - QY_SocketServiceDelegate
-
-/**
- *  252 用户登录结果
- *
- *  @param successed
- */
-- (void)QY_userLoginSuccessed:(BOOL)successed {
-    if ( successed ) {
-        [QYUtils toMain] ;
-    } else {
-        [QYUtils alert:@"登录失败"] ;
-    }
-}
+//#pragma mark - QY_SocketServiceDelegate
+//
+///**
+// *  252 用户登录结果
+// *
+// *  @param successed
+// */
+//- (void)QY_userLoginSuccessed:(BOOL)successed {
+//    if ( successed ) {
+//        [QYUtils toMain] ;
+//    } else {
+//        [QYUtils alert:@"登录失败"] ;
+//    }
+//}
 
 @end

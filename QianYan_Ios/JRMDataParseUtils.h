@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "QY_jclient_jrm_protocol_Marco.h"
+#import "QY_Common.h"
 
 #pragma mark - JRMDataParseUtils
+
+#warning 补文档
 
 @interface JRMDataParseUtils : NSObject
 
@@ -20,7 +23,7 @@
  *
  *  @return 例 <0004****> --> 4
  */
-+ (NSUInteger)getLen:(NSData *)data ;
++ (NSUInteger)getLen:(NSData *)data QYDeprecated("第二版socket组件开发完成后停止使用") ;
 
 /**
  *  获取(2,4)部分的cmd integer数据
@@ -29,7 +32,9 @@
  *
  *  @return 例 (<00040000 019d> --> 0x019d --> 413 ) --> JCLIENT_REG_NEW_USER_REPLY
  */
-+ (JOSEPH_COMMAND)getCmd:(NSData *)data ;
++ (JOSEPH_COMMAND)getCmd:(NSData *)data QYDeprecated("第二版socket组件开发完成后停止使用") ;
+
++ (JOSEPH_COMMAND)getCmd:(NSData *)data range:(NSRange)range ;
 
 /**
  *  获取range 部分的 string数据（无视后0）
@@ -61,6 +66,8 @@
  */
 + (NSInteger)getIntegerValue:(NSData *)data range:(NSRange)range ;
 
++ (NSInteger)getIntegerValue:(NSData *)data ;
+
 /**
  *  获取range 部分的 imageData数据
  *
@@ -69,6 +76,8 @@
  *
  *  @return NSData 图片的数据
  */
-+ (NSData *)getImageData:(NSData *)data range:(NSRange)range ;
++ (NSData *)getImageData:(NSData *)data range:(NSRange)range QYDeprecated("第二版socket组件开发完成后停止使用") ;
+
++ (NSArray *)getListValue:(NSData *)data range:(NSRange)range perDataLen:(NSUInteger)len ;
 
 @end

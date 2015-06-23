@@ -41,6 +41,12 @@
 
 - (IBAction)getWifiQRImage:(id)sender {
     NSDictionary *info = [self fetchSSIDInfo] ;
+
+    if ( !info ) {
+        QYDebugLog(@"未连接wifi!") ;
+        return ;
+    }
+    QYDebugLog(@"wifi info = %@",info) ;
     
     NSString *SSID = info[@"SSID"] ;
     self.wifiIdLabel.text = SSID ;

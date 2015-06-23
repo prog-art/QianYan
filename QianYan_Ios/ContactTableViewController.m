@@ -55,7 +55,7 @@ static NSString * const ContactTableViewCellReuseIdentifier = @"ContactTableView
     } else {
         _displayDataSourceOfContact = [NSMutableArray array] ;
         
-        for (QY_AddressBook *addressBook in _dataSourceOfContact ) {
+        for (QY_Contact *addressBook in _dataSourceOfContact ) {
             NSString *name = [addressBook.name lowercaseString] ;
             
             if ([name containsString:searchText] || [addressBook.tel containsString:searchText]) {
@@ -77,7 +77,7 @@ static NSString * const ContactTableViewCellReuseIdentifier = @"ContactTableView
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ContactTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ContactTableViewCellReuseIdentifier forIndexPath:indexPath];
     
-    QY_AddressBook *addressBook = _displayDataSourceOfContact[indexPath.row] ;
+    QY_Contact *addressBook = _displayDataSourceOfContact[indexPath.row] ;
 
     
     cell.name = addressBook.name ;
@@ -109,7 +109,7 @@ static NSString * const ContactTableViewCellReuseIdentifier = @"ContactTableView
 #pragma mark - ContactTableViewCellDelegate
 
 - (void)didClickedInviteBtn:(ContactTableViewCell *)cell atIndex:(NSInteger)index {
-    QY_AddressBook *addressBook = _displayDataSourceOfContact[index] ;
+    QY_Contact *addressBook = _displayDataSourceOfContact[index] ;
     NSString *tel = addressBook.tel ;
     
     [_utils sendSMSmessage:@"来玩千衍吧(((o(*ﾟ▽ﾟ*)o)))" ToTel:tel sender:self] ;

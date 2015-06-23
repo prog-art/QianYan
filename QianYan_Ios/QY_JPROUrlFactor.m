@@ -8,8 +8,6 @@
 
 #import "QY_JPROUrlFactor.h"
 
-
-
 @implementation QY_JPROUrlFactor
 
 #pragma mark - 上传
@@ -18,13 +16,14 @@
 
 + (NSString *)uploadURLWithHost:(NSString *)host
                            Port:(NSString *)port {
-    return [NSString stringWithFormat:@"http://%@:%@/files/upload/",host,port] ;
+    return [NSString stringWithFormat:@"http://%@:%@/files/upload",host,port] ;
 }
 
 + (NSString *)uploadURLWithHost:(NSString *)host
                            Port:(NSString *)port
                            Path:(NSString *)path {
-    return  [NSString stringWithFormat:@"http://%@:%@/files/upload/?path=%@",host,port,path] ;
+    NSString *ppath = [NSString stringWithFormat:@"?path=%@",path] ;
+    return [[self uploadURLWithHost:host Port:port] stringByAppendingPathComponent:ppath] ;
 }
 
 #pragma mark - 下载 
@@ -33,39 +32,41 @@
 
 + (NSString *)downloadURLWithHost:(NSString *)host
                              Port:(NSString *)port {
-    return [NSString stringWithFormat:@"http://%@:%@/archives/",host,port] ;
+    return [NSString stringWithFormat:@"http://%@:%@/archives",host,port] ;
 }
 
 + (NSString *)downloadURLWithHost:(NSString *)host
                              Port:(NSString *)port
                              Path:(NSString *)path {
-    return [NSString stringWithFormat:@"http://%@:%@/archives/%@",host,port,path] ;
+    return [[self downloadURLWithHost:host Port:port] stringByAppendingPathComponent:path] ;
 }
 
 #pragma mark - 删除
 
 + (NSString *)deleteURLWithHost:(NSString *)host
                            Port:(NSString *)port {
-    return [NSString stringWithFormat:@"http://%@:%@/files/clear/",host,port] ;
+    return [NSString stringWithFormat:@"http://%@:%@/files/clear",host,port] ;
 }
 
 + (NSString *)deleteURLWithHost:(NSString *)host
                            Port:(NSString *)port
                            Path:(NSString *)path {
-    return [NSString stringWithFormat:@"http://%@:%@/files/clear/?path=%@",host,port,path] ;
+    NSString *ppath = [NSString stringWithFormat:@"?path=%@",path] ;
+    return [[self deleteURLWithHost:host Port:port] stringByAppendingPathComponent:ppath] ;
 }
 
 #pragma mark - 目录列表获取
 
 + (NSString *)getFileListURLWithHost:(NSString *)host
                                 Port:(NSString *)port {
-    return [NSString stringWithFormat:@"http://%@:%@/files/list/",host,port] ;
+    return [NSString stringWithFormat:@"http://%@:%@/files/list",host,port] ;
 }
 
 + (NSString *)getFileListURLWithHost:(NSString *)host
                                 Port:(NSString *)port
                                 Path:(NSString *)path {
-    return [NSString stringWithFormat:@"http://%@:%@/files/list/?path=%@",host,port,path] ;
+    NSString *ppath = [NSString stringWithFormat:@"?path=%@",path] ;
+    return [[self getFileListURLWithHost:host Port:port] stringByAppendingPathComponent:ppath] ;
 }
 
 #pragma mark - 路径组装

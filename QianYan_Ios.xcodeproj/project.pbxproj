@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19382E541B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 19382E531B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.m */; };
+		1935450C1B486F8800ACE915 /* QY_JPROHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1935450B1B486F8800ACE915 /* QY_JPROHttpService.m */; };
 		1938CCB11B24AC32009C4AE5 /* JRMvalueDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCB01B24AC32009C4AE5 /* JRMvalueDescription.m */; };
 		1938CCB41B24ACB4009C4AE5 /* JRMvalue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCB31B24ACB4009C4AE5 /* JRMvalue.m */; };
 		1938CCB81B24BC2B009C4AE5 /* JRMDataParseUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCB71B24BC2B009C4AE5 /* JRMDataParseUtils.m */; };
 		1938CCBB1B24BCEA009C4AE5 /* JRMDataFormatUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCBA1B24BCEA009C4AE5 /* JRMDataFormatUtils.m */; };
 		194E391A1B00832F00BA4473 /* NSString+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */; };
 		194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */; };
-		1956BACB1AFF323C00C4A7F6 /* QY_JRMDataPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 1956BACA1AFF323C00C4A7F6 /* QY_JRMDataPacket.m */; };
+		195C15DD1B3AEF3A00A316FE /* QY_JRMGCDSocketDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 195C15DC1B3AEF3A00A316FE /* QY_JRMGCDSocketDelegater.m */; };
+		195C15E11B3B044300A316FE /* QY_JRMAPIDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 195C15E01B3B044300A316FE /* QY_JRMAPIDescriptor.m */; };
+		195C16161B3E8DF500A316FE /* QY_JRMRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 195C16151B3E8DF500A316FE /* QY_JRMRequest.m */; };
+		195C16191B3E8E0A00A316FE /* QY_JRMResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 195C16181B3E8E0A00A316FE /* QY_JRMResponse.m */; };
+		195C161D1B3EA11100A316FE /* QY_JRMAPIPhraseRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 195C161C1B3EA11100A316FE /* QY_JRMAPIPhraseRule.m */; };
+		195C16201B3EA5C800A316FE /* QY_SocketAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 195C161F1B3EA5C800A316FE /* QY_SocketAgent.m */; };
+		195C16231B3EA5FD00A316FE /* QY_SocketService.m in Sources */ = {isa = PBXBuildFile; fileRef = 195C16221B3EA5FD00A316FE /* QY_SocketService.m */; };
 		1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1964569D1B058D4000EA4E14 /* QY_QRCodeUtils.m */; };
 		196456A01B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1964569F1B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m */; };
 		196456A41B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456A31B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m */; };
@@ -22,9 +28,9 @@
 		196456AE1B0617D000EA4E14 /* ChineseString.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456AD1B0617D000EA4E14 /* ChineseString.m */; };
 		196456B11B0617F800EA4E14 /* QY_ChineseStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456B01B0617F800EA4E14 /* QY_ChineseStringUtils.m */; };
 		196456BA1B063A7F00EA4E14 /* QianYan_ChineseStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456B91B063A7F00EA4E14 /* QianYan_ChineseStringTests.m */; };
+		197C68401B39434600907CFC /* UIImage+QY_resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 197C683F1B39434600907CFC /* UIImage+QY_resize.m */; };
 		198530321B27215500EB96F7 /* testNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530311B27215500EB96F7 /* testNetworkViewController.m */; };
 		198530351B272C3300EB96F7 /* QYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530341B272C3300EB96F7 /* QYUser.m */; };
-		198530391B28075500EB96F7 /* QY_JPROHttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530381B28075500EB96F7 /* QY_JPROHttpService.m */; };
 		1985303D1B2887CD00EB96F7 /* QY_FileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1985303C1B2887CD00EB96F7 /* QY_FileService.m */; };
 		198530421B28B98B00EB96F7 /* QY_XMLService.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530411B28B98B00EB96F7 /* QY_XMLService.m */; };
 		198530471B28B9AF00EB96F7 /* QY_XMLPhraser.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530461B28B9AF00EB96F7 /* QY_XMLPhraser.m */; };
@@ -36,10 +42,13 @@
 		198BADF41AF0AB2600B4E2E6 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF01AF0AB2600B4E2E6 /* QRCodeReaderView.m */; };
 		198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF21AF0AB2600B4E2E6 /* QRCodeReaderViewController.m */; };
 		198BADF91AF0B51700B4E2E6 /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF81AF0B51700B4E2E6 /* QRCodeGenerator.m */; };
-		19909B491AEE9F4B00CCB721 /* QY_SocketService.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B481AEE9F4B00CCB721 /* QY_SocketService.m */; };
 		19909B4E1AEEA04900CCB721 /* QYUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B4D1AEEA04900CCB721 /* QYUtils.m */; };
-		19909B5B1AEEEC4600CCB721 /* QY_JRMDataPacketFactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B5A1AEEEC4600CCB721 /* QY_JRMDataPacketFactor.m */; };
-		19A695381AFB32F000F60D03 /* QY_JDASSocketDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A695371AFB32F000F60D03 /* QY_JDASSocketDelegater.m */; };
+		19A140031B5044F400A7746C /* QY_AlertMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A140021B5044F400A7746C /* QY_AlertMessage.m */; };
+		19A140061B5044F400A7746C /* QY_attache.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A140051B5044F400A7746C /* QY_attache.m */; };
+		19A140091B5044F400A7746C /* QY_feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A140081B5044F400A7746C /* QY_feed.m */; };
+		19A1400C1B5044F400A7746C /* QY_comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A1400B1B5044F400A7746C /* QY_comment.m */; };
+		19A140121B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A140111B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.m */; };
+		19A140171B5117F100A7746C /* QY_UserReloginDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A140161B5117F100A7746C /* QY_UserReloginDescriptor.m */; };
 		19A6953B1AFB44C500F60D03 /* QYNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A6953A1AFB44C500F60D03 /* QYNotify.m */; };
 		19ED2EE41AECF84F00E9DBEA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EE31AECF84F00E9DBEA /* main.m */; };
 		19ED2EE71AECF84F00E9DBEA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EE61AECF84F00E9DBEA /* AppDelegate.m */; };
@@ -48,13 +57,10 @@
 		19ED2EF01AECF84F00E9DBEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19ED2EEE1AECF84F00E9DBEA /* Main.storyboard */; };
 		19ED2EF51AECF84F00E9DBEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19ED2EF31AECF84F00E9DBEA /* LaunchScreen.xib */; };
 		19ED2F011AECF84F00E9DBEA /* QianYan_IosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2F001AECF84F00E9DBEA /* QianYan_IosTests.m */; };
-		19F34B8C1B1E8BFD00B624C6 /* QY_SocketServiceAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F34B8B1B1E8BFD00B624C6 /* QY_SocketServiceAgent.m */; };
-		19F34B8F1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F34B8E1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.m */; };
-		19F3AC041AFB6941002B45DD /* QY_JRMSocketDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F3AC031AFB6941002B45DD /* QY_JRMSocketDelegater.m */; };
 		19F91CEE1B0E2A1800264AC0 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F91CEC1B0E2A1800264AC0 /* AddressBook.framework */; };
 		19F91CEF1B0E2A1800264AC0 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F91CED1B0E2A1800264AC0 /* AddressBookUI.framework */; };
 		19F91CF21B0E2ADF00264AC0 /* testAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F91CF11B0E2ADF00264AC0 /* testAddressBookViewController.m */; };
-		19F91CF91B0F1B1000264AC0 /* QY_AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F91CF81B0F1B1000264AC0 /* QY_AddressBook.m */; };
+		19F91CF91B0F1B1000264AC0 /* QY_Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F91CF81B0F1B1000264AC0 /* QY_Contact.m */; };
 		19F91CFC1B0F2D8000264AC0 /* QY_contactUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F91CFB1B0F2D8000264AC0 /* QY_contactUtils.m */; };
 		19F91D001B0F591000264AC0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F91CFF1B0F591000264AC0 /* MessageUI.framework */; };
 		2E198AB0F8530161A1BAD09F /* libPods-QianYan_Ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11F773AF3A6D9E59DFFC3C35 /* libPods-QianYan_Ios.a */; };
@@ -125,7 +131,6 @@
 		6E9BA9561B0CB8FB009D87BE /* SKSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BA94B1B0CB8FB009D87BE /* SKSTableViewCell.m */; };
 		6E9BA9571B0CB8FB009D87BE /* SKSTableViewCellIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9BA94D1B0CB8FB009D87BE /* SKSTableViewCellIndicator.m */; };
 		6E9BA9581B0CB8FB009D87BE /* Drawers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9BA94E1B0CB8FB009D87BE /* Drawers.storyboard */; };
-		6EAFC69E1B3096CE00547535 /* QY_JRMDataPhraser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAFC69D1B3096CE00547535 /* QY_JRMDataPhraser.m */; };
 		6EDF09AD1B29311800413348 /* QRCodeCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDF09AC1B29311800413348 /* QRCodeCardViewController.m */; };
 		6EDF09B41B29317E00413348 /* QRCodeCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDF09B21B29317E00413348 /* QRCodeCardTableViewCell.m */; };
 		6EDF09B51B29317E00413348 /* QRCodeCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDF09B31B29317E00413348 /* QRCodeCardTableViewCell.xib */; };
@@ -154,11 +159,9 @@
 
 /* Begin PBXFileReference section */
 		11F773AF3A6D9E59DFFC3C35 /* libPods-QianYan_Ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QianYan_Ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1902EEDA1B01BDCA001E4B12 /* QY_Socket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_Socket.h; sourceTree = "<group>"; };
-		192614141B14E30100241DDC /* QY_JDASSocketDelegaterDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_JDASSocketDelegaterDelegate.h; sourceTree = "<group>"; };
-		19382E521B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_SocketServiceDelegateNotificationCenter.h; sourceTree = "<group>"; };
-		19382E531B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_SocketServiceDelegateNotificationCenter.m; sourceTree = "<group>"; };
-		19382E551B03761C0041F7E4 /* QY_SocketServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_SocketServiceDelegate.h; sourceTree = "<group>"; };
+		190E5DF41B31187700D08688 /* QYConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYConstants.h; sourceTree = "<group>"; };
+		1935450A1B486F8800ACE915 /* QY_JPROHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JPROHttpService.h; sourceTree = "<group>"; };
+		1935450B1B486F8800ACE915 /* QY_JPROHttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JPROHttpService.m; sourceTree = "<group>"; };
 		1938CCAF1B24AC32009C4AE5 /* JRMvalueDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRMvalueDescription.h; sourceTree = "<group>"; };
 		1938CCB01B24AC32009C4AE5 /* JRMvalueDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRMvalueDescription.m; sourceTree = "<group>"; };
 		1938CCB21B24ACB4009C4AE5 /* JRMvalue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRMvalue.h; sourceTree = "<group>"; };
@@ -171,8 +174,24 @@
 		194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QY_dataFormat.m"; sourceTree = "<group>"; };
 		194E391B1B00DAB600BA4473 /* NSData+QY_dataFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+QY_dataFormat.h"; sourceTree = "<group>"; };
 		194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+QY_dataFormat.m"; sourceTree = "<group>"; };
-		1956BAC91AFF323C00C4A7F6 /* QY_JRMDataPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMDataPacket.h; sourceTree = "<group>"; };
-		1956BACA1AFF323C00C4A7F6 /* QY_JRMDataPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMDataPacket.m; sourceTree = "<group>"; };
+		195C15DB1B3AEF3A00A316FE /* QY_JRMGCDSocketDelegater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMGCDSocketDelegater.h; sourceTree = "<group>"; };
+		195C15DC1B3AEF3A00A316FE /* QY_JRMGCDSocketDelegater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMGCDSocketDelegater.m; sourceTree = "<group>"; };
+		195C15DF1B3B044300A316FE /* QY_JRMAPIDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMAPIDescriptor.h; sourceTree = "<group>"; };
+		195C15E01B3B044300A316FE /* QY_JRMAPIDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMAPIDescriptor.m; sourceTree = "<group>"; };
+		195C16141B3E8DF500A316FE /* QY_JRMRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMRequest.h; sourceTree = "<group>"; };
+		195C16151B3E8DF500A316FE /* QY_JRMRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMRequest.m; sourceTree = "<group>"; };
+		195C16171B3E8E0A00A316FE /* QY_JRMResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMResponse.h; sourceTree = "<group>"; };
+		195C16181B3E8E0A00A316FE /* QY_JRMResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMResponse.m; sourceTree = "<group>"; };
+		195C161B1B3EA11100A316FE /* QY_JRMAPIPhraseRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMAPIPhraseRule.h; sourceTree = "<group>"; };
+		195C161C1B3EA11100A316FE /* QY_JRMAPIPhraseRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMAPIPhraseRule.m; sourceTree = "<group>"; };
+		195C161E1B3EA5C800A316FE /* QY_SocketAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_SocketAgent.h; sourceTree = "<group>"; };
+		195C161F1B3EA5C800A316FE /* QY_SocketAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_SocketAgent.m; sourceTree = "<group>"; };
+		195C16211B3EA5FD00A316FE /* QY_SocketService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_SocketService.h; sourceTree = "<group>"; };
+		195C16221B3EA5FD00A316FE /* QY_SocketService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_SocketService.m; sourceTree = "<group>"; };
+		195C16241B401DC800A316FE /* QY_JRMAPIInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_JRMAPIInterface.h; sourceTree = "<group>"; };
+		195C16251B40462500A316FE /* QY_Block_Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_Block_Define.h; sourceTree = "<group>"; };
+		195C16261B41254700A316FE /* QY_JDASAPIInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_JDASAPIInterface.h; sourceTree = "<group>"; };
+		195C16271B41411200A316FE /* QY_Socket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_Socket.h; sourceTree = "<group>"; };
 		196456971B0582B000EA4E14 /* QY_QRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_QRCode.h; sourceTree = "<group>"; };
 		1964569C1B058D4000EA4E14 /* QY_QRCodeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_QRCodeUtils.h; sourceTree = "<group>"; };
 		1964569D1B058D4000EA4E14 /* QY_QRCodeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_QRCodeUtils.m; sourceTree = "<group>"; };
@@ -188,12 +207,13 @@
 		196456B01B0617F800EA4E14 /* QY_ChineseStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_ChineseStringUtils.m; sourceTree = "<group>"; };
 		196456B81B0639D600EA4E14 /* QY_ChineseString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_ChineseString.h; sourceTree = "<group>"; };
 		196456B91B063A7F00EA4E14 /* QianYan_ChineseStringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QianYan_ChineseStringTests.m; sourceTree = "<group>"; };
+		197170D31B3294FF00B34AB1 /* QY_JPRO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_JPRO.h; sourceTree = "<group>"; };
+		197C683E1B39434600907CFC /* UIImage+QY_resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+QY_resize.h"; sourceTree = "<group>"; };
+		197C683F1B39434600907CFC /* UIImage+QY_resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+QY_resize.m"; sourceTree = "<group>"; };
 		198530301B27215500EB96F7 /* testNetworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testNetworkViewController.h; sourceTree = "<group>"; };
 		198530311B27215500EB96F7 /* testNetworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testNetworkViewController.m; sourceTree = "<group>"; };
 		198530331B272C3300EB96F7 /* QYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYUser.h; sourceTree = "<group>"; };
 		198530341B272C3300EB96F7 /* QYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYUser.m; sourceTree = "<group>"; };
-		198530371B28075500EB96F7 /* QY_JPROHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JPROHttpService.h; sourceTree = "<group>"; };
-		198530381B28075500EB96F7 /* QY_JPROHttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JPROHttpService.m; sourceTree = "<group>"; };
 		1985303B1B2887CD00EB96F7 /* QY_FileService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_FileService.h; sourceTree = "<group>"; };
 		1985303C1B2887CD00EB96F7 /* QY_FileService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_FileService.m; sourceTree = "<group>"; };
 		1985303E1B28B33A00EB96F7 /* userInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = userInterface.h; sourceTree = "<group>"; };
@@ -217,17 +237,27 @@
 		198BADF21AF0AB2600B4E2E6 /* QRCodeReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderViewController.m; path = "ThirdPart_ByHand/二维码扫描/QRCodeReaderViewController/QRCodeReaderViewController.m"; sourceTree = "<group>"; };
 		198BADF71AF0B51700B4E2E6 /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeGenerator.h; path = "ThirdPart_ByHand/二维码生成/QRCodeGenerator.h"; sourceTree = "<group>"; };
 		198BADF81AF0B51700B4E2E6 /* QRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCodeGenerator.m; path = "ThirdPart_ByHand/二维码生成/QRCodeGenerator.m"; sourceTree = "<group>"; };
-		19909B471AEE9F4B00CCB721 /* QY_SocketService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_SocketService.h; sourceTree = "<group>"; };
-		19909B481AEE9F4B00CCB721 /* QY_SocketService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_SocketService.m; sourceTree = "<group>"; };
 		19909B4A1AEE9F7400CCB721 /* QY_Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_Common.h; sourceTree = "<group>"; };
 		19909B4B1AEE9F8100CCB721 /* QY_CommonDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_CommonDefine.h; sourceTree = "<group>"; };
 		19909B4C1AEEA04900CCB721 /* QYUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYUtils.h; sourceTree = "<group>"; };
 		19909B4D1AEEA04900CCB721 /* QYUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYUtils.m; sourceTree = "<group>"; };
 		19909B521AEEE1C300CCB721 /* QY_jclient_jrm_protocol_Marco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_jclient_jrm_protocol_Marco.h; sourceTree = "<group>"; };
-		19909B591AEEEC4600CCB721 /* QY_JRMDataPacketFactor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMDataPacketFactor.h; sourceTree = "<group>"; };
-		19909B5A1AEEEC4600CCB721 /* QY_JRMDataPacketFactor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMDataPacketFactor.m; sourceTree = "<group>"; };
-		19A695361AFB32F000F60D03 /* QY_JDASSocketDelegater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JDASSocketDelegater.h; sourceTree = "<group>"; };
-		19A695371AFB32F000F60D03 /* QY_JDASSocketDelegater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JDASSocketDelegater.m; sourceTree = "<group>"; };
+		19A140011B5044F400A7746C /* QY_AlertMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_AlertMessage.h; sourceTree = "<group>"; };
+		19A140021B5044F400A7746C /* QY_AlertMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_AlertMessage.m; sourceTree = "<group>"; };
+		19A140041B5044F400A7746C /* QY_attache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_attache.h; sourceTree = "<group>"; };
+		19A140051B5044F400A7746C /* QY_attache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_attache.m; sourceTree = "<group>"; };
+		19A140071B5044F400A7746C /* QY_feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_feed.h; sourceTree = "<group>"; };
+		19A140081B5044F400A7746C /* QY_feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_feed.m; sourceTree = "<group>"; };
+		19A1400A1B5044F400A7746C /* QY_comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_comment.h; sourceTree = "<group>"; };
+		19A1400B1B5044F400A7746C /* QY_comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_comment.m; sourceTree = "<group>"; };
+		19A1400D1B50451000A7746C /* QY_CoreDataModels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_CoreDataModels.h; sourceTree = "<group>"; };
+		19A1400E1B50478A00A7746C /* QY_jms_parameter_key_marco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_jms_parameter_key_marco.h; sourceTree = "<group>"; };
+		19A1400F1B506D0400A7746C /* QY_jpro_http_protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_jpro_http_protocol.h; sourceTree = "<group>"; };
+		19A140101B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JDASGCDSocketDelegater.h; sourceTree = "<group>"; };
+		19A140111B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JDASGCDSocketDelegater.m; sourceTree = "<group>"; };
+		19A140141B510DFB00A7746C /* QY_SocketServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_SocketServiceDelegate.h; sourceTree = "<group>"; };
+		19A140151B5117F100A7746C /* QY_UserReloginDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_UserReloginDescriptor.h; sourceTree = "<group>"; };
+		19A140161B5117F100A7746C /* QY_UserReloginDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_UserReloginDescriptor.m; sourceTree = "<group>"; };
 		19A695391AFB44C500F60D03 /* QYNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYNotify.h; sourceTree = "<group>"; };
 		19A6953A1AFB44C500F60D03 /* QYNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYNotify.m; sourceTree = "<group>"; };
 		19ED2EDE1AECF84F00E9DBEA /* QianYan_Ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QianYan_Ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,19 +273,13 @@
 		19ED2EFA1AECF84F00E9DBEA /* QianYan_IosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QianYan_IosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19ED2EFF1AECF84F00E9DBEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19ED2F001AECF84F00E9DBEA /* QianYan_IosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QianYan_IosTests.m; sourceTree = "<group>"; };
-		19F34B8A1B1E8BFD00B624C6 /* QY_SocketServiceAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_SocketServiceAgent.h; sourceTree = "<group>"; };
-		19F34B8B1B1E8BFD00B624C6 /* QY_SocketServiceAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_SocketServiceAgent.m; sourceTree = "<group>"; };
-		19F34B8D1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.h"; sourceTree = "<group>"; };
-		19F34B8E1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.m"; sourceTree = "<group>"; };
-		19F3AC021AFB6941002B45DD /* QY_JRMSocketDelegater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMSocketDelegater.h; sourceTree = "<group>"; };
-		19F3AC031AFB6941002B45DD /* QY_JRMSocketDelegater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMSocketDelegater.m; sourceTree = "<group>"; };
 		19F91CEC1B0E2A1800264AC0 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		19F91CED1B0E2A1800264AC0 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		19F91CF01B0E2ADF00264AC0 /* testAddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testAddressBookViewController.h; sourceTree = "<group>"; };
 		19F91CF11B0E2ADF00264AC0 /* testAddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testAddressBookViewController.m; sourceTree = "<group>"; };
 		19F91CF41B0F19F300264AC0 /* QY_contactService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_contactService.h; sourceTree = "<group>"; };
-		19F91CF71B0F1B1000264AC0 /* QY_AddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_AddressBook.h; sourceTree = "<group>"; };
-		19F91CF81B0F1B1000264AC0 /* QY_AddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_AddressBook.m; sourceTree = "<group>"; };
+		19F91CF71B0F1B1000264AC0 /* QY_Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_Contact.h; sourceTree = "<group>"; };
+		19F91CF81B0F1B1000264AC0 /* QY_Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_Contact.m; sourceTree = "<group>"; };
 		19F91CFA1B0F2D8000264AC0 /* QY_contactUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_contactUtils.h; sourceTree = "<group>"; };
 		19F91CFB1B0F2D8000264AC0 /* QY_contactUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_contactUtils.m; sourceTree = "<group>"; };
 		19F91CFE1B0F55F900264AC0 /* QY_contactUtilsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_contactUtilsDelegate.h; sourceTree = "<group>"; };
@@ -476,8 +500,6 @@
 		6E9BA94C1B0CB8FB009D87BE /* SKSTableViewCellIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKSTableViewCellIndicator.h; path = ../SKSTableViewCellIndicator.h; sourceTree = "<group>"; };
 		6E9BA94D1B0CB8FB009D87BE /* SKSTableViewCellIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKSTableViewCellIndicator.m; path = ../SKSTableViewCellIndicator.m; sourceTree = "<group>"; };
 		6E9BA94E1B0CB8FB009D87BE /* Drawers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Drawers.storyboard; path = ../Drawers.storyboard; sourceTree = "<group>"; };
-		6EAFC69C1B3096CE00547535 /* QY_JRMDataPhraser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JRMDataPhraser.h; sourceTree = "<group>"; };
-		6EAFC69D1B3096CE00547535 /* QY_JRMDataPhraser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JRMDataPhraser.m; sourceTree = "<group>"; };
 		6EDF09AB1B29311800413348 /* QRCodeCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeCardViewController.h; sourceTree = "<group>"; };
 		6EDF09AC1B29311800413348 /* QRCodeCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeCardViewController.m; sourceTree = "<group>"; };
 		6EDF09B11B29317E00413348 /* QRCodeCardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeCardTableViewCell.h; sourceTree = "<group>"; };
@@ -537,31 +559,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		192614131B14E2E400241DDC /* JDAS */ = {
+		190A7A651B35CEE30098D691 /* cell */ = {
 			isa = PBXGroup;
 			children = (
-				19A695361AFB32F000F60D03 /* QY_JDASSocketDelegater.h */,
-				19A695371AFB32F000F60D03 /* QY_JDASSocketDelegater.m */,
-				192614141B14E30100241DDC /* QY_JDASSocketDelegaterDelegate.h */,
+				6EDF09B11B29317E00413348 /* QRCodeCardTableViewCell.h */,
+				6EDF09B21B29317E00413348 /* QRCodeCardTableViewCell.m */,
+				6EDF09B31B29317E00413348 /* QRCodeCardTableViewCell.xib */,
 			);
-			name = JDAS;
+			name = cell;
 			sourceTree = "<group>";
 		};
-		192614151B15CE4700241DDC /* JRM */ = {
+		193545011B46C70000ACE915 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				19F3AC021AFB6941002B45DD /* QY_JRMSocketDelegater.h */,
-				19F3AC031AFB6941002B45DD /* QY_JRMSocketDelegater.m */,
+				19A1400A1B5044F400A7746C /* QY_comment.h */,
+				19A1400B1B5044F400A7746C /* QY_comment.m */,
+				19A140071B5044F400A7746C /* QY_feed.h */,
+				19A140081B5044F400A7746C /* QY_feed.m */,
+				19A140041B5044F400A7746C /* QY_attache.h */,
+				19A140051B5044F400A7746C /* QY_attache.m */,
+				19A140011B5044F400A7746C /* QY_AlertMessage.h */,
+				19A140021B5044F400A7746C /* QY_AlertMessage.m */,
+				19A1400D1B50451000A7746C /* QY_CoreDataModels.h */,
 			);
-			name = JRM;
+			name = CoreData;
 			sourceTree = "<group>";
 		};
-		19382E581B0376910041F7E4 /* header */ = {
+		193545081B486F2B00ACE915 /* 网络 */ = {
 			isa = PBXGroup;
 			children = (
-				19382E551B03761C0041F7E4 /* QY_SocketServiceDelegate.h */,
+				198530361B2806F300EB96F7 /* JPRO_Http */,
+				197C683B1B391DB200907CFC /* JRM_Sockets */,
 			);
-			name = header;
+			name = "网络";
 			sourceTree = "<group>";
 		};
 		1938CCA81B2446F9009C4AE5 /* Category */ = {
@@ -586,53 +616,36 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		1956BAC81AFF321600C4A7F6 /* Sockets */ = {
+		195C15DA1B3AEF1400A316FE /* socketDelegaters */ = {
 			isa = PBXGroup;
 			children = (
-				19F34B891B1E8B6600B624C6 /* Agent */,
-				1902EEDA1B01BDCA001E4B12 /* QY_Socket.h */,
-				19382E581B0376910041F7E4 /* header */,
-				196456951B05826E00EA4E14 /* main */,
-				1938CCA81B2446F9009C4AE5 /* Category */,
-				1963DA261AFFA36C008E9FCF /* socketDataServices */,
-				19F3AC051AFB6947002B45DD /* socketDelegaters */,
-				1956BACC1AFF324700C4A7F6 /* models */,
+				195C15DB1B3AEF3A00A316FE /* QY_JRMGCDSocketDelegater.h */,
+				195C15DC1B3AEF3A00A316FE /* QY_JRMGCDSocketDelegater.m */,
+				19A140101B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.h */,
+				19A140111B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.m */,
 			);
-			name = Sockets;
+			name = socketDelegaters;
 			sourceTree = "<group>";
 		};
-		1956BACC1AFF324700C4A7F6 /* models */ = {
+		195C15DE1B3AF04D00A316FE /* models */ = {
 			isa = PBXGroup;
 			children = (
-				1938CCB51B24BC1C009C4AE5 /* Utils */,
-				1956BAC91AFF323C00C4A7F6 /* QY_JRMDataPacket.h */,
-				1956BACA1AFF323C00C4A7F6 /* QY_JRMDataPacket.m */,
+				195C161B1B3EA11100A316FE /* QY_JRMAPIPhraseRule.h */,
+				195C161C1B3EA11100A316FE /* QY_JRMAPIPhraseRule.m */,
 				1938CCAF1B24AC32009C4AE5 /* JRMvalueDescription.h */,
 				1938CCB01B24AC32009C4AE5 /* JRMvalueDescription.m */,
 				1938CCB21B24ACB4009C4AE5 /* JRMvalue.h */,
 				1938CCB31B24ACB4009C4AE5 /* JRMvalue.m */,
+				195C15DF1B3B044300A316FE /* QY_JRMAPIDescriptor.h */,
+				195C15E01B3B044300A316FE /* QY_JRMAPIDescriptor.m */,
+				195C16141B3E8DF500A316FE /* QY_JRMRequest.h */,
+				195C16151B3E8DF500A316FE /* QY_JRMRequest.m */,
+				195C16171B3E8E0A00A316FE /* QY_JRMResponse.h */,
+				195C16181B3E8E0A00A316FE /* QY_JRMResponse.m */,
+				19A140151B5117F100A7746C /* QY_UserReloginDescriptor.h */,
+				19A140161B5117F100A7746C /* QY_UserReloginDescriptor.m */,
 			);
 			name = models;
-			sourceTree = "<group>";
-		};
-		1963DA261AFFA36C008E9FCF /* socketDataServices */ = {
-			isa = PBXGroup;
-			children = (
-				19909B591AEEEC4600CCB721 /* QY_JRMDataPacketFactor.h */,
-				19909B5A1AEEEC4600CCB721 /* QY_JRMDataPacketFactor.m */,
-				6EAFC69C1B3096CE00547535 /* QY_JRMDataPhraser.h */,
-				6EAFC69D1B3096CE00547535 /* QY_JRMDataPhraser.m */,
-			);
-			name = socketDataServices;
-			sourceTree = "<group>";
-		};
-		196456951B05826E00EA4E14 /* main */ = {
-			isa = PBXGroup;
-			children = (
-				19909B471AEE9F4B00CCB721 /* QY_SocketService.h */,
-				19909B481AEE9F4B00CCB721 /* QY_SocketService.m */,
-			);
-			name = main;
 			sourceTree = "<group>";
 		};
 		196456961B05828B00EA4E14 /* QY_QRCode */ = {
@@ -679,6 +692,8 @@
 				19909B4D1AEEA04900CCB721 /* QYUtils.m */,
 				19A695391AFB44C500F60D03 /* QYNotify.h */,
 				19A6953A1AFB44C500F60D03 /* QYNotify.m */,
+				197C683E1B39434600907CFC /* UIImage+QY_resize.h */,
+				197C683F1B39434600907CFC /* UIImage+QY_resize.m */,
 			);
 			name = "其他工具";
 			sourceTree = "<group>";
@@ -713,14 +728,78 @@
 			name = main;
 			sourceTree = "<group>";
 		};
-		198530361B2806F300EB96F7 /* JPRO */ = {
+		197170D11B3294CF00B34AB1 /* header */ = {
 			isa = PBXGroup;
 			children = (
-				198530511B2B666500EB96F7 /* URL工具 */,
-				198530371B28075500EB96F7 /* QY_JPROHttpService.h */,
-				198530381B28075500EB96F7 /* QY_JPROHttpService.m */,
+				197170D31B3294FF00B34AB1 /* QY_JPRO.h */,
 			);
-			name = JPRO;
+			name = header;
+			sourceTree = "<group>";
+		};
+		197170D21B3294D500B34AB1 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				1935450A1B486F8800ACE915 /* QY_JPROHttpService.h */,
+				1935450B1B486F8800ACE915 /* QY_JPROHttpService.m */,
+				19A1400E1B50478A00A7746C /* QY_jms_parameter_key_marco.h */,
+				19A1400F1B506D0400A7746C /* QY_jpro_http_protocol.h */,
+				198530511B2B666500EB96F7 /* URL工具 */,
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
+		197C683B1B391DB200907CFC /* JRM_Sockets */ = {
+			isa = PBXGroup;
+			children = (
+				195C16271B41411200A316FE /* QY_Socket.h */,
+				197C683D1B391DC600907CFC /* header */,
+				197C683C1B391DC100907CFC /* main */,
+				195C15DE1B3AF04D00A316FE /* models */,
+				1938CCA81B2446F9009C4AE5 /* Category */,
+				1938CCB51B24BC1C009C4AE5 /* Utils */,
+			);
+			name = JRM_Sockets;
+			sourceTree = "<group>";
+		};
+		197C683C1B391DC100907CFC /* main */ = {
+			isa = PBXGroup;
+			children = (
+				195C161E1B3EA5C800A316FE /* QY_SocketAgent.h */,
+				195C161F1B3EA5C800A316FE /* QY_SocketAgent.m */,
+				195C16211B3EA5FD00A316FE /* QY_SocketService.h */,
+				195C16221B3EA5FD00A316FE /* QY_SocketService.m */,
+				195C15DA1B3AEF1400A316FE /* socketDelegaters */,
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
+		197C683D1B391DC600907CFC /* header */ = {
+			isa = PBXGroup;
+			children = (
+				195C16241B401DC800A316FE /* QY_JRMAPIInterface.h */,
+				195C16261B41254700A316FE /* QY_JDASAPIInterface.h */,
+				19A140141B510DFB00A7746C /* QY_SocketServiceDelegate.h */,
+			);
+			name = header;
+			sourceTree = "<group>";
+		};
+		197D3F771B4DA16B00DB84C8 /* workModels */ = {
+			isa = PBXGroup;
+			children = (
+				198530331B272C3300EB96F7 /* QYUser.h */,
+				198530341B272C3300EB96F7 /* QYUser.m */,
+				1985303E1B28B33A00EB96F7 /* userInterface.h */,
+			);
+			name = workModels;
+			sourceTree = "<group>";
+		};
+		198530361B2806F300EB96F7 /* JPRO_Http */ = {
+			isa = PBXGroup;
+			children = (
+				197170D11B3294CF00B34AB1 /* header */,
+				197170D21B3294D500B34AB1 /* main */,
+			);
+			name = JPRO_Http;
 			sourceTree = "<group>";
 		};
 		1985303A1B2887AF00EB96F7 /* QYFileSystem */ = {
@@ -805,9 +884,8 @@
 		19909B421AEE985200CCB721 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				198530331B272C3300EB96F7 /* QYUser.h */,
-				198530341B272C3300EB96F7 /* QYUser.m */,
-				1985303E1B28B33A00EB96F7 /* userInterface.h */,
+				197D3F771B4DA16B00DB84C8 /* workModels */,
+				193545011B46C70000ACE915 /* CoreData */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -815,15 +893,14 @@
 		19909B431AEE985700CCB721 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				193545081B486F2B00ACE915 /* 网络 */,
 				1985304B1B29CB3600EB96F7 /* QYError */,
 				1985303F1B28B96700EB96F7 /* QY_XML */,
 				1985303A1B2887AF00EB96F7 /* QYFileSystem */,
-				198530361B2806F300EB96F7 /* JPRO */,
 				19F91CF31B0F19D200264AC0 /* 联系人 */,
 				196456A81B06177F00EA4E14 /* 中文字符串工具 */,
 				196456A71B05D00E00EA4E14 /* 其他工具 */,
 				196456961B05828B00EA4E14 /* QY_QRCode */,
-				1956BAC81AFF321600C4A7F6 /* Sockets */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -834,6 +911,8 @@
 				19909B521AEEE1C300CCB721 /* QY_jclient_jrm_protocol_Marco.h */,
 				19909B4A1AEE9F7400CCB721 /* QY_Common.h */,
 				19909B4B1AEE9F8100CCB721 /* QY_CommonDefine.h */,
+				190E5DF41B31187700D08688 /* QYConstants.h */,
+				195C16251B40462500A316FE /* QY_Block_Define.h */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -939,28 +1018,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		19F34B891B1E8B6600B624C6 /* Agent */ = {
-			isa = PBXGroup;
-			children = (
-				19F34B8A1B1E8BFD00B624C6 /* QY_SocketServiceAgent.h */,
-				19F34B8B1B1E8BFD00B624C6 /* QY_SocketServiceAgent.m */,
-				19F34B8D1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.h */,
-				19F34B8E1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.m */,
-			);
-			name = Agent;
-			sourceTree = "<group>";
-		};
-		19F3AC051AFB6947002B45DD /* socketDelegaters */ = {
-			isa = PBXGroup;
-			children = (
-				192614151B15CE4700241DDC /* JRM */,
-				192614131B14E2E400241DDC /* JDAS */,
-				19382E521B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.h */,
-				19382E531B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.m */,
-			);
-			name = socketDelegaters;
-			sourceTree = "<group>";
-		};
 		19F91CF31B0F19D200264AC0 /* 联系人 */ = {
 			isa = PBXGroup;
 			children = (
@@ -984,8 +1041,8 @@
 		19F91CF61B0F1AEC00264AC0 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				19F91CF71B0F1B1000264AC0 /* QY_AddressBook.h */,
-				19F91CF81B0F1B1000264AC0 /* QY_AddressBook.m */,
+				19F91CF71B0F1B1000264AC0 /* QY_Contact.h */,
+				19F91CF81B0F1B1000264AC0 /* QY_Contact.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1480,11 +1537,9 @@
 		6EDF09AA1B2930DE00413348 /* 二维码名片 */ = {
 			isa = PBXGroup;
 			children = (
+				190A7A651B35CEE30098D691 /* cell */,
 				6EDF09AB1B29311800413348 /* QRCodeCardViewController.h */,
 				6EDF09AC1B29311800413348 /* QRCodeCardViewController.m */,
-				6EDF09B11B29317E00413348 /* QRCodeCardTableViewCell.h */,
-				6EDF09B21B29317E00413348 /* QRCodeCardTableViewCell.m */,
-				6EDF09B31B29317E00413348 /* QRCodeCardTableViewCell.xib */,
 			);
 			name = "二维码名片";
 			sourceTree = "<group>";
@@ -1767,14 +1822,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				198530541B2B669900EB96F7 /* QY_JPROUrlFactor.m in Sources */,
+				19A140091B5044F400A7746C /* QY_feed.m in Sources */,
 				6E75ACA11B281E8300A0C919 /* ContactViewController.m in Sources */,
 				6E1EC9BF1B50F69B003E346F /* SystemSettingsImageTableViewCell.m in Sources */,
-				1956BACB1AFF323C00C4A7F6 /* QY_JRMDataPacket.m in Sources */,
 				6E67BBE21B0F81B00066C9CE /* ContactTableViewCell.m in Sources */,
 				6E2761BF1B08C03200247CCC /* LoginViewController.m in Sources */,
 				198530391B28075500EB96F7 /* QY_JPROHttpService.m in Sources */,
-				19F34B8C1B1E8BFD00B624C6 /* QY_SocketServiceAgent.m in Sources */,
-				19F3AC041AFB6941002B45DD /* QY_JRMSocketDelegater.m in Sources */,
 				6E4BB92B1B51441600070F6F /* CameraSubTableViewCell.m in Sources */,
 				6E18D1001B281C2800802C49 /* PasswordManageViewController.m in Sources */,
 				196456B11B0617F800EA4E14 /* QY_ChineseStringUtils.m in Sources */,
@@ -1786,8 +1839,9 @@
 				6E9BA9521B0CB8FB009D87BE /* JVRightDrawerTableViewController.m in Sources */,
 				6E9BA9501B0CB8FB009D87BE /* JVRightDrawerTableViewCell.m in Sources */,
 				6E1A9B931B50A4410046B8AB /* YMTapGestureRecongnizer.m in Sources */,
-				19A695381AFB32F000F60D03 /* QY_JDASSocketDelegater.m in Sources */,
 				6E32DA081B51672A002A6301 /* KxMovieViewController.m in Sources */,
+				19A140031B5044F400A7746C /* QY_AlertMessage.m in Sources */,
+				197C68401B39434600907CFC /* UIImage+QY_resize.m in Sources */,
 				198BADF41AF0AB2600B4E2E6 /* QRCodeReaderView.m in Sources */,
 				6E67BBE31B0F81B00066C9CE /* ContactTableViewController.m in Sources */,
 				194E391A1B00832F00BA4473 /* NSString+QY_dataFormat.m in Sources */,
@@ -1800,14 +1854,12 @@
 				19ED2EEA1AECF84F00E9DBEA /* QianYan_Ios.xcdatamodeld in Sources */,
 				6E1A9BA31B50A4CB0046B8AB /* ILRegularExpressionManager.m in Sources */,
 				1985303D1B2887CD00EB96F7 /* QY_FileService.m in Sources */,
-				19382E541B03367D0041F7E4 /* QY_SocketServiceDelegateNotificationCenter.m in Sources */,
 				196456A41B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m in Sources */,
 				6EDF09AD1B29311800413348 /* QRCodeCardViewController.m in Sources */,
 				6E7C075D1B3BE41200AC8EC3 /* AlertNotificationTableViewController.m in Sources */,
 				198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */,
 				6EE8E6681B11F768007C54E0 /* SettingsViewController.m in Sources */,
 				6E75ACA51B28268400A0C919 /* AddContactViewController.m in Sources */,
-				6EAFC69E1B3096CE00547535 /* QY_JRMDataPhraser.m in Sources */,
 				196456AB1B0617A700EA4E14 /* pinyin.c in Sources */,
 				1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */,
 				6E32DA071B51672A002A6301 /* KxMovieGLView.m in Sources */,
@@ -1815,6 +1867,7 @@
 				6EE8E6601B11F737007C54E0 /* OnlyButtonTableViewCell.m in Sources */,
 				6E2761BE1B08C03200247CCC /* RegisterViewController.m in Sources */,
 				6E32DA061B51672A002A6301 /* KxMovieDecoder.m in Sources */,
+				195C16201B3EA5C800A316FE /* QY_SocketAgent.m in Sources */,
 				198530471B28B9AF00EB96F7 /* QY_XMLPhraser.m in Sources */,
 				6E1A9BA41B50A4CB0046B8AB /* NSArray+NSArray_ILExtension.m in Sources */,
 				6E1A9B921B50A4410046B8AB /* WFTextView.m in Sources */,
@@ -1827,31 +1880,36 @@
 				19F91CFC1B0F2D8000264AC0 /* QY_contactUtils.m in Sources */,
 				6EDF09B41B29317E00413348 /* QRCodeCardTableViewCell.m in Sources */,
 				6E1EC9D61B5105D5003E346F /* CameraSettingCollectionReusableView.m in Sources */,
+				195C16161B3E8DF500A316FE /* QY_JRMRequest.m in Sources */,
 				194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */,
+				1935450C1B486F8800ACE915 /* QY_JPROHttpService.m in Sources */,
+				19A140121B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.m in Sources */,
 				6E9BA9561B0CB8FB009D87BE /* SKSTableViewCell.m in Sources */,
 				6E1EC9C61B50FFD4003E346F /* AccountInfoViewController.m in Sources */,
 				19F91CF21B0E2ADF00264AC0 /* testAddressBookViewController.m in Sources */,
 				6E62A0F91B441E320001E3A2 /* GroupManageTableViewCell.m in Sources */,
 				196456AE1B0617D000EA4E14 /* ChineseString.m in Sources */,
 				6E9BA94F1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.m in Sources */,
-				19909B491AEE9F4B00CCB721 /* QY_SocketService.m in Sources */,
 				198530421B28B98B00EB96F7 /* QY_XMLService.m in Sources */,
 				6E9BA9551B0CB8FB009D87BE /* SKSTableView.m in Sources */,
 				6E7C07601B3BE42600AC8EC3 /* AlertNotificationTableViewCell.m in Sources */,
 				1938CCB41B24ACB4009C4AE5 /* JRMvalue.m in Sources */,
 				6E1A9B981B50A44F0046B8AB /* WXViewController.m in Sources */,
-				19F34B8F1B1FF31700B624C6 /* QY_SocketServiceAgent+QY_SocketServiceAgent_GCD.m in Sources */,
+				19A140171B5117F100A7746C /* QY_UserReloginDescriptor.m in Sources */,
+				195C15DD1B3AEF3A00A316FE /* QY_JRMGCDSocketDelegater.m in Sources */,
 				6E9BA9571B0CB8FB009D87BE /* SKSTableViewCellIndicator.m in Sources */,
 				6E32DA091B51672A002A6301 /* LandScapeKxMovieViewController.m in Sources */,
 				6E4BB9281B5140C800070F6F /* RacentTableViewController.m in Sources */,
 				6E9BA9541B0CB8FB009D87BE /* CameraViewController.m in Sources */,
 				198530321B27215500EB96F7 /* testNetworkViewController.m in Sources */,
-				19F91CF91B0F1B1000264AC0 /* QY_AddressBook.m in Sources */,
+				19F91CF91B0F1B1000264AC0 /* QY_Contact.m in Sources */,
 				198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */,
 				1938CCB11B24AC32009C4AE5 /* JRMvalueDescription.m in Sources */,
+				19A1400C1B5044F400A7746C /* QY_comment.m in Sources */,
+				19A140061B5044F400A7746C /* QY_attache.m in Sources */,
 				1985304A1B28B9BC00EB96F7 /* QY_XMLFormatter.m in Sources */,
-				19909B5B1AEEEC4600CCB721 /* QY_JRMDataPacketFactor.m in Sources */,
 				6E1A9BA61B50A4CB0046B8AB /* YMTextData.m in Sources */,
+				195C16191B3E8E0A00A316FE /* QY_JRMResponse.m in Sources */,
 				198BADF91AF0B51700B4E2E6 /* QRCodeGenerator.m in Sources */,
 				6E1EC9D41B5105D5003E346F /* CameraSettingCollectionViewController.m in Sources */,
 				6E75ACA01B281E8300A0C919 /* SearchTableViewCell.m in Sources */,
@@ -1863,11 +1921,14 @@
 				1985304E1B29D5EA00EB96F7 /* NSError+QYError.m in Sources */,
 				6E9BA9511B0CB8FB009D87BE /* JVLeftDrawerTableViewController.m in Sources */,
 				6E1EC9BD1B50F69B003E346F /* SystemSettingsTableViewController.m in Sources */,
+				195C15E11B3B044300A316FE /* QY_JRMAPIDescriptor.m in Sources */,
 				6E75AC9E1B281E8300A0C919 /* UMTableViewCell.m in Sources */,
 				6EE8E65E1B11F737007C54E0 /* ButtonTableViewCell.m in Sources */,
 				6E1A9B941B50A4410046B8AB /* YMShowImageView.m in Sources */,
 				6E1A9B911B50A4410046B8AB /* YMTableViewCell.m in Sources */,
 				6EE8E6641B11F737007C54E0 /* SwitchTableViewCell.m in Sources */,
+				195C16231B3EA5FD00A316FE /* QY_SocketService.m in Sources */,
+				195C161D1B3EA11100A316FE /* QY_JRMAPIPhraseRule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

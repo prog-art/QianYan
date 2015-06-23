@@ -1,26 +1,26 @@
 //
-//  QY_JPROHttpService.h
+//  QY_tempHttpService.h
 //  QianYan_Ios
 //
-//  Created by 虎猫儿 on 15/6/10.
+//  Created by 虎猫儿 on 15/7/5.
 //  Copyright (c) 2015年 虎猫儿. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
+#import "QY_Block_Define.h"
 
-#import <AFNetworking/AFNetworking.h>
-//success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-//failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+#import "QY_JPRO.h"
 
-typedef void(^QY_AFSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject) ;
-typedef void(^QY_AFFailBlock)(AFHTTPRequestOperation *operation, NSError *error) ;
+#import "QY_jpro_http_protocol.h"
 
+@interface QY_JPROHttpService : NSObject<QY_jpro_http_protocol>
 
-@interface QY_JPROHttpService : NSObject
++ (instancetype)shareInstance ;
 
-+ (void)downLoadTest ;
+@property (nonatomic,readonly) NSString *jpro_ip ;
+@property (nonatomic,readonly) NSString *jpro_port ;
 
-+ (void)uploadTest ;
+- (void)configIp:(NSString *)jpro_ip Port:(NSString *)jpro_port ;
 
 @end

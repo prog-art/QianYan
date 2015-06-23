@@ -11,9 +11,12 @@
 #import "AppDelegate.h"
 #import "JVFloatingDrawerViewController.h"
 
+#import "QY_Common.h"
+#import "CameraViewController.h"
+
 static NSString * const kJVDrawerCellReuseIdentifier = @"JVRightDrawerCellReuseIdentifier";
 
-@interface JVRightDrawerTableViewController ()
+@interface JVRightDrawerTableViewController ()<QY_QRCodeScanerDelegate>
 
 @end
 
@@ -25,6 +28,7 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVRightDrawerCellReuseI
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.contentInset = UIEdgeInsetsMake(80, 0.0, 0.0, 0.0);
     self.clearsSelectionOnViewWillAppear = NO;
+    
 }
 
 #pragma mark - Table View Data Source
@@ -79,7 +83,7 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVRightDrawerCellReuseI
     return cell;
 }
 
-#pragma mark - Actions
+#pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     __block UIViewController *destinationViewController = nil;

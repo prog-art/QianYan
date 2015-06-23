@@ -11,6 +11,8 @@
 
 #import "QY_contactUtilsDelegate.h"
 
+typedef void(^QYContactBlock)(BOOL success , NSArray *contacts);
+
 @interface QY_contactUtils : NSObject
 
 @property (weak) id<QY_contactUtilsDelegate> delegate ;
@@ -21,6 +23,13 @@
  *  获取Contacts，结果用delegate接收
  */
 - (void)getContacts ;
+
+/**
+ *  获取Contacts，结果用block回调
+ *
+ *  @param complection (BOOL success , NSArray *contacts)
+ */
+- (void)getContactsComplection:(QYContactBlock)complection ;
 
 #pragma mark - 发送短信
 

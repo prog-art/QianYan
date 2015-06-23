@@ -13,15 +13,15 @@
 //#import "QY_JRMDataPharser.h"
 //#import "NSString+QY_dataFormat.h"
 //#import "NSData+QY_dataFormat.h"
-//#import "QY_FileService.h"
+#import "QY_FileService.h"
 #import "QY_XMLService.h"
 #import "QYUser.h"
+#import "QY_Common.h"
 
 @interface QianYan_IosTests : XCTestCase
 
 @end
 
-#warning 快速跳转warning
 @implementation QianYan_IosTests
 
 - (void)setUp {
@@ -64,6 +64,25 @@
     QYUser *user2 = (QYUser *)[QY_XMLService getUserFromProfileXML:xmlStr] ;
     
     NSLog(@"%@",user2) ;
+    
+}
+
+- (void)testPath {
+    NSString *userId = @"10000133" ;
+    NSString *path = [[QY_FileService getUserPathByUserId:userId] stringByAppendingPathComponent:@"profile.xml"] ;
+    QYDebugLog(@"path = %@",path) ;
+}
+
+- (void)testStringFromSelector {
+    NSString *str = NSStringFromSelector(@selector(testPath)) ;
+    
+    QYDebugLog(@"str = %@",str) ;
+    
+    str = NSStringFromSelector(@selector(testStr:)) ;
+    QYDebugLog(@"str = %@",str) ;
+}
+
+- (void)testStr:(NSString *)str {
     
 }
 

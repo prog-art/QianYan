@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CameraViewController : UIViewController
+#import "QY_QRCodeScanerDelegate.h"
+
+@interface CameraViewController : UIViewController<QY_QRCodeScanerDelegate>
 
 @end

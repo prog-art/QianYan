@@ -12,5 +12,14 @@
 #import "QY_CommonDefine.h"
 #import "QYUtils.h"
 #import "NSError+QYError.h"
+#import "QYConstants.h"
+#import "QY_Block_Define.h"
+
+
+#import "QY_Socket.h"
+#import "QYUser.h"
+#import "QY_QRCode.h"
+
+#import "UIImage+QY_resize.h"
 
 #endif

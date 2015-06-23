@@ -17,7 +17,11 @@
 }
 
 + (JOSEPH_COMMAND)getCmd:(NSData *)data {
-    return (JOSEPH_COMMAND)[self getIntegerValue:data range:NSMakeRange(JRM_DATA_LEN_OF_KEY_LEN, JRM_DATA_LEN_OF_KEY_CMD)] ;
+    return [self getCmd:data range:NSMakeRange(JRM_DATA_LEN_OF_KEY_LEN, JRM_DATA_LEN_OF_KEY_CMD)] ;
+}
+
++ (JOSEPH_COMMAND)getCmd:(NSData *)data range:(NSRange)range {
+    return (JOSEPH_COMMAND)[self getIntegerValue:data range:range] ;
 }
 
 + (NSString *)getStringValue:(NSData *)data range:(NSRange)range {
@@ -29,9 +33,14 @@
 }
 
 + (NSInteger)getIntegerValue:(NSData *)data range:(NSRange)range {
+    return [self getIntegerValue:[data subdataWithRange:range]] ;
+}
+
++ (NSInteger)getIntegerValue:(NSData *)data {
+    if (!data) return 0 ;
     NSInteger res = 0 ;
-    Byte *dataByte = (Byte *)[[data subdataWithRange:range] bytes] ;
-    for ( int i = 0 ; i < range.length ; i++) {
+    Byte *dataByte = (Byte *)[data bytes] ;
+    for ( int i = 0 ; i < data.length ; i++ ) {
         Byte tempB = dataByte[i] ;
         NSUInteger tempI = (NSUInteger)tempB ;
         res = res * 256 + tempI ;
@@ -41,6 +50,23 @@
 
 + (NSData *)getImageData:(NSData *)data range:(NSRange)range {
     return [data subdataWithRange:range] ;
+}
+
++ (NSArray *)getListValue:(NSData *)data range:(NSRange)range perDataLen:(NSUInteger)len {
+    if ( range.length % len != 0 ) {
+        QYDebugLog(@"请检查数据") ;
+        return nil ;
+    }
+    data = [data subdataWithRange:range] ;
+    NSMutableArray *result = [NSMutableArray array] ;
+    NSInteger num = range.length / len ;
+    
+    for (int i = 0 ; i < num ; i++ ) {
+        NSRange range = NSMakeRange( i * len , len ) ;
+        NSString *str = [self getStringValue:data range:range] ;
+        [result addObject:str] ;
+    }    
+    return result ;
 }
 
 @end

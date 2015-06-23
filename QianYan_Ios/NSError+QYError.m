@@ -22,4 +22,25 @@
     return [self QYErrorWithCode:code userInfo:userInfo] ;
 }
 
+#pragma mark -
+
++ (NSString *)QYErrorCodeDescription:(QianYan_ErrorCode)errorCode {
+    NSString *desc = @"" ;
+    switch ( errorCode ) {
+        case API2529_Para_Error :
+            desc = @"绑定参数出错" ;
+            break;
+        case API2529_Binding_Error :
+            desc = @"绑定出错" ;
+            break ;
+        case API2529_Camera_IS_Been_Bindinged :
+            desc = @"相机已经绑定给其他用户" ;
+            break ;
+        default:
+            break;
+    }
+    
+    return desc ;
+}
+
 @end

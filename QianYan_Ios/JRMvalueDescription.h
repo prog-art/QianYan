@@ -13,8 +13,13 @@ typedef NS_ENUM(NSUInteger, JRMValueType) {
     JRMValueType_Number = 2 ,
     JRMValueType_ImageData  = 3 ,
     JRMValueType_NULL   = 4 ,
+    JRMValueType_ImageDataLen = 5 ,
+    JRMValueType_String_List = 6 
 } ;
 
+/**
+ *  JRMValue描述类，包含长度和类型类型
+ */
 @interface JRMvalueDescription : NSObject
 
 + (instancetype)descriptionWithLen:(NSUInteger)len Type:(JRMValueType)type ;

@@ -11,6 +11,6 @@
 
 #import "QY_contactUtils.h"
 #import "QY_contactUtilsDelegate.h"
-#import "QY_AddressBook.h"
+#import "QY_Contact.h"
 
 #endif

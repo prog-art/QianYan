@@ -13,6 +13,8 @@
 #import "CameraSubTableViewCell.h"
 #import "QY_SKSTableView.h"
 
+#import "QY_Common.h"
+
 @interface CameraViewController () <SKSTableViewDelegate>
 
 @property (nonatomic, strong) NSArray *contents;
@@ -158,6 +160,75 @@
 
 - (IBAction)actionToggleRightDrawer:(id)sender {
     [[AppDelegate globalDelegate] toggleRightDrawer:self animated:YES];
+}
+
+#pragma mark - QY_QRCodeScanerDelegate
+
+/**
+ *  成功扫描二维码，普通字符串
+ *
+ *  @param resultStr 结果字符串
+ */
+- (void)QY_didScanQRCode:(NSString *)resultStr {
+    QYDebugLog(@"扫描普通字符串 %@",resultStr) ;
+    [self.navigationController popViewControllerAnimated:YES] ;
+}
+
+/**
+ *  取消扫描二维码
+ */
+- (void)QY_didCancelQRCodeScan {
+    QYDebugLog(@"取消扫描") ;
+    [self.navigationController popViewControllerAnimated:YES] ;
+}
+
+/**
+ *  扫描到了某种千衍的二维码结构
+ *
+ *  @param opetion 扫描到的类型
+ *  @param info    各种参数
+ */
+- (void)QY_didScanOption:(QY_QRCodeType)option userInfo:(NSDictionary *)info {
+    QYDebugLog(@"扫描千衍二维码！option = %ld info = %@",option,info) ;
+    [self.navigationController popViewControllerAnimated:YES] ;
+    if ( option == QY_QRCodeType_Binding_Camera ) {
+        NSString *cameraId = info[QY_QRCODE_DATA_DIC_KEY][KEY_FOR_DATA_AT_INDEX(1)];
+        [self bindingCameraWithCameraId:cameraId] ;
+    } else
+    if (option == QY_QRCodeType_User )  {
+        NSString *friendId = info[QY_QRCODE_DATA_DIC_KEY][KEY_FOR_DATA_AT_INDEX(1)] ;
+        [self addFriendWithFriendId:friendId] ;
+    }
+}
+
+#pragma mark - private
+
+/**
+ *  绑定摄像机
+ *
+ *  @param cameraId
+ */
+- (void)bindingCameraWithCameraId:(NSString *)cameraId {
+    QYDebugLog(@"绑定摄像机！") ;
+
+    QYUser *user = [QYUser currentUser] ;
+
+    if ( user.userId ) {
+#warning !!
+    } else {
+        QYDebugLog(@"user为空") ;
+    }
+}
+
+- (void)addFriendWithFriendId:(NSString *)friendId {
+    QYDebugLog(@"添加好友！") ;
+    QYUser *user = [QYUser currentUser] ;
+
+    if ( user ) {
+#warning !!
+    } else {
+        QYDebugLog(@"user为空") ;
+    }
 }
 
 @end

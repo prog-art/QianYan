@@ -55,7 +55,7 @@ typedef NS_ENUM (NSInteger,JRM_REQUEST_OPERATION_TYPE) {
     JRM_REQUEST_OPERATION_TYPE_SET_USERNAME_FOR_THIRD_PART_LOGIN_USER = 2542
 };
 
-
+#define QY_CMD JOSEPH_COMMAND 
 
 
 /**
@@ -111,67 +111,72 @@ typedef NS_ENUM (NSInteger,JRM_REQUEST_OPERATION_TYPE) {
 #define ParameterKey_accountType     @"accountType"
 #define ParameterKey_openId          @"openId"
 
+#define ParameterKey_avatar          @"avatar"
 
 //------------------------   宏定义个部分参数的长度   ---------------------------------------------------
 
-#define JRM_DATA_LEN_OF_KEY_LEN                    2
-#define JRM_DATA_LEN_OF_KEY_CMD                    4
 
-#define JRM_DATA_LEN_OF_KEY_username               16
-#define JRM_DATA_LEN_OF_KEY_userPassword           32
-#define JRM_DATA_LEN_OF_KEY_userId                 16
-#define JRM_DATA_LEN_OF_KEY_jproIp                 32
-#define JRM_DATA_LEN_OF_KEY_jproPort               8
-#define JRM_DATA_LEN_OF_KEY_jproPassword           32
+#define JRM_DATA_LEN_OF_KEY_LEN               2
+#define JRM_DATA_LEN_OF_KEY_CMD               4
 
-#define JRM_DATA_LEN_OF_KEY_jssId                  16
-#define JRM_DATA_LEN_OF_KEY_jssIp                  32
-#define JRM_DATA_LEN_OF_KEY_jssPort4jipnc          8
-#define JRM_DATA_LEN_OF_KEY_jssPort4jclient        8
-#define JRM_DATA_LEN_OF_KEY_jssPassword            32
-#define JRM_DATA_LEN_OF_KEY_jssPort                8
+#define JRM_DATA_LEN_OF_KEY_JmsIP             16
+#define JRM_DATA_LEN_OF_KEY_JmsPort           8
+
+#define JRM_DATA_LEN_OF_KEY_username          16
+#define JRM_DATA_LEN_OF_KEY_userPassword      32
+#define JRM_DATA_LEN_OF_KEY_userId            16
+#define JRM_DATA_LEN_OF_KEY_jproIp            32
+#define JRM_DATA_LEN_OF_KEY_jproPort          8
+#define JRM_DATA_LEN_OF_KEY_jproPassword      32
+
+#define JRM_DATA_LEN_OF_KEY_jssId             16
+#define JRM_DATA_LEN_OF_KEY_jssIp             32
+#define JRM_DATA_LEN_OF_KEY_jssPort4jipnc     8
+#define JRM_DATA_LEN_OF_KEY_jssPort4jclient   8
+#define JRM_DATA_LEN_OF_KEY_jssPassword       32
+#define JRM_DATA_LEN_OF_KEY_jssPort           8
 
 
-#define JRM_DATA_LEN_OF_KEY_jipncId                16
-#define JRM_DATA_LEN_OF_KEY_jipncPassword          32
-#define JRM_DATA_LEN_OF_KEY_jipncNickname          32
+#define JRM_DATA_LEN_OF_KEY_jipncId           16
+#define JRM_DATA_LEN_OF_KEY_jipncPassword     32
+#define JRM_DATA_LEN_OF_KEY_jipncNickname     32
 
 //jipnc的多媒体地址 如 "c000 0000 0000 001"
-#define JRM_DATA_LEN_OF_KEY_jipncMediaAddr         32
+#define JRM_DATA_LEN_OF_KEY_jipncMediaAddr    32
 
 
 
-#define JRM_DATA_LEN_OF_KEY_userPhone              32
-#define JRM_DATA_LEN_OF_KEY_userEmail              16
-#define JRM_DATA_LEN_OF_KEY_verifyCode             32
+#define JRM_DATA_LEN_OF_KEY_userPhone         32
+#define JRM_DATA_LEN_OF_KEY_userEmail         16
+#define JRM_DATA_LEN_OF_KEY_verifyCode        32
 
-#define JRM_DATA_LEN_OF_KEY_userNickname           32
+#define JRM_DATA_LEN_OF_KEY_userNickname      32
 
 //@"江苏南京"
-#define JRM_DATA_LEN_OF_KEY_userLocation           32
+#define JRM_DATA_LEN_OF_KEY_userLocation      32
 
-#define JRM_DATA_LEN_OF_KEY_userSign               128
+#define JRM_DATA_LEN_OF_KEY_userSign          128
 
 //#warning (unsigned int,4bytes)后跟4bytes描述的长度的image data.
-#define JRM_DATA_LEN_OF_KEY_sculptureSize          4
+#define JRM_DATA_LEN_OF_KEY_sculptureSize     4
 
-#define JRM_DATA_LEN_OF_KEY_FriendList(count)      16*count
+#define JRM_DATA_LEN_OF_KEY_FriendList(count) 16*count
 
-#define JRM_DATA_LEN_OF_KEY_FriendId               16
-#define JRM_DATA_LEN_OF_KEY_jipncList(count)       16*count
+#define JRM_DATA_LEN_OF_KEY_FriendId          16
+#define JRM_DATA_LEN_OF_KEY_jipncList(count)  16*count
 
 //#warning (unsigned int , 4bytes) errorCode  (1:表示参数出错，2:表示绑定出错，3:表示已绑定给其他用户)
-#define JRM_DATA_LEN_OF_KEY_errno                  4
+#define JRM_DATA_LEN_OF_KEY_errno             4
 
-#define JRM_DATA_LEN_OF_KEY_ownerId                16
-#define JRM_DATA_LEN_OF_KEY_sharedList(count)      16*count
+#define JRM_DATA_LEN_OF_KEY_ownerId           16
+#define JRM_DATA_LEN_OF_KEY_sharedList(count) 16*count
 
 //user的登录串号 "20150403093030 0000 0000"
-#define JRM_DATA_LEN_OF_KEY_userLoginSeries        32
+#define JRM_DATA_LEN_OF_KEY_userLoginSeries   32
 
 //#warning accountType ("1":表示QQ , "2":表示微信 , "3":表示新浪)
-#define JRM_DATA_LEN_OF_KEY_accountType            8
-#define JRM_DATA_LEN_OF_KEY_openId                 64
+#define JRM_DATA_LEN_OF_KEY_accountType       8
+#define JRM_DATA_LEN_OF_KEY_openId            64
 
 
 

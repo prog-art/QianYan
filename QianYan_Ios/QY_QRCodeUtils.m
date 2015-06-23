@@ -20,7 +20,7 @@ const NSString *kQYIOS_deviceType = @"30" ;
 //[NSString stringWithFormat:@"%ld",(long)JOSEPH_DEVICE_JCLIENT] ;
 
 const NSInteger kQRStrLenFieldLen = 2 ;
-const CGFloat kQRImageSize = 80 ;
+const CGFloat kQRImageSize = 300 ;
 
 const JOSEPH_DEVICE_TYPE device_type = JOSEPH_DEVICE_JCLIENT ;//30
 const JOSEPH_DEVICE_TYPE debug_device_type = JOSEPH_DEVICE_JCLIENT_NANJING_2 ;//722
@@ -99,7 +99,8 @@ QY_QRCodeReaderDelegater *tempHolder ;
 
 + (void)startWithDelegater:(UIViewController<QY_QRCodeScanerDelegate> *)delegater {
     QRCodeReaderViewController *reader = [QRCodeReaderViewController new] ;
-    reader.modalPresentationStyle = UIModalPresentationFormSheet;
+    reader.hidesBottomBarWhenPushed = YES ;
+    reader.modalPresentationStyle = UIModalPresentationFormSheet ;
     delegateHolder = [[QY_QRCodeReaderDelegater alloc] initWithDelegate:delegater] ;
     reader.delegate = delegateHolder ;
     

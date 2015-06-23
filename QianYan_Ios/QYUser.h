@@ -10,13 +10,10 @@
 
 
 #import "userInterface.h"
-#import "QY_Socket.h"
+#import "QYFile.h"
+#import "QY_Block_Define.h"
 
 @class QYUser ;
-
-typedef void(^QYUserBlock)(QYUser *registedUser , NSError *error) ;
-typedef void(^QYResultBlock)(BOOL success , NSError *error) ;
-
 
 @interface QYUser : NSObject<user2ProfileXMLInterface,user2userIdXMLInterface>
 
@@ -47,7 +44,7 @@ typedef void(^QYResultBlock)(BOOL success , NSError *error) ;
 
 
 /**
- *  注册用户,注册成功就会持久话这个user到本地
+ *  注册用户,注册成功就会持久化这个user到本地
  *
  *  @param username 用户名
  *  @param password 密码
@@ -61,6 +58,11 @@ typedef void(^QYResultBlock)(BOOL success , NSError *error) ;
  *  @param password 密码
  */
 + (void)loginName:(NSString *)username Password:(NSString *)password complection:(QYResultBlock)complection ;
+
+/**
+ *  退出登录
+ */
++ (void)logOffComplection:(QYResultBlock)complection ;
 
 #pragma mark - Profile.xml 属性
 
@@ -177,5 +179,10 @@ typedef void(^QYResultBlock)(BOOL success , NSError *error) ;
  *  每个User都是基于xml文档实例话的，这个必须有。空表示不合法
  */
 @property (nonatomic) NSString *xmlFilePath ;
+
+///**
+// *  对象对应的持久化文件路径profile.xml之类的
+// */
+//@property (readonly) QYFile *file ;
 
 @end

@@ -85,6 +85,7 @@
         
         GDataXMLElement *jproTag = [GDataXMLElement elementWithName:@"jpro" stringValue:[user jpro]] ;
         [userTag addChild:jproTag] ;
+        
     }
     
     return [self xmlStrWithRootElement:userTag] ;

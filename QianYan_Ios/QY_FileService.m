@@ -238,6 +238,15 @@
 }
 
 /**
+ *  获取沙盒下User路径
+ *
+ *  @return sandBox/document/user
+ */
++ (NSString *)getUserPath {
+    return [[self getDocPath] stringByAppendingPathComponent:@"user"] ;
+}
+
+/**
  *  获取给单独user的一个文件夹
  *
  *  @param userId QY用户系统的userId
@@ -248,12 +257,40 @@
     if ( !userId ) {
         return @"" ;
     }
-    NSString *path = [[self getDocPath] stringByAppendingPathComponent:userId] ;
+    NSString *path = [[self getUserPath] stringByAppendingPathComponent:userId] ;
     
     QYDebugLog(@"user Path = %@",path) ;
     
     return path ;
 }
+
+/**
+ *  获取沙盒下Camera的路径
+ *
+ *  @return sandBox/document/camera
+ */
++ (NSString *)getCameraPath {
+    return [[self getDocPath] stringByAppendingPathComponent:@"camera"] ;
+}
+
+/**
+ *  获取分配给单独camera的一个文件夹
+ *
+ *  @param cameraId QY相机系统的cameraId
+ *
+ *  @return sandBox/document/camera/cameraId
+ */
++ (NSString *)getCameraPathByCameraId:(NSString *)cameraId {
+    if ( !cameraId ) {
+        return @"" ;
+    }
+    NSString *path = [[self getCameraPath] stringByAppendingPathComponent:cameraId] ;
+    
+    QYDebugLog(@"camera Path = %@",path) ;
+    
+    return path ;
+}
+
 
 /**
  *  给制定路径添加后缀名
