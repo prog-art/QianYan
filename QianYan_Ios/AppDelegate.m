@@ -17,9 +17,14 @@
 #define LoginVCStoryBoardID @"LoginVCStoryBoardID"
 #define RegisterVCStoryBoardID @"RegisterVCStoryBoardID"
 #define QRCodeCardViewControllerStrorBoardID @"QRCodeCardViewControllerStrorBoardID"
+#define SystemSettingsViewControllerStoryBoardID @"SystemSettingsViewControllerStoryBoardID"
 #define SettingsViewControllerStoryBoardID @"SettingsViewControllerStoryBoardID"
 #define ContactTableViewControllerStoryBoardID @"ContactTableViewControllerStoryBoardID"
 #define MyPhotoGraphCollectionViewControllerStoryBoardID @"MyPhotoGraphCollectionViewControllerStoryBoardID"
+#define WifiSettingViewControllerStoryBoardID @"WifiSettingViewControllerStoryBoardID"
+#define AccountInfoViewControllerStoryBoardID @"AccountInfoViewControllerStoryBoardID"
+#define CameraSettingCollectionViewControllerStoryBoardID @"CameraSettingCollectionViewControllerStoryBoardID"
+#define RacentTableViewControllerStoryBoardID @"RacentTableViewControllerStoryBoardID"
 
 
 //static NSString * const kJVDrawersStoryboardName = @"Drawers";
@@ -275,9 +280,18 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
     return _ContactTableViewController;
 }
 
+#pragma mark - System Settings View Controller
+
+- (UITableViewController *)systemSettingsTableViewController {
+    if (!_systemSettingsTableViewController) {
+        _systemSettingsTableViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:SystemSettingsViewControllerStoryBoardID];
+    }
+    return _systemSettingsTableViewController;
+}
+
 #pragma mark - Settings View Controller
 
-- (UITableViewController *)settingsViewController {
+- (UIViewController *)settingsViewController {
     if (!_settingsViewController) {
         _settingsViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:SettingsViewControllerStoryBoardID];
     }
@@ -292,6 +306,43 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
     }
     return _myPhotoGraphCollectionViewController;
 }
+
+#pragma mark - WifiSetting View Controller
+
+- (UIViewController *)WifiSettingViewController {
+    if (!_WifiSettingViewController) {
+        _WifiSettingViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:WifiSettingViewControllerStoryBoardID];
+    }
+    return _WifiSettingViewController;
+}
+
+#pragma mark -- Account Info View Controller
+
+- (UIViewController *)AccountInfoViewController {
+    if (!_AccountInfoViewController) {
+        _AccountInfoViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:AccountInfoViewControllerStoryBoardID];
+    }
+    return _AccountInfoViewController;
+}
+
+#pragma mark -- Camera Setting Collection View Controller
+
+- (UICollectionViewController *)CameraSettingCollectionViewController {
+    if (!_CameraSettingCollectionViewController) {
+        _CameraSettingCollectionViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:CameraSettingCollectionViewControllerStoryBoardID];
+    }
+    return _CameraSettingCollectionViewController;
+}
+
+#pragma mark -- Racent Table View Controller
+
+- (UITableViewController *)RacentTableViewController {
+    if (!_RacentTableViewController) {
+        _RacentTableViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:RacentTableViewControllerStoryBoardID];
+    }
+    return _RacentTableViewController;
+}
+
 
 #pragma mark - Global Access Helper
 

@@ -81,33 +81,46 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVRightDrawerCellReuseI
 
 #pragma mark - Actions
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UIViewController *destinationViewController = nil;
-//    
-//    switch (indexPath.row) {
-//        case 0:
-//            destinationViewController = [[AppDelegate globalDelegate] drawerSettingsViewController];
-//            break;
-//        case 1:
-//            destinationViewController = [[AppDelegate globalDelegate] drawerSettingsViewController];
-//            break;
-//        case 2:
-//            destinationViewController = [[AppDelegate globalDelegate] drawerSettingsViewController];
-//            break;
-//        case 3:
-//            destinationViewController = [[AppDelegate globalDelegate] drawerSettingsViewController];
-//            break;
-//        case 4:
-//            destinationViewController = [[AppDelegate globalDelegate] drawerSettingsViewController];
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//    
-//    [[[AppDelegate globalDelegate] drawerViewController] setCenterViewController:destinationViewController];
-//    [[AppDelegate globalDelegate] toggleRightDrawer:self animated:YES];
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    __block UIViewController *destinationViewController = nil;
+    
+    switch (indexPath.row) {
+        case 0:
+            break;
+            
+        case 1:
+            break;
+            
+        case 2:
+            break;
+            
+        case 3:
+            break;
+            
+        case 4:
+            destinationViewController = [[AppDelegate globalDelegate] WifiSettingViewController];
+            [self test:destinationViewController] ;
+            break;
+            
+        default:
+            break;
+    }
+    
+    [[AppDelegate globalDelegate] toggleRightDrawer:self animated:YES];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO] ;
+}
 
+- (void)test:(UIViewController *)destinationViewController {
+    
+    UITabBarController *tbc = (UITabBarController *)[[[AppDelegate globalDelegate] drawerViewController] centerViewController] ;
+    
+    UINavigationController *nvc = tbc.viewControllers[0] ;
+    
+    
+    UIViewController *vc = nvc.topViewController ;
+    
+    [vc.navigationController pushViewController:destinationViewController animated:NO] ;
+}
 
 @end

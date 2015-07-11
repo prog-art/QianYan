@@ -59,15 +59,15 @@
         [_socketService userLoginRequestWithName:username Psd:password] ;
     }
     
-//    if ([self.inputPasswordTextField.text length] < 6) {
-//        //如果输入框内容小于6则弹出警告
-//        [QYUtils alert:@"密码不能少于6位"] ;
-//    }else if ([self.inputPasswordTextField.text length] > 20) { //如果输入框内容大于20则弹出警告
-//        self.inputPasswordTextField.text = [self.inputPasswordTextField.text substringToIndex:20];
-//        [QYUtils alert:@"密码不能多于20位"] ;
-//    }else {
-//        [QYUtils toMain];
-//    }
+    if ([self.inputPasswordTextField.text length] < 6) {
+        //如果输入框内容小于6则弹出警告
+        [QYUtils alert:@"密码不能少于6位"] ;
+    }else if ([self.inputPasswordTextField.text length] > 20) { //如果输入框内容大于20则弹出警告
+        self.inputPasswordTextField.text = [self.inputPasswordTextField.text substringToIndex:20];
+        [QYUtils alert:@"密码不能多于20位"] ;
+    }else {
+        [QYUtils toMain];
+    }
 }
 
 - (IBAction)retrievePasswordBtnClicked:(id)sender {

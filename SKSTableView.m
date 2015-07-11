@@ -34,7 +34,7 @@
 #pragma mark - SKSTableView
 
 
-@interface SKSTableView () <UITableViewDataSource, UITableViewDelegate>
+@interface SKSTableView () 
 
 @property (nonatomic, strong) NSMutableArray *expandedIndexPaths;
 

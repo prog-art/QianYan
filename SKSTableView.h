@@ -64,7 +64,7 @@
 @end
 
 
-@interface SKSTableView : UITableView
+@interface SKSTableView : UITableView<UITableViewDataSource, UITableViewDelegate>
 
 /**
  * The delegate for the SKSTableViewDelegate protocol.

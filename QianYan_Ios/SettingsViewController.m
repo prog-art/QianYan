@@ -217,11 +217,10 @@
     }
 }
 
-#pragma mark - back 
+#pragma mark -- Back Button
 
-- (IBAction)backBtnClicked:(id)sender {
+- (IBAction)back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES] ;
 }
-
 
 @end
