@@ -10,6 +10,29 @@
 #import <XCTest/XCTest.h>
 
 #import "QY_FileService.h"
+#import "QYUser.h"
+
+@interface testObject : NSObject
+
+@property (nonatomic,retain) NSString *objectId ;
+
+@property (nonatomic,retain) NSDictionary *properties ;
+
+@end
+
+@implementation testObject
+
+- (instancetype)init {
+    if ( self = [super init] ) {
+        self.properties = @{@"testKeyPath":@"233"} ;
+    }
+    return self ;
+}
+
+@end
+
+
+#pragma mark -
 
 @interface fileManagerTest : XCTestCase
 
@@ -68,6 +91,41 @@
     NSLog(@"fileUrl --> Str = %@",[fileUrl path]) ;
     
 }
+
+- (void)testKVC {
+    QYUser *user = [[QYUser alloc] init] ;
+    
+    user.username = @"233" ;
+    
+    user.userId = @"10000133" ;
+    
+    user.userId = nil ;
+
+    
+    NSDictionary *dic = [user dictionaryWithValuesForKeys:@[@"username",@"userId",@"userJpro"]] ;
+    NSLog(@"%@",dic) ;
+    
+    NSString *testNull = dic[@"userId"] ;
+    NSLog(@"%@ NULL = %d Nil = %d",testNull,[testNull isEqual:[NSNull null]],testNull == nil ) ;
+    
+    if ( testNull ) {
+        NSLog(@"test nsnull") ;
+    }
+    
+    testNull = nil ;
+    NSLog(@"%@ NULL = %d Nil = %d",testNull,[testNull isEqual:[NSNull null]],testNull == nil ) ;
+    
+    if ( testNull ) {
+        NSLog(@"test nil") ;
+    }
+}
+
+- (void)testObjects {
+    testObject *obj = [[testObject alloc] init] ;
+    
+    NSLog(@"%@",[obj valueForKeyPath:@"properties.testKeyPath"]) ;
+}
+
 //
 //- (void)testWrite2 {
 ////    //这里不会简历子路径

@@ -16,13 +16,10 @@
 
 #import "QYUtils.h"
 
-const NSString *kQYIOS_deviceType = @"30" ;
-//[NSString stringWithFormat:@"%ld",(long)JOSEPH_DEVICE_JCLIENT] ;
-
 const NSInteger kQRStrLenFieldLen = 2 ;
-const CGFloat kQRImageSize = 300 ;
+const CGFloat kQRImageSize = 3000 ;
 
-const JOSEPH_DEVICE_TYPE device_type = JOSEPH_DEVICE_JCLIENT ;//30
+const JOSEPH_DEVICE_TYPE device_type = JOSEPH_DEVICE_JCLIENT_WUXI_2 ;//622
 const JOSEPH_DEVICE_TYPE debug_device_type = JOSEPH_DEVICE_JCLIENT_NANJING_2 ;//722
 
 #warning 测试用722类型，正式更换为device_type
@@ -71,6 +68,14 @@ const JOSEPH_DEVICE_TYPE debug_device_type = JOSEPH_DEVICE_JCLIENT_NANJING_2 ;//
 //}
 
 + (UIImage *)QY_generateQRImageOfPersonalCardWithUserId:(NSString *)userId {
+#ifdef DEBUG
+    userId = userId ? : @"10000133" ;
+#else
+    if ( !userId ) {
+        return nil ;
+    }
+#endif
+    
     static NSString *operationTyep = @"QYUSER" ;
     NSString *deviceType = [NSString stringWithFormat:@"%ld",(long)TargetDeviceType] ;
     
@@ -107,13 +112,32 @@ QY_QRCodeReaderDelegater *tempHolder ;
     [reader setCompletionWithBlock:^(NSString *resultAsString) {
         tempHolder = delegateHolder ;
         delegateHolder = nil ;
-        [QYUtils runAfterSecs:0.5 block:^{
+        [QYUtils runAfterSecs:1 block:^{
             QYDebugLog(@"delegate 销毁～")
             tempHolder = nil ;
         }] ;
     }];
     
     [delegater.navigationController pushViewController:reader animated:YES] ;
+}
+
++ (void)startQRScanWithNavigationController:(UINavigationController *)nav Delegate:(id<QY_QRCodeScanerDelegate>)delegate {
+    assert(nav) ;
+    assert(delegate) ;
+    QRCodeReaderViewController *reader = [QRCodeReaderViewController new] ;
+    reader.hidesBottomBarWhenPushed = YES ;
+    reader.modalPresentationStyle = UIModalPresentationFormSheet ;
+    delegateHolder = [[QY_QRCodeReaderDelegater alloc] initWithNavigationController:nav Delegate:delegate] ;
+    reader.delegate = delegateHolder ;
+    
+    [reader setCompletionWithBlock:^(NSString *resultAsString) {
+        [QYUtils runAfterSecs:1 block:^{
+            QYDebugLog(@"delegater 销毁~") ;
+            delegateHolder = nil ;
+        }] ;
+    }] ;
+    
+    [nav pushViewController:reader animated:YES] ;
 }
 
 #pragma mark - private method (data format)

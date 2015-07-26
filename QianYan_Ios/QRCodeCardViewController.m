@@ -23,9 +23,18 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *QRCodeImageView;
 
+@property (nonatomic, weak) QYUser *user ;
+
 @end
 
 @implementation QRCodeCardViewController
+
+- (QYUser *)user {
+    if ( !_user ) {
+        _user = [QYUser currentUser] ;
+    }
+    return _user ;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,6 +45,11 @@
     //init QR Image
     UIImage *image = [QY_QRCodeUtils QY_generateQRImageOfPersonalCardWithUserId:[QYUser currentUser].userId] ;
     self.QRCodeImageView.image = image ;
+    
+    self.usernameLabel.text = self.user.username ;
+    self.genderLabel.text = self.user.gender ;
+//    self.ageLabel.text = @"29岁" ;
+    self.locationLabel.text = self.user.location ;    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,33 +65,31 @@
 
 #pragma mark - Table View Delegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 1 ;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 48;
+    return 48. ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QRCodeCardTableViewCell *cell = [[QRCodeCardTableViewCell alloc] init];
     
-    NSArray *cell_nib = [[NSBundle mainBundle]loadNibNamed:@"QRCodeCardTableViewCell" owner:self options:nil];
-    for(id oneObject in cell_nib){
+    NSArray *cell_nib = [[NSBundle mainBundle] loadNibNamed:@"QRCodeCardTableViewCell" owner:self options:nil] ;
+    for(id oneObject in cell_nib ){
         if([oneObject isKindOfClass:[QRCodeCardTableViewCell class]]) {
             cell = (QRCodeCardTableViewCell *)oneObject;
-            cell.accountID = @"2414414424124";
+            cell.accountID = self.user.userId ;
         }
     }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Selected");
+    QYDebugLog(@"selected") ;
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES] ;
 }
 
 #pragma mark - back

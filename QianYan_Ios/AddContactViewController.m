@@ -11,6 +11,9 @@
 #import "JVFloatingDrawerViewController.h"
 #import "SettingsViewController.h"
 
+
+#import "QY_Common.h"
+
 @interface AddContactViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *addContactTableView;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -42,7 +45,7 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-
+    
 }
 
 #pragma mark -- Table View Datasource && Delegate
@@ -56,11 +59,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+#warning 待重写
     UITableViewCell *firstCell = [_addContactTableView dequeueReusableCellWithIdentifier:@"FirstCell"];
     UITableViewCell *secondCell = [_addContactTableView dequeueReusableCellWithIdentifier:@"SecondCell"];
     UITableViewCell *thirdCell = [_addContactTableView dequeueReusableCellWithIdentifier:@"ThirdCell"];
-
+    
     if (indexPath.row == 0) {
         return firstCell;
     } else if (indexPath.row == 1) {
@@ -71,13 +74,34 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     UITableViewController *destinationViewController = nil;
     
-    if (indexPath.row == 0) {
-        destinationViewController = [[AppDelegate globalDelegate] ContactTableViewController];
-        [self.navigationController pushViewController:destinationViewController animated:YES] ;
+    switch ( indexPath.row ) {
+        case 0 : {
+            //添加手机联系人
+            destinationViewController = [[AppDelegate globalDelegate] ContactTableViewController];
+            [self.navigationController pushViewController:destinationViewController animated:YES] ;
+            break;
+        }
+
+        case 1 : {
+            //扫一扫
+            [QY_QRCodeUtils startQRScanWithNavigationController:self.navigationController Delegate:self] ;
+            break ;
+        }
+            
+        case 2 : {
+            //添加公众号
+            [QYUtils alert:@"未开放，敬请期待d(^_^o)"] ;
+            break ;
+        }
+            
+        default:
+            break;
     }
+    
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES] ;
 }
 
 @end

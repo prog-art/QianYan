@@ -45,7 +45,6 @@
  *  右侧栏
  */
 @property (nonatomic, strong) UITableViewController *rightDrawerViewController;
-#warning 这是什么
 @property (nonatomic, strong) UIViewController *githubViewController;
 @property (nonatomic, strong) UIViewController *drawerSettingsViewController;
 @property (nonatomic, strong) UITableViewController *systemSettingsTableViewController;

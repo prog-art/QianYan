@@ -14,4 +14,9 @@
 
 @property (strong) UIImage *image;
 
+/**
+ *  离线或在线
+ */
+@property (nonatomic) BOOL state ;
+
 @end

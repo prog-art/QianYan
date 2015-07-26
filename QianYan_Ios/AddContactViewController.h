@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 虎猫儿. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QYBaseViewController.h"
 
-@interface AddContactViewController : UIViewController
+@interface AddContactViewController : QYBaseViewController
 
 @end

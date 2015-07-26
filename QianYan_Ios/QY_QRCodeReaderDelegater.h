@@ -10,11 +10,14 @@
 
 #import "QRCodeReaderDelegate.h"
 #import "QY_QRCodeScanerDelegate.h"
+#import <UIKit/UIKit.h>
 
 @interface QY_QRCodeReaderDelegater : NSObject<QRCodeReaderDelegate>
 
 @property (weak) id<QY_QRCodeScanerDelegate>delegate ;
 
 - (instancetype)initWithDelegate:(id<QY_QRCodeScanerDelegate>)delegate ;
+
+- (instancetype)initWithNavigationController:(UINavigationController *)nav Delegate:(id<QY_QRCodeScanerDelegate>)delegate ;
 
 @end

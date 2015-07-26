@@ -9,43 +9,22 @@
 #ifndef QianYan_Ios_QY_jms_parameter_key_marco_h
 #define QianYan_Ios_QY_jms_parameter_key_marco_h
 
+#define JMS_IP @"221.6.13.155"
+#define JMS_PORT @"50276"
 
-#define QY_key_user_id          @"user_id"
-#define QY_key_password         @"password"
-#define QY_key_username         @"username"
+#define JMS_LOGIN_KEY @"hello"
 
-#define QY_key_page             @"page"
-#define QY_key_num              @"num"
-#define QY_key_type             @"type"
-#define QY_key_user_id          @"user_id"
-#define QY_key_jipnc_id         @"jipnc_id"
-#define QY_key_start            @"start"
-#define QY_key_end              @"end"
-#define QY_key_check            @"check"
+#define JMS_DATA_LEN_OF_KEY_CAMID          16
+#define JMS_DATA_LEN_OF_KEY_TYPE           4
+#define JMS_DATA_LEN_OF_KEY_TIME           4
+#define JMS_DATA_LEN_OF_KEY_LENGTH         4
+#define JMS_DATA_LEN_OF_KEY_CMD_LENGTH     2
+#define JMS_DATA_LEN_OF_KEY_CMD            4
+#define JMS_DATA_LEN_OF_KEY_CAMDATA_LENGTH 2
+#define JMS_DATA_LEN_OF_KEY_CAMDATA_DATA   2
 
-#define QY_key_pub_date         @"pub_date"
-#define QY_key_content          @"content"
-#define QY_key_id               @"id"
-
-#define QY_key_msg_list         @"msg_list"
-
-#define QY_key_attaches         @"attaches"
-#define QY_key_messages         @"messages"
-
-#define QY_key_attach_count     @"attach_count"
-#define QY_key_message_count    @"message_count"
-#define QY_key_mod_date         @"mod_date"
-#define QY_key_digg             @"digg"
-#define QY_key_digg_count       @"digg_count"
-#define QY_key_comments         @"comments"
-#define QY_key_comment_count    @"comment_count"
-
-#define QY_key_comment          @"comment"
-
-#define QY_key_shared_user_list @"shared_user_list"
-
-#define QY_key_src              @"src"
-#define QY_key_medium           @"medium"
-#define QY_key_small            @"small"
+#define JMS_DATA_LEN_OF_KEY_DEVICE_TYPE    4
+#define JMS_DATA_LEN_OF_KEY_DEVICE_ID      16
+#define JMS_DATA_LEN_OF_KEY_KEY            12
 
 #endif

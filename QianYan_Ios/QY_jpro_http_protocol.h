@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "QY_Block_Define.h"
+#import "QYConstants.h"
 
 #import <AFNetworking/AFNetworking.h>
 /**
@@ -35,6 +36,24 @@ typedef void(^QY_AFFailBlock)(AFHTTPRequestOperation *operation, NSError *error)
 typedef void(^QY_DownloadComplectionBlock)(NSURL *filePath,NSError *error) ;
 
 @protocol QY_jpro_http_protocol <NSObject>
+
+/**
+ *  登录JPRO服务器
+ *
+ *  @param userId      @"10000133"
+ *  @param password    @"123456"
+ *  @param complection
+ */
+- (void)jproLoginWithUserId:(NSString *)userId
+                   Password:(NSString *)password
+                Complection:(QYResultBlock)complection ;
+
+/**
+ *  注销用户登录
+ *
+ *  @param complection
+ */
+- (void)jproLogoutComplection:(QYResultBlock)complection ;
 
 /**
  *  1.获取警报message列表
@@ -247,7 +266,23 @@ typedef void(^QY_DownloadComplectionBlock)(NSURL *filePath,NSError *error) ;
                 fileName:(NSString *)filename
                 fileType:(NSString *)fileType
                  Success:(QY_AFSuccessBlock)success
-                    Fail:(QY_AFFailBlock)fail ;
+                    Fail:(QY_AFFailBlock)fail QYDeprecated("尽量不用，用18[2]");
+
+/**
+ *  18[2].上传档案文件
+ *
+ *  @param path        [必填]上传在jpro服务器上的路径,(@"?path=%@",path)
+ *  @param data        [必填]要上传的文件的data
+ *  @param name        [必填]上传在服务器上保存的名字
+ *  @param mimeType    [必填]Content-Type
+ *  @param complection
+ */
+- (void)uploadFileToPath:(NSString *)path
+                FileData:(NSData *)data
+                fileName:(NSString *)name
+                mimeType:(NSString *)mimeType
+             Complection:(QYResultBlock)complection ;
+
 /**
  *  19.从服务器下载文件
  *
@@ -258,6 +293,25 @@ typedef void(^QY_DownloadComplectionBlock)(NSURL *filePath,NSError *error) ;
 - (void)downloadFileFromPath:(NSString *)path
                saveToFIleURL:(NSURL *)fileUrl
                  complection:(QY_DownloadComplectionBlock)complection ;
+
+/**
+ *  19[2].从服务器读取文件内容到Memory
+ *
+ *  @param path        [必填]服务器Path @"user/10000133/profile.xml"
+ *  @param complection 回调
+ */
+- (void)downloadFileFromPath:(NSString *)path
+                 complection:(QYObjectBlock)complection ;
+
+/**
+ *  19[3].从服务器读取图片Data到Memory
+ *
+ *  @param path        [必填]服务器Path @"user/10000133/profile.xml"
+ *  @param complection
+ */
+- (void)downloadImageFromPath:(NSString *)path
+                  complection:(QYObjectBlock)complection ;
+
 /**
  *  20.获取档案目录文件列表
  *

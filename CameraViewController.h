@@ -6,10 +6,8 @@
 //  Copyright (c) 2015 JVillella. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QYBaseViewController.h"
 
-#import "QY_QRCodeScanerDelegate.h"
-
-@interface CameraViewController : UIViewController<QY_QRCodeScanerDelegate>
+@interface CameraViewController : QYBaseViewController
 
 @end

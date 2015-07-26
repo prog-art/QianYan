@@ -112,14 +112,13 @@ typedef NS_ENUM(NSInteger, JRM_Socket_Read_tag) {
     QYDebugLog(@"body data = %@",data) ;
 
     QY_JRMAPIDescriptor *currentDescriptor = [[QY_SocketService shareInstance] currentDescriptor] ;
-
+    assert(currentDescriptor) ;
     WEAKSELF
     [currentDescriptor setResponseWithData:data ShouldReadAppendDataBlock:^(BOOL should, NSUInteger len) {
         if ( should && len != 0 ) {
             QYDebugLog(@"读取附件 长度:%lu",(unsigned long)len) ;
             [sock readDataToLength:len withTimeout:-1 tag:JRM_Socket_Read_tag_readAppendData] ;
         } else {
-            QYDebugLog(@"不需要读取附件") ;
             [weakSelf postNotification_finishDataReceiver] ;
         }
     }] ;
@@ -137,7 +136,6 @@ typedef NS_ENUM(NSInteger, JRM_Socket_Read_tag) {
 }
 
 - (void)postNotification_finishDataReceiver {
-    QYDebugLog(@"数据接收完成") ;
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationName_finishDataReceive object:nil] ;
 }
 

@@ -19,6 +19,8 @@
 #import "KxLogger.h"
 #import <UIKit/UIKit.h>
 
+#import "QY_Common.h"
+
 ////////////////////////////////////////////////////////////////////////////////
 NSString * kxmovieErrorDomain = @"ru.kolyvan.kxmovie";
 static void FFLog(void* context, int level, const char* format, va_list args);
@@ -733,7 +735,7 @@ static int interrupt_callback(void *ctx);
     
     _path = path;
     
-    kxMovieError errCode = [self openInput: path];
+    kxMovieError errCode = [self openInput: path];//下列代码在退出时调用。
     
     if (errCode == kxMovieErrorNone) {
         
@@ -787,15 +789,20 @@ static int interrupt_callback(void *ctx);
         return kxMovieErrorOpenFile;
     }
     
+    QYDebugLog(@"start avformat_find_stream_info")
+    
+#warning avformat_find_stream_info 卡住    
     if (avformat_find_stream_info(formatCtx, NULL) < 0) {
-        
+        QYDebugLog(@"end avformat_find_stream_info and Result < 0") ;
         avformat_close_input(&formatCtx);
         return kxMovieErrorStreamInfoNotFound;
     }
-
+    QYDebugLog(@"end avformat_find_stream_info and Result > 0") ;
+    
     av_dump_format(formatCtx, 0, [path.lastPathComponent cStringUsingEncoding: NSUTF8StringEncoding], false);
     
     _formatCtx = formatCtx;
+    QYDebugLog(@"end open input method") ;
     return kxMovieErrorNone;
 }
 

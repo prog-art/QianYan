@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SWTableViewCell.h"
 
-@interface ContactViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate>
+@interface ContactViewController : UITableViewController
 
 @end

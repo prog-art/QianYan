@@ -117,7 +117,6 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-
     [textField resignFirstResponder];    //主要是[receiver resignFirstResponder]在哪调用就能把receiver对应的键盘往下收
     
     return YES;

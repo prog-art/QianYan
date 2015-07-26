@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, QianYan_ErrorCode) {
     RegisteStep4_Error = 14 ,//注册第四部出错，移动和重命名temp.xml --> profile.xml
     
     LoginStep1_Error = 21 ,//登录第一步出错，网络原因。
-    LoginStep2_Error = 22 ,//登录第二步出错，get userId by username出错
+    LoginStep2_Error = 22 ,//登录第二步出错，get userId by username出错［获取UserId失败，请检查网络或联系系统管理员。］
     LoginStep3_Error = 23 ,//登录第三步出错，get user jpro information出错
     LoginStep4_Error = 24 ,//登录第四步出错，get user profile.xml出错
     

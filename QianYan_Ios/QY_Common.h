@@ -22,4 +22,6 @@
 
 #import "UIImage+QY_resize.h"
 
+#import "QY_CoreDataModels.h"
+
 #endif

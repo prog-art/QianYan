@@ -14,6 +14,9 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *tempStateLabel;
+
+
 @end
 
 @implementation CameraSubTableViewCell
@@ -35,7 +38,12 @@
     return _locationLabel.text;
 }
 
+- (void)setState:(BOOL)state {
+    self.tempStateLabel.text = state ? @"在线" : @"离线" ;
+}
+
 - (void)awakeFromNib {
+    self.state = FALSE ;
     // Initialization code
 }
 

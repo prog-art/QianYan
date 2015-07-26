@@ -132,10 +132,16 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
     // Create the coordinator and store
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    
+    // 建议看Learning Core Data for iOS”，做数据升级和迁移
+    
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:[NSNumber numberWithBool:YES],
+                              NSInferMappingModelAutomaticallyOption:[NSNumber numberWithBool:YES]} ;
+    
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"QianYan_Ios.sqlite"];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
         // Report any error we got.
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
@@ -274,10 +280,11 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
 #pragma mark - Contact Table View Controller
 
 - (UITableViewController *)ContactTableViewController {
-    if (!_ContactTableViewController) {
-        _ContactTableViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:ContactTableViewControllerStoryBoardID];
-    }
-    return _ContactTableViewController;
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:ContactTableViewControllerStoryBoardID] ;    
+//    if (!_ContactTableViewController) {
+//        _ContactTableViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:ContactTableViewControllerStoryBoardID];
+//    }
+//    return _ContactTableViewController;
 }
 
 #pragma mark - System Settings View Controller
@@ -301,10 +308,12 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
 #pragma mark - MyPhotoGraph View Controller
 
 - (UICollectionViewController *)myPhotoGraphCollectionViewController {
-    if (!_myPhotoGraphCollectionViewController) {
-        _myPhotoGraphCollectionViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:MyPhotoGraphCollectionViewControllerStoryBoardID];
-    }
-    return _myPhotoGraphCollectionViewController;
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:MyPhotoGraphCollectionViewControllerStoryBoardID] ;
+//    
+//    if (!_myPhotoGraphCollectionViewController) {
+//        _myPhotoGraphCollectionViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:MyPhotoGraphCollectionViewControllerStoryBoardID];
+//    }
+//    return _myPhotoGraphCollectionViewController;
 }
 
 #pragma mark - WifiSetting View Controller

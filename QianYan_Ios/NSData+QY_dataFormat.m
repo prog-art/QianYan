@@ -40,7 +40,7 @@
     
     Byte *bytes = (Byte *)[data bytes] ;
     
-    NSInteger index ;
+    NSInteger index = 0 ;
     for ( int i = 0 ; i < data.length ; i++) {
         Byte tempB = bytes[i] ;
         if ( tempB != 0x00 ) {

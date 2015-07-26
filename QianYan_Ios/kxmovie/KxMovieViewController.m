@@ -18,6 +18,8 @@
 #import "KxLogger.h"
 #import "LandScapeKxMovieViewController.h"
 
+#import "QY_Common.h"
+
 NSString * const KxMovieParameterMinBufferedDuration = @"KxMovieParameterMinBufferedDuration";
 NSString * const KxMovieParameterMaxBufferedDuration = @"KxMovieParameterMaxBufferedDuration";
 NSString * const KxMovieParameterDisableDeinterlacing = @"KxMovieParameterDisableDeinterlacing";
@@ -36,9 +38,9 @@ static NSString * formatTimeInterval(CGFloat seconds, BOOL isLeft)
     m = m % 60;
 
     NSMutableString *format = [(isLeft && seconds >= 0.5 ? @"-" : @"") mutableCopy];
-    if (h != 0) [format appendFormat:@"%d:%0.2d", h, m];
-    else        [format appendFormat:@"%d", m];
-    [format appendFormat:@":%0.2d", s];
+    if (h != 0) [format appendFormat:@"%ld:%0.2ld", (long)h, (long)m];
+    else        [format appendFormat:@"%ld", (long)m];
+    [format appendFormat:@":%0.2ld", (long)s];
 
     return format;
 }
@@ -172,6 +174,7 @@ static NSMutableDictionary * gHistory;
 - (id) initWithContentPath: (NSString *) path
                 parameters: (NSDictionary *) parameters
 {
+    QYDebugLog(@"初始化！") ;
     NSAssert(path.length > 0, @"empty path");
     
     _statusBarHidden = NO;
@@ -194,16 +197,20 @@ static NSMutableDictionary * gHistory;
             return strongSelf ? [strongSelf interruptDecoder] : YES;
         };
         
+        QYDebugLog(@"异步去打开path") ;
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
     
             NSError *error = nil;
+            QYDebugLog(@"will open file") ;
             [decoder openFile:path error:&error];
-                        
+            QYDebugLog(@"did open file") ;
+            QYDebugLog(@"will set movie decoer at main queue") ;
+            //在主线程设置MovieDecoer
             __strong KxMovieViewController *strongSelf = weakSelf;
             if (strongSelf) {
                 
                 dispatch_sync(dispatch_get_main_queue(), ^{
-                    
+                    QYDebugLog(@"test") ;
                     [strongSelf setMovieDecoder:decoder withError:error];                    
                 });
             }
@@ -816,6 +823,7 @@ _messageLabel.hidden = YES;
 
 #pragma mark - private
 
+//初始化的最后一步
 - (void) setMovieDecoder: (KxMovieDecoder *) decoder
                withError: (NSError *) error
 {

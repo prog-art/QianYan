@@ -14,23 +14,13 @@
 
 #import "QY_Socket.h"
 
-static QYUser *_currentUser = nil ;
+#import "QY_appDataCenter.h"
 
-typedef NS_ENUM(NSInteger, UserWorkingState) {
-    UserWorkingState_None = 0 ,
-    UserWorkingState_Registe = 1 ,
-    UserWorkingState_Login = 2
-} ;
+static QYUser *_currentUser = nil ;
 
 @interface QYUser () {
     NSString *_xmlFilePath ;
 }
-
-
-/**
- *  判断当前是注册在工作还是登录在工作
- */
-@property (nonatomic,assign) UserWorkingState workingState ;
 
 /**
  *  密码
@@ -118,7 +108,7 @@ typedef NS_ENUM(NSInteger, UserWorkingState) {
     self.userId = @"" ;
     self.username = @"" ;
     self.gender = @"男" ;
-    self.location = @"" ;
+    self.location = nil ;
     self.birthday = [NSDate date] ;
     self.signature = @"" ;
     self.nickname = @"" ;
@@ -146,12 +136,11 @@ typedef NS_ENUM(NSInteger, UserWorkingState) {
             complection(registedUser,error) ;
         }
     } ;
-    user.workingState = UserWorkingState_Registe ;
 
     QY_SocketAgent *agent = [QY_SocketAgent shareInstance] ;
     
     [agent userRegisteRequestWithName:username Psd:password Complection:^(NSDictionary *info, NSError *error) {
-        if ( !error ) {
+        if ( !error && info ) {
             NSString *userId = info[ParameterKey_userId] ;
             user.userId = userId ;
             QYDebugLog(@"注册的userId = %@",userId) ;
@@ -170,6 +159,7 @@ typedef NS_ENUM(NSInteger, UserWorkingState) {
             }] ;
         } else {
             QYDebugLog(@"想jrm注册用户出错 error = %@",error) ;
+            error = [NSError QYErrorWithCode:RegisteStep1_Error description:@"注册第一步出错，registe to jrm出错。"] ;
             complection(false,error) ;
         }
     }] ;
@@ -222,8 +212,6 @@ typedef NS_ENUM(NSInteger, UserWorkingState) {
             complection(success,error) ;
         }
     } ;
-
-    user.workingState = UserWorkingState_Login ;
     
     QY_SocketAgent *agent = [QY_SocketAgent shareInstance] ;
     
@@ -235,23 +223,28 @@ typedef NS_ENUM(NSInteger, UserWorkingState) {
                 if ( !error ) {
                     user.userId = info[ParameterKey_userId] ;
                     
-                    [agent getJPROServerInfoForUser:user.userId Complection:^(NSDictionary *info, NSError *error) {
-                        if ( !error ) {
-                            user.jproIp   = info[ParameterKey_jproIp] ;
-                            user.jproPort = info[ParameterKey_jproPort] ;
-                            user.jproPsd  = info[ParameterKey_jproPassword] ;
-                            
-                            [user downloadProfileComplection:complection] ;
-                            
-                        } else {
-                            QYDebugLog(@"获取用户jpro服务器信息出错 error = %@",error) ;
-                            error = [NSError QYErrorWithCode:LoginStep3_Error description:@"登录第三步出错，get user jpro information出错"] ;
-                            complection(false,error) ;
-                        }
-                    }] ;
+                    user.coreUser = [QY_appDataCenter userWithId:user.userId] ;
+                    //只要获取到UserId就行了。
+                    _currentUser = user ;
+                    
+                    complection(TRUE,nil) ;
+//                    [agent getJPROServerInfoForUser:user.userId Complection:^(NSDictionary *info, NSError *error) {
+//                        if ( !error ) {
+//                            user.jproIp   = info[ParameterKey_jproIp] ;
+//                            user.jproPort = info[ParameterKey_jproPort] ;
+//                            user.jproPsd  = info[ParameterKey_jproPassword] ;
+//                            
+//                            [user downloadProfileComplection:complection] ;
+//                            
+//                        } else {
+//                            QYDebugLog(@"获取用户jpro服务器信息出错 error = %@",error) ;
+//                            error = [NSError QYErrorWithCode:LoginStep3_Error description:@"登录第三步出错，get user jpro information出错"] ;
+//                            complection(false,error) ;
+//                        }
+//                    }] ;
                 } else {
                     QYDebugLog(@"通过用户名获取UserId出错 error = %@",error) ;
-                    error = [NSError QYErrorWithCode:LoginStep2_Error description:@"get userId by username出错"] ;
+                    error = [NSError QYErrorWithCode:LoginStep2_Error description:@"获取UserId失败，请检查网络或联系系统管理员。"] ;
                     complection(false,error) ;
                 }
             }] ;
@@ -404,6 +397,12 @@ typedef NS_ENUM(NSInteger, UserWorkingState) {
     }
     
     return result ;
+}
+
+#pragma mark - getter & setter 
+
+- (NSString *)location {
+    return _location ? : @"江苏 南京" ;
 }
 
 @end

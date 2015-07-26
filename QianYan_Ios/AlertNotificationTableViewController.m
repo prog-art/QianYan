@@ -135,7 +135,20 @@
     AlertNotificationTableViewCell *cell = (AlertNotificationTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     cell.isRead = YES;
     
-    NSString *path = @"http://www.qeebu.com/newe/Public/Attachment/99/52958fdb45565.mp4";
+    NSString *path ;
+    
+    if ( indexPath.row == 1 ) {
+        path = @"http://www.qeebu.com/newe/Public/Attachment/99/52958fdb45565.mp4";
+    } else {
+//        path = @"rtsp://admin:12345@10.10.1.5:554/h264/ch1/main/av_stream" ;
+//        path = @"rtsp://jssid:jsspass@jssaddr:port/ipncid"
+//            @"t00000000000112" ;
+//            @"c00000000000247" ;
+        path = [NSString stringWithFormat:@"rtsp://%@:%@@%@:%@/%@",@"jss000000000001",@"12345678",@"jdas.qycam.com",@"50310",@"c00000000000247"] ;
+    }
+    //rtsp://jss000000000001:12345678@jdas.qycam.com:50310/c00000000000247
+
+    
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
     // increase buffering for .wmv, it solves problem with delaying audio frames

@@ -274,6 +274,7 @@ typedef void(^QYBlock)() ;
         
     }
     
+    CFRelease(allPeople) ;
     return addressBookTemp ;
 }
 

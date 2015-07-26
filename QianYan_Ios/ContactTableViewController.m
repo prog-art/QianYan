@@ -10,9 +10,12 @@
 #import "ContactTableViewCell.h"
 
 #import "QY_contactService.h"
-
+#import "QY_SocketAgent.h"
+#import "QY_Common.h"
 
 static NSString * const ContactTableViewCellReuseIdentifier = @"ContactTableViewCellReuseIdentifier";
+
+static NSMutableArray *cacheContacts = nil ;
 
 @interface ContactTableViewController () <UISearchBarDelegate,QY_contactUtilsDelegate,ContactTableViewCellDelegate> {
     QY_contactUtils *_utils ;
@@ -24,18 +27,36 @@ static NSString * const ContactTableViewCellReuseIdentifier = @"ContactTableView
 
 @property (weak, nonatomic) IBOutlet UISearchBar *contactSearchBar;
 
+@property (nonatomic,weak) QY_SocketAgent *socketAgent ;
+
 @end
 
 @implementation ContactTableViewController
 
+#pragma mark - getter & setter 
+
+- (QY_SocketAgent *)socketAgent {
+    if ( !_socketAgent ) {
+        _socketAgent = [QY_SocketAgent shareInstance] ;
+    }
+    return _socketAgent ;
+}
+
+#pragma mark - life cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad] ;
     
-    _dataSourceOfContact = [NSMutableArray array] ;
+    _dataSourceOfContact = cacheContacts ;
     _displayDataSourceOfContact = _dataSourceOfContact ;
     
-    _utils = [[QY_contactUtils alloc] initWithDelegate:self] ;
-    [_utils getContacts] ;
+    if ( !_dataSourceOfContact ) {
+        QYDebugLog(@"没有缓存") ;
+        _utils = [[QY_contactUtils alloc] initWithDelegate:self] ;
+        [_utils getContacts] ;
+    } else {
+        QYDebugLog(@"有缓存") ;
+    }
 
     self.contactSearchBar.delegate = self ;
     
@@ -99,12 +120,67 @@ static NSString * const ContactTableViewCellReuseIdentifier = @"ContactTableView
 #pragma mark - QY_contactUtilsDelegate
 
 - (void)didReceiveContactsSuccess:(BOOL)success Contacts:(NSArray *)contacts {
+    QYDebugLog(@"fuck") ;
     if ( success ) {
         _dataSourceOfContact = [contacts mutableCopy] ;
         _displayDataSourceOfContact = _dataSourceOfContact ;
-        [self.tableView reloadData] ;
+        QYDebugLog(@"reload data") ;
+        
+        [QYUtils runInMainQueue:^{
+            cacheContacts = _dataSourceOfContact ;
+            [self.tableView reloadData] ;
+        }] ;
+
+
+        [self lookUpContactsHasQYAccount:contacts] ;
     }
 }
+
+#pragma mark - private method 
+
+- (void)lookUpContactsHasQYAccount:(NSArray *)contacts {
+    __block dispatch_semaphore_t _sema = dispatch_semaphore_create(0) ;
+
+    WEAKSELF
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        _sema = dispatch_semaphore_create(0) ;
+
+        NSArray *tempContacts = [contacts copy] ;
+
+        for ( QY_Contact *contact in tempContacts ) {
+            QYDebugLog(@"contact = %@",contact) ;
+
+            [self.socketAgent getUserIdByTelephone:contact.tel Complection:^(NSDictionary *info, NSError *error) {
+                if ( !error && info ) {
+                    QYDebugLog(@"info = %@",info) ;
+                    contact.qy_userId = info[ParameterKey_userId] ;
+                }
+                dispatch_semaphore_signal(_sema) ;
+            }] ;
+
+            dispatch_semaphore_wait(_sema, DISPATCH_TIME_FOREVER) ;
+        }
+
+        //sort
+        {
+            NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"qy_userId" ascending:NO] ;
+            tempContacts = [tempContacts sortedArrayUsingDescriptors:@[sortDesc]] ;
+        }
+
+
+        QYDebugLog(@"完成了所有～") ;
+        _sema = NULL ;
+
+        _dataSourceOfContact = [tempContacts mutableCopy] ;
+
+        [QYUtils runInMainQueue:^{
+            _displayDataSourceOfContact = _dataSourceOfContact ;
+            cacheContacts = _dataSourceOfContact ;
+            [weakSelf.tableView reloadData] ;
+        }] ;
+    }) ;
+}
+
 
 #pragma mark - ContactTableViewCellDelegate
 
@@ -116,7 +192,7 @@ static NSString * const ContactTableViewCellReuseIdentifier = @"ContactTableView
 }
 
 - (void)didClickedAddBtn:(ContactTableViewCell *)cell atIndex:(NSInteger)index {
-    
+//#warning 添加好友
 }
 
 

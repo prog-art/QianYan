@@ -47,12 +47,12 @@
  */
 @property (assign,readonly) JRM_REQUEST_OPERATION_TYPE apiNo ;
 
-/**
- *  描述API的功能，通过apiNo生成
- *
- *  @return
- */
-- (NSString *)apiDescription ;
+///**
+// *  描述API的功能，通过apiNo生成
+// *
+// *  @return
+// */
+//- (NSString *)apiDescription ;
 
 /**
  *  [生成时必要]请求描述，用于负责收纳

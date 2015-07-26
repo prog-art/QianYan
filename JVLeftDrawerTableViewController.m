@@ -155,7 +155,6 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVLeftDrawerCellReuseId
     
     UINavigationController *nvc = tbc.viewControllers[0] ;
     
-    
     UIViewController *vc = nvc.topViewController ;
     
     [vc.navigationController pushViewController:destinationViewController animated:NO] ;

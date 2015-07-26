@@ -11,6 +11,7 @@
 #import "QY_XMLPhraser.h"
 #import "QY_XMLFormatter.h"
 #import "QY_Common.h"
+#import "QY_appDataCenter.h"
 
 #import <GDataXML-HTML/GDataXMLNode.h>
 
@@ -175,10 +176,52 @@
     }
 }
 
+
++ (QY_camera *)getCameraFromIdXML:(NSString *)xmlStr {
+    NSError *error ;
+    GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:&error] ;
+    
+    if ( error ) {
+        [QYUtils alertError:error] ;
+        return nil ;
+    } else {
+        QY_camera *camera = [QY_camera camera] ;
+        
+        GDataXMLElement *root = [xmlDoc rootElement] ;
+        
+        camera.cameraId = [[root attributeForName:@"id"] stringValue] ;
+        NSString *ownerId = [self getStringValueForElement:root name:@"owner"] ;
+        camera.jpro = [self getStringValueForElement:root name:@"jpro"] ;
+
+        [camera setOwner:[QY_appDataCenter userWithId:ownerId]] ;
+        
+        NSError *savingError ;
+        [QY_appDataCenter saveObject:camera error:&savingError] ;
+        
+        if ( savingError ) {
+            QYDebugLog(@"保存失败 error = %@",savingError) ;
+            [QYUtils alertError:error] ;
+        } else {
+            QYDebugLog(@"保存成功 camera = %@",camera) ;
+        }
+        
+        return camera ;
+    }
+}
+
++ (QY_camera *)getCameraFromProfileXML:(NSString *)xmlStr {
+    return nil ;
+}
+
 #pragma mark -
 
 + (NSString *)getStringValueForElement:(GDataXMLElement *)root name:(NSString *)name {
-    return [[[root elementsForName:name] lastObject] stringValue] ;
+    id object = [[root elementsForName:name] lastObject] ;
+    
+    if ( nil != object ) {
+        return [object stringValue] ;
+    }
+    return nil ;
 }
 
 /**

@@ -90,7 +90,9 @@
                 break;
         }
         
-        [jvalues addObject:jvalue] ;
+        if ( jvalue ) {
+            [jvalues addObject:jvalue] ;
+        }
         location += description.len ;
     }] ;
     self.values = jvalues ;

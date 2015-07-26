@@ -13,14 +13,14 @@
 #import "QY_CoreDataModels.h"
 
 #define JPRO_IP @"qycam.com"
-#define JPRO_PORT @"50060"
+#define JPRO_PORT @"50300"
+//#define JPRO_PORT @"50060"
 
-#define JMS_IP @"221.6.13.155"
-#define JMS_PORT @"50276"
-
-#import "QY_jms_parameter_key_marco.h"
+#import "QY_jpro_parameter_key_marco.h"
 #import "QY_FileService.h"
 
+
+NSString * const kUserDefaultsCookie = @"UserCookie" ;
 
 @interface QY_JPROHttpService ()
 
@@ -42,6 +42,17 @@
     return sharedInstance ;
 }
 
+- (instancetype)init {
+    if ( self = [super init] ) {
+        [self setUp] ;
+    }
+    return self ;
+}
+
+- (void)setUp {
+    [self readCookiesToCookiesStorage] ;
+}
+
 #pragma mark - getter && setter
 
 - (NSString *)jpro_ip {
@@ -52,13 +63,18 @@
     return _jpro_port ? : JPRO_PORT ;
 }
 
+/**
+ *  jpro的URL
+ *
+ *  @return
+ */
 - (NSString *)baseUrl {
     return [NSString stringWithFormat:@"http://%@:%@",self.jpro_ip,self.jpro_port] ;
 }
 
 - (void)configIp:(NSString *)jpro_ip Port:(NSString *)jpro_port {
     if ( !jpro_ip && !jpro_port ) {
-        [NSException raise:@"jpro ip port info config exception" format:@"错误的ip和port传入"] ;
+        [NSException raise:@"jpro ip port info config exception" format:@"空的ip和port传入"] ;
         return ;
     }
     _jpro_ip = jpro_ip ;
@@ -75,6 +91,52 @@ QYResultBlock packComplection(QYResultBlock complection) {
         }
     } ;
 }
+
+#pragma mark - Cookies
+
+- (NSArray *)cookiesForURL:(NSString *)urlString {
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:urlString]] ;
+    return cookies ;
+}
+
+/**
+ *  持久化保存cookie，下次登录时，调用readCookiesToCookiesStorage读取到系统缓存中。
+ *
+ *  @param cookies
+ */
+- (void)saveCookies:(NSArray *)cookies {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies] ;
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:kUserDefaultsCookie] ;
+}
+
+/**
+ *  读取持久话cookie到系统缓存中。
+ */
+- (void)readCookiesToCookiesStorage {
+    NSData *cookiesData = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsCookie] ;
+    if ( [cookiesData length] ) {
+        NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesData] ;
+        [cookies enumerateObjectsUsingBlock:^(NSHTTPCookie *cookie, NSUInteger idx, BOOL *stop) {
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie] ;
+        }] ;
+    }
+}
+
+/**
+ *  注销时，清除cookies
+ *
+ *  @return 是否清除成功
+ */
+- (BOOL)clearCookies {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserDefaultsCookie] ;
+    return [[NSUserDefaults standardUserDefaults] synchronize] ;
+}
+
+- (void)saveCookiesForURL:(NSString *)urlString {
+    NSArray *cookies = [self cookiesForURL:urlString] ;
+    [self saveCookies:cookies] ;
+}
+
 
 #pragma mark - JPRO 
 
@@ -106,6 +168,9 @@ QYResultBlock packComplection(QYResultBlock complection) {
     [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         QYDebugLog(@"登录成功") ;
         complection(true,nil) ;
+        
+        [self saveCookiesForURL:self.baseUrl] ;
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         QYDebugLog(@"登录失败 error = %@",error) ;
         complection(false,error) ;
@@ -125,12 +190,12 @@ QYResultBlock packComplection(QYResultBlock complection) {
     
     [manager POST:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         QYDebugLog(@"注销成功") ;
+        [self clearCookies] ;
         complection(true,false) ;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         QYDebugLog(@"注销失败 error = %@",error) ;
         complection(false,error) ;
     }] ;
-    
 }
 
 #pragma makr - JPRO Alert Message 
@@ -168,26 +233,27 @@ QYResultBlock packComplection(QYResultBlock complection) {
     manager.requestSerializer = [AFHTTPRequestSerializer serializer] ;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary] ;
     {
-        [parameters setObject:@(page) forKey:QY_key_page] ;
-        [parameters setObject:@(num) forKey:QY_key_num] ;
-        [parameters setObject:@(type) forKey:QY_key_type] ;
-        [parameters setObject:userId forKey:QY_key_user_id] ;
-        [parameters setObject:cameraId forKey:QY_key_jipnc_id] ;
-        [parameters setObject:startId forKey:QY_key_start] ;
-        [parameters setObject:endId forKey:QY_key_end] ;
-        [parameters setObject:check forKey:QY_key_check] ;
+        if ( page ) [parameters setObject:@(page) forKey:QY_key_page] ;
+        if ( num ) [parameters setObject:@(num) forKey:QY_key_num] ;
+        if ( type ) [parameters setObject:@(type) forKey:QY_key_type] ;
+        if ( userId ) [parameters setObject:userId forKey:QY_key_user_id] ;
+        if ( cameraId ) [parameters setObject:cameraId forKey:QY_key_jipnc_id] ;
+        if ( startId ) [parameters setObject:startId forKey:QY_key_start] ;
+        if ( endId ) [parameters setObject:endId forKey:QY_key_end] ;
+        if ( check ) [parameters setObject:check forKey:QY_key_check] ;
     }
     manager.responseSerializer = [AFJSONResponseSerializer serializer] ;
     
     [manager GET:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, NSArray *alertMsgs) {
-        
+        QYDebugLog(@"获取报警信息列表成功！alertMsgs = %@",alertMsgs) ;
         NSMutableArray *alertMessages = [NSMutableArray array] ;
         [alertMsgs enumerateObjectsUsingBlock:^(NSDictionary *messageDic, NSUInteger idx, BOOL *stop) {
-            QY_AlertMessage *alertMessage = [[QY_AlertMessage alloc] initWithDictionary:messageDic] ;            
+            QY_alertMessage *alertMessage = [[QY_alertMessage alloc] initWithDictionary:messageDic] ;
             [alertMessages addObject:alertMessage] ;
         }] ;
         complection(alertMessages,nil) ;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        QYDebugLog(@"获取报警信息类表失败！error = %@",error) ;
         complection(nil,error) ;
     }] ;
     
@@ -247,8 +313,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
     
     [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *alertMsgDic) {
         QYDebugLog(@"获取某个msg成功 response = %@",alertMsgDic) ;
-        
-        QY_AlertMessage *alertMessage = [[QY_AlertMessage alloc] initWithDictionary:alertMsgDic] ;
+        QY_alertMessage *alertMessage = [[QY_alertMessage alloc] initWithDictionary:alertMsgDic] ;
         complection(alertMessage,nil) ;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         QYDebugLog(@"添加msg失败 error = %@",error) ;
@@ -432,8 +497,10 @@ QYResultBlock packComplection(QYResultBlock complection) {
     manager.responseSerializer = [AFJSONResponseSerializer serializer] ;
     [manager POST:urlString parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
-        [formData appendPartWithFormData:attachmentData
-                                    name:@"attach"] ;
+        [formData appendPartWithFileData:attachmentData
+                                    name:@"attach"
+                                fileName:@"test.jpg"
+                                mimeType:MIMETYPE] ;
         
     } success:^(AFHTTPRequestOperation *operation, NSDictionary *attachIdDic) {
         QYDebugLog(@"上传成功 response = %@",attachIdDic) ;
@@ -468,7 +535,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
     } ;
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager] ;
-    NSString *urlString = [NSString stringWithFormat:@"http://%@:%@/attaches/",JMS_IP,JMS_PORT];
+    NSString *urlString = [NSString stringWithFormat:@"%@/attaches/",self.baseUrl];
     manager.requestSerializer = [AFJSONRequestSerializer serializer] ;
     NSMutableDictionary *param = [NSMutableDictionary dictionary] ;
     {
@@ -493,7 +560,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
 }
 
 /**
- *  10.发表状态feed
+ *  10.发表状态feed,注意type字段，1代表message分享，2.代表附件图片分享，3.代表普通文字分享
  *
  *  @param content     内容
  *  @param attachesIds 附件IDs
@@ -520,14 +587,27 @@ QYResultBlock packComplection(QYResultBlock complection) {
     NSMutableDictionary *param = [NSMutableDictionary dictionary] ;
     {
         [param setObject:content forKey:QY_key_content] ;
-        if ( messageIds) [param setObject:messageIds forKey:QY_key_messages] ;
-        if ( attachesIds ) [param setObject:attachesIds forKey:QY_key_attaches] ;
+        
+        NSNumber *type = @3 ;
+
+        
+        if ( messageIds.count != 0 ) {
+            [param setObject:[messageIds allObjects] forKey:QY_key_messages] ;
+            type = @1 ;
+        }
+
+        if ( attachesIds.count != 0 ) {
+            [param setObject:[attachesIds allObjects] forKey:QY_key_attaches] ;
+            type = @2 ;
+        }
+
+        [param setObject:type forKey:QY_key_type] ;
     }
     
     manager.responseSerializer = [AFJSONResponseSerializer serializer] ;
     
     [manager PUT:urlString parameters:param success:^(AFHTTPRequestOperation *operation, NSDictionary *feedIdDic) {
-        QYDebugLog(@"发表状态feed 成功") ;
+        QYDebugLog(@"发表状态feed 成功 feedId = %@",feedIdDic) ;
         
         complection(feedIdDic[QY_key_id],nil) ;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -565,21 +645,22 @@ QYResultBlock packComplection(QYResultBlock complection) {
     manager.requestSerializer = [AFHTTPRequestSerializer serializer] ;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary] ;
     {
-        [parameters setObject:@(page) forKey:QY_key_page] ;
-        [parameters setObject:@(num) forKey:QY_key_num] ;
-        [parameters setObject:userId forKey:QY_key_user_id] ;
-        [parameters setObject:startId forKey:QY_key_start] ;
-        [parameters setObject:endId forKey:QY_key_end] ;
-        [parameters setObject:check forKey:QY_key_check] ;
+        if (page) [parameters setObject:@(page) forKey:QY_key_page] ;
+        if (@(num)) [parameters setObject:@(num) forKey:QY_key_num] ;
+        if (userId) [parameters setObject:userId forKey:QY_key_user_id] ;
+        if (startId) [parameters setObject:startId forKey:QY_key_start] ;
+        if (endId) [parameters setObject:endId forKey:QY_key_end] ;
+        if (check) [parameters setObject:check forKey:QY_key_check] ;
     }
     
     manager.responseSerializer = [AFJSONResponseSerializer serializer] ;
     
     [manager GET:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, NSArray *feedDicArray) {
-        QYDebugLog(@"发表状态feed 成功 response = %@",feedDicArray) ;
+        QYDebugLog(@"获取状态列表feed 成功 response = %@",feedDicArray) ;
         
         NSMutableArray *feeds = [NSMutableArray array] ;
         [feedDicArray enumerateObjectsUsingBlock:^(NSDictionary *feedDic, NSUInteger idx, BOOL *stop) {
+#warning 未测试
             QY_feed *feed = [[QY_feed alloc] initWithFeedDic:feedDic] ;
             [feeds addObject:feed] ;
         }] ;
@@ -587,7 +668,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
         complection(feeds,nil) ;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        QYDebugLog(@"发表状态feed 失败 error = %@",error) ;
+        QYDebugLog(@"获取状态列表feed 失败 error = %@",error) ;
         complection(nil,error) ;
     }] ;
 }
@@ -614,10 +695,11 @@ QYResultBlock packComplection(QYResultBlock complection) {
     
     [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *feedDic) {
         QYDebugLog(@"获取某个状态feed 成功 response = %@",feedDic) ;
-        
-        QY_feed *feed = [[QY_feed alloc] initWithFeedDic:feedDic] ;
-        
-        complection(feed,nil) ;
+
+#warning !
+//        QY_feed *feed = [[QY_feed alloc] initWithFeedDic:feedDic] ;
+//        
+//        complection(feed,nil) ;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         QYDebugLog(@"获取某个状态feed 失败 error = %@",error) ;
@@ -664,6 +746,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
 - (void)addCommentToFeed:(NSString *)feedId
                  Comment:(NSString *)comment
              Complection:(QYObjectBlock)complection {
+    assert(comment) ;
     complection = ^(id object,NSError *error) {
         if ( complection ) {
             complection(object,error) ;
@@ -671,16 +754,16 @@ QYResultBlock packComplection(QYResultBlock complection) {
     } ;
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager] ;
-    NSString *urlString = [NSString stringWithFormat:@"%@/feeds/%@/",self.baseUrl,feedId];
+    NSString *urlString = [NSString stringWithFormat:@"%@/feeds/%@/comments",self.baseUrl,feedId];
     manager.requestSerializer = [AFJSONRequestSerializer serializer] ;
     NSMutableDictionary *param = [NSMutableDictionary dictionary] ;
     {
-        [param setObject:comment forKey:QY_key_comment];
+        [param setObject:comment forKey:QY_key_content];
     }
     
     manager.responseSerializer = [AFJSONResponseSerializer serializer] ;
     
-    [manager PUT:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *commentIdDic) {
+    [manager PUT:urlString parameters:param success:^(AFHTTPRequestOperation *operation, NSDictionary *commentIdDic) {
         QYDebugLog(@"发表评论 成功 response = %@",commentIdDic) ;
         
         complection(commentIdDic[QY_key_id],nil) ;
@@ -701,6 +784,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
  */
 - (void)deleteCommentById:(NSString *)commentId
               Complection:(QYResultBlock)complection {
+    assert(commentId) ;
     complection = ^(BOOL success , NSError *error) {
         if ( complection ) {
             complection(success,error) ;
@@ -804,14 +888,9 @@ QYResultBlock packComplection(QYResultBlock complection) {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager] ;
     manager.requestSerializer = [AFHTTPRequestSerializer serializer] ;
-    NSString *urlStr = [NSString stringWithFormat:@"%@/files/upload/",self.baseUrl] ;
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary] ;
-    {
-        [parameters setObject:path forKey:@"path"] ;
-    } ;
+    NSString *urlStr = [NSString stringWithFormat:@"%@/files/upload/?path=%@",self.baseUrl,path] ;
     
-    
-    [manager POST:urlStr parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:urlStr parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         NSError *error ;
         [formData appendPartWithFileURL:fileUrl
@@ -840,6 +919,48 @@ QYResultBlock packComplection(QYResultBlock complection) {
     }] ;
 }
 
+/**
+ *  18[2].上传档案文件
+ *
+ *  @param path        [必填]上传在jpro服务器上的路径,(@"?path=%@",path)
+ *  @param data        [必填]要上传的文件的data
+ *  @param name        [必填]上传在服务器上保存的名字
+ *  @param mimeType    [必填]Content-Type
+ *  @param complection
+ */
+- (void)uploadFileToPath:(NSString *)path
+                FileData:(NSData *)data
+                fileName:(NSString *)name
+                mimeType:(NSString *)mimeType
+             Complection:(QYResultBlock)complection {
+    assert(path) ;
+    assert(data) ;
+    assert(name) ;
+    assert(mimeType) ;
+    complection = ^(BOOL result,NSError *error) {
+        if ( complection ) {
+            complection(result,error) ;
+        }
+    } ;
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager] ;
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer] ;
+    NSString *urlStr = [NSString stringWithFormat:@"%@/files/upload/?path=%@",self.baseUrl,path] ;
+    
+    [manager POST:urlStr parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        [formData appendPartWithFileData:data
+                                    name:@"file"
+                                fileName:name
+                                mimeType:mimeType] ;
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }] ;
+    
+}
 
 /**
  *  19.从服务器下载文件
@@ -887,6 +1008,42 @@ QYResultBlock packComplection(QYResultBlock complection) {
     }] ;
     
     [task resume] ;
+}
+
+/**
+ *  19[2].从服务器读取文件内容到Memory
+ *
+ *  @param path        [必填]服务器Path @"user/10000133/profile.xml"
+ *  @param complection 回调
+ */
+- (void)downloadFileFromPath:(NSString *)path
+                 complection:(QYObjectBlock)complection {
+    complection = ^(id object,NSError *error) {
+        if ( complection ) {
+            if ( object ) {
+                NSString *fileStr = [[NSString alloc] initWithData:object encoding:NSUTF8StringEncoding] ;
+                object = fileStr ;
+            }
+            complection(object,error) ;
+        }
+    } ;
+    [self downloadFileDataFromPath:path isImageFile:NO complection:complection] ;
+}
+
+/**
+ *  19[3].从服务器读取图片Data到Memory
+ *
+ *  @param path        [必填]服务器Path @"user/10000133/profile.xml"
+ *  @param complection
+ */
+- (void)downloadImageFromPath:(NSString *)path
+                  complection:(QYObjectBlock)complection {
+    complection = ^(id object,NSError *error) {
+        if ( complection ) {
+            complection(object,error) ;
+        }
+    } ;
+    [self downloadFileDataFromPath:path isImageFile:YES complection:complection] ;
 }
 
 /**
@@ -1034,5 +1191,108 @@ BOOL makeFIleUrlReachabily(NSURL *fileUrl) {
     return TRUE ;
 }
 
+#pragma mark - JPRO 内自封装的接口
+
+/**
+ *  上传用户头像
+ *
+ *  @param userId      [必填]用户Id
+ *  @param avatar      [必填]头像图片
+ *  @param complection
+ */
+- (void)setUserAvatarForUser:(NSString *)userId image:(UIImage *)avatar Complection:(QYResultBlock)complection {
+    complection = ^(BOOL success ,NSError *error) {
+        if ( complection ) {
+            complection(success,error) ;
+        }
+    } ;
+    
+    NSString *path = [NSString stringWithFormat:@"user/%@/headpicture.jpg",userId] ;
+    
+#warning 图片未压缩
+    NSData *imageData = UIImageJPEGRepresentation(avatar, 1.0f) ;
+    
+    [self uploadFileToPath:path
+                  FileData:imageData
+                  fileName:@"headpicture.jpg"
+                  mimeType:MIMETYPE
+               Complection:complection] ;
+}
+
+/**
+ *  下载文件到内存
+ *
+ *  @param path        [必填]服务器上的路径
+ *  @param typeImage   更具这个选择ResponseSerializer
+ *  @param complection 回调
+ */
+- (void)downloadFileDataFromPath:(NSString *)path
+                     isImageFile:(BOOL)typeImage
+                     complection:(QYObjectBlock)complection {
+    assert(path) ;
+    assert(complection) ;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager] ;
+    NSString *urlStr = [NSString stringWithFormat:@"%@/archives/%@",self.baseUrl,path] ;
+    
+    manager.responseSerializer = typeImage ? [AFImageResponseSerializer serializer] : [AFHTTPResponseSerializer serializer] ;
+    
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        complection(responseObject,nil) ;
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        complection(nil,error) ;
+    }] ;
+}
+
+#pragma mark - test 
+
+- (void)testUpload {
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager] ;
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer] ;
+    NSString *urlStr = [NSString stringWithFormat:@"%@/files/upload/?path=user/10000133/profile.xml",self.baseUrl] ;
+    
+    [manager POST:urlStr parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        NSData *data = [@"testJpro300" dataUsingEncoding:NSUTF8StringEncoding] ;
+        
+        [formData appendPartWithFileData:data name:@"file" fileName:@"profile.xml" mimeType:@"multipart/form-data"] ;
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        QYDebugLog(@"成功 responseObject = %@",responseObject) ;
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        QYDebugLog(@"失败 error = %@",error) ;
+        
+    }] ;
+}
+
+- (void)testDownload {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager] ;
+    NSString *urlStr = [NSString stringWithFormat:@"%@/archives/user/10000133/profile.xml",self.baseUrl] ;
+//    manager.responseSerializer = [AFXMLParserResponseSerializer serializer] ;
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer] ;
+    
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        QYDebugLog(@"responseObject = %@",responseObject) ;
+        
+        QYDebugLog(@"%@",[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]) ;
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        QYDebugLog(@"error = %@",error) ;
+    }] ;
+}
+
+- (void)testDownload2 {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager] ;
+    NSString *urlStr = [NSString stringWithFormat:@"%@/archives/user/10000133/headpicture.jpg",self.baseUrl] ;
+    
+    manager.responseSerializer = [AFImageResponseSerializer serializer] ;
+    
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        QYDebugLog(@"responseObject = %@,class = %@",responseObject,[responseObject class]) ;
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        QYDebugLog(@"error = %@",error) ;
+    }] ;
+}
 
 @end

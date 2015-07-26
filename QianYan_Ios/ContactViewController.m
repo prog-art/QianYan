@@ -10,14 +10,17 @@
 #import "SWTableViewCell.h"
 #import "UMTableViewCell.h"
 
-@interface ContactViewController () {
-    NSMutableArray *_sections;
-    NSMutableArray *_testArray;
+#import "QY_Common.h"
+#import "QY_contactService.h"
+
+@interface ContactViewController () <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate> {
+    NSMutableArray *_sections ;
+    NSMutableArray *_testArray ;
 }
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) UIRefreshControl *refreshControl;
-@property (nonatomic, strong) NSMutableArray *indexTitle;
+@property (nonatomic, weak) IBOutlet UITableView *tableView ;
+@property (nonatomic, weak) UIRefreshControl *refreshControl ;
+@property (nonatomic, strong) NSMutableArray *indexTitle ;
 
 @end
 
@@ -26,8 +29,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSArray *sectionIndex = [[NSArray alloc] initWithObjects:@"🔍", @"", @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N",@"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", @"#", nil];
-    _indexTitle = [[NSMutableArray alloc] initWithArray:sectionIndex];//indexTitle
+    NSArray *sectionIndex = @[@"🔍", @"", @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N",@"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", @"#"] ;
+    _indexTitle = [sectionIndex mutableCopy] ;
     
     //self.navigationItem.leftBarButtonItem = self.editButtonItem; //左侧选择按钮
     self.tableView.rowHeight = 90;
@@ -46,7 +49,7 @@
     
     _sections = [[[UILocalizedIndexedCollation currentCollation] sectionIndexTitles] mutableCopy];
     
-    _testArray = [[NSMutableArray alloc] init];
+    _testArray = [NSMutableArray array] ;
         
     for (int i = 0; i < _sections.count; ++i) {
         [_testArray addObject:[NSMutableArray array]];
@@ -54,7 +57,7 @@
     
     for (int i = 0; i < 100; ++i) {
         NSString *string = [NSString stringWithFormat:@"%d", i];
-        [_testArray[i % _sections.count] addObject:string];
+        [_testArray[i % _sections.count] addObject:string] ;
     }
 }
 
@@ -63,17 +66,17 @@
     [self.tabBarController.tabBar setHidden:NO];
 }
 
-#pragma mark UITableViewDataSource
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _testArray.count+2;
+    return _testArray.count + 2 ;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section > 1) {
         return [_testArray[section-2] count];
     } else {
-        return 1;
+        return 1 ;
     }
 }
 

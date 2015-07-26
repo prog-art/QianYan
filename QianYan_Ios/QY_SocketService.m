@@ -92,6 +92,7 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
             if ( !error ) {
                 self.JRM_IP = info[JDAS_DATA_JRM_IP_KEY] ;
                 self.JRM_Port = [info[JDAS_DATA_JRM_PORT_KEY] unsignedIntegerValue] ;
+                QYDebugLog(@"请求到IP = %@ 和 PORT = %lu",self.JRM_IP,(unsigned long)self.JRM_Port) ;
             }
             complection(info,error) ;
             jdas = nil ;
@@ -182,6 +183,7 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
     }
     
     if ( [self.jrmSocket isConnected]) {
+        QYDebugLog(@"data = %@",data) ;
         [self.jrmSocket writeData:data withTimeout:10 tag:request.apiNo] ;
     } else {
         QYDebugLog(@"未连接") ;
@@ -189,6 +191,7 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
         [self connectToJRMWithComplection:^(BOOL success, NSError *error) {
             if ( success ) {
                 QYDebugLog(@"连接成功") ;
+                QYDebugLog(@"data = %@",data) ;
                 [self.jrmSocket writeData:data withTimeout:10 tag:request.apiNo] ;
             } else {
                 QYDebugLog(@"连接失败 error = %@",error) ;
@@ -211,13 +214,13 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
     QYDebugLog(@"接收了所有的数据，并解析完成") ;
     
     QY_JRMAPIDescriptor *APIDesc = self.currentDescriptor ;
-    
+    self.currentDescriptor = nil ;
     QY_JRMResponse *response = APIDesc.response ;
     
     if ( self.apiComplection ) {
         self.apiComplection(response,nil) ;
     }
-    self.currentDescriptor = nil ;
+    
 }
 
 #pragma mark - getter && setter 

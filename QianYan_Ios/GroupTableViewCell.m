@@ -13,6 +13,7 @@
 @end
 
 @implementation GroupTableViewCell
+
 - (IBAction)groupBtnClicked:(id)sender {
 }
 - (IBAction)publicBtnClicked:(id)sender {

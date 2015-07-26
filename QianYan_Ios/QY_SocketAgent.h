@@ -50,12 +50,12 @@ typedef NS_ENUM(NSInteger, APP_State) {
 
 #pragma mark - JRM
 
-/**
- *  检查contacts（电话号码）是否有千衍账号
- *
- *  @param contacts    电话号码
- *  @param complection
- */
-- (void)checkContacts:(NSString *)contacts HaveQYAccountComplection:(QYArrayBlock)complection ;
+///**
+// *  检查contacts（电话号码）是否有千衍账号
+// *
+// *  @param contacts    电话号码
+// *  @param complection
+// */
+//- (void)checkContacts:(NSString *)contacts HaveQYAccountComplection:(QYArrayBlock)complection ;
 
 @end

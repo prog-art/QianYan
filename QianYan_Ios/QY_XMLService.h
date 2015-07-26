@@ -10,6 +10,8 @@
 
 #import "QYUser.h"
 
+#import "QY_CoreDataModels.h"
+
 /**
  *  需求:
  *     1.提供XML文本构建的API
@@ -32,5 +34,10 @@
 
 //ok
 + (id<user2userIdXMLInterface>)getUserFromUserIdXML:(NSString *)xmlStr ;
+
+
++ (QY_camera *)getCameraFromIdXML:(NSString *)xmlStr ;
+
++ (QY_camera *)getCameraFromProfileXML:(NSString *)xmlStr ;
 
 @end

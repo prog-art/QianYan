@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 #import "QY_QRCodeScanerDelegate.h"
+#import "QYConstants.h"
 
 /**
  *  1.提供生成二维码的功能。
@@ -54,9 +55,9 @@
 
 /**
  *  唤起QRCodeScaner
- *
- *  @param sender 扫描结果结果接收者
  */
-+ (void)startWithDelegater:(UIViewController<QY_QRCodeScanerDelegate> *)delegater ;
++ (void)startWithDelegater:(UIViewController<QY_QRCodeScanerDelegate> *)delegater QYDeprecated("1.1.2版本后不再使用，请使用带Nav的方法");
+
++ (void)startQRScanWithNavigationController:(UINavigationController *)nav Delegate:(id<QY_QRCodeScanerDelegate>)delegate ;
 
 @end

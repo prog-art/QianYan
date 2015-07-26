@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #import "QY_Block_Define.h"
 
@@ -22,5 +23,22 @@
 @property (nonatomic,readonly) NSString *jpro_port ;
 
 - (void)configIp:(NSString *)jpro_ip Port:(NSString *)jpro_port ;
+
+/**
+ *  上传用户头像
+ *
+ *  @param userId      用户Id[必填]
+ *  @param avatar      头像图片[必填,方法内自压缩]
+ *  @param complection
+ */
+- (void)setUserAvatarForUser:(NSString *)userId image:(UIImage *)avatar Complection:(QYResultBlock)complection ;
+
+#pragma mark - test
+
+- (void)testUpload ;
+
+- (void)testDownload ;
+
+- (void)testDownload2 ;
 
 @end

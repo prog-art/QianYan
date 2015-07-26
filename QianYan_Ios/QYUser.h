@@ -12,6 +12,7 @@
 #import "userInterface.h"
 #import "QYFile.h"
 #import "QY_Block_Define.h"
+#import "QY_user.h"
 
 @class QYUser ;
 
@@ -63,6 +64,9 @@
  *  退出登录
  */
 + (void)logOffComplection:(QYResultBlock)complection ;
+
+#warning temp
+@property (nonatomic) QY_user *coreUser ;
 
 #pragma mark - Profile.xml 属性
 
@@ -179,10 +183,5 @@
  *  每个User都是基于xml文档实例话的，这个必须有。空表示不合法
  */
 @property (nonatomic) NSString *xmlFilePath ;
-
-///**
-// *  对象对应的持久化文件路径profile.xml之类的
-// */
-//@property (readonly) QYFile *file ;
 
 @end

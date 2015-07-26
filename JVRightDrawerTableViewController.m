@@ -13,6 +13,7 @@
 
 #import "QY_Common.h"
 #import "CameraViewController.h"
+#import "QYBaseViewController.h"
 
 static NSString * const kJVDrawerCellReuseIdentifier = @"JVRightDrawerCellReuseIdentifier";
 
@@ -33,10 +34,6 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVRightDrawerCellReuseI
 
 #pragma mark - Table View Data Source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
 }
@@ -47,7 +44,6 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVRightDrawerCellReuseI
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JVRightDrawerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kJVDrawerCellReuseIdentifier forIndexPath:indexPath];
-    
     
     
     switch (indexPath.row) {
@@ -89,8 +85,17 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVRightDrawerCellReuseI
     __block UIViewController *destinationViewController = nil;
     
     switch (indexPath.row) {
-        case 0:
+        case 0 : {
+            //扫一扫
+            UITabBarController *tbc = (UITabBarController *)[[[AppDelegate globalDelegate] drawerViewController] centerViewController] ;
+            
+            UINavigationController *nav = tbc.viewControllers[0] ;
+            QYBaseViewController *vc = (QYBaseViewController *)nav.topViewController ;
+            
+            [QY_QRCodeUtils startQRScanWithNavigationController:nav Delegate:vc] ;
+            
             break;
+        }
             
         case 1:
             break;

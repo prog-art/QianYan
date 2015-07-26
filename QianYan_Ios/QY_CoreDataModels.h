@@ -9,9 +9,25 @@
 #ifndef QianYan_Ios_QY_CoreDataModels_h
 #define QianYan_Ios_QY_CoreDataModels_h
 
+#import "CoreDataCategory.h"
+
+#pragma mark - 朋友圈
+
 #import "QY_comment.h"
 #import "QY_feed.h"
 #import "QY_attache.h"
-#import "QY_AlertMessage.h"
+#import "QY_alertMessage.h"
+
+#pragma mark - 用户
+
+#import "QY_user.h"
+#import "QY_friendGroup.h"
+#import "QY_friendSetting.h"
+
+#pragma mark - 摄像机
+
+#import "QY_camera.h"
+#import "QY_cameraGroup.h"
+#import "QY_cameraSetting.h"
 
 #endif

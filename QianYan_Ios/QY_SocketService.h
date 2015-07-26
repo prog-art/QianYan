@@ -19,7 +19,6 @@ extern NSString *const kNotificationName_finishDataReceive ;
 
 #import "QY_SocketServiceDelegate.h"
 
-#warning 因为对Socket这个的部分的经验不足的原因，设计成一次只能传一种数据。一个周期完成之后才能继续。
 /**
  *  基于QY_JRMAPIDescriptor类，对发送数据，接受数据，作处理。
  *  处于组件第二层，底层是 CocoaAsyncSocket/GCDAsyncSocket.h

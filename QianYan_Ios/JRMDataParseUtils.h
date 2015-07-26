@@ -12,8 +12,6 @@
 
 #pragma mark - JRMDataParseUtils
 
-#warning 补文档
-
 @interface JRMDataParseUtils : NSObject
 
 /**

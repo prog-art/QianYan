@@ -11,6 +11,7 @@
 
 #import "QY_Block_Define.h"
 #import <UIKit/UIKit.h>
+#import "QYConstants.h"
 
 
 #define jms_ip_key @"jms_ip_key"
@@ -143,14 +144,14 @@
  *  @param userId   用户Id
  *  @param nickName 昵称
  */
-- (void)setNicknameForUser:(NSString *)userId Nickname:(NSString *)nickName Complection:(QYResultBlock)complection ;
+- (void)setNicknameForUser:(NSString *)userId Nickname:(NSString *)nickName Complection:(QYResultBlock)complection QYDeprecated("后续不再使用，更改为修改用户档案下的profile.xml文件") ;
 
 /**
  *  2.5.16 获取用户昵称
  *
  *  @param userId   用户Id
  */
-- (void)getNicknameByUserId:(NSString *)userId Complection:(QYInfoBlock)complection ;
+- (void)getNicknameByUserId:(NSString *)userId Complection:(QYInfoBlock)complection QYDeprecated("后续不再使用，更改为获取用户档案下的profile.xml文件");
 
 /**
  *  2.5.17 设置用户所在地
@@ -158,14 +159,14 @@
  *  @param userId   用户Id
  *  @param location 用户位置 例:@"江苏南京"
  */
-- (void)setUserLocationForUser:(NSString *)userId Location:(NSString *)location Complection:(QYResultBlock)complection ;
+- (void)setUserLocationForUser:(NSString *)userId Location:(NSString *)location Complection:(QYResultBlock)complection QYDeprecated("后续不再使用，更改为修改用户档案下的profile.xml文件");
 
 /**
  *  2.5.18 获取用户所在地
  *
  *  @param userId 用户Id
  */
-- (void)getUserLocationByUserId:(NSString *)userId Complection:(QYInfoBlock)complection ;
+- (void)getUserLocationByUserId:(NSString *)userId Complection:(QYInfoBlock)complection QYDeprecated("后续不再使用，更改为获取用户档案下的profile.xml文件");
 
 /**
  *  2.5.19 设置用户个性签名
@@ -173,14 +174,14 @@
  *  @param userId 用户Id
  *  @param sign   签名 128byes
  */
-- (void)setUserSignForUser:(NSString *)userId Sign:(NSString *)sign Complection:(QYResultBlock)complection ;
+- (void)setUserSignForUser:(NSString *)userId Sign:(NSString *)sign Complection:(QYResultBlock)complection QYDeprecated("后续不再使用，更改为修改用户档案下的profile.xml文件");
 
 /**
  *  2.5.20 获取用户个性签名
  *
  *  @param userId 用户Id
  */
-- (void)getUserSignByUserId:(NSString *)userId Complection:(QYInfoBlock)complection ;
+- (void)getUserSignByUserId:(NSString *)userId Complection:(QYInfoBlock)complection QYDeprecated("后续不再使用，更改为获取用户档案下的profile.xml文件");
 
 /**
  *  2.5.21 设置用户头像
@@ -188,14 +189,14 @@
  *  @param userId 用户Id
  *  @param avatar 头像图片(待处理),头像最大大小
  */
-- (void)setUserAvatarForUser:(NSString *)userId image:(UIImage *)avatar Complection:(QYResultBlock)complection ;
+- (void)setUserAvatarForUser:(NSString *)userId image:(UIImage *)avatar Complection:(QYResultBlock)complection QYDeprecated("后续不再使用，头像改为jpro存储") ;
 
 /**
  *  2.5.22 获取用户头像
  *
  *  @param userId 用户Id
  */
-- (void)getUserAvatarForUser:(NSString *)userId Complection:(QYObjectBlock)complection ;
+- (void)getUserAvatarForUser:(NSString *)userId Complection:(QYObjectBlock)complection QYDeprecated("后续不再使用，头像改为jpro存储") ;
 
 #pragma mark - 好友
 
@@ -204,21 +205,21 @@
  *
  *  @param userId 用户Id
  */
-- (void)getUserFriendListForUser:(NSString *)userId Complection:(QYArrayBlock)complection ;
+- (void)getUserFriendListForUser:(NSString *)userId Complection:(QYArrayBlock)complection QYDeprecated("后续不再使用，修改为和jpro交互") ;
 
 /**
  *  2.5.24 添加好友
  *
  *  @param friendId 用户Id(string,16bytes)
  */
-- (void)createAddRequestToUser:(NSString *)friendId Complection:(QYResultBlock)complection ;
+- (void)createAddRequestToUser:(NSString *)friendId Complection:(QYResultBlock)complection QYDeprecated("后续不再使用，修改为和jpro交互") ;
 
 /**
  *  2.5.25 删除好友
  *
  *  @param friendId 用户Id(string,16bytes)
  */
-- (void)deleteFriend:(NSString *)friendId Complection:(QYResultBlock)complection ;
+- (void)deleteFriend:(NSString *)friendId Complection:(QYResultBlock)complection QYDeprecated("后续不再使用，修改为和jpro交互") ;
 
 
 #pragma mark - 相机相关
@@ -229,7 +230,7 @@
  *  @param cameraId jipnc_id(string,16bytes)
  *  @param friendId 用户Id(string,16bytes)
  */
-- (void)shareCamera:(NSString *)cameraId toUser:(NSString *)friendId Complection:(QYResultBlock)complection ;
+- (void)shareCamera:(NSString *)cameraId toUser:(NSString *)friendId Complection:(QYResultBlock)complection QYDeprecated("后续不再使用，修改为和jpro交互") ;
 
 /**
  *  2.5.27 取消相机对好友的分享
@@ -237,12 +238,12 @@
  *  @param cameraId jipnc_id(string,16bytes)
  *  @param friendId 用户Id(string,16bytes)
  */
-- (void)stopSharingCamera:(NSString *)cameraId toUser:(NSString *)friendId Complection:(QYResultBlock)complection ;
+- (void)stopSharingCamera:(NSString *)cameraId toUser:(NSString *)friendId Complection:(QYResultBlock)complection QYDeprecated("后续不再使用，修改为和jpro交互") ;
 
 /**
  *  2.5.28 获取相机列表
  */
-- (void)getCameraListForUser:(NSString *)userId Complection:(QYArrayBlock)complection ;
+- (void)getCameraListForUser:(NSString *)userId Complection:(QYArrayBlock)complection QYDeprecated("后续不再使用，修改为和jpro交互") ;
 
 /**
  *  2.5.29 用户绑定相机
@@ -264,14 +265,14 @@
  *  @param ownerId  相机拥有者的userId
  *  @param cameraId jipnc_id(string,16bytes)
  */
-- (void)getCameraSharingListForOwner:(NSString *)ownerId camera:(NSString *)cameraId Complection:(QYArrayBlock)complection ;
+- (void)getCameraSharingListForOwner:(NSString *)ownerId camera:(NSString *)cameraId Complection:(QYArrayBlock)complection QYDeprecated("后续不再使用，修改为和jpro交互") ;
 
 /**
  *  2.5.32 获取指定相机信息
  *
  *  @param cameraId jipnc_id(string,16bytes)
  */
-- (void)getCameraInformationForCameraId:(NSString *)cameraId Complection:(QYInfoBlock)complection ;
+- (void)getCameraInformationForCameraId:(NSString *)cameraId Complection:(QYInfoBlock)complection QYDeprecated("后续不再使用，修改为和jpro交互") ;
 
 /**
  *  2.5.33 设置相机昵称
@@ -279,14 +280,14 @@
  *  @param cameraId jipnc_id(string,16bytes)
  *  @param nickname jipnc_nickname(string,32bytes)
  */
-- (void)setNicknameForCamera:(NSString *)cameraId Nickname:(NSString *)nickname Complection:(QYInfoBlock)complection ;
+- (void)setNicknameForCamera:(NSString *)cameraId Nickname:(NSString *)nickname Complection:(QYInfoBlock)complection QYDeprecated("后续不再使用，修改为和jpro交互") ;
 
 /**
  *  2.5.34 获取相机拥有者Id
  *
  *  @param cameraId jipnc_id(string,16bytes)
  */
-- (void)getCameraOwnerIdForCamera:(NSString *)cameraId Complection:(QYInfoBlock)complection ;
+- (void)getCameraOwnerIdForCamera:(NSString *)cameraId Complection:(QYInfoBlock)complection QYDeprecated("后续不再使用，修改为和jpro交互") ;
 
 #pragma mark - User
 
@@ -295,7 +296,7 @@
  *
  *  @param userId 用户Id
  */
-- (void)getUsernameByUserId:(NSString *)userId Complection:(QYInfoBlock)complection ;
+- (void)getUsernameByUserId:(NSString *)userId Complection:(QYInfoBlock)complection QYDeprecated("后续不再使用，修改为和jpro交互") ;
 
 /**
  *  2.5.36 查询登录串号

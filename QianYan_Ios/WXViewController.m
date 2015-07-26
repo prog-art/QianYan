@@ -61,9 +61,9 @@ lineBreakMode:mode].height : 0.f;
     
     self.view.backgroundColor = [UIColor whiteColor];
 
-    _tableDataSource = [[NSMutableArray alloc] init];
+    _tableDataSource = [NSMutableArray array] ;
     
-    _contentDataSource = [[NSMutableArray alloc] init];//回复数据来源
+    _contentDataSource = [NSMutableArray array] ;//回复数据来源
     [_contentDataSource addObject:kContentText1];
     [_contentDataSource addObject:kContentText2];
     [_contentDataSource addObject:kContentText3];
@@ -71,7 +71,7 @@ lineBreakMode:mode].height : 0.f;
     [_contentDataSource addObject:kContentText5];
     [_contentDataSource addObject:kContentText6];
     
-    _shuoshuoDatasSource = [[NSMutableArray alloc] init];//说说数据来源
+    _shuoshuoDatasSource = [NSMutableArray array] ;//说说数据来源
     
     [_shuoshuoDatasSource addObject:kShuoshuoText1];
     [_shuoshuoDatasSource addObject:kShuoshuoText2];
@@ -131,6 +131,11 @@ lineBreakMode:mode].height : 0.f;
     _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [_maskView addGestureRecognizer:_tapGestureRecognizer];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated] ;
+    [self.tabBarController.tabBar setHidden:NO] ;
 }
 
 #pragma mark -- 添加动画Actions 

@@ -2,7 +2,7 @@
 //  QY_comment.h
 //  QianYan_Ios
 //
-//  Created by 虎猫儿 on 15/7/11.
+//  Created by 虎猫儿 on 15/7/26.
 //  Copyright (c) 2015年 虎猫儿. All rights reserved.
 //
 
@@ -13,12 +13,10 @@
 
 @interface QY_comment : NSManagedObject
 
+@property (nonatomic, retain) NSString * commentId;
 @property (nonatomic, retain) NSString * content;
-@property (nonatomic, retain) NSString * comment_id;
-@property (nonatomic, retain) NSNumber * pub_date;
-@property (nonatomic, retain) NSString * user_id;
-@property (nonatomic, retain) QY_feed *feed;
-
-+ (NSSet *)commentWithDicArray:(NSArray *)dicArray ;
+@property (nonatomic, retain) NSDate * pubDate;
+@property (nonatomic, retain) NSString * userId;
+@property (nonatomic, retain) QY_feed *belong2Feed;
 
 @end

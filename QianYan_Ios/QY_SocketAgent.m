@@ -669,6 +669,7 @@
         if ( result ) {
             info = [NSMutableDictionary dictionary] ;
             NSString *user_id = [response valueAtIndex:0] ;
+            [info setObject:username forKey:ParameterKey_username] ;
             [info setObject:user_id forKey:ParameterKey_userId] ;
         }
         
@@ -721,6 +722,7 @@
         if ( result ) {
             info = [NSMutableDictionary dictionary] ;
             NSString *user_id = [response valueAtIndex:0] ;
+            [info setObject:telephone forKey:ParameterKey_userPhone] ;
             [info setObject:user_id forKey:ParameterKey_userId] ;
         }
         

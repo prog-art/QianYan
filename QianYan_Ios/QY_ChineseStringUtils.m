@@ -61,16 +61,15 @@ static NSMutableArray *_ChineseStringArr = nil ;
     NSMutableArray *arrayForArrays = [NSMutableArray array] ;
     
     BOOL checkValueAtIndex = NO ;
-    NSMutableArray *TempArrForGrouping = nil ;
+    NSMutableArray *TempArrForGrouping = [NSMutableArray array] ;
     for (NSInteger index = 0 ; index < [chineseStringsArray count] ; index++ ) {
         ChineseString *chineseStr = (ChineseString *)chineseStringsArray[index] ;
         NSMutableString *strchar = [NSMutableString stringWithString:chineseStr.pinYin] ;
         NSString *sr = [strchar substringToIndex:1] ;
-        NSLog(@"%@",sr) ;
+        QYDebugLog(@"%@",sr) ;
         
         if ( ![titleArray containsObject:[sr uppercaseString]]) {
             [titleArray addObject:[sr uppercaseString]] ;
-            TempArrForGrouping = [[NSMutableArray alloc] initWithObjects:nil] ;
             checkValueAtIndex = NO ;
         }
         

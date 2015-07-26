@@ -10,6 +10,12 @@
 
 #import "QY_CommonDefine.h"
 
+@interface QY_QRCodeReaderDelegater ()
+
+@property (weak) UINavigationController *nav ;
+
+@end
+
 @implementation QY_QRCodeReaderDelegater
 
 #pragma mark - Life cycle 
@@ -17,6 +23,15 @@
 - (instancetype)initWithDelegate:(id<QY_QRCodeScanerDelegate>)delegate {
     if ( self = [self init]) {
         self.delegate = delegate ;
+    }
+    return self ;
+}
+
+- (instancetype)initWithNavigationController:(UINavigationController *)nav Delegate:(id<QY_QRCodeScanerDelegate>)delegate {
+    assert(nav) ;
+    if ( self = [self init] ) {
+        self.delegate = delegate ;
+        self.nav = nav ;
     }
     return self ;
 }
@@ -41,11 +56,12 @@
             [self.delegate QY_didScanQRCode:result] ;
         }
     }
-    
+    [self.nav popViewControllerAnimated:YES] ;
 }
 
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader {
     QYDebugLog(@"取消扫描") ;
+    [self.nav popViewControllerAnimated:YES] ;
     if ( [self.delegate respondsToSelector:@selector(QY_didCancelQRCodeScan)]) {
         [self.delegate QY_didCancelQRCodeScan] ;
     }

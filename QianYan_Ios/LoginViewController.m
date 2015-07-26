@@ -29,12 +29,6 @@
     self.inputEmailOrPhoneNumberTextField.delegate = self ;
     self.inputPasswordTextField.delegate = self ;
     
-//    _socketService = [QY_SocketService shareInstance] ;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated] ;
-//    _socketService.delegate = self ;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,31 +46,24 @@
     
     NSString *username = self.inputEmailOrPhoneNumberTextField.text ;
     NSString *password = self.inputPasswordTextField.text ;
+    
+#warning 测试用
+    username = @"18817870386" ;
+    password = @"1234567" ;
 
-    [QYUtils toMain] ;
-    
-#warning 测试完，下面代码注释去掉。
-//    if ( [self isPasswordAvailable:password] && ![username isEqualToString:@""]) {
-//        [QYUser loginName:username Password:password complection:^(BOOL success, NSError *error) {
-//            if ( success ) {
-//                QYDebugLog(@"登陆成功") ;
-//                [QYUtils toMain] ;
-//            } else {
-//                QYDebugLog(@"登陆失败 error = %@",error) ;
-//                [QYUtils alert:@"登陆失败"] ;
-//            }
-//        }] ;
-//    }
-    
-    if ([self.inputPasswordTextField.text length] < 6) {
-        //如果输入框内容小于6则弹出警告
-        [QYUtils alert:@"密码不能少于6位"] ;
-    }else if ([self.inputPasswordTextField.text length] > 20) { //如果输入框内容大于20则弹出警告
-        self.inputPasswordTextField.text = [self.inputPasswordTextField.text substringToIndex:20];
-        [QYUtils alert:@"密码不能多于20位"] ;
-    }else {
-        [QYUtils toMain];
+    if ( [self isPasswordAvailable:password] && ![username isEqualToString:@""]) {
+        
+        [QYUser loginName:username Password:password complection:^(BOOL success, NSError *error) {
+            if ( success ) {
+                QYDebugLog(@"登陆成功") ;
+                [QYUtils toMain] ;
+            } else {
+                QYDebugLog(@"登陆失败 error = %@",error) ;
+                [QYUtils alertError:error] ;
+            }
+        }] ;
     }
+    
 }
 
 - (IBAction)retrievePasswordBtnClicked:(id)sender {
@@ -145,19 +132,5 @@
     return TRUE ;
 }
 
-//#pragma mark - QY_SocketServiceDelegate
-//
-///**
-// *  252 用户登录结果
-// *
-// *  @param successed
-// */
-//- (void)QY_userLoginSuccessed:(BOOL)successed {
-//    if ( successed ) {
-//        [QYUtils toMain] ;
-//    } else {
-//        [QYUtils alert:@"登录失败"] ;
-//    }
-//}
 
 @end
