@@ -19,6 +19,8 @@
 #import "QY_JMSService.h"
 #import "QY_appDataCenter.h"
 
+#import "KxMovieViewController.h"
+
 @interface CameraViewController () <SKSTableViewDelegate>
 
 @property (nonatomic, strong) NSArray *contents;
@@ -283,27 +285,80 @@
             cell.locationText = camera.cameraId ;
             cell.state = [camera.status boolValue] ;
             
-//            if (indexPath.subRow == 1) {
-//                cell.image = [UIImage imageNamed:@"相机分组-子图片1.png"];
-//                cell.locationText = @"门店1";
-//            }
-//            else if (indexPath.subRow == 2) {
-//                cell.image = [UIImage imageNamed:@"相机分组-子图片2.png"];
-//                cell.locationText = @"门店2";
-//            } else {
-//                cell.image = [UIImage imageNamed:@"相机分组-子图片1.png"];
-//                cell.locationText = [NSString stringWithFormat:@"门店%ld",(long)indexPath.subRow] ;
-//            }
-            
             return cell ;
             break ;
         }
-            
             
         default:
             return nil ;
             break;
     }
+}
+
+/**
+ *  看直播d(^_^o)
+ *
+ *  @param camera
+ */
+- (void)watchLive:(QY_camera *)camera {
+    //不检查了
+    
+    if ( [camera.status boolValue] == FALSE ) {
+        [QYUtils alert:@"相机不在线(・Д・)ノ"] ;
+        return ;
+    }
+    
+    NSString *path = [NSString stringWithFormat:@"rtsp://%@:%@@%@:%@/%@",camera.jssId,camera.jssPassword,camera.jssIp,camera.jssPort,camera.cameraId] ;
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        parameters[KxMovieParameterDisableDeinterlacing] = @(YES);
+    
+    KxMovieViewController *vc = [KxMovieViewController movieViewControllerWithContentPath:path parameters:parameters] ;
+    
+    [self.navigationController pushViewController:vc animated:NO] ;
+}
+
+/**
+ *  拉取相机jss信息
+ *
+ *  @param camera
+ */
+- (void)fetchCameraJssInfo:(QY_camera *)camera {
+    QYDebugLog(@"fecth jss info") ;
+    [[QY_SocketAgent shareInstance] getCameraJSSInfoByCameraId:camera.cameraId Complection:^(NSDictionary *info, NSError *error) {
+        if ( info ) {
+            QYDebugLog(@"成功~") ;
+            camera.cameraPassword = info[ParameterKey_jipncPassword] ;
+            camera.jssId = info[ParameterKey_jssId] ;
+            camera.jssPassword = info[ParameterKey_jssPassword] ;
+            camera.jssIp = info[ParameterKey_jssIp] ;
+            camera.jssPort = info[ParameterKey_jssPort] ;
+            
+            [QY_appDataCenter saveObject:nil error:NULL] ;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self watchLive:camera] ;
+            }) ;
+            
+        } else {
+            [QYUtils alertError:error] ;
+        }
+    }] ;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ( indexPath.section == 1 &&  indexPath.row > 0 ) {
+        QY_camera *camera = self.contents[indexPath.section][0][indexPath.row] ;
+        
+        if ( !camera.jssId ) {
+            [self fetchCameraJssInfo:camera] ;
+        } else {
+            [self watchLive:camera] ;
+        }
+    }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES] ;
 }
 
 #pragma mark - Actions

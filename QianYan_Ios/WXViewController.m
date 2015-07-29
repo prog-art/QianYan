@@ -34,8 +34,7 @@ lineBreakMode:mode].height : 0.f;
 #define kAdmin @"WD"
 
 
-@interface WXViewController ()<UITableViewDataSource,UITableViewDelegate,cellDelegate,InputDelegate>
-{
+@interface WXViewController ()<UITableViewDataSource,UITableViewDelegate,cellDelegate,InputDelegate> {
     NSMutableArray *_imageDataSource;
     
     NSMutableArray *_contentDataSource;//模拟接口给的数据

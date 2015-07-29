@@ -13,6 +13,7 @@
 #import "QY_Common.h"
 
 @interface QRCodeCardViewController () <UITableViewDataSource, UITableViewDelegate>
+
 @property (strong, nonatomic) IBOutlet UIImageView *potraitImageView;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *genderLabel;
@@ -35,6 +36,8 @@
     }
     return _user ;
 }
+
+#pragma mark - life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];

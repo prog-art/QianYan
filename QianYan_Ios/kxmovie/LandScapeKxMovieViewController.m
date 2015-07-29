@@ -137,25 +137,22 @@ static NSMutableDictionary * gHistory;
 
 @implementation LandScapeKxMovieViewController
 
-+ (void)initialize
-{
++ (void)initialize {
     if (!gHistory)
-        gHistory = [NSMutableDictionary dictionary];
+        gHistory = [NSMutableDictionary dictionary] ;
 }
 
 //- (BOOL)prefersStatusBarHidden { return YES; }
 
-+ (id) movieViewControllerWithContentPath: (NSString *) path
-                               parameters: (NSDictionary *) parameters
-{
++ (id)movieViewControllerWithContentPath:(NSString *)path
+                               parameters:(NSDictionary *)parameters {
     id<KxAudioManager> audioManager = [KxAudioManager audioManager];
     [audioManager activateAudioSession];
     return [[LandScapeKxMovieViewController alloc] initWithContentPath: path parameters: parameters];
 }
 
-- (id) initWithContentPath: (NSString *) path
-                parameters: (NSDictionary *) parameters
-{
+- (id)initWithContentPath:(NSString *)path
+               parameters:(NSDictionary *)parameters {
     NSAssert(path.length > 0, @"empty path");
     
     self = [super initWithNibName:nil bundle:nil];
@@ -194,8 +191,7 @@ static NSMutableDictionary * gHistory;
     return self;
 }
 
-- (void) dealloc
-{
+- (void)dealloc {
     [self pause];
     
     
@@ -210,8 +206,7 @@ static NSMutableDictionary * gHistory;
     LoggerStream(1, @"%@ dealloc", self);
 }
 
-- (void)loadView
-{
+- (void)loadVie {
     // LoggerStream(1, @"loadView");
     CGRect bounds = [[UIScreen mainScreen] applicationFrame];
     

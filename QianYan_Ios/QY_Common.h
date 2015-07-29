@@ -24,4 +24,6 @@
 
 #import "QY_CoreDataModels.h"
 
+#import "QY_appDataCenter.h"
+
 #endif

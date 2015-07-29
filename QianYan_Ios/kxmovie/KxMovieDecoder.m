@@ -782,7 +782,15 @@ static int interrupt_callback(void *ctx);
         formatCtx->interrupt_callback = cb;
     }
     
-    if (avformat_open_input(&formatCtx, [path cStringUsingEncoding: NSUTF8StringEncoding], NULL, NULL) < 0) {
+    //test
+    AVDictionary *options = NULL ;    
+    {
+        
+        av_dict_set(&options, "rtsp_transport", "tcp", 0) ;
+    }
+    //test
+    
+    if (avformat_open_input(&formatCtx, [path cStringUsingEncoding: NSUTF8StringEncoding], NULL, &options) < 0) {
         
         if (formatCtx)
             avformat_free_context(formatCtx);

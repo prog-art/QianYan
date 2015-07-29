@@ -45,16 +45,15 @@
     QY_user *user = [NSEntityDescription insertNewObjectForEntityForName:className inManagedObjectContext:[self managedObjectContext]] ;
     if ( user != nil ) {
         user.userId = userId ;
-        
-        NSError *savingError = nil ;
-        
-        if ( [[self managedObjectContext] save:&savingError] ) {
-            QYDebugLog(@"success saved user = %@",user) ;
-            return user ;
-        } else {
-            QYDebugLog(@"failed to save the user , error = %@",savingError) ;
-            return nil ;
-        }
+        return user ;
+//        NSError *savingError = nil ;
+//        if ( [[self managedObjectContext] save:&savingError] ) {
+//            QYDebugLog(@"success saved user = %@",user) ;
+//            return user ;
+//        } else {
+//            QYDebugLog(@"failed to save the user , error = %@",savingError) ;
+//            return nil ;
+//        }
     } else {
         QYDebugLog(@"failed to create new user") ;
         return nil ;
@@ -70,6 +69,8 @@
 }
 
 + (BOOL)saveObject:(NSManagedObject *)object error:(NSError **)error {
+#warning 加锁
+    
     if ( [[self managedObjectContext] save:error] ) {
         return YES ;
     } else {

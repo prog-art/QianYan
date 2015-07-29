@@ -98,8 +98,7 @@
             
         default:
             break;
-    }
-    
+    }    
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES] ;
 }

@@ -12,26 +12,84 @@
 #include "avcodec.h"
 #import "KxMovieViewController.h"
 
+#import "QY_Common.h"
+#import "QY_JPROHttpService.h"
+
+
 @interface AlertNotificationTableViewController ()
 {
-    NSArray *_localMovies;
-    NSArray *_remoteMovies;
+    NSArray *_localMovies ;
+    NSArray *_remoteMovies ;
+    UIRefreshControl *_refreshControl ;
 }
 
-@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) UITableView *tableView ;
+
+@property (nonatomic) NSMutableArray *alertMessages ;
+
+@property (nonatomic,strong) UIRefreshControl *refreshControl ;
 
 @end
 
 @implementation AlertNotificationTableViewController
 
+#pragma mark - getter & setter 
+
+- (NSMutableArray *)alertMessages {
+    if ( !_alertMessages ) {
+        _alertMessages = [NSMutableArray array] ;
+    }
+    return _alertMessages ;
+}
+
+- (UIRefreshControl *)refreshControl {
+    if ( !_refreshControl ) {
+        _refreshControl = [[UIRefreshControl alloc] init] ;
+        [_refreshControl addTarget:self action:@selector(refreshMessage:) forControlEvents:UIControlEventValueChanged] ;
+        [_refreshControl setAttributedTitle:[[NSAttributedString alloc] initWithString:@"下拉刷新"]] ;
+    }
+    return _refreshControl ;
+}
+
+- (void)refreshMessage:(UIRefreshControl *)refreshControl {
+    QYDebugLog(@"Refresh～") ;
+    [[QY_JPROHttpService shareInstance] getAlertMessageListPage:1 NumPerPage:10 Type:140 UserId:nil cameraId:nil StartId:nil EndId:nil Check:nil Complection:^(NSArray *objects, NSError *error) {
+        if ( refreshControl ) {
+            [refreshControl endRefreshing] ;
+        }
+        
+        if ( objects ) {
+            QYDebugLog(@"%@",objects) ;
+        } else {
+            QYDebugLog(@"error = %@",error) ;
+        }
+    }] ;
+}
+
+#pragma mark - Life Cycle
+
+- (void)refreshMessage {
+    [self refreshMessage:nil] ;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] init];
+    [self.tableView addSubview:self.refreshControl] ;    
+    
+    self.alertMessages = [[QY_appDataCenter findObjectWithClassName:NSStringFromClass([QY_alertMessage class]) predicate:nil] mutableCopy] ;
+    
+    [self refreshMessage] ;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated] ;    
+    [self.tabBarController.tabBar setHidden:FALSE] ;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.tabBarController.tabBar setHidden:YES];
+    
 }
 
 #pragma mark - Table view data source
@@ -62,70 +120,92 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
+//    return self.alertMessages.count ;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+//    return 2;
+    return 1 ;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     AlertNotificationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlertCell"
                                                                            forIndexPath:indexPath];
-    switch (indexPath.section) {
-        case 0:
-            switch (indexPath.row) {
-                case 0:
-                    cell.image = [UIImage imageNamed:@"报警通知-视频截图1.png"];
-                    cell.totalTime = @"0:42";
-                    cell.time = @"17:50";
-                    cell.location = @"家里客居";
-                    cell.eventType = @"移动侦测事件";
-                    cell.isRead = NO;
-                    break;
-                    
-                case 1:
-                    cell.image = [UIImage imageNamed:@"报警通知-视频截图2.png"];
-                    cell.totalTime = @"0:16";
-                    cell.time = @"17:30";
-                    cell.location = @"孩子房间";
-                    cell.eventType = @"人体感应事件";
-                    cell.isRead = NO;
-                    break;
-                    
-                default:
-                    break;
-            }
-            break;
-            
-        case 1:
-            switch (indexPath.row) {
-                case 0:
-                    cell.image = [UIImage imageNamed:@"报警通知-视频截图3.png"];
-                    cell.totalTime = @"1:26";
-                    cell.time = @"10:06";
-                    cell.location = @"商店";
-                    cell.eventType = @"声音感应事件";
-                    cell.isRead = NO;
-                    break;
-                    
-                case 1:
-                    cell.image = [UIImage imageNamed:@"报警通知-视频截图4.png"];
-                    cell.totalTime = @"0:10";
-                    cell.time = @"10:19";
-                    cell.location = @"商店2";
-                    cell.eventType = @"遮挡感应事件";
-                    cell.isRead = NO;
-                    break;
-                    
-                default:
-                    break;
-            }
-            break;
-            
-        default:
-            break;
-    }
+    
+//    QY_alertMessage *msg = self.alertMessages[indexPath.row] ;
+    
+#warning 这个图片哪里来的？
+    cell.image = [UIImage imageNamed:@"报警通知-视频截图1.png"] ;
+    //都是两段视频，一段5秒
+    cell.totalTime = @"0:10" ;
+    
+    NSDate *date ;//= msg.pubDate ;
+    
+    date = [NSDate date] ;
+    
+    NSDateFormatter *formater = [[NSDateFormatter alloc] init] ;
+    [formater setDateFormat:@"HH:mm"] ;
+    
+    cell.time = [formater stringFromDate:date] ;
+    cell.location = @"" ;
+    cell.eventType = @"移动侦测事件" ;
+    cell.isRead = NO ;
+    
+//    switch (indexPath.section) {
+//        case 0:
+//            switch (indexPath.row) {
+//                case 0:
+//                    cell.image = [UIImage imageNamed:@"报警通知-视频截图1.png"];
+//                    cell.totalTime = @"0:42";
+//                    cell.time = @"17:50";
+//                    cell.location = @"家里客居";
+//                    cell.eventType = @"移动侦测事件";
+//                    cell.isRead = NO;
+//                    break;
+//                    
+//                case 1:
+//                    cell.image = [UIImage imageNamed:@"报警通知-视频截图2.png"];
+//                    cell.totalTime = @"0:16";
+//                    cell.time = @"17:30";
+//                    cell.location = @"孩子房间";
+//                    cell.eventType = @"人体感应事件";
+//                    cell.isRead = NO;
+//                    break;
+//                    
+//                default:
+//                    break;
+//            }
+//            break;
+//            
+//        case 1:
+//            switch (indexPath.row) {
+//                case 0:
+//                    cell.image = [UIImage imageNamed:@"报警通知-视频截图3.png"];
+//                    cell.totalTime = @"1:26";
+//                    cell.time = @"10:06";
+//                    cell.location = @"商店";
+//                    cell.eventType = @"声音感应事件";
+//                    cell.isRead = NO;
+//                    break;
+//                    
+//                case 1:
+//                    cell.image = [UIImage imageNamed:@"报警通知-视频截图4.png"];
+//                    cell.totalTime = @"0:10";
+//                    cell.time = @"10:19";
+//                    cell.location = @"商店2";
+//                    cell.eventType = @"遮挡感应事件";
+//                    cell.isRead = NO;
+//                    break;
+//                    
+//                default:
+//                    break;
+//            }
+//            break;
+//            
+//        default:
+//            break;
+//    }
     
     return cell;
 }
@@ -137,17 +217,7 @@
     
     NSString *path ;
     
-    if ( indexPath.row == 1 ) {
-        path = @"http://www.qeebu.com/newe/Public/Attachment/99/52958fdb45565.mp4";
-    } else {
-//        path = @"rtsp://admin:12345@10.10.1.5:554/h264/ch1/main/av_stream" ;
-//        path = @"rtsp://jssid:jsspass@jssaddr:port/ipncid"
-//            @"t00000000000112" ;
-//            @"c00000000000247" ;
-        path = [NSString stringWithFormat:@"rtsp://%@:%@@%@:%@/%@",@"jss000000000001",@"12345678",@"jdas.qycam.com",@"50310",@"c00000000000247"] ;
-    }
-    //rtsp://jss000000000001:12345678@jdas.qycam.com:50310/c00000000000247
-
+    path = @"http://www.qeebu.com/newe/Public/Attachment/99/52958fdb45565.mp4";
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     

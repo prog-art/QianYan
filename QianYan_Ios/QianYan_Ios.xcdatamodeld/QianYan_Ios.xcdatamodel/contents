@@ -3,6 +3,7 @@
     <entity name="QY_alertMessage" representedClassName="QY_alertMessage" syncable="YES">
         <attribute name="cameraId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isRead" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="messageId" attributeType="String" syncable="YES"/>
         <attribute name="pubDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -28,6 +29,7 @@
         <attribute name="jssPort" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <relationship name="inGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_cameraGroup" inverseName="containCameras" inverseEntity="QY_cameraGroup" syncable="YES"/>
+        <relationship name="inSettings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_cameraSetting" inverseName="toCamera" inverseEntity="QY_cameraSetting" syncable="YES"/>
         <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="QY_user" inverseName="cameras" inverseEntity="QY_user" syncable="YES"/>
         <relationship name="shareUser" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_user" inverseName="sharedCameras" inverseEntity="QY_user" syncable="YES"/>
     </entity>
@@ -40,11 +42,8 @@
     </entity>
     <entity name="QY_cameraSetting" representedClassName="QY_cameraSetting" syncable="YES">
         <attribute name="nickName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="toCameraId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="QY_user" inverseName="cameraSettings" inverseEntity="QY_user" syncable="YES"/>
-        <fetchedProperty name="toCamera" optional="YES" syncable="YES">
-            <fetchRequest name="fetchedPropertyFetchRequest" entity="QY_cameraSetting"/>
-        </fetchedProperty>
+        <relationship name="toCamera" maxCount="1" deletionRule="Nullify" destinationEntity="QY_camera" inverseName="inSettings" inverseEntity="QY_camera" syncable="YES"/>
     </entity>
     <entity name="QY_comment" representedClassName="QY_comment" syncable="YES">
         <attribute name="commentId" attributeType="String" syncable="YES"/>
@@ -82,11 +81,8 @@
         <attribute name="follow" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="remarkName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shield" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="toFriendId" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QY_user" inverseName="friendSettings" inverseEntity="QY_user" syncable="YES"/>
-        <fetchedProperty name="toFriend" optional="YES" syncable="YES">
-            <fetchRequest name="fetchedPropertyFetchRequest" entity="QY_friendSetting"/>
-        </fetchedProperty>
+        <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="QY_user" inverseName="friendSettings" inverseEntity="QY_user" syncable="YES"/>
+        <relationship name="toFriend" maxCount="1" deletionRule="Nullify" destinationEntity="QY_user" inverseName="inSettings" inverseEntity="QY_user" syncable="YES"/>
     </entity>
     <entity name="QY_user" representedClassName="QY_user" syncable="YES">
         <attribute name="avatarUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -109,19 +105,20 @@
         <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_user" inverseName="friends" inverseEntity="QY_user" syncable="YES"/>
         <relationship name="friendSettings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_friendSetting" inverseName="owner" inverseEntity="QY_friendSetting" syncable="YES"/>
         <relationship name="inGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_friendGroup" inverseName="containUsers" inverseEntity="QY_friendGroup" syncable="YES"/>
+        <relationship name="inSettings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_friendSetting" inverseName="toFriend" inverseEntity="QY_friendSetting" syncable="YES"/>
         <relationship name="sharedCameras" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_camera" inverseName="shareUser" inverseEntity="QY_camera" syncable="YES"/>
     </entity>
     <fetchRequest name="FetchRequest" entity="QY_user" predicateString="userId == &quot;1000013&quot;"/>
     <elements>
-        <element name="QY_alertMessage" positionX="25" positionY="-13" width="128" height="28"/>
+        <element name="QY_alertMessage" positionX="25" positionY="-13" width="128" height="165"/>
         <element name="QY_attach" positionX="-677" positionY="-229" width="128" height="148"/>
-        <element name="QY_camera" positionX="565" positionY="-558" width="128" height="28"/>
+        <element name="QY_camera" positionX="565" positionY="-558" width="128" height="223"/>
         <element name="QY_cameraGroup" positionX="61" positionY="-409" width="128" height="118"/>
+        <element name="QY_cameraSetting" positionX="-675" positionY="-503" width="128" height="88"/>
         <element name="QY_comment" positionX="-558" positionY="26" width="128" height="118"/>
         <element name="QY_feed" positionX="-155" positionY="-270" width="128" height="238"/>
         <element name="QY_friendGroup" positionX="-216" positionY="-676" width="128" height="133"/>
-        <element name="QY_friendSetting" positionX="-225" positionY="-333" width="128" height="41"/>
-        <element name="QY_user" positionX="-486" positionY="-648" width="128" height="358"/>
-        <element name="QY_cameraSetting" positionX="-675" positionY="-503" width="128" height="41"/>
+        <element name="QY_friendSetting" positionX="-225" positionY="-333" width="128" height="148"/>
+        <element name="QY_user" positionX="-486" positionY="-648" width="128" height="373"/>
     </elements>
 </model>

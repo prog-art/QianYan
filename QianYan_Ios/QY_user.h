@@ -2,7 +2,7 @@
 //  QY_user.h
 //  QianYan_Ios
 //
-//  Created by 虎猫儿 on 15/7/26.
+//  Created by 虎猫儿 on 15/7/27.
 //  Copyright (c) 2015年 虎猫儿. All rights reserved.
 //
 
@@ -13,17 +13,17 @@
 
 @interface QY_user : NSManagedObject
 
+@property (nonatomic, retain) NSString * avatarUrl;
 @property (nonatomic, retain) NSDate * birthday;
+@property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * gender;
 @property (nonatomic, retain) NSString * jpro;
 @property (nonatomic, retain) NSString * location;
+@property (nonatomic, retain) NSString * nickname;
+@property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSString * signature;
 @property (nonatomic, retain) NSString * userId;
 @property (nonatomic, retain) NSString * userName;
-@property (nonatomic, retain) NSString * avatarUrl;
-@property (nonatomic, retain) NSString * email;
-@property (nonatomic, retain) NSString * nickname;
-@property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSSet *cameraGroups;
 @property (nonatomic, retain) NSSet *cameras;
 @property (nonatomic, retain) NSSet *cameraSettings;
@@ -34,6 +34,11 @@
 @property (nonatomic, retain) NSSet *friendSettings;
 @property (nonatomic, retain) NSSet *inGroups;
 @property (nonatomic, retain) NSSet *sharedCameras;
+@property (nonatomic, retain) NSSet *inSettings;
+
++ (QY_user *)user ;
+
++ (QY_user *)findUserById:(NSString *)userId ;
 
 @end
 
@@ -88,5 +93,10 @@
 - (void)removeSharedCamerasObject:(QY_camera *)value;
 - (void)addSharedCameras:(NSSet *)values;
 - (void)removeSharedCameras:(NSSet *)values;
+
+- (void)addInSettingsObject:(QY_friendSetting *)value;
+- (void)removeInSettingsObject:(QY_friendSetting *)value;
+- (void)addInSettings:(NSSet *)values;
+- (void)removeInSettings:(NSSet *)values;
 
 @end

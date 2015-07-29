@@ -12,15 +12,45 @@
 
 @interface GroupManageViewController () {
     NSMutableArray *_testArray;
+    UIRefreshControl *_refreshControl ;
 }
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
 @implementation GroupManageViewController
 
+- (UIRefreshControl *)refreshControl {
+    if ( !_refreshControl ) {
+        _refreshControl = [[UIRefreshControl alloc] init] ;
+        
+        [_refreshControl addTarget:self action:@selector(toggleCells:) forControlEvents:UIControlEventValueChanged] ;
+        _refreshControl.tintColor = [UIColor blueColor] ;
+    }
+    return _refreshControl ;
+}
+
+
+#pragma mark - UIRefreshControl Selector
+
+- (void)toggleCells:(UIRefreshControl*)refreshControl {
+    [refreshControl beginRefreshing];
+    //    self.useCustomCells = !self.useCustomCells;
+    //    if (self.useCustomCells)
+    //    {
+    //        self.refreshControl.tintColor = [UIColor yellowColor];
+    //    }
+    //    else
+    //    {
+    //        self.refreshControl.tintColor = [UIColor blueColor];
+    //    }
+    [self.tableView reloadData];
+    [refreshControl endRefreshing];
+}
+
+#pragma mark - life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,19 +58,13 @@
     //self.navigationItem.leftBarButtonItem = self.editButtonItem; //左侧选择按钮
     self.tableView.rowHeight = 90;
     self.view.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:245/255.0 alpha:1];
-    // Setup refresh control for example app
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(toggleCells:) forControlEvents:UIControlEventValueChanged];
-    refreshControl.tintColor = [UIColor blueColor];
-
-    self.refreshControl = refreshControl;
     
     // If you set the seperator inset on iOS 6 you get a NSInvalidArgumentException...weird
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
         self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0); // Makes the horizontal row seperator stretch the entire length of the table view
     }
     
-    _testArray = [[NSMutableArray alloc] init];
+    _testArray = [NSMutableArray array];
     
     for (int i = 0; i < 100; ++i) {
         NSString *string = [NSString stringWithFormat:@"%d", i];
@@ -67,24 +91,6 @@
     }
 }
 
-#pragma mark - UIRefreshControl Selector
-
-- (void)toggleCells:(UIRefreshControl*)refreshControl
-{
-    [refreshControl beginRefreshing];
-//    self.useCustomCells = !self.useCustomCells;
-//    if (self.useCustomCells)
-//    {
-//        self.refreshControl.tintColor = [UIColor yellowColor];
-//    }
-//    else
-//    {
-//        self.refreshControl.tintColor = [UIColor blueColor];
-//    }
-    [self.tableView reloadData];
-    [refreshControl endRefreshing];
-}
-
 #pragma mark - UIScrollViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,9 +105,8 @@
     return cell;
 }
 
-- (NSArray *)rightButtons
-{
-    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+- (NSArray *)rightButtons {
+    NSMutableArray *rightUtilityButtons = [NSMutableArray array] ;
     [rightUtilityButtons sw_addUtilityButtonWithColor:
      [UIColor colorWithRed:251/255.0 green:70/255.0 blue:78/255.0 alpha:1.0f]
                                                     icon:[UIImage imageNamed:@"群组管理-删除按钮.png"]];
@@ -116,14 +121,9 @@
 
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Set background color of cell here if you don't want default white
-}
-
 #pragma mark - SWTableViewDelegate
 
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state
-{
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state {
     switch (state) {
         case 0:
             NSLog(@"utility buttons closed");
@@ -139,22 +139,18 @@
     }
 }
 
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
-{
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
     
     [_testArray removeObjectAtIndex:cellIndexPath.row];
     [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
 }
 
-- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
-{
-    // allow just one cell's utility button to be open at once
+- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell {
     return YES;
 }
 
-- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
-{
+- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state {
     switch (state) {
         case 1:
             // set to NO to disable all left utility buttons appearing

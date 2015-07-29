@@ -25,18 +25,18 @@
 		195C161D1B3EA11100A316FE /* QY_JRMAPIPhraseRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 195C161C1B3EA11100A316FE /* QY_JRMAPIPhraseRule.m */; };
 		195C16201B3EA5C800A316FE /* QY_SocketAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 195C161F1B3EA5C800A316FE /* QY_SocketAgent.m */; };
 		195C16231B3EA5FD00A316FE /* QY_SocketService.m in Sources */ = {isa = PBXBuildFile; fileRef = 195C16221B3EA5FD00A316FE /* QY_SocketService.m */; };
-		19602FA81B64F7CB0064BC87 /* QY_friendSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FA71B64F7CB0064BC87 /* QY_friendSetting.m */; };
-		19602FAE1B64F8070064BC87 /* QY_user.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FAD1B64F8070064BC87 /* QY_user.m */; };
 		19602FB11B64F8080064BC87 /* QY_friendGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FB01B64F8080064BC87 /* QY_friendGroup.m */; };
 		19602FB41B64FB8B0064BC87 /* QY_cameraGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FB31B64FB8B0064BC87 /* QY_cameraGroup.m */; };
-		19602FB71B64FB8B0064BC87 /* QY_cameraSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FB61B64FB8B0064BC87 /* QY_cameraSetting.m */; };
-		19602FBA1B64FB8B0064BC87 /* QY_camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FB91B64FB8B0064BC87 /* QY_camera.m */; };
 		19602FC01B64FBA90064BC87 /* QY_feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FBF1B64FBA90064BC87 /* QY_feed.m */; };
 		19602FC31B64FBA90064BC87 /* QY_attache.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FC21B64FBA90064BC87 /* QY_attache.m */; };
 		19602FC61B64FBAA0064BC87 /* QY_comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FC51B64FBAA0064BC87 /* QY_comment.m */; };
-		19602FCC1B64FE320064BC87 /* QY_alertMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FCB1B64FE320064BC87 /* QY_alertMessage.m */; };
 		19602FCF1B64FF010064BC87 /* QY_alertMessage+QY_JPRO_DATA_FORMAT.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FCE1B64FF010064BC87 /* QY_alertMessage+QY_JPRO_DATA_FORMAT.m */; };
 		19602FD51B6535270064BC87 /* QY_appDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FD41B6535270064BC87 /* QY_appDataCenter.m */; };
+		19602FD81B6566970064BC87 /* QY_alertMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FD71B6566970064BC87 /* QY_alertMessage.m */; };
+		19602FDB1B665CD10064BC87 /* QY_cameraSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FDA1B665CD10064BC87 /* QY_cameraSetting.m */; };
+		19602FDE1B665D2D0064BC87 /* QY_camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FDD1B665D2D0064BC87 /* QY_camera.m */; };
+		19602FE11B665D600064BC87 /* QY_friendSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FE01B665D600064BC87 /* QY_friendSetting.m */; };
+		19602FE41B665D800064BC87 /* QY_user.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FE31B665D800064BC87 /* QY_user.m */; };
 		1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1964569D1B058D4000EA4E14 /* QY_QRCodeUtils.m */; };
 		196456A01B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1964569F1B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m */; };
 		196456A41B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456A31B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m */; };
@@ -213,30 +213,30 @@
 		195C16251B40462500A316FE /* QY_Block_Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_Block_Define.h; sourceTree = "<group>"; };
 		195C16261B41254700A316FE /* QY_JDASAPIInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_JDASAPIInterface.h; sourceTree = "<group>"; };
 		195C16271B41411200A316FE /* QY_Socket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_Socket.h; sourceTree = "<group>"; };
-		19602FA61B64F7CB0064BC87 /* QY_friendSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_friendSetting.h; sourceTree = "<group>"; };
-		19602FA71B64F7CB0064BC87 /* QY_friendSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_friendSetting.m; sourceTree = "<group>"; };
-		19602FAC1B64F8070064BC87 /* QY_user.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_user.h; sourceTree = "<group>"; };
-		19602FAD1B64F8070064BC87 /* QY_user.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_user.m; sourceTree = "<group>"; };
 		19602FAF1B64F8080064BC87 /* QY_friendGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_friendGroup.h; sourceTree = "<group>"; };
 		19602FB01B64F8080064BC87 /* QY_friendGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_friendGroup.m; sourceTree = "<group>"; };
 		19602FB21B64FB8B0064BC87 /* QY_cameraGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_cameraGroup.h; sourceTree = "<group>"; };
 		19602FB31B64FB8B0064BC87 /* QY_cameraGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_cameraGroup.m; sourceTree = "<group>"; };
-		19602FB51B64FB8B0064BC87 /* QY_cameraSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_cameraSetting.h; sourceTree = "<group>"; };
-		19602FB61B64FB8B0064BC87 /* QY_cameraSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_cameraSetting.m; sourceTree = "<group>"; };
-		19602FB81B64FB8B0064BC87 /* QY_camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_camera.h; sourceTree = "<group>"; };
-		19602FB91B64FB8B0064BC87 /* QY_camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_camera.m; sourceTree = "<group>"; };
 		19602FBE1B64FBA90064BC87 /* QY_feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_feed.h; sourceTree = "<group>"; };
 		19602FBF1B64FBA90064BC87 /* QY_feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_feed.m; sourceTree = "<group>"; };
 		19602FC11B64FBA90064BC87 /* QY_attache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_attache.h; sourceTree = "<group>"; };
 		19602FC21B64FBA90064BC87 /* QY_attache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_attache.m; sourceTree = "<group>"; };
 		19602FC41B64FBAA0064BC87 /* QY_comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_comment.h; sourceTree = "<group>"; };
 		19602FC51B64FBAA0064BC87 /* QY_comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_comment.m; sourceTree = "<group>"; };
-		19602FCA1B64FE320064BC87 /* QY_alertMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_alertMessage.h; sourceTree = "<group>"; };
-		19602FCB1B64FE320064BC87 /* QY_alertMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_alertMessage.m; sourceTree = "<group>"; };
 		19602FCD1B64FF010064BC87 /* QY_alertMessage+QY_JPRO_DATA_FORMAT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QY_alertMessage+QY_JPRO_DATA_FORMAT.h"; sourceTree = "<group>"; };
 		19602FCE1B64FF010064BC87 /* QY_alertMessage+QY_JPRO_DATA_FORMAT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QY_alertMessage+QY_JPRO_DATA_FORMAT.m"; sourceTree = "<group>"; };
 		19602FD31B6535270064BC87 /* QY_appDataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_appDataCenter.h; sourceTree = "<group>"; };
 		19602FD41B6535270064BC87 /* QY_appDataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_appDataCenter.m; sourceTree = "<group>"; };
+		19602FD61B6566970064BC87 /* QY_alertMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_alertMessage.h; sourceTree = "<group>"; };
+		19602FD71B6566970064BC87 /* QY_alertMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_alertMessage.m; sourceTree = "<group>"; };
+		19602FD91B665CD10064BC87 /* QY_cameraSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_cameraSetting.h; sourceTree = "<group>"; };
+		19602FDA1B665CD10064BC87 /* QY_cameraSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_cameraSetting.m; sourceTree = "<group>"; };
+		19602FDC1B665D2D0064BC87 /* QY_camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_camera.h; sourceTree = "<group>"; };
+		19602FDD1B665D2D0064BC87 /* QY_camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_camera.m; sourceTree = "<group>"; };
+		19602FDF1B665D600064BC87 /* QY_friendSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_friendSetting.h; sourceTree = "<group>"; };
+		19602FE01B665D600064BC87 /* QY_friendSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_friendSetting.m; sourceTree = "<group>"; };
+		19602FE21B665D800064BC87 /* QY_user.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_user.h; sourceTree = "<group>"; };
+		19602FE31B665D800064BC87 /* QY_user.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_user.m; sourceTree = "<group>"; };
 		196456971B0582B000EA4E14 /* QY_QRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_QRCode.h; sourceTree = "<group>"; };
 		1964569C1B058D4000EA4E14 /* QY_QRCodeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_QRCodeUtils.h; sourceTree = "<group>"; };
 		1964569D1B058D4000EA4E14 /* QY_QRCodeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_QRCodeUtils.m; sourceTree = "<group>"; };
@@ -713,8 +713,8 @@
 				19602FC21B64FBA90064BC87 /* QY_attache.m */,
 				19602FBE1B64FBA90064BC87 /* QY_feed.h */,
 				19602FBF1B64FBA90064BC87 /* QY_feed.m */,
-				19602FCA1B64FE320064BC87 /* QY_alertMessage.h */,
-				19602FCB1B64FE320064BC87 /* QY_alertMessage.m */,
+				19602FD61B6566970064BC87 /* QY_alertMessage.h */,
+				19602FD71B6566970064BC87 /* QY_alertMessage.m */,
 			);
 			name = "朋友圈";
 			sourceTree = "<group>";
@@ -722,12 +722,12 @@
 		19589C4C1B567326005246BC /* 用户 */ = {
 			isa = PBXGroup;
 			children = (
-				19602FA61B64F7CB0064BC87 /* QY_friendSetting.h */,
-				19602FA71B64F7CB0064BC87 /* QY_friendSetting.m */,
 				19602FAF1B64F8080064BC87 /* QY_friendGroup.h */,
 				19602FB01B64F8080064BC87 /* QY_friendGroup.m */,
-				19602FAC1B64F8070064BC87 /* QY_user.h */,
-				19602FAD1B64F8070064BC87 /* QY_user.m */,
+				19602FDF1B665D600064BC87 /* QY_friendSetting.h */,
+				19602FE01B665D600064BC87 /* QY_friendSetting.m */,
+				19602FE21B665D800064BC87 /* QY_user.h */,
+				19602FE31B665D800064BC87 /* QY_user.m */,
 			);
 			name = "用户";
 			sourceTree = "<group>";
@@ -735,12 +735,12 @@
 		19589C4D1B567333005246BC /* 摄像机 */ = {
 			isa = PBXGroup;
 			children = (
-				19602FB81B64FB8B0064BC87 /* QY_camera.h */,
-				19602FB91B64FB8B0064BC87 /* QY_camera.m */,
-				19602FB51B64FB8B0064BC87 /* QY_cameraSetting.h */,
-				19602FB61B64FB8B0064BC87 /* QY_cameraSetting.m */,
 				19602FB21B64FB8B0064BC87 /* QY_cameraGroup.h */,
 				19602FB31B64FB8B0064BC87 /* QY_cameraGroup.m */,
+				19602FD91B665CD10064BC87 /* QY_cameraSetting.h */,
+				19602FDA1B665CD10064BC87 /* QY_cameraSetting.m */,
+				19602FDC1B665D2D0064BC87 /* QY_camera.h */,
+				19602FDD1B665D2D0064BC87 /* QY_camera.m */,
 			);
 			name = "摄像机";
 			sourceTree = "<group>";
@@ -807,6 +807,15 @@
 			children = (
 			);
 			name = header;
+			sourceTree = "<group>";
+		};
+		19602FE51B66606F0064BC87 /* 二级界面 */ = {
+			isa = PBXGroup;
+			children = (
+				1979071B1B528A120079452C /* cell */,
+				6E67BBDD1B0F81890066C9CE /* 手机通讯录 */,
+			);
+			name = "二级界面";
 			sourceTree = "<group>";
 		};
 		196456961B05828B00EA4E14 /* QY_QRCode */ = {
@@ -1332,8 +1341,7 @@
 		6E18D1011B281DA300802C49 /* tab-联系人 */ = {
 			isa = PBXGroup;
 			children = (
-				6E67BBDD1B0F81890066C9CE /* 手机通讯录 */,
-				1979071B1B528A120079452C /* cell */,
+				19602FE51B66606F0064BC87 /* 二级界面 */,
 				6E75ACA21B28266000A0C919 /* tab-联系人-添加好友 */,
 				6E75AC9C1B281E8300A0C919 /* ContactViewController.h */,
 				6E75AC9D1B281E8300A0C919 /* ContactViewController.m */,
@@ -2039,17 +2047,14 @@
 			files = (
 				198530541B2B669900EB96F7 /* QY_JPROUrlFactor.m in Sources */,
 				6E75ACA11B281E8300A0C919 /* ContactViewController.m in Sources */,
-				19602FAE1B64F8070064BC87 /* QY_user.m in Sources */,
+				19602FD81B6566970064BC87 /* QY_alertMessage.m in Sources */,
 				6E1EC9BF1B50F69B003E346F /* SystemSettingsImageTableViewCell.m in Sources */,
 				6E67BBE21B0F81B00066C9CE /* ContactTableViewCell.m in Sources */,
-				19602FBA1B64FB8B0064BC87 /* QY_camera.m in Sources */,
 				6E2761BF1B08C03200247CCC /* LoginViewController.m in Sources */,
 				6E4BB92B1B51441600070F6F /* CameraSubTableViewCell.m in Sources */,
-				19602FB71B64FB8B0064BC87 /* QY_cameraSetting.m in Sources */,
 				6E18D1001B281C2800802C49 /* PasswordManageViewController.m in Sources */,
 				196456B11B0617F800EA4E14 /* QY_ChineseStringUtils.m in Sources */,
 				1938CCB81B24BC2B009C4AE5 /* JRMDataParseUtils.m in Sources */,
-				19602FCC1B64FE320064BC87 /* QY_alertMessage.m in Sources */,
 				1938CCBB1B24BCEA009C4AE5 /* JRMDataFormatUtils.m in Sources */,
 				6E62A0FA1B441E320001E3A2 /* GroupManageViewController.m in Sources */,
 				6E75AC9F1B281E8300A0C919 /* GroupTableViewCell.m in Sources */,
@@ -2068,7 +2073,6 @@
 				19ED2EE71AECF84F00E9DBEA /* AppDelegate.m in Sources */,
 				6E1EC9C71B50FFD4003E346F /* AccountInfoTableViewCell.m in Sources */,
 				19909B4E1AEEA04900CCB721 /* QYUtils.m in Sources */,
-				19602FA81B64F7CB0064BC87 /* QY_friendSetting.m in Sources */,
 				6EE8E6621B11F737007C54E0 /* SliderTableViewCell.m in Sources */,
 				6E1A9BA31B50A4CB0046B8AB /* ILRegularExpressionManager.m in Sources */,
 				1985303D1B2887CD00EB96F7 /* QY_FileService.m in Sources */,
@@ -2108,6 +2112,7 @@
 				1935450C1B486F8800ACE915 /* QY_JPROHttpService.m in Sources */,
 				19A140121B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.m in Sources */,
 				6E9BA9561B0CB8FB009D87BE /* SKSTableViewCell.m in Sources */,
+				19602FE11B665D600064BC87 /* QY_friendSetting.m in Sources */,
 				6E1EC9C61B50FFD4003E346F /* AccountInfoViewController.m in Sources */,
 				19F91CF21B0E2ADF00264AC0 /* testAddressBookViewController.m in Sources */,
 				6E62A0F91B441E320001E3A2 /* GroupManageTableViewCell.m in Sources */,
@@ -2116,6 +2121,7 @@
 				19589C221B566BCA005246BC /* QY_feed+QY_JPRO_DATA_FORMAT.m in Sources */,
 				6E9BA94F1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.m in Sources */,
 				198530421B28B98B00EB96F7 /* QY_XMLService.m in Sources */,
+				19602FE41B665D800064BC87 /* QY_user.m in Sources */,
 				6E9BA9551B0CB8FB009D87BE /* SKSTableView.m in Sources */,
 				6E7C07601B3BE42600AC8EC3 /* AlertNotificationTableViewCell.m in Sources */,
 				1938CCB41B24ACB4009C4AE5 /* JRMvalue.m in Sources */,
@@ -2139,9 +2145,11 @@
 				19589C281B566C89005246BC /* QY_attache+QY_JPRO_DATA_FORMAT.m in Sources */,
 				6E75ACA01B281E8300A0C919 /* SearchTableViewCell.m in Sources */,
 				19A6953B1AFB44C500F60D03 /* QYNotify.m in Sources */,
+				19602FDB1B665CD10064BC87 /* QY_cameraSetting.m in Sources */,
 				6E4BB9271B5140C800070F6F /* RacentTableViewCell.m in Sources */,
 				19ED2EE41AECF84F00E9DBEA /* main.m in Sources */,
 				6E1EC9D51B5105D5003E346F /* CameraSettingCollectionViewCell.m in Sources */,
+				19602FDE1B665D2D0064BC87 /* QY_camera.m in Sources */,
 				6E1EC9BE1B50F69B003E346F /* SystemSettingsTableViewCell.m in Sources */,
 				1985304E1B29D5EA00EB96F7 /* NSError+QYError.m in Sources */,
 				6E9BA9511B0CB8FB009D87BE /* JVLeftDrawerTableViewController.m in Sources */,

@@ -210,8 +210,9 @@ NSString *const kNotificationNameReceiveCamerasState = @"kNotificationNameReceiv
                                                                       toLen:JMS_DATA_LEN_OF_KEY_CAMDATA_LENGTH];
         NSData *cam_cmdData = [JRMDataFormatUtils formatIntegerValueData:cmd
                                                                    toLen:JMS_DATA_LEN_OF_KEY_CMD] ;
-        NSData *cam_dataData = [JRMDataFormatUtils formatIntegerValueData:1
-                                                                    toLen:JMS_DATA_LEN_OF_KEY_CAMDATA_DATA] ;
+        NSData *cam_dataData = [JRMDataFormatUtils formatStringValueData:@"1"
+                                                                   toLen:JMS_DATA_LEN_OF_KEY_CAMDATA_DATA] ;
+        
         NSArray *camDataArr = @[cam_lengthData,cam_cmdData,cam_dataData] ;
         [camDataArr enumerateObjectsUsingBlock:^(NSData *data, NSUInteger idx, BOOL *stop) {
             [camData appendData:data] ;

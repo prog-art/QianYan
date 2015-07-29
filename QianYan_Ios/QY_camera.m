@@ -2,13 +2,15 @@
 //  QY_camera.m
 //  QianYan_Ios
 //
-//  Created by 虎猫儿 on 15/7/26.
+//  Created by 虎猫儿 on 15/7/27.
 //  Copyright (c) 2015年 虎猫儿. All rights reserved.
 //
 
 #import "QY_camera.h"
 #import "QY_cameraGroup.h"
+#import "QY_cameraSetting.h"
 #import "QY_user.h"
+
 #import "QY_appDataCenter.h"
 
 @implementation QY_camera
@@ -21,9 +23,10 @@
 @dynamic jssPassword;
 @dynamic jssPort;
 @dynamic status;
+@dynamic inGroups;
 @dynamic owner;
 @dynamic shareUser;
-@dynamic inGroups;
+@dynamic inSettings;
 
 + (instancetype)camera {
     QY_camera *camera = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:[QY_appDataCenter managedObjectContext]] ;
@@ -33,7 +36,7 @@
 + (QY_camera *)findCameraById:(NSString *)cameraId {
     assert(cameraId) ;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"cameraId = %@",cameraId] ;
-    QY_camera *camera = (QY_camera *)[QY_appDataCenter findObjectWithClassName:NSStringFromClass(self) predicate:predicate] ;    
+    QY_camera *camera = (QY_camera *)[QY_appDataCenter findObjectWithClassName:NSStringFromClass(self) predicate:predicate] ;
     return camera ;
 }
 

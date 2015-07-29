@@ -86,11 +86,11 @@
     
     appCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-1 user登录" cmd:@(-1)],
 //                [NSDictionary dictionaryWithDesc:@"-2 user注册" cmd:@(-2)],
-                [NSDictionary dictionaryWithDesc:@"-302 绑定摄像机" cmd:@(-302)],
+                [NSDictionary dictionaryWithDesc:@"[ok]-302 绑定摄像机" cmd:@(-302)],
                 [NSDictionary dictionaryWithDesc:@"-303 分享相机" cmd:@(-303)],
                 [NSDictionary dictionaryWithDesc:@"-304 取消分享相机" cmd:@(-304)],
                 [NSDictionary dictionaryWithDesc:@"-305 解绑相机" cmd:@(-305)],
-                [NSDictionary dictionaryWithDesc:@"-306 添加好友" cmd:@(-306)],
+                [NSDictionary dictionaryWithDesc:@"[ok]-306 添加好友" cmd:@(-306)],
                 [NSDictionary dictionaryWithDesc:@"-307 不想让他看我的朋友圈状态" cmd:@(-307)],
                 [NSDictionary dictionaryWithDesc:@"-308 不想看他的朋友圈状态" cmd:@(-308)],
                 [NSDictionary dictionaryWithDesc:@"-309 删除好友" cmd:@(-309)],] ;
@@ -297,11 +297,9 @@
 //    [tableView endUpdates] ;
 //    return ;
     
-//    appCmds = @[[NSDictionary dictionaryWithDesc:@"-302 绑定摄像机" cmd:@(-302)],
 //                [NSDictionary dictionaryWithDesc:@"-303 分享相机" cmd:@(-303)],
 //                [NSDictionary dictionaryWithDesc:@"-304 取消分享相机" cmd:@(-304)],
 //                [NSDictionary dictionaryWithDesc:@"-305 解绑相机" cmd:@(-305)],
-//                [NSDictionary dictionaryWithDesc:@"-306 添加好友" cmd:@(-306)],
 //                [NSDictionary dictionaryWithDesc:@"-307 不想让他看我的朋友圈状态" cmd:@(-307)],
 //                [NSDictionary dictionaryWithDesc:@"-308 不想看他的朋友圈状态" cmd:@(-308)],
 //                [NSDictionary dictionaryWithDesc:@"-309 删除好友" cmd:@(-309)],] ;
@@ -336,13 +334,7 @@
             
         case -302 : {
             //扫描机身二维码－生成wifi二维码－
-            [self.socketAgent_v2 bindingCameraToCurrentUser:@"c00000000000247" Complection:^(BOOL success, NSError *error) {
-                if ( success ) {
-                    QYDebugLog(@"二维码扫描绑定成功") ;
-                } else {
-                    QYDebugLog(@"二维码扫描绑定失败 error = %@",error) ;
-                }
-            }] ;
+//            [self bindingCameraWithCameraId:testCameraId2] ;
             break ;
         }
             
@@ -359,6 +351,7 @@
         }
             
         case -306 : {
+//            [self addFriendWithFriendId:@"10000122"] ;
             break ;
         }
             
@@ -387,8 +380,7 @@
         }
             
         case -203 : {
-            [[QY_JMSService shareInstance] getCameraThumbnailById:testCameraId] ;
-            //<74303030 30303030 30303030 31313200 0000178e 00000000 00000008 00060000 05500001>
+            [[QY_JMSService shareInstance] getCameraThumbnailById:testCameraId2] ;
             break ;
         }
             
@@ -542,26 +534,7 @@
             [[QY_JPROHttpService shareInstance] testUpload] ;            
             break ;
         }
-        case -7 : {
             
-            NSManagedObjectContext *context = [(AppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext] ;
-            
-            
-//            //增
-//            [context insertObject:nil] ;
-//            [context insertedObjects] ;
-//            //删
-//            [context deleteObject:nil] ;
-//            [context deletedObjects] ;
-//            //改
-//            [context updatedObjects] ;
-//            
-//            //查
-//            NSError *error ;
-//            [context executeFetchRequest:nil error:&error] ;
-            
-            break ;
-        }
         case -3 : {
             [QY_QRCodeUtils startQRScanWithNavigationController:self.navigationController Delegate:self] ;
             break ;
@@ -894,69 +867,6 @@
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO] ;
-}
-
-#pragma mark - QY_QRCodeScanerDelegate
-
-/**
- *  成功扫描二维码，普通字符串
- *
- *  @param resultStr 结果字符串
- */
-- (void)QY_didScanQRCode:(NSString *)resultStr {
-    QYDebugLog(@"扫描普通字符串 %@",resultStr) ;
-    
-    [self.navigationController popViewControllerAnimated:YES] ;
-}
-
-/**
- *  取消扫描二维码
- */
-- (void)QY_didCancelQRCodeScan {
-    QYDebugLog(@"取消扫描") ;
-    [self.navigationController popViewControllerAnimated:YES] ;
-}
-
-/**
- *  扫描到了某种千衍的二维码结构
- *
- *  @param opetion 扫描到的类型
- *  @param info    各种参数
- */
-- (void)QY_didScanOption:(QY_QRCodeType)option userInfo:(NSDictionary *)info {
-    QYDebugLog(@"扫描千衍二维码！option = %ld info = %@",option,info) ;
-    [self.navigationController popViewControllerAnimated:YES] ;
-    if ( option == QY_QRCodeType_Binding_Camera ) {
-        QYDebugLog(@"绑定摄像机！") ;
-        
-        self.userId = testUserId ;
-        if ( self.userId ) {
-            [self.socketAgent_v2 bindingCameraToCurrentUser:info[QY_QRCODE_DATA_DIC_KEY][KEY_FOR_DATA_AT_INDEX(0)] Complection:^(BOOL success, NSError *error) {
-                if ( success ) {
-                    QYDebugLog(@"绑定摄像机成功") ;
-                    [QYUtils alert:@"绑定摄像机成功"] ;
-                } else {
-                    QYDebugLog(@"绑定摄像机失败 error = %@",error) ;
-                    [QYUtils alertError:error] ;
-                }
-            }] ;
-        } else {
-            QYDebugLog(@"user为空") ;            
-        }
-        
-    } else
-    if (option == QY_QRCodeType_User )  {
-        QYDebugLog(@"添加好友！") ;
-        QYUser *user = [QYUser currentUser] ;
-        NSString *friendId = info[QY_QRCODE_DATA_DIC_KEY][KEY_FOR_DATA_AT_INDEX(1)] ;
-        
-//        if ( user ) {
-//            [self.socketAgent_v2 createAddRequestToUser:friendId Complection:nil] ;
-//        } else {
-//            QYDebugLog(@"user为空") ;
-//        }
-        
-    }
 }
 
 #pragma mark - 

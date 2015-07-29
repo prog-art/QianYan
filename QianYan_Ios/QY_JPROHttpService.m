@@ -955,8 +955,12 @@ QYResultBlock packComplection(QYResultBlock complection) {
                                 mimeType:mimeType] ;
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        QYDebugLog(@"上传成功") ;
+        complection(true,nil) ;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        QYDebugLog(@"上传失败") ;
+        complection(false,error) ;
         
     }] ;
     

@@ -221,6 +221,7 @@ static NSMutableDictionary * gHistory;
 
 - (void) dealloc
 {
+    QYDebugLog(@"dealloc") ;
     [self pause];
     
     

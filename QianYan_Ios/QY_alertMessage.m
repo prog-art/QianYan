@@ -2,7 +2,7 @@
 //  QY_alertMessage.m
 //  QianYan_Ios
 //
-//  Created by 虎猫儿 on 15/7/26.
+//  Created by 虎猫儿 on 15/7/27.
 //  Copyright (c) 2015年 虎猫儿. All rights reserved.
 //
 
@@ -12,12 +12,13 @@
 
 @implementation QY_alertMessage
 
-@dynamic content;
 @dynamic cameraId;
+@dynamic content;
+@dynamic messageId;
 @dynamic pubDate;
 @dynamic type;
-@dynamic messageId;
 @dynamic userId;
+@dynamic isRead;
 @dynamic shared2Feeds;
 
 @end

@@ -27,17 +27,27 @@
 //ok
 + (NSString *)getUserIdXML:(id<user2userIdXMLInterface>)user ;
 
+
 #pragma mark - xml Str --> obj 
 
-//ok
-+ (id<user2ProfileXMLInterface>)getUserFromProfileXML:(NSString *)xmlStr ;
+////ok
+//+ (id<user2ProfileXMLInterface>)getUserFromProfileXML:(NSString *)xmlStr ;
 
 //ok
 + (id<user2userIdXMLInterface>)getUserFromUserIdXML:(NSString *)xmlStr ;
 
+#pragma mark - Core Data Model
 
 + (QY_camera *)getCameraFromIdXML:(NSString *)xmlStr ;
 
 + (QY_camera *)getCameraFromProfileXML:(NSString *)xmlStr ;
+
++ (QY_friendSetting *)getSesttingFromIdXML:(NSString *)xmlStr ;
+
++ (QY_user *)getUserFromProfileXML:(NSString *)xmlStr ;
+
+#pragma mark - Core Data Model To Xml String 
+
++ (NSString *)QY_friendSettingXMLString:(QY_friendSetting *)setting ;
 
 @end
