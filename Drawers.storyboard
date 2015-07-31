@@ -252,7 +252,7 @@
         <!--添加-->
         <scene sceneID="KpV-n0-TuM">
             <objects>
-                <viewController id="ZmV-Gi-aRB" customClass="AddContactViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddContactViewControllerSBID" id="ZmV-Gi-aRB" customClass="AddContactViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xz2-ue-dMS"/>
                         <viewControllerLayoutGuide type="bottom" id="ds9-Zi-KjQ"/>
@@ -1227,6 +1227,7 @@
                     <navigationItem key="navigationItem" title="账号信息" id="RsF-eM-lzY"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="avatarBtn" destination="buM-4q-eAk" id="PoL-qw-gtw"/>
                         <outlet property="tableView" destination="ksv-ng-TIx" id="SI7-Sa-oAB"/>
                     </connections>
                 </viewController>

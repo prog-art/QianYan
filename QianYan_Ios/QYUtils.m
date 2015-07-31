@@ -72,4 +72,31 @@
     [[self getAppDelegate] toLogin] ;
 }
 
+#pragma mark - UIImagePickerController 
+
++ (void)pickImageFromPhotoLibraryAtController:(UIViewController *)controller{
+    UIImagePickerControllerSourceType srcType = UIImagePickerControllerSourceTypePhotoLibrary ;
+    NSArray* mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:srcType] ;
+    if([UIImagePickerController isSourceTypeAvailable:srcType] && [mediaTypes count] > 0 ){
+        UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init] ;
+        imagePicker.mediaTypes = mediaTypes;
+        imagePicker.delegate = (id)controller;
+        imagePicker.allowsEditing = YES;
+        imagePicker.sourceType = srcType;
+        [controller presentViewController:imagePicker animated:YES completion:nil] ;
+    }else{
+        [QYUtils alert:@"no image picker available"] ;
+    }
+}
+
++ (void)pickImageFromCameraAtController:(UIViewController *)controller {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init] ;
+    imagePicker.delegate = (id)controller ;
+    imagePicker.allowsEditing = YES ;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera ;
+    [controller presentViewController:imagePicker animated:YES completion:nil] ;
+}
+
+#pragma mark - 
+
 @end

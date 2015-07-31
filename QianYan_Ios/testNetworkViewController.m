@@ -85,7 +85,8 @@
                      [NSDictionary dictionaryWithDesc:@"[ok]-411 删除所有Camera" cmd:@(-411)]] ;
     
     appCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-1 user登录" cmd:@(-1)],
-//                [NSDictionary dictionaryWithDesc:@"-2 user注册" cmd:@(-2)],
+                [NSDictionary dictionaryWithDesc:@"[ok]-2 user注册" cmd:@(-2)],
+                [NSDictionary dictionaryWithDesc:@"[ok]-4 user注册上传profile.xml" cmd:@(-4)],
                 [NSDictionary dictionaryWithDesc:@"[ok]-302 绑定摄像机" cmd:@(-302)],
                 [NSDictionary dictionaryWithDesc:@"-303 分享相机" cmd:@(-303)],
                 [NSDictionary dictionaryWithDesc:@"-304 取消分享相机" cmd:@(-304)],
@@ -561,15 +562,44 @@
             break ;
         }
         case -2 : {
-            [QYUser registeName:@"79395178112" Password:testPassword1 complection:^(QYUser *registedUser, NSError *error) {
+            [QYUser registeName:@"793951787" Password:testPassword1 complection:^(QYUser *registedUser, NSError *error) {
                 if ( !error ) {
                     QYDebugLog(@"注册成功 userId = %@",registedUser.userId) ;
+                    
+                    [registedUser uploadProfileComplection:^(BOOL success, NSError *error) {
+                        if ( success ) {
+                            QYDebugLog(@"上传profile成功") ;
+                        } else {
+                            QYDebugLog(@"上传profile成功失败 error = %@",error) ;
+                        }
+                    }] ;
+                    
                 } else {
                     QYDebugLog(@"注册失败 error = %@",error) ;
                 }
             }] ;
             break ;
         }
+            
+        case -4 : {
+            [QYUser loginName:@"793951787" Password:testPassword1 complection:^(BOOL success, NSError *error) {
+                if ( success ) {
+                    QYDebugLog(@"登录成功") ;
+                    [[QYUser currentUser] uploadProfileComplection:^(BOOL success, NSError *error) {
+                        if ( success ) {
+                            QYDebugLog(@"上传profile成功") ;
+                        } else {
+                            QYDebugLog(@"上传profile成功失败 error = %@",error) ;
+                        }
+                    }] ;
+                    
+                } else {
+                    QYDebugLog(@"登录失败 error = %@",error) ;
+                }
+            }] ;
+            break ;
+        }
+            
         case 211 : {
             [[QY_SocketAgent shareInstance] deviceLoginRequestComplection:^(BOOL success, NSError *error) {
                 if ( success ) {

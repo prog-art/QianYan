@@ -55,4 +55,8 @@
     return user ;
 }
 
++ (QY_user *)insertUserById:(NSString *)userId {
+    return [QY_appDataCenter userWithId:userId] ;
+}
+
 @end

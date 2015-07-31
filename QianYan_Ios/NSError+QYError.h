@@ -15,19 +15,28 @@ typedef NS_ENUM(NSInteger, QianYan_ErrorCode) {
     API2529_Binding_Error            = 2 ,//绑定出错
     API2529_Camera_IS_Been_Bindinged = 3 ,//相机已经被绑定了
     
-    RegisteStep1_Error = 11 ,//注册第一步出错，registe to jrm出错。
-    RegisteStep2_Error = 12 ,//注册第二步出错，获取JPRO服务器信息出错。
-    RegisteStep3_Error = 13 ,//注册第三步出错，upload profile.xml出错。
-    RegisteStep4_Error = 14 ,//注册第四部出错，移动和重命名temp.xml --> profile.xml
+#pragma mark - Network connective 
+
+#pragma mark - User Operation
     
-    LoginStep1_Error = 21 ,//登录第一步出错，网络原因。
-    LoginStep2_Error = 22 ,//登录第二步出错，get userId by username出错［获取UserId失败，请检查网络或联系系统管理员。］
-    LoginStep3_Error = 23 ,//登录第三步出错，get user jpro information出错
-    LoginStep4_Error = 24 ,//登录第四步出错，get user profile.xml出错
+    REGISTE_ERROR_USERNAME_EXISTED = 10 ,//用户名已经存在
+    
+    Login_Error_Username_Or_Password = 20,//用户名或密码出错
+    
+    
     
     FILEURL_ERROR = 101 ,//提供的文件URL出错
     
+#pragma mark - JPRO 
+    
+    JPRO_UPLOAD_PROFILE_ERROR = 110 ,//上传PROFILE的时候出错
+    JPRO_DOWNLOAD_PROFILE_ERROR = 111 ,//下载PROFILE的时候出错
+    
+#pragma makr - JRM
+    
     JRM_DO_NOT_CONNECTED = 200,//JRM服务器未连接
+    JRM_GET_USER_JPRO_ERROR = 210,//获取User Jpro信息出错
+    JRM_GET_USERID_BY_ID_ERROR ,//获取UserId出错
     
     JDAS_GET_JRM_ADDRESS_ERROR = 300,//JDAS寻址出错
     JRM_USER_RELOGIN2JRM_ERROR = 301,//用户重新登录JRM错误

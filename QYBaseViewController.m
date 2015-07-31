@@ -44,8 +44,8 @@
     QYDebugLog(@"data = %@",data) ;
     switch (option) {
         case QY_QRCodeType_User : {
-            NSString *userId = info[KEY_FOR_DATA_AT_INDEX(0)] ;
-//            NSString *device_type = info[KEY_FOR_DATA_AT_INDEX(2)] ;
+            NSString *userId = data[KEY_FOR_DATA_AT_INDEX(0)] ;
+//            NSString *device_type = data[KEY_FOR_DATA_AT_INDEX(2)] ;
             QYDebugLog(@"二维码中userId = %@",userId) ;
             
             [self addFriendWithFriendId:userId] ;
@@ -54,9 +54,9 @@
         }
             
         case QY_QRCodeType_Binding_Camera : {
-            NSString *cameraId = info[KEY_FOR_DATA_AT_INDEX(0)] ;
-//            NSString *password = info[KEY_FOR_DATA_AT_INDEX(1)] ;
-//            NSString *device_type = info[KEY_FOR_DATA_AT_INDEX(2)] ;
+            NSString *cameraId = data[KEY_FOR_DATA_AT_INDEX(0)] ;
+//            NSString *password = data[KEY_FOR_DATA_AT_INDEX(1)] ;
+//            NSString *device_type = data[KEY_FOR_DATA_AT_INDEX(2)] ;
             QYDebugLog(@"二维码中cameraId = %@",cameraId) ;
             
             [self bindingCameraWithCameraId:cameraId] ;
@@ -105,7 +105,7 @@
  *  @param friendId 好友Id
  */
 - (void)addFriendWithFriendId:(NSString *)friendId {
-    QYDebugLog(@"添加好友！") ;
+    QYDebugLog(@"添加好友！friendId = %@",friendId) ;
     
     QYUser *user = [QYUser currentUser] ;
     if ( !user || !user.userId ) {

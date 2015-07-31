@@ -263,7 +263,6 @@
 		198530341B272C3300EB96F7 /* QYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYUser.m; sourceTree = "<group>"; };
 		1985303B1B2887CD00EB96F7 /* QY_FileService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_FileService.h; sourceTree = "<group>"; };
 		1985303C1B2887CD00EB96F7 /* QY_FileService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_FileService.m; sourceTree = "<group>"; };
-		1985303E1B28B33A00EB96F7 /* userInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = userInterface.h; sourceTree = "<group>"; };
 		198530401B28B98B00EB96F7 /* QY_XMLService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_XMLService.h; sourceTree = "<group>"; };
 		198530411B28B98B00EB96F7 /* QY_XMLService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_XMLService.m; sourceTree = "<group>"; };
 		198530451B28B9AF00EB96F7 /* QY_XMLPhraser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_XMLPhraser.h; sourceTree = "<group>"; };
@@ -980,7 +979,6 @@
 			children = (
 				198530331B272C3300EB96F7 /* QYUser.h */,
 				198530341B272C3300EB96F7 /* QYUser.m */,
-				1985303E1B28B33A00EB96F7 /* userInterface.h */,
 			);
 			name = workModels;
 			sourceTree = "<group>";

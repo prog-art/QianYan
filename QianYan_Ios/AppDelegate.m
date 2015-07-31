@@ -318,6 +318,11 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
 
 #pragma mark - WifiSetting View Controller
 
+- (UIViewController *)controllerWithId:(NSString *)VCSBID {
+    if ( !VCSBID ) return nil ;
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:VCSBID] ;
+}
+
 - (UIViewController *)WifiSettingViewController {
     if (!_WifiSettingViewController) {
         _WifiSettingViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:WifiSettingViewControllerStoryBoardID];

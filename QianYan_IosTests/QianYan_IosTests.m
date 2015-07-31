@@ -32,41 +32,6 @@
     [super tearDown];
 }
 
-- (void)testQYUser {
-    QYUser *user = [QYUser instanceWithUserId:@"testUserId"
-                                     username:@"zr233"
-                                     nickname:@"小瑞瑞"
-                                   remarkname:@"fuck you"
-                                       follow:3
-                                         fans:100
-                                        black:50
-                                       shield:3
-                                         jpro:@"http://qycam.com:50551"] ;
-    
-    NSString *xmlStr = [user getUserIdXMLString] ;
-    
-    QYUser *user2 = (QYUser *)[QY_XMLService getUserFromUserIdXML:xmlStr] ;
-    
-    NSLog(@"%@",user2) ;
-}
-
-- (void)testQYUser2 {
-    QYUser *user = [QYUser instanceWithUserId:@"123456"
-                                     username:@"123456"
-                                       gender:@"123456"
-                                     location:@"123456"
-                                     birthday:[NSDate date]
-                                    signature:@"123456"] ;
-    
-    
-    NSString *xmlStr = [user getProfileXMLString] ;
-
-    QYUser *user2 = (QYUser *)[QY_XMLService getUserFromProfileXML:xmlStr] ;
-    
-    NSLog(@"%@",user2) ;
-    
-}
-
 - (void)testPath {
     NSString *userId = @"10000133" ;
     NSString *path = [[QY_FileService getUserPathByUserId:userId] stringByAppendingPathComponent:@"profile.xml"] ;

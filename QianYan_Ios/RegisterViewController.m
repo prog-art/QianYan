@@ -72,9 +72,49 @@
 
 - (IBAction)enrollBtnClicked:(id)sender {
     //判断是否时我们想要限定的那个输入框
-    if ([self.passwordTextField.text length] < 6) {
+    
+    NSString *password = self.passwordTextField.text ;
+    NSString *username = self.emailOrPhoneNumberTextField.text ;
+    
+    if ([password length] < 6 ) {
         //如果输入框内容小于6则弹出警告
         [QYUtils alert:@"密码不能少于6位"];
+        
+        if ( [username length] == 0 ) {
+            [QYUtils alert:@"输入的用户名不能为空"] ;
+            return ;
+        }
+        
+        [QYUser registeName:username Password:password complection:^(QYUser *registedUser, NSError *error) {
+            if ( !error ) {
+                QYDebugLog(@"注册成功 userId = %@",registedUser.userId) ;
+                
+                [registedUser uploadProfileComplection:^(BOOL success, NSError *error) {
+                    if ( success ) {
+                        QYDebugLog(@"上传profile成功") ;
+                        
+                        [QYUser loginName:username Password:password complection:^(BOOL success, NSError *error) {
+                            if ( success ) {
+                                QYDebugLog(@"登录成功") ;
+                                [QYUtils toMain] ;
+                            } else {
+                                QYDebugLog(@"登录失败 error = %@",error) ;
+                                [QYUtils alertError:error] ;
+                            }
+                        }] ;
+                        
+                    } else {
+                        QYDebugLog(@"上传profile成功失败 error = %@",error) ;
+                        [QYUtils alertError:error] ;
+                    }
+                }] ;
+                
+            } else {
+                QYDebugLog(@"注册失败 error = %@",error) ;
+                [QYUtils alertError:error] ;
+            }
+        }] ;
+        
     }
     if ([self.passwordTextField.text length] > 20) {
         //如果输入框内容大于20则弹出警告

@@ -27,156 +27,128 @@
 
 #pragma mark - Obj --> xml Str
 
-+ (NSString *)getUserProfileXML:(id<user2ProfileXMLInterface>)user {
++ (NSString *)getProfileXMLFromUser:(QY_user *)user {
     GDataXMLElement *userTag = [GDataXMLNode elementWithName:@"user"] ;
+    
     {
-        GDataXMLElement *userIdAttr = [GDataXMLNode attributeWithName:@"id" stringValue:[user userId]] ;
+        GDataXMLElement *userIdAttr = [GDataXMLNode attributeWithName:@"id" stringValue:user.userId] ;
         [userTag addAttribute:userIdAttr] ;
+
+        if ( user.userName ) {
+            GDataXMLElement *usernameTag = [GDataXMLNode elementWithName:@"username" stringValue:user.userName] ;
+            [userTag addChild:usernameTag] ;
+        } ;
         
-        GDataXMLElement *usernameTag = [GDataXMLNode elementWithName:@"username" stringValue:[user username]] ;
-        [userTag addChild:usernameTag] ;
-        
-        GDataXMLElement *genderTag = [GDataXMLElement elementWithName:@"gender" stringValue:[user gender]] ;
-        [userTag addChild:genderTag] ;
-        
-        GDataXMLElement *locationTag = [GDataXMLElement elementWithName:@"location" stringValue:[user location]] ;
-        [userTag addChild:locationTag] ;
-        
-        NSString *birthdayStr ;
-        {
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-            [formatter setDateFormat:@"yyyy年MM月dd日"] ;
-            birthdayStr = [formatter stringFromDate:[user birthday]] ;
+        if ( user.nickname ) {
+            GDataXMLElement *nicknameTag = [GDataXMLNode elementWithName:@"nickname" stringValue:user.nickname] ;
+            [userTag addChild:nicknameTag] ;
         }
         
-        GDataXMLElement *birthdayTag = [GDataXMLElement elementWithName:@"birthday" stringValue:birthdayStr] ;
-        [userTag addChild:birthdayTag] ;
+        if ( user.gender ) {
+            GDataXMLElement *genderTag = [GDataXMLElement elementWithName:@"gender" stringValue:user.gender] ;
+            [userTag addChild:genderTag] ;
+        }
+
+        if ( user.location ) {
+            GDataXMLElement *locationTag = [GDataXMLElement elementWithName:@"location" stringValue:user.location] ;
+            [userTag addChild:locationTag] ;
+        }
         
-        GDataXMLElement *signTag = [GDataXMLElement elementWithName:@"signature" stringValue:[user signature]] ;
-        [userTag addChild:signTag] ;
+        if ( user.birthday ) {
+            NSString *birthdayStr ;
+            {
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+                [formatter setDateFormat:@"yyyy年MM月dd日"] ;
+                birthdayStr = [formatter stringFromDate:user.birthday] ;
+            }
+            
+            GDataXMLElement *birthdayTag = [GDataXMLElement elementWithName:@"birthday" stringValue:birthdayStr] ;
+            [userTag addChild:birthdayTag] ;
+        }
+
+        if ( user.signature ) {
+            GDataXMLElement *signTag = [GDataXMLElement elementWithName:@"signature" stringValue:user.signature] ;
+            [userTag addChild:signTag] ;
+        }
+        
+        if ( user.jpro ) {
+            GDataXMLElement *jproTag = [GDataXMLElement elementWithName:@"jpro" stringValue:user.jpro] ;
+            [userTag addChild:jproTag] ;
+        }
+
     }
     
     return [self xmlStrWithRootElement:userTag] ;
 }
-
-+ (NSString *)getUserIdXML:(id<user2userIdXMLInterface>)user {
-    GDataXMLElement *userTag = [GDataXMLNode elementWithName:@"user"] ;
-    {
-        GDataXMLElement *userIdAttr = [GDataXMLNode attributeWithName:@"id" stringValue:[user userId]] ;
-        [userTag addAttribute:userIdAttr] ;
-        
-        GDataXMLElement *usernameTag = [GDataXMLNode elementWithName:@"username" stringValue:[user username]] ;
-        [userTag addChild:usernameTag] ;
-        
-        GDataXMLElement *nicknameTag = [GDataXMLElement elementWithName:@"nickname" stringValue:[user nickname]] ;
-        [userTag addChild:nicknameTag] ;
-        
-        GDataXMLElement *remarknameTag = [GDataXMLElement elementWithName:@"remarkname" stringValue:[user remarkname]] ;
-        [userTag addChild:remarknameTag] ;
-        
-        GDataXMLElement *followTag = [GDataXMLElement elementWithName:@"follow" stringValue:QY_STR([user follow])] ;
-        [userTag addChild:followTag] ;
-        
-        GDataXMLElement *fansTag = [GDataXMLElement elementWithName:@"fans" stringValue:QY_STR([user fans])] ;
-        [userTag addChild:fansTag] ;
-        
-        GDataXMLElement *blackTag = [GDataXMLElement elementWithName:@"black" stringValue:QY_STR([user black])] ;
-        [userTag addChild:blackTag] ;
-        
-        GDataXMLElement *shieldTag = [GDataXMLElement elementWithName:@"shield" stringValue:QY_STR([user shield])] ;
-        [userTag addChild:shieldTag] ;
-        
-        GDataXMLElement *jproTag = [GDataXMLElement elementWithName:@"jpro" stringValue:[user jpro]] ;
-        [userTag addChild:jproTag] ;
-        
-    }
-    
-    return [self xmlStrWithRootElement:userTag] ;
-}
-
-#pragma mark - xml Str --> obj 
-
-//+ (id<user2ProfileXMLInterface>)getUserFromProfileXML:(NSString *)xmlStr {
-//    NSError *error ;
-//    GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:&error] ;
-//    
-//    if ( error ) {
-//        [QYUtils alertError:error] ;
-//        return nil ;
-//    } else {
-//        QYUser *user ;
+//
+//+ (NSString *)getUserProfileXML:(id<user2ProfileXMLInterface>)user {
+//    GDataXMLElement *userTag = [GDataXMLNode elementWithName:@"user"] ;
+//    {
+//        GDataXMLElement *userIdAttr = [GDataXMLNode attributeWithName:@"id" stringValue:[user userId]] ;
+//        [userTag addAttribute:userIdAttr] ;
 //        
-//        GDataXMLElement *root = [xmlDoc rootElement] ;
+//        GDataXMLElement *usernameTag = [GDataXMLNode elementWithName:@"username" stringValue:[user username]] ;
+//        [userTag addChild:usernameTag] ;
 //        
-//        NSString *userId = [[root attributeForName:@"id"] stringValue] ;
-//        NSString *username = [self getStringValueForElement:root name:@"username"] ;
-//        NSString *gender = [self getStringValueForElement:root name:@"gender"] ;
-//        NSString *location = [self getStringValueForElement:root name:@"location"] ;
-//        //2008年06月21日 --> NSDate
-//        NSString *birthdayStr = [self getStringValueForElement:root name:@"birthday"] ;
+//        GDataXMLElement *genderTag = [GDataXMLElement elementWithName:@"gender" stringValue:[user gender]] ;
+//        [userTag addChild:genderTag] ;
 //        
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-//        [formatter setDateFormat:@"yyyy年MM月dd日"] ;
-//        NSDate *birthday = [formatter dateFromString:birthdayStr] ;
+//        GDataXMLElement *locationTag = [GDataXMLElement elementWithName:@"location" stringValue:[user location]] ;
+//        [userTag addChild:locationTag] ;
 //        
-//        NSString *signature = [self getStringValueForElement:root name:@"signature"] ;
+//        NSString *birthdayStr ;
+//        {
+//            NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+//            [formatter setDateFormat:@"yyyy年MM月dd日"] ;
+//            birthdayStr = [formatter stringFromDate:[user birthday]] ;
+//        }
 //        
-//        user = [QYUser instanceWithUserId:userId
-//                                 username:username
-//                                   gender:gender
-//                                 location:location
-//                                 birthday:birthday
-//                                signature:signature] ;
+//        GDataXMLElement *birthdayTag = [GDataXMLElement elementWithName:@"birthday" stringValue:birthdayStr] ;
+//        [userTag addChild:birthdayTag] ;
 //        
-//        return user ;
+//        GDataXMLElement *signTag = [GDataXMLElement elementWithName:@"signature" stringValue:[user signature]] ;
+//        [userTag addChild:signTag] ;
 //    }
+//    
+//    return [self xmlStrWithRootElement:userTag] ;
+//}
+//
+//+ (NSString *)getUserIdXML:(id<user2userIdXMLInterface>)user {
+//    GDataXMLElement *userTag = [GDataXMLNode elementWithName:@"user"] ;
+//    {
+//        GDataXMLElement *userIdAttr = [GDataXMLNode attributeWithName:@"id" stringValue:[user userId]] ;
+//        [userTag addAttribute:userIdAttr] ;
+//        
+//        GDataXMLElement *usernameTag = [GDataXMLNode elementWithName:@"username" stringValue:[user username]] ;
+//        [userTag addChild:usernameTag] ;
+//        
+//        GDataXMLElement *nicknameTag = [GDataXMLElement elementWithName:@"nickname" stringValue:[user nickname]] ;
+//        [userTag addChild:nicknameTag] ;
+//        
+//        GDataXMLElement *remarknameTag = [GDataXMLElement elementWithName:@"remarkname" stringValue:[user remarkname]] ;
+//        [userTag addChild:remarknameTag] ;
+//        
+//        GDataXMLElement *followTag = [GDataXMLElement elementWithName:@"follow" stringValue:QY_STR([user follow])] ;
+//        [userTag addChild:followTag] ;
+//        
+//        GDataXMLElement *fansTag = [GDataXMLElement elementWithName:@"fans" stringValue:QY_STR([user fans])] ;
+//        [userTag addChild:fansTag] ;
+//        
+//        GDataXMLElement *blackTag = [GDataXMLElement elementWithName:@"black" stringValue:QY_STR([user black])] ;
+//        [userTag addChild:blackTag] ;
+//        
+//        GDataXMLElement *shieldTag = [GDataXMLElement elementWithName:@"shield" stringValue:QY_STR([user shield])] ;
+//        [userTag addChild:shieldTag] ;
+//        
+//        GDataXMLElement *jproTag = [GDataXMLElement elementWithName:@"jpro" stringValue:[user jpro]] ;
+//        [userTag addChild:jproTag] ;
+//        
+//    }
+//    
+//    return [self xmlStrWithRootElement:userTag] ;
 //}
 
-+ (id<user2userIdXMLInterface>)getUserFromUserIdXML:(NSString *)xmlStr {
-    NSError *error ;
-    GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:&error] ;
-    
-    if ( error ) {
-        [QYUtils alertError:error] ;
-        return nil ;
-    } else {
-        QYUser *user ;
-        
-        GDataXMLElement *root = [xmlDoc rootElement] ;
-        
-        NSString *userId = [[root attributeForName:@"id"] stringValue] ;
-        NSString *username = [self getStringValueForElement:root name:@"username"] ;
-        NSString *nickname = [self getStringValueForElement:root name:@"nickname"] ;
-        NSString *remarkname = [self getStringValueForElement:root name:@"remarkname"] ;
-        
-        NSString *followStr = [self getStringValueForElement:root name:@"follow"] ;
-        NSInteger follow = [followStr integerValue] ;
-        
-        NSString *fansStr = [self getStringValueForElement:root name:@"fans"] ;
-        NSInteger fans = [fansStr integerValue] ;
-        
-        NSString *blackStr = [self getStringValueForElement:root name:@"black"] ;
-        NSInteger black = [blackStr integerValue] ;
-        
-        NSString *shieldStr = [self getStringValueForElement:root name:@"shield"] ;
-        NSInteger shield = [shieldStr integerValue] ;
-        
-        NSString *jpro = [self getStringValueForElement:root name:@"jpro"] ;
-        
-        
-        user = [QYUser instanceWithUserId:userId
-                                 username:username
-                                 nickname:nickname
-                               remarkname:remarkname
-                                   follow:follow
-                                     fans:fans
-                                    black:black
-                                   shield:shield
-                                     jpro:jpro] ;
-        
-        return user ;
-    }
-}
+#pragma mark - xml Str --> obj
 
 #pragma mark -
 

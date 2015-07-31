@@ -40,6 +40,8 @@
 
 + (QY_user *)findUserById:(NSString *)userId ;
 
++ (QY_user *)insertUserById:(NSString *)userId ;
+
 @end
 
 @interface QY_user (CoreDataGeneratedAccessors)

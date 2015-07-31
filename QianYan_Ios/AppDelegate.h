@@ -63,6 +63,8 @@
 
 #pragma mark - public
 
+- (UIViewController *)controllerWithId:(NSString *)VCSBID ;
+
 + (AppDelegate *)globalDelegate;
 
 

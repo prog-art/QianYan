@@ -26,4 +26,6 @@
 
 #import "QY_appDataCenter.h"
 
+#import "QY_JPRO.h"
+
 #endif

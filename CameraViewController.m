@@ -141,7 +141,12 @@
 - (void)refreshCamerasState {
     QYDebugLog(@"请求相机状态") ;
     //通过notificaiton接受通知
-    [[QY_JMSService shareInstance] getCamerasStateByIds:[NSSet setWithArray:self.cameras.allKeys]] ;
+    
+    NSSet *cameras = [NSSet setWithArray:self.cameras.allKeys] ;
+#warning 补丁
+    if ( cameras && [cameras count] != 0 ) {
+        [[QY_JMSService shareInstance] getCamerasStateByIds:[NSSet setWithArray:self.cameras.allKeys]] ;
+    }
 }
 
 - (void)didReceiveCamerasState:(NSNotification *)notification {

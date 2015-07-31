@@ -21,20 +21,9 @@
 
 #pragma mark - Obj --> xml Str
 
-//ok
-+ (NSString *)getUserProfileXML:(id<user2ProfileXMLInterface>)user ;
-
-//ok
-+ (NSString *)getUserIdXML:(id<user2userIdXMLInterface>)user ;
-
++ (NSString *)getProfileXMLFromUser:(QY_user *)user ;
 
 #pragma mark - xml Str --> obj 
-
-////ok
-//+ (id<user2ProfileXMLInterface>)getUserFromProfileXML:(NSString *)xmlStr ;
-
-//ok
-+ (id<user2userIdXMLInterface>)getUserFromUserIdXML:(NSString *)xmlStr ;
 
 #pragma mark - Core Data Model
 

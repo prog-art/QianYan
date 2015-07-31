@@ -11,6 +11,8 @@
 
 #import "QY_Common.h"
 
+#import <UIKit/UIKit.h>
+
 @interface QYUtils : NSObject
 
 + (void)alert:(NSString *)msg ;
@@ -38,5 +40,17 @@
 + (void)toRegiste ;
 
 + (void)toLogin ;
+
+#pragma mark - UIImagePickerController
+
+/**
+ *  从相册选照片
+ */
++ (void)pickImageFromPhotoLibraryAtController:(UIViewController *)controller ;
+
+/**
+ *  拍照
+ */
++ (void)pickImageFromCameraAtController:(UIViewController *)controller ;
 
 @end

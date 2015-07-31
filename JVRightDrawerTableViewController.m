@@ -14,6 +14,7 @@
 #import "QY_Common.h"
 #import "CameraViewController.h"
 #import "QYBaseViewController.h"
+#import "AddContactViewController.h"
 
 static NSString * const kJVDrawerCellReuseIdentifier = @"JVRightDrawerCellReuseIdentifier";
 
@@ -97,19 +98,34 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVRightDrawerCellReuseI
             break;
         }
             
-        case 1:
-            break;
+        case 1 : {
+            //添加好友
             
-        case 2:
-            break;
+            NSString *VCSBID = @"AddContactViewControllerSBID" ;
             
-        case 3:
-            break;
+            destinationViewController = [[AppDelegate globalDelegate] controllerWithId:VCSBID] ;
             
-        case 4:
-            destinationViewController = [[AppDelegate globalDelegate] WifiSettingViewController];
             [self test:destinationViewController] ;
-            break;
+            
+            break ;
+        }
+
+            
+        case 2 : {
+            
+            break ;
+        }
+            
+        case 3 : {
+            
+            break ;
+        }
+            
+        case 4 : {
+            destinationViewController = [[AppDelegate globalDelegate] WifiSettingViewController] ;
+            [self test:destinationViewController] ;
+            break ;
+        }
             
         default:
             break;
@@ -125,11 +141,10 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVRightDrawerCellReuseI
     UITabBarController *tbc = (UITabBarController *)[[[AppDelegate globalDelegate] drawerViewController] centerViewController] ;
     
     UINavigationController *nvc = tbc.viewControllers[0] ;
-    
-    
+        
     UIViewController *vc = nvc.topViewController ;
     
-    [vc.navigationController pushViewController:destinationViewController animated:NO] ;
+    [vc.navigationController pushViewController:destinationViewController animated:YES] ;
 }
 
 @end

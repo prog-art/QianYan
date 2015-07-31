@@ -93,7 +93,10 @@
 
 //公众号没做
 
-//头像没做
+/**
+ *  314 @"user/userId/headpicture.jpg"
+ */
++ (NSString *)pathForUserAvatar:(NSString *)userId ;
 
 /**
  *  32 @"camera/userId"

@@ -150,6 +150,8 @@ NSString *const kNotificationNameReceiveCamerasState = @"kNotificationNameReceiv
 
 - (void)getCamerasStateByIds:(NSSet *)cameraIds {
     assert(cameraIds) ;
+    assert([cameraIds count] != 0) ;
+    
     static NSUInteger type = 6013 ;
     NSArray *cameraIDs = [cameraIds allObjects] ;
     

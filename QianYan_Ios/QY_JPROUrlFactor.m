@@ -107,6 +107,13 @@
     return path ;
 }
 
++ (NSString *)pathForUserAvatar:(NSString *)userId {
+    NSString *path = PATH_USER ;
+    path = [path stringByAppendingPathComponent:userId] ;
+    path = [path stringByAppendingString:@"headpicture.jpg"] ;
+    return path ;
+}
+
 #define PATH_CAMERA @"camera"
 
 /**

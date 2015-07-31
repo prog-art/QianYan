@@ -46,6 +46,7 @@
     _tableView.delegate = self;
     
     //init QR Image
+    QYDebugLog(@"userId = %@",[QYUser currentUser].userId) ;
     UIImage *image = [QY_QRCodeUtils QY_generateQRImageOfPersonalCardWithUserId:[QYUser currentUser].userId] ;
     self.QRCodeImageView.image = image ;
     
