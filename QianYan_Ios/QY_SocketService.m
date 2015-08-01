@@ -266,6 +266,8 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
         QYDebugLog(@"JRM Socket did disconnect") ;
     }
     
+    self.jrmSocket = nil ;
+    
 }
 
 @end

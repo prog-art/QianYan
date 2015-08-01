@@ -235,7 +235,7 @@
                                                       ValueCount:2
                                                   AttachmentData:nil] ;
         return request ;
-    } successRuleBlock:^QY_JRMAPIPhraseRule *{
+    } successRuleBlock:^QY_JRMAPIPhraseRule *{        
         QY_JRMAPIPhraseRule *successRule = [QY_JRMAPIPhraseRule ruleWithTargetCMD:DEVICE_LOGIN2JRM_OK
                                                                      descriptions:nil
                                                                        attachment:NO] ;

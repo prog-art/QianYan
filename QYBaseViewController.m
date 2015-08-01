@@ -171,21 +171,21 @@
         me2Friend.owner = me ;
         me2Friend.toFriend = friend ;
         me2Friend.remarkName = me.nickname ;
-        
-        NSString *path4Me = [QY_JPROUrlFactor pathForUserFriendList:me.userId FriendId:friend.userId] ;
+        NSString *path4Friend = [QY_JPROUrlFactor pathForUserFriendList:friend.userId FriendId:me.userId] ;
         
         
         QY_friendSetting *friend2Me = [QY_friendSetting setting] ;
         friend2Me.owner = friend ;
         friend2Me.toFriend = me ;
         friend2Me.remarkName = friend.nickname ;
-        NSString *path4Friend = [QY_JPROUrlFactor pathForUserFriendList:friend.userId FriendId:me.userId] ;
+        NSString *path4Me = [QY_JPROUrlFactor pathForUserFriendList:me.userId FriendId:friend.userId] ;
+
         
         //开始上传服务器
-        [[QY_JPROHttpService shareInstance] uploadFileToPath:path4Me FileData:me2Friend.xmlStringDataForTransportByHttp fileName:@"file" mimeType:MIMETYPE Complection:^(BOOL success, NSError *error) {
+        [[QY_JPROHttpService shareInstance] uploadFileToPath:path4Friend FileData:me2Friend.xmlStringDataForTransportByHttp fileName:@"file" mimeType:MIMETYPE Complection:^(BOOL success, NSError *error) {
             if ( success ) {
                 
-                [[QY_JPROHttpService shareInstance] uploadFileToPath:path4Friend FileData:friend2Me.xmlStringDataForTransportByHttp fileName:@"file" mimeType:MIMETYPE Complection:^(BOOL success, NSError *error) {
+                [[QY_JPROHttpService shareInstance] uploadFileToPath:path4Me FileData:friend2Me.xmlStringDataForTransportByHttp fileName:@"file" mimeType:MIMETYPE Complection:^(BOOL success, NSError *error) {
                     if ( success ) {
                         QYDebugLog(@"添加好友成功") ;
                         [QY_appDataCenter saveObject:nil error:NULL] ;
@@ -202,5 +202,91 @@
     }) ;
 }
 
+#pragma mark - 删除好友
+
+- (void)deleteFriendWithId:(NSString *)friendId complection:(QYResultBlock)complection {
+    complection = ^(BOOL result,NSError *error) {
+        if ( complection ) {
+            complection(result,error) ;
+        }
+    } ;
+    QYDebugLog(@"删除好友 friendId = %@",friendId) ;
+
+    QYUser *curUser = [QYUser currentUser] ;
+    
+    if ( !curUser ) {
+        QYDebugLog(@"未登录!") ;
+        
+        NSError *error = [NSError QYErrorWithCode:USER_DID_NOT_LOGIN description:@"未登录！"];
+        
+        complection(false,error) ;
+        
+        return ;
+    }
+    
+    QY_user *user = curUser.coreUser ;
+    QY_user *friend = [QY_user findUserById:friendId] ;
+    
+    if ( [user.friends containsObject:friend] ) {
+#warning 这里对JPRO的操作，不应该客户端来保证原子性！！一旦某个操作失败很容易导致数据被污染。
+        dispatch_group_t group = dispatch_group_create() ;
+        
+        dispatch_semaphore_t sema = dispatch_semaphore_create(-2) ;
+        
+        dispatch_group_async(group, dispatch_get_global_queue(0, 0), ^{
+            //删除自己
+            NSString *path = [QY_JPROUrlFactor pathForUserFriendList:friendId FriendId:user.userId];
+            
+            [[QY_JPROHttpService shareInstance] clearDocumentOnPath:path Complection:^(BOOL success, NSError *error) {
+                if ( success ) {
+                    QYDebugLog(@"删除自己成功") ;
+                } else {
+                    QYDebugLog(@"删除自己失败 error = %@",error) ;
+                }
+
+                dispatch_semaphore_signal(sema) ;
+            }] ;
+            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER) ;
+            QYDebugLog(@"删除自己完成") ;
+        }) ;
+        
+        dispatch_group_async(group, dispatch_get_global_queue(0, 0), ^{
+            //删除别人
+            NSString *path = [QY_JPROUrlFactor pathForUserFriendList:user.userId FriendId:friendId] ;
+            
+            [[QY_JPROHttpService shareInstance] clearDocumentOnPath:path Complection:^(BOOL success, NSError *error) {
+                if ( success ) {
+                    QYDebugLog(@"删除别人成功") ;
+                } else {
+                    QYDebugLog(@"删除别人失败 error = %@",error) ;
+                }
+                dispatch_semaphore_signal(sema) ;
+            }] ;
+            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER) ;
+            QYDebugLog(@"删除别人完成") ;
+        }) ;
+        
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+            QYDebugLog(@"finish，准备数据库删除") ;
+#warning test
+            [user removeFriendsObject:friend] ;
+            
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"toFriend.userId = %@",friend.userId];
+            QY_friendSetting *setting = (QY_friendSetting *)[QY_appDataCenter findObjectWithClassName:@"QY_friendSetting" predicate:predicate] ;
+            
+            QYDebugLog(@"setting[%@] exist : %@",setting,setting?@"存在":@"不存在") ;
+            
+            [QY_appDataCenter deleteObjectsWithClassName:@"QY_friendSetting" predicate:predicate] ;
+            setting = nil ;
+            
+            [QY_appDataCenter saveObject:nil error:NULL] ;
+            
+            complection(TRUE,nil) ;
+        }) ;
+        
+    } else {
+        QYDebugLog(@"无好友关系！") ;
+    }
+}
 
 @end

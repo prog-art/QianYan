@@ -19,6 +19,8 @@ typedef NS_ENUM(NSInteger, QianYan_ErrorCode) {
 
 #pragma mark - User Operation
     
+    USER_DID_NOT_LOGIN = 5 ,//用户未登录
+    
     REGISTE_ERROR_USERNAME_EXISTED = 10 ,//用户名已经存在
     
     Login_Error_Username_Or_Password = 20,//用户名或密码出错

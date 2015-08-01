@@ -85,8 +85,11 @@
                      [NSDictionary dictionaryWithDesc:@"[ok]-411 删除所有Camera" cmd:@(-411)]] ;
     
     appCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-1 user登录" cmd:@(-1)],
+                [NSDictionary dictionaryWithDesc:@"-12 user登录错误密码" cmd:@(-12)],
                 [NSDictionary dictionaryWithDesc:@"[ok]-2 user注册" cmd:@(-2)],
+                [NSDictionary dictionaryWithDesc:@"[ok]-3 扫一扫" cmd:@(-3)],
                 [NSDictionary dictionaryWithDesc:@"[ok]-4 user注册上传profile.xml" cmd:@(-4)],
+                [NSDictionary dictionaryWithDesc:@"-5 通过UserId或Tel搜索用户" cmd:@(-5)],
                 [NSDictionary dictionaryWithDesc:@"[ok]-302 绑定摄像机" cmd:@(-302)],
                 [NSDictionary dictionaryWithDesc:@"-303 分享相机" cmd:@(-303)],
                 [NSDictionary dictionaryWithDesc:@"-304 取消分享相机" cmd:@(-304)],
@@ -126,7 +129,7 @@
                  [NSDictionary dictionaryWithDesc:@"[ok]-8 上传profile.xml" cmd:@(-8)],
                  [NSDictionary dictionaryWithDesc:@"-7 core data" cmd:@(-7)]] ;
 
-    jrmCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-3 扫一扫" cmd:@(-3)],
+    jrmCmds = @[[NSDictionary dictionaryWithDesc:@"200 断开JRM连接" cmd:@(200)],
                 [NSDictionary dictionaryWithDesc:@"[ok] 212 获取jms服务器信息" cmd:@212],
                 [NSDictionary dictionaryWithDesc:@"[ok] 251 用户注册" cmd:@251],
                 [NSDictionary dictionaryWithDesc:@"[ok] 252 用户登录" cmd:@252],
@@ -303,7 +306,6 @@
 //                [NSDictionary dictionaryWithDesc:@"-305 解绑相机" cmd:@(-305)],
 //                [NSDictionary dictionaryWithDesc:@"-307 不想让他看我的朋友圈状态" cmd:@(-307)],
 //                [NSDictionary dictionaryWithDesc:@"-308 不想看他的朋友圈状态" cmd:@(-308)],
-//                [NSDictionary dictionaryWithDesc:@"-309 删除好友" cmd:@(-309)],] ;
     
     NSInteger cmd = [cmds[indexPath.section][indexPath.row][cmdKey] integerValue] ;
     switch (cmd) {
@@ -365,6 +367,14 @@
         }
             
         case -309 : {
+            [self deleteFriendWithId:@"10000133" complection:^(BOOL success, NSError *error) {
+                if ( success ) {
+                    QYDebugLog(@"删除成功") ;
+                } else {
+                    QYDebugLog(@"删除失败error = %@",error) ;
+                    [QYUtils alertError:error] ;
+                }
+            }] ;
             break ;
         }
             
@@ -561,6 +571,12 @@
 //            }] ;
             break ;
         }
+        
+        case -12 : {
+            [QYUser loginName:testUsername Password:testPassword1 complection:nil] ;
+            break ;
+        }
+            
         case -2 : {
             [QYUser registeName:@"793951787" Password:testPassword1 complection:^(QYUser *registedUser, NSError *error) {
                 if ( !error ) {
@@ -600,6 +616,20 @@
             break ;
         }
             
+        case -5 : {
+            //259 通过用户名获取UserId
+            //2510 通过手机号获取UserId
+            QYDebugLog(@"美鞋") ;
+            
+            break ;
+        }
+    
+            
+        case 200 : {
+            QYDebugLog(@"断开连接") ;
+            [[QY_SocketAgent shareInstance] disconnected] ;
+            break ;
+        }
         case 211 : {
             [[QY_SocketAgent shareInstance] deviceLoginRequestComplection:^(BOOL success, NSError *error) {
                 if ( success ) {
