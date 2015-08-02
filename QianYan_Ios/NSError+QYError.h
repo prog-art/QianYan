@@ -40,6 +40,7 @@ typedef NS_ENUM(NSInteger, QianYan_ErrorCode) {
     JPRO_DOWNLOAD_PROFILE_ERROR   = 111 ,//下载PROFILE的时候出错
     JPRO_DELETE_FRIEND_FILE_ERROR = 112,//删除好友－删除双方文件时出错
     JPRO_GET_FRIENDLIST_ERROR     = 113,//获取好友列表出错
+    JPRO_GET_FRIENDSETTING_ERROR  = 114,//获取对好友设置(friendlist/friendId.xml)出错
 
 #pragma makr - JRM
 

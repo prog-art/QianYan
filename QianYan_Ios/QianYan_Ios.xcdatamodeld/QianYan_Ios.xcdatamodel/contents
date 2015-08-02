@@ -89,7 +89,8 @@
         <attribute name="birthday" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="jpro" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jproIp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jproPort" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
@@ -102,13 +103,12 @@
         <relationship name="diggedFeeds" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_feed" inverseName="diggedByUsers" inverseEntity="QY_feed" syncable="YES"/>
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_feed" inverseName="owner" inverseEntity="QY_feed" syncable="YES"/>
         <relationship name="friendGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_friendGroup" inverseName="owner" inverseEntity="QY_friendGroup" syncable="YES"/>
-        <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_user" inverseName="friends" inverseEntity="QY_user" syncable="YES"/>
         <relationship name="friendSettings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_friendSetting" inverseName="owner" inverseEntity="QY_friendSetting" syncable="YES"/>
         <relationship name="inGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_friendGroup" inverseName="containUsers" inverseEntity="QY_friendGroup" syncable="YES"/>
         <relationship name="inSettings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_friendSetting" inverseName="toFriend" inverseEntity="QY_friendSetting" syncable="YES"/>
         <relationship name="sharedCameras" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_camera" inverseName="shareUser" inverseEntity="QY_camera" syncable="YES"/>
     </entity>
-    <fetchRequest name="FetchRequest" entity="QY_user" predicateString="userId == &quot;1000013&quot;"/>
+    <fetchRequest name="FetchRequest" entity="QY_friendSetting" predicateString="owner.userId == 10000133 AND toFriend.userId == 10000145"/>
     <elements>
         <element name="QY_alertMessage" positionX="25" positionY="-13" width="128" height="165"/>
         <element name="QY_attach" positionX="-677" positionY="-229" width="128" height="148"/>
@@ -119,6 +119,6 @@
         <element name="QY_feed" positionX="-155" positionY="-270" width="128" height="238"/>
         <element name="QY_friendGroup" positionX="-216" positionY="-676" width="128" height="133"/>
         <element name="QY_friendSetting" positionX="-225" positionY="-333" width="128" height="148"/>
-        <element name="QY_user" positionX="-486" positionY="-648" width="128" height="373"/>
+        <element name="QY_user" positionX="-486" positionY="-648" width="128" height="375"/>
     </elements>
 </model>

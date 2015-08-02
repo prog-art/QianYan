@@ -73,12 +73,17 @@ NSString * const kUserDefaultsCookie = @"UserCookie" ;
 }
 
 - (void)configIp:(NSString *)jpro_ip Port:(NSString *)jpro_port {
+    static dispatch_once_t onceToken ;
+    
     if ( !jpro_ip && !jpro_port ) {
         [NSException raise:@"jpro ip port info config exception" format:@"空的ip和port传入"] ;
         return ;
     }
-    _jpro_ip = jpro_ip ;
-    _jpro_port = jpro_port ;
+    
+    dispatch_once(&onceToken, ^{
+        _jpro_ip = jpro_ip ;
+        _jpro_port = jpro_port ;
+    }) ;
 }
 
 /**

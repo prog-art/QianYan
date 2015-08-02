@@ -210,31 +210,24 @@
 }
 
 + (QY_camera *)getCameraFromProfileXML:(NSString *)xmlStr {
+#warning 没写
     return nil ;
 }
 
 
-+ (QY_friendSetting *)getSesttingFromIdXML:(NSString *)xmlStr {
-    NSError *error ;
-    GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:&error] ;
++ (void)initFriendSetting:(QY_friendSetting *)setting withFriendIdXMLStr:(NSString *)xmlStr error:(NSError **)error {
+    GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:error] ;
     
-    if ( error ) {
-        [QYUtils alertError:error] ;
-        return nil ;
+    if ( *error ) {
+        [QYUtils alertError:*error] ;
     } else {
         GDataXMLElement *root = [xmlDoc rootElement] ;
         
         NSString *ownerId = [QYUser currentUser].userId ;
         
         NSString *userId = [[root attributeForName:@"id"] stringValue] ;
-
-        QY_friendSetting *setting = [QY_friendSetting setting] ;
-        
         setting.owner = [QY_appDataCenter userWithId:ownerId] ;
         setting.toFriend = [QY_appDataCenter userWithId:userId] ;
-        //add relationship
-        [setting.owner addFriendsObject:setting.toFriend] ;
-        
         setting.toFriend.jpro = [self getStringValueForElement:root name:@"jpro"] ;
 
         setting.black = @([[self getStringValueForElement:root name:@"black"] integerValue]);
@@ -242,37 +235,24 @@
         setting.follow = @([[self getStringValueForElement:root name:@"follow"] integerValue]) ;
         setting.shield = @([[self getStringValueForElement:root name:@"shield"] integerValue]) ;
         setting.remarkName = [self getStringValueForElement:root name:@"remarkname"] ;
-        
         setting.toFriend.userName = [self getStringValueForElement:root name:@"username"] ;
-        
-        NSError *savingError ;
-        [QY_appDataCenter saveObject:nil error:&savingError] ;
-        if ( savingError ) {
-            QYDebugLog(@"保存失败 error = %@",savingError) ;
-            [QYUtils alertError:error] ;
-        } else {
-            QYDebugLog(@"保存成功 setting = %@",setting) ;
-        }
-        
-        return setting ;
     }
 }
 
-+ (QY_user *)getUserFromProfileXML:(NSString *)xmlStr {
-    NSError *error ;
-    GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:&error] ;
++ (void)initUser:(QY_user *)user withProfileXMLStr:(NSString *)xmlStr error:(NSError **)error {
+    assert(user) ;
+    
+    GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:error] ;
     
     if ( error ) {
-        [QYUtils alertError:error] ;
-        return nil ;
+        [QYUtils alertError:*error] ;
     } else {
         GDataXMLElement *root = [xmlDoc rootElement] ;
-        QY_user *user = [QY_appDataCenter userWithId:[[root attributeForName:@"id"] stringValue]] ;
-
+        
         user.userName = [self getStringValueForElement:root name:@"username"] ;
         user.gender = [self getStringValueForElement:root name:@"gender"] ;
         user.location = [self getStringValueForElement:root name:@"location"] ;
-
+        
         //2008年06月21日 --> NSDate
         NSString *birthdayStr = [self getStringValueForElement:root name:@"birthday"] ;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
@@ -281,8 +261,6 @@
         user.birthday = birthday ;
         
         user.signature = [self getStringValueForElement:root name:@"signature"] ;
-
-        return user ;
     }
 }
 

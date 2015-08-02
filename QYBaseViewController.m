@@ -118,35 +118,22 @@
         return ;
     }
     
-#warning 如果后台数据结构不重构，之后就会非常非常麻烦了。
+    QY_user *me = user.coreUser ;
+    QY_user *friend = [QY_user insertUserById:friendId] ;
     
-    //0.拉取资料。。。
-    [[QY_JPROHttpService shareInstance] downloadFileFromPath:[QY_JPROUrlFactor pathForUserProfile:friendId] complection:^(NSString* xmlStr, NSError *error) {
-        if ( xmlStr ) {
-            QY_user *friend = [QY_XMLService getUserFromProfileXML:xmlStr] ;
-            [QY_appDataCenter saveObject:nil error:NULL] ;
-            
-            if ( user.coreUser.nickname == nil ) {
-                [[QY_JPROHttpService shareInstance] downloadFileFromPath:[QY_JPROUrlFactor pathForUserProfile:user.userId] complection:^(NSString *xmlStr, NSError *error) {
-                    
-                    if ( xmlStr ) {
-                        user.coreUser = [QY_XMLService getUserFromProfileXML:xmlStr] ;
-                        [QY_appDataCenter saveObject:nil error:NULL] ;
-                        
-                        //两边资料齐全才能添加。。
-                        [self addFriendWithFriendInstance:friend] ;
-                        
-                    } else {
-                        [QYUtils alert:@"资料拉取失败，请检查网络"] ;
-                    }
-                }] ;
-            }
+    [friend fetchUserInfoComplection:^(QY_user *user, NSError *error) {
+        if ( user && !error ) {
+            [me fetchUserInfoComplection:^(QY_user *user2, NSError *error) {
+                if ( user2 && !error ) {
+                    [self addFriendWithFriendInstance:user] ;
+                } else {
+                    [QYUtils alertError:error] ;
+                }
+            }] ;
         } else {
             [QYUtils alertError:error] ;
-            
         }
     }] ;
-
 }
 
 /**
@@ -160,34 +147,20 @@
     
     //3.在对方消息通知文件user/10000022/notification.xml添加好友关注消息。
     dispatch_async(dispatch_get_main_queue(), ^{
-        //先保存
-        [QY_appDataCenter saveObject:nil error:NULL] ;
-        
         QY_user *me = [QY_appDataCenter userWithId:[QYUser currentUser].userId] ;
         
-        [me addFriendsObject:friend] ;
+        QY_friendSetting *me2Friend = [QY_friendSetting settingFromOwner:me toFriend:friend] ;
         
-        QY_friendSetting *me2Friend = [QY_friendSetting setting] ;
-        me2Friend.owner = me ;
-        me2Friend.toFriend = friend ;
-        me2Friend.remarkName = me.nickname ;
-        NSString *path4Friend = [QY_JPROUrlFactor pathForUserFriendList:friend.userId FriendId:me.userId] ;
-        
-        
-        QY_friendSetting *friend2Me = [QY_friendSetting setting] ;
-        friend2Me.owner = friend ;
-        friend2Me.toFriend = me ;
-        friend2Me.remarkName = friend.nickname ;
-        NSString *path4Me = [QY_JPROUrlFactor pathForUserFriendList:me.userId FriendId:friend.userId] ;
-
-        
-        //开始上传服务器
-        [[QY_JPROHttpService shareInstance] uploadFileToPath:path4Friend FileData:me2Friend.xmlStringDataForTransportByHttp fileName:@"file" mimeType:MIMETYPE Complection:^(BOOL success, NSError *error) {
+        [me2Friend saveComplection:^(BOOL success, NSError *error) {
             if ( success ) {
+                QYDebugLog(@"单项添加成功") ;
+                [QY_appDataCenter saveObject:nil error:NULL] ;
                 
-                [[QY_JPROHttpService shareInstance] uploadFileToPath:path4Me FileData:friend2Me.xmlStringDataForTransportByHttp fileName:@"file" mimeType:MIMETYPE Complection:^(BOOL success, NSError *error) {
+                QY_friendSetting *friend2Me = [QY_friendSetting settingFromOwner:friend toFriend:me] ;
+                
+                [friend2Me saveComplection:^(BOOL success, NSError *error) {
                     if ( success ) {
-                        QYDebugLog(@"添加好友成功") ;
+                        QYDebugLog(@"双向添加成功") ;
                         [QY_appDataCenter saveObject:nil error:NULL] ;
                         [QYUtils alert:@"添加好友成功"] ;
                     } else {
@@ -204,59 +177,60 @@
 
 #pragma mark - 删除好友
 
+//#error 改！
 - (void)deleteFriendWithId:(NSString *)friendId complection:(QYResultBlock)complection {
-    complection = ^(BOOL result,NSError *error) {
-        if ( complection ) {
-            complection(result,error) ;
-        }
-    } ;
-    QYDebugLog(@"删除好友 friendId = %@",friendId) ;
-
-    QYUser *curUser = [QYUser currentUser] ;
     
-    if ( !curUser ) {
-        QYDebugLog(@"未登录!") ;
-        
-        NSError *error = [NSError QYErrorWithCode:USER_DID_NOT_LOGIN description:@"未登录！"];
-        
-        complection(false,error) ;
-        
-        return ;
-    }
-    
-    QY_user *user = curUser.coreUser ;
-    QY_user *friend = [QY_user findUserById:friendId] ;
-
-    if ( [user.friends containsObject:friend] ) {
-        [[QY_JPROHttpService shareInstance] deleteFriendWithFriendId:friend.userId selfId:user.userId complection:^(BOOL success, NSError *error) {
-            if ( success ) {
-                //本地删除
-                QYDebugLog(@"删除成功，准备从本地数据库删除") ;
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"toFriend.userId = %@",friend.userId];
-                QY_friendSetting *setting = (QY_friendSetting *)[QY_appDataCenter findObjectWithClassName:@"QY_friendSetting" predicate:predicate] ;
-                {
-                    QY_user *friend = setting.toFriend ;
-                    QY_user *owner = setting.owner ;
-                    QYDebugLog(@"setting[%@] exist : %@ , owner = [%@] , toFriend = [%@]",setting,setting?@"存在":@"不存在",owner,friend) ;
-                    [QY_appDataCenter deleteObjectsWithClassName:@"QY_friendSetting" predicate:predicate] ;
-                    setting = nil ;
-                }
-                [user removeFriendsObject:friend] ;
-                [QY_appDataCenter saveObject:nil error:NULL] ;
-                QYDebugLog(@"本地数据库删除成功") ;
-                complection(TRUE,nil) ;
-                
-            } else {
-                NSError *error = [NSError QYErrorWithCode:JPRO_DELETE_FRIEND_FILE_ERROR description:@"删除双方文件时出错"] ;
-                complection(FALSE,error) ;
-            }
-        }] ;
-    } else {
-        QYDebugLog(@"无好友关系！") ;
-        NSError *error = [NSError QYErrorWithCode:ALL_FIX_ERROR description:@"无好友关系"] ;
-        
-        complection(FALSE,error) ;
-    }
+//    complection = ^(BOOL result,NSError *error) {
+//        if ( complection ) {
+//            complection(result,error) ;
+//        }
+//    } ;
+//    QYDebugLog(@"删除好友 friendId = %@",friendId) ;
+//
+//    QYUser *curUser = [QYUser currentUser] ;
+//    
+//    if ( !curUser ) {
+//        QYDebugLog(@"未登录!") ;
+//        
+//        NSError *error = [NSError QYErrorWithCode:USER_DID_NOT_LOGIN description:@"未登录！"];
+//        
+//        complection(false,error) ;
+//        
+//        return ;
+//    }
+//    
+//    QY_user *user = curUser.coreUser ;
+//    QY_user *friend = [QY_user findUserById:friendId] ;
+//
+//    if ( [user.friends containsObject:friend] ) {
+//        [[QY_JPROHttpService shareInstance] deleteFriendWithFriendId:friend.userId selfId:user.userId complection:^(BOOL success, NSError *error) {
+//            if ( success ) {
+//                //本地删除
+//                QYDebugLog(@"删除成功，准备从本地数据库删除") ;
+//                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"toFriend.userId = %@",friend.userId];
+//                QY_friendSetting *setting = (QY_friendSetting *)[QY_appDataCenter findObjectWithClassName:@"QY_friendSetting" predicate:predicate] ;
+//                {
+//                    QY_user *friend = setting.toFriend ;
+//                    QY_user *owner = setting.owner ;
+//                    QYDebugLog(@"setting[%@] exist : %@ , owner = [%@] , toFriend = [%@]",setting,setting?@"存在":@"不存在",owner,friend) ;
+//                    [QY_appDataCenter deleteObjectsWithClassName:@"QY_friendSetting" predicate:predicate] ;
+//                    setting = nil ;
+//                }
+//                [QY_appDataCenter saveObject:nil error:NULL] ;
+//                QYDebugLog(@"本地数据库删除成功") ;
+//                complection(TRUE,nil) ;
+//                
+//            } else {
+//                NSError *error = [NSError QYErrorWithCode:JPRO_DELETE_FRIEND_FILE_ERROR description:@"删除双方文件时出错"] ;
+//                complection(FALSE,error) ;
+//            }
+//        }] ;
+//    } else {
+//        QYDebugLog(@"无好友关系！") ;
+//        NSError *error = [NSError QYErrorWithCode:ALL_FIX_ERROR description:@"无好友关系"] ;
+//        
+//        complection(FALSE,error) ;
+//    }
 }
 
 @end

@@ -2,7 +2,7 @@
 //  QY_user.h
 //  QianYan_Ios
 //
-//  Created by 虎猫儿 on 15/7/27.
+//  Created by 虎猫儿 on 15/8/2.
 //  Copyright (c) 2015年 虎猫儿. All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 
 #import "QY_Block_Define.h"
 
-@class QY_camera, QY_cameraGroup, QY_cameraSetting, QY_feed, QY_friendGroup, QY_friendSetting, QY_user;
+@class QY_camera, QY_cameraGroup, QY_cameraSetting, QY_feed, QY_friendGroup, QY_friendSetting;
 
 @interface QY_user : NSManagedObject
 
@@ -19,28 +19,25 @@
 @property (nonatomic, retain) NSDate * birthday;
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * gender;
-
-#warning 待删除字段，分离为jproIp 和 jproPort，提供同名jpro方法，组装jproIp:jproPort
-@property (nonatomic, retain) NSString * jpro;
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSString * nickname;
 @property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSString * signature;
 @property (nonatomic, retain) NSString * userId;
 @property (nonatomic, retain) NSString * userName;
+@property (nonatomic, retain) NSString * jproIp;
+@property (nonatomic, retain) NSString * jproPort;
 @property (nonatomic, retain) NSSet *cameraGroups;
 @property (nonatomic, retain) NSSet *cameras;
 @property (nonatomic, retain) NSSet *cameraSettings;
 @property (nonatomic, retain) NSSet *diggedFeeds;
 @property (nonatomic, retain) NSSet *feeds;
 @property (nonatomic, retain) NSSet *friendGroups;
-
-#warning 待删除字段，保留friendSettings，提供同名friends方法，转发消息给friendSettings.toFreidns
-@property (nonatomic, retain) NSSet *friends;
 @property (nonatomic, retain) NSSet *friendSettings;
 @property (nonatomic, retain) NSSet *inGroups;
-@property (nonatomic, retain) NSSet *sharedCameras;
 @property (nonatomic, retain) NSSet *inSettings;
+@property (nonatomic, retain) NSSet *sharedCameras;
+
 
 #pragma mark - 数据库交互
 
@@ -52,15 +49,23 @@
 
 #pragma mark - 远端数据库交互
 
+- (void)fetchJproServerInfoComplection:(QYResultBlock)complection ;
+
 - (void)fetchUserInfoComplection:(QYObjectBlock)complection ;
+
+- (void)saveUserInfoComplection:(QYObjectBlock)complection ;
 
 - (void)fetchFriendsComplection:(QYArrayBlock)complection ;
 
 - (void)fetchCamerasComplection:(QYArrayBlock)complection ;
 
-#pragma mark - getter
+#pragma mark - getter && setter
 
-//- (NSString *)jpro ;
+- (NSString *)jpro ;
+
+- (void)setJpro:(NSString *)jpro ;
+
+- (NSSet *)friends ;
 
 @end
 
@@ -96,11 +101,6 @@
 - (void)addFriendGroups:(NSSet *)values;
 - (void)removeFriendGroups:(NSSet *)values;
 
-- (void)addFriendsObject:(QY_user *)value;
-- (void)removeFriendsObject:(QY_user *)value;
-- (void)addFriends:(NSSet *)values;
-- (void)removeFriends:(NSSet *)values;
-
 - (void)addFriendSettingsObject:(QY_friendSetting *)value;
 - (void)removeFriendSettingsObject:(QY_friendSetting *)value;
 - (void)addFriendSettings:(NSSet *)values;
@@ -111,14 +111,14 @@
 - (void)addInGroups:(NSSet *)values;
 - (void)removeInGroups:(NSSet *)values;
 
-- (void)addSharedCamerasObject:(QY_camera *)value;
-- (void)removeSharedCamerasObject:(QY_camera *)value;
-- (void)addSharedCameras:(NSSet *)values;
-- (void)removeSharedCameras:(NSSet *)values;
-
 - (void)addInSettingsObject:(QY_friendSetting *)value;
 - (void)removeInSettingsObject:(QY_friendSetting *)value;
 - (void)addInSettings:(NSSet *)values;
 - (void)removeInSettings:(NSSet *)values;
+
+- (void)addSharedCamerasObject:(QY_camera *)value;
+- (void)removeSharedCamerasObject:(QY_camera *)value;
+- (void)addSharedCameras:(NSSet *)values;
+- (void)removeSharedCameras:(NSSet *)values;
 
 @end

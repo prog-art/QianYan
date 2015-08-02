@@ -70,33 +70,6 @@ static QYUser *_currentUser = nil ;
     self.userCameraList = @[] ;
 }
 
-/**
- *  获取用户JPRO信息
- */
-- (void)getJproServerInfoForUser:(NSString *)userId Complection:(QYResultBlock)complection {
-    //自动填充
-    NSAssert(userId, @"userId不能为空") ;
-    assert(complection) ;
-    
-    [[QY_SocketAgent shareInstance] getJPROServerInfoForUser:userId Complection:^(NSDictionary *info, NSError *error) {
-        if ( !error && info ) {
-            self.jproIp   = info[ParameterKey_jproIp] ;
-            self.jproPort = info[ParameterKey_jproPort] ;
-            self.jproPsd  = info[ParameterKey_jproPassword] ;
-            [[QY_JPROHttpService shareInstance] configIp:self.jproIp Port:self.jproPort] ;
-            
-            self.coreUser.jpro = [NSString stringWithFormat:@"http://%@:%@/",self.jproIp,self.jproPort] ;
-            
-            [QY_appDataCenter saveObject:nil error:NULL] ;
-            QYDebugLog(@"获得JPRO信息 = %@",self.coreUser.jpro) ;
-            complection(true,nil) ;
-        } else {
-            QYDebugLog(@"获取用户jpro服务器信息出错 error = %@",error) ;
-            error = [NSError QYErrorWithCode:JRM_GET_USER_JPRO_ERROR description:@"获取JPRO服务器信息出错。"] ;
-            complection(false,error) ;
-        }
-    }] ;
-}
 
 #pragma mark - 注册
 
@@ -144,40 +117,14 @@ static QYUser *_currentUser = nil ;
             complection(result,error) ;
         }
     } ;
-    
+
     QYDebugLog(@"上传profile.xml") ;
-    
-#warning 配置JPRO HTTP SERVICE
-    if ( !self.coreUser.jpro ) {
-        
-        [self getJproServerInfoForUser:self.coreUser.userId Complection:^(BOOL success, NSError *error) {
-            if ( success ) {
-                [self uploadProfileComplection:complection] ;
-            } else {
-                complection(FALSE,error) ;
-            }
-        }] ;
-        
-        return ;
-    }
-    
-#warning 采用默认的
-    NSString *profileXmlStr = [QY_XMLService getProfileXMLFromUser:self.coreUser] ;
-    QYDebugLog(@"profileXmlStr = %@",profileXmlStr) ;
-    
-    NSData *xmlData = [profileXmlStr dataUsingEncoding:NSUTF8StringEncoding] ;
-    
-    [[QY_JPROHttpService shareInstance] uploadFileToPath:[QY_JPROUrlFactor pathForUserProfile:self.coreUser.userId] FileData:xmlData fileName:@"profile.xml" mimeType:MIMETYPE Complection:^(BOOL success, NSError *error) {
-        if ( success ) {
-            QYDebugLog(@"上传成功") ;
-            complection(TRUE,nil) ;
-            
+    [self.coreUser saveUserInfoComplection:^(QY_user *user, NSError *error) {
+        if ( user && !error ) {
+            complection(true,nil) ;
         } else {
-            QYDebugLog(@"上传失败 error = %@",error) ;
-            error = [NSError QYErrorWithCode:JPRO_UPLOAD_PROFILE_ERROR description:@"上传PROFILE的时候出错"] ;
-            complection(FALSE,error) ;
-        }        
-        
+            complection(false,error) ;
+        }
     }] ;
 }
 
@@ -202,9 +149,18 @@ static QYUser *_currentUser = nil ;
                     user.userId = info[ParameterKey_userId] ;
                     
                     user.coreUser = [QY_appDataCenter userWithId:user.userId] ;
-                    _currentUser = user ;
+
                     
-                    complection(TRUE,nil) ;
+                    [user.coreUser fetchJproServerInfoComplection:^(BOOL success, NSError *error) {
+                        if ( success ) {
+                            _currentUser = user ;
+                            [QY_appDataCenter saveObject:nil error:NULL] ;
+                            complection(TRUE,nil) ;
+                        } else {
+                            complection(false,error) ;
+                        }
+                    }] ;
+
                 } else {
                     QYDebugLog(@"通过用户名获取UserId出错 error = %@",error) ;
                     error = [NSError QYErrorWithCode:JRM_GET_USERID_BY_ID_ERROR
@@ -223,32 +179,14 @@ static QYUser *_currentUser = nil ;
 
 - (void)downloadProfileComplection:(QYResultBlock)complection {
     assert(complection) ;
-    NSString *path = [QY_JPROUrlFactor pathForUserProfile:self.userId] ;
     
-    if ( !self.coreUser.jpro ) {
-        
-        [self getJproServerInfoForUser:self.coreUser.userId Complection:^(BOOL success, NSError *error) {
-            if ( success ) {
-                [self downloadProfileComplection:complection] ;
-            } else {
-                complection(FALSE,error) ;
-            }
-        }] ;
-        
-        return ;
-    }
-    
-    [[QY_JPROHttpService shareInstance] downloadFileFromPath:path complection:^(NSString *xmlStr, NSError *error) {
-        if ( xmlStr ) {
-#warning 解析,并存数据库
-            
+    [self.coreUser fetchUserInfoComplection:^(QY_user *user, NSError *error) {
+        if ( user && !error ) {
             complection(YES,nil) ;
-            
         } else {
             NSError *error = [NSError QYErrorWithCode:JPRO_DOWNLOAD_PROFILE_ERROR description:@"下载PROFILE的时候出错"] ;
-            complection(FALSE,error) ;
+            complection(false,error) ;
         }
-        
     }] ;
 }
 

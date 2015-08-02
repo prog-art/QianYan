@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "QY_Block_Define.h"
+
 @class QY_user;
 
 @interface QY_friendSetting : NSManagedObject
@@ -21,7 +23,19 @@
 @property (nonatomic, retain) QY_user *owner;
 @property (nonatomic, retain) QY_user *toFriend;
 
-+ (QY_friendSetting *)setting ;
+#pragma mark - 本地数据库交互
+
+//+ (QY_friendSetting *)setting ;
+
++ (QY_friendSetting *)settingFromOwner:(QY_user *)owner toFriend:(QY_user *)toFriend ;
+
+#pragma mark - 远端数据库交互 
+
+- (void)saveComplection:(QYResultBlock)complection ;
+
+- (void)fetchComplection:(QYObjectBlock)complection ;
+
+#pragma mark -
 
 /**
  *  生成保存在Jpro服务器上的xml字符串
@@ -32,7 +46,7 @@
 
 - (NSData *)xmlStringDataForTransportByHttp ;
 
-#pragma mark - 
+#pragma mark - getter
 
 - (NSString *)displayName ;
 

@@ -11,6 +11,7 @@
 #import "QYUser.h"
 
 #import "QY_CoreDataModels.h"
+#import "QYConstants.h"
 
 /**
  *  需求:
@@ -31,9 +32,9 @@
 
 + (QY_camera *)getCameraFromProfileXML:(NSString *)xmlStr ;
 
-+ (QY_friendSetting *)getSesttingFromIdXML:(NSString *)xmlStr ;
++ (void)initFriendSetting:(QY_friendSetting *)setting withFriendIdXMLStr:(NSString *)xmlStr error:(NSError **)error ;
 
-+ (QY_user *)getUserFromProfileXML:(NSString *)xmlStr ;
++ (void)initUser:(QY_user *)user withProfileXMLStr:(NSString *)xmlStr error:(NSError **)error ;
 
 #pragma mark - Core Data Model To Xml String 
 

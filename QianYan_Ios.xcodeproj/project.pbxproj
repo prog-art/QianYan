@@ -36,7 +36,6 @@
 		19602FDB1B665CD10064BC87 /* QY_cameraSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FDA1B665CD10064BC87 /* QY_cameraSetting.m */; };
 		19602FDE1B665D2D0064BC87 /* QY_camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FDD1B665D2D0064BC87 /* QY_camera.m */; };
 		19602FE11B665D600064BC87 /* QY_friendSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FE01B665D600064BC87 /* QY_friendSetting.m */; };
-		19602FE41B665D800064BC87 /* QY_user.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FE31B665D800064BC87 /* QY_user.m */; };
 		1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1964569D1B058D4000EA4E14 /* QY_QRCodeUtils.m */; };
 		196456A01B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1964569F1B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m */; };
 		196456A41B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456A31B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m */; };
@@ -44,6 +43,7 @@
 		196456AE1B0617D000EA4E14 /* ChineseString.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456AD1B0617D000EA4E14 /* ChineseString.m */; };
 		196456B11B0617F800EA4E14 /* QY_ChineseStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456B01B0617F800EA4E14 /* QY_ChineseStringUtils.m */; };
 		196456BA1B063A7F00EA4E14 /* QianYan_ChineseStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456B91B063A7F00EA4E14 /* QianYan_ChineseStringTests.m */; };
+		196900DB1B6E29AC0059E737 /* QY_user.m in Sources */ = {isa = PBXBuildFile; fileRef = 196900DA1B6E29AC0059E737 /* QY_user.m */; };
 		1979071A1B52674C0079452C /* QYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 197907191B52674C0079452C /* QYBaseViewController.m */; };
 		197C68401B39434600907CFC /* UIImage+QY_resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 197C683F1B39434600907CFC /* UIImage+QY_resize.m */; };
 		198530321B27215500EB96F7 /* testNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530311B27215500EB96F7 /* testNetworkViewController.m */; };
@@ -235,8 +235,6 @@
 		19602FDD1B665D2D0064BC87 /* QY_camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_camera.m; sourceTree = "<group>"; };
 		19602FDF1B665D600064BC87 /* QY_friendSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_friendSetting.h; sourceTree = "<group>"; };
 		19602FE01B665D600064BC87 /* QY_friendSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_friendSetting.m; sourceTree = "<group>"; };
-		19602FE21B665D800064BC87 /* QY_user.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_user.h; sourceTree = "<group>"; };
-		19602FE31B665D800064BC87 /* QY_user.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_user.m; sourceTree = "<group>"; };
 		196456971B0582B000EA4E14 /* QY_QRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_QRCode.h; sourceTree = "<group>"; };
 		1964569C1B058D4000EA4E14 /* QY_QRCodeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_QRCodeUtils.h; sourceTree = "<group>"; };
 		1964569D1B058D4000EA4E14 /* QY_QRCodeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_QRCodeUtils.m; sourceTree = "<group>"; };
@@ -252,6 +250,8 @@
 		196456B01B0617F800EA4E14 /* QY_ChineseStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_ChineseStringUtils.m; sourceTree = "<group>"; };
 		196456B81B0639D600EA4E14 /* QY_ChineseString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_ChineseString.h; sourceTree = "<group>"; };
 		196456B91B063A7F00EA4E14 /* QianYan_ChineseStringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QianYan_ChineseStringTests.m; sourceTree = "<group>"; };
+		196900D91B6E29AC0059E737 /* QY_user.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_user.h; sourceTree = "<group>"; };
+		196900DA1B6E29AC0059E737 /* QY_user.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_user.m; sourceTree = "<group>"; };
 		197170D31B3294FF00B34AB1 /* QY_JPRO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_JPRO.h; sourceTree = "<group>"; };
 		197907181B52674C0079452C /* QYBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseViewController.h; sourceTree = SOURCE_ROOT; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
 		197907191B52674C0079452C /* QYBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = QYBaseViewController.m; sourceTree = SOURCE_ROOT; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
@@ -725,8 +725,8 @@
 				19602FB01B64F8080064BC87 /* QY_friendGroup.m */,
 				19602FDF1B665D600064BC87 /* QY_friendSetting.h */,
 				19602FE01B665D600064BC87 /* QY_friendSetting.m */,
-				19602FE21B665D800064BC87 /* QY_user.h */,
-				19602FE31B665D800064BC87 /* QY_user.m */,
+				196900D91B6E29AC0059E737 /* QY_user.h */,
+				196900DA1B6E29AC0059E737 /* QY_user.m */,
 			);
 			name = "用户";
 			sourceTree = "<group>";
@@ -2119,7 +2119,6 @@
 				19589C221B566BCA005246BC /* QY_feed+QY_JPRO_DATA_FORMAT.m in Sources */,
 				6E9BA94F1B0CB8FB009D87BE /* JVLeftDrawerTableViewCell.m in Sources */,
 				198530421B28B98B00EB96F7 /* QY_XMLService.m in Sources */,
-				19602FE41B665D800064BC87 /* QY_user.m in Sources */,
 				6E9BA9551B0CB8FB009D87BE /* SKSTableView.m in Sources */,
 				6E7C07601B3BE42600AC8EC3 /* AlertNotificationTableViewCell.m in Sources */,
 				1938CCB41B24ACB4009C4AE5 /* JRMvalue.m in Sources */,
@@ -2128,6 +2127,7 @@
 				195C15DD1B3AEF3A00A316FE /* QY_JRMGCDSocketDelegater.m in Sources */,
 				6E9BA9571B0CB8FB009D87BE /* SKSTableViewCellIndicator.m in Sources */,
 				6E32DA091B51672A002A6301 /* LandScapeKxMovieViewController.m in Sources */,
+				196900DB1B6E29AC0059E737 /* QY_user.m in Sources */,
 				6E4BB9281B5140C800070F6F /* RacentTableViewController.m in Sources */,
 				6E9BA9541B0CB8FB009D87BE /* CameraViewController.m in Sources */,
 				198530321B27215500EB96F7 /* testNetworkViewController.m in Sources */,
