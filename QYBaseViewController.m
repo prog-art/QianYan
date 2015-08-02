@@ -119,60 +119,16 @@
     }
     
     QY_user *me = user.coreUser ;
-    QY_user *friend = [QY_user insertUserById:friendId] ;
     
-    [friend fetchUserInfoComplection:^(QY_user *user, NSError *error) {
-        if ( user && !error ) {
-            [me fetchUserInfoComplection:^(QY_user *user2, NSError *error) {
-                if ( user2 && !error ) {
-                    [self addFriendWithFriendInstance:user] ;
-                } else {
-                    [QYUtils alertError:error] ;
-                }
-            }] ;
+    [me addFriendById:friendId complection:^(BOOL success, NSError *error) {
+        if ( success ) {
+            QYDebugLog(@"添加好友成功") ;
+            [QYUtils alert:@"添加好友成功"] ;
         } else {
+            QYDebugLog(@"添加好友失败 error = %@",error) ;
             [QYUtils alertError:error] ;
         }
     }] ;
-}
-
-/**
- *  拉取到用户资料后，准备添加！
- *
- *  @param friend
- */
-- (void)addFriendWithFriendInstance:(QY_user *)friend {
-    //1.在自己用户档案朋友列表目录user/10000133/friendlist/中添加friendId.xml,并设置follow属性为1。其他属性0
-    //2.在对方用户档案朋友列表目录user/friendId/friendlist/中添加selfId.xml，并设置fans属性为1，其他0
-    
-    //3.在对方消息通知文件user/10000022/notification.xml添加好友关注消息。
-    dispatch_async(dispatch_get_main_queue(), ^{
-        QY_user *me = [QY_appDataCenter userWithId:[QYUser currentUser].userId] ;
-        
-        QY_friendSetting *me2Friend = [QY_friendSetting settingFromOwner:me toFriend:friend] ;
-        
-        [me2Friend saveComplection:^(BOOL success, NSError *error) {
-            if ( success ) {
-                QYDebugLog(@"单项添加成功") ;
-                [QY_appDataCenter saveObject:nil error:NULL] ;
-                
-                QY_friendSetting *friend2Me = [QY_friendSetting settingFromOwner:friend toFriend:me] ;
-                
-                [friend2Me saveComplection:^(BOOL success, NSError *error) {
-                    if ( success ) {
-                        QYDebugLog(@"双向添加成功") ;
-                        [QY_appDataCenter saveObject:nil error:NULL] ;
-                        [QYUtils alert:@"添加好友成功"] ;
-                    } else {
-                        [[QY_appDataCenter managedObjectContext] undo] ;
-                    }
-                }] ;
-                
-            } else {
-                [[QY_appDataCenter managedObjectContext] undo] ;
-            }
-        }] ;
-    }) ;
 }
 
 #pragma mark - 删除好友

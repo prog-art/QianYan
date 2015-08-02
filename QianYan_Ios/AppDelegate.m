@@ -25,6 +25,12 @@
 #define AccountInfoViewControllerStoryBoardID @"AccountInfoViewControllerStoryBoardID"
 #define CameraSettingCollectionViewControllerStoryBoardID @"CameraSettingCollectionViewControllerStoryBoardID"
 #define RacentTableViewControllerStoryBoardID @"RacentTableViewControllerStoryBoardID"
+#define PasswordManageViewControllerStoryBoardID @"PasswordManageViewControllerStoryBoardID"
+#define ManageNicknameViewControllerStoryBoardID @"ManageNicknameViewControllerStoryBoardID"
+#define PhoneNumberIdentifyViewControllerStoryBoardID @"PhoneNumberIdentifyViewControllerStoryBoardID"
+#define ManageSignatureViewControllerStoryBoardID @"ManageSignatureViewControllerStoryBoardID"
+#define FeedbackViewControllerStoryBoardID @"FeedbackViewControllerStoryBoardID"
+#define TextShareViewControllerStoryBoardID @"TextShareViewControllerStoryBoardID"
 
 
 //static NSString * const kJVDrawersStoryboardName = @"Drawers";
@@ -357,6 +363,41 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
     return _RacentTableViewController;
 }
 
+#pragma mark -- Password Manage View Controller
+
+- (UIViewController *)PasswordManageViewController {
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:PasswordManageViewControllerStoryBoardID] ;
+}
+
+#pragma mark -- Manage Nickname View Controller
+
+- (UIViewController *)ManageNicknameViewController {
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:ManageNicknameViewControllerStoryBoardID] ;
+}
+
+#pragma mark -- Phone Number Identify View Controller
+
+- (UIViewController *)PhoneNumberIdentifyViewController {
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:PhoneNumberIdentifyViewControllerStoryBoardID] ;
+}
+
+#pragma mark -- Manage Signature View Controller
+
+- (UIViewController *)ManageSignatureViewController {
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:ManageSignatureViewControllerStoryBoardID] ;
+}
+
+#pragma mark -- Feedback View Controller
+
+- (UIViewController *)FeedbackViewController {
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:FeedbackViewControllerStoryBoardID] ;
+}
+
+#pragma mark -- Text Share View Controller
+
+- (UIViewController *)TextShareViewController {
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:TextShareViewControllerStoryBoardID] ;
+}
 
 #pragma mark - Global Access Helper
 

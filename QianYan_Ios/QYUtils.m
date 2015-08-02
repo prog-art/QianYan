@@ -97,6 +97,14 @@
     [controller presentViewController:imagePicker animated:YES completion:nil] ;
 }
 
-#pragma mark - 
+#pragma mark - 验证码
+
++ (NSString *)getAValidateCodeLength:(NSUInteger)len {
+    NSString *validateCode = @"" ;    
+    for ( int i = 0 ; i < len ; i++ ) {
+        validateCode = [validateCode stringByAppendingFormat:@"%i",(arc4random() % 9)] ;
+    }
+    return validateCode ;
+}
 
 @end

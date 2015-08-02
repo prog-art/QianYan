@@ -89,9 +89,9 @@
             if ( !error ) {
                 QYDebugLog(@"注册成功 userId = %@",registedUser.userId) ;
                 
-                [registedUser uploadProfileComplection:^(BOOL success, NSError *error) {
-                    if ( success ) {
-                        QYDebugLog(@"上传profile成功") ;
+                [registedUser.coreUser saveUserInfoComplection:^(id object, NSError *error) {
+                    if ( object && !error ) {
+                        QYDebugLog(@"上传用户资料成功") ;
                         
                         [QYUser loginName:username Password:password complection:^(BOOL success, NSError *error) {
                             if ( success ) {
@@ -104,7 +104,7 @@
                         }] ;
                         
                     } else {
-                        QYDebugLog(@"上传profile成功失败 error = %@",error) ;
+                        QYDebugLog(@"上传用户资料失败 error = %@",error) ;
                         [QYUtils alertError:error] ;
                     }
                 }] ;

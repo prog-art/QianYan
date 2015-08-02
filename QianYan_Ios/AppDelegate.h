@@ -56,6 +56,12 @@
 @property (nonatomic, strong) UIViewController *AccountInfoViewController;
 @property (nonatomic, strong) UICollectionViewController *CameraSettingCollectionViewController;
 @property (nonatomic, strong) UITableViewController *RacentTableViewController;
+@property (nonatomic, strong) UIViewController *PasswordManageViewController;
+@property (nonatomic, strong) UIViewController *ManageNicknameViewController;
+@property (nonatomic, strong) UIViewController *PhoneNumberIdentifyViewController;
+@property (nonatomic, strong) UIViewController *ManageSignatureViewController;
+@property (nonatomic, strong) UIViewController *FeedbackViewController;
+@property (nonatomic, strong) UIViewController *TextShareViewController;
 
 
 - (void)toggleLeftDrawer:(id)sender animated:(BOOL)animated;

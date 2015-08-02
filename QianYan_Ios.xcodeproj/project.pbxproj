@@ -44,6 +44,11 @@
 		196456B11B0617F800EA4E14 /* QY_ChineseStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456B01B0617F800EA4E14 /* QY_ChineseStringUtils.m */; };
 		196456BA1B063A7F00EA4E14 /* QianYan_ChineseStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456B91B063A7F00EA4E14 /* QianYan_ChineseStringTests.m */; };
 		196900DB1B6E29AC0059E737 /* QY_user.m in Sources */ = {isa = PBXBuildFile; fileRef = 196900DA1B6E29AC0059E737 /* QY_user.m */; };
+		196900DF1B6E60360059E737 /* PhoneNumberIdentifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 196900DE1B6E60360059E737 /* PhoneNumberIdentifyViewController.m */; };
+		196900E31B6E658F0059E737 /* ManageNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 196900E21B6E658F0059E737 /* ManageNicknameViewController.m */; };
+		196900E71B6E67DD0059E737 /* ManageSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 196900E61B6E67DD0059E737 /* ManageSignatureViewController.m */; };
+		196900EC1B6E6B250059E737 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 196900EB1B6E6B250059E737 /* FeedbackViewController.m */; };
+		196900F01B6E6E7E0059E737 /* TextShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 196900EF1B6E6E7E0059E737 /* TextShareViewController.m */; };
 		1979071A1B52674C0079452C /* QYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 197907191B52674C0079452C /* QYBaseViewController.m */; };
 		197C68401B39434600907CFC /* UIImage+QY_resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 197C683F1B39434600907CFC /* UIImage+QY_resize.m */; };
 		198530321B27215500EB96F7 /* testNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530311B27215500EB96F7 /* testNetworkViewController.m */; };
@@ -252,6 +257,16 @@
 		196456B91B063A7F00EA4E14 /* QianYan_ChineseStringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QianYan_ChineseStringTests.m; sourceTree = "<group>"; };
 		196900D91B6E29AC0059E737 /* QY_user.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_user.h; sourceTree = "<group>"; };
 		196900DA1B6E29AC0059E737 /* QY_user.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_user.m; sourceTree = "<group>"; };
+		196900DD1B6E60360059E737 /* PhoneNumberIdentifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumberIdentifyViewController.h; sourceTree = "<group>"; };
+		196900DE1B6E60360059E737 /* PhoneNumberIdentifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberIdentifyViewController.m; sourceTree = "<group>"; };
+		196900E11B6E658F0059E737 /* ManageNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageNicknameViewController.h; sourceTree = "<group>"; };
+		196900E21B6E658F0059E737 /* ManageNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageNicknameViewController.m; sourceTree = "<group>"; };
+		196900E51B6E67DD0059E737 /* ManageSignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageSignatureViewController.h; sourceTree = "<group>"; };
+		196900E61B6E67DD0059E737 /* ManageSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageSignatureViewController.m; sourceTree = "<group>"; };
+		196900EA1B6E6B250059E737 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		196900EB1B6E6B250059E737 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		196900EE1B6E6E7E0059E737 /* TextShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextShareViewController.h; sourceTree = "<group>"; };
+		196900EF1B6E6E7E0059E737 /* TextShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextShareViewController.m; sourceTree = "<group>"; };
 		197170D31B3294FF00B34AB1 /* QY_JPRO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_JPRO.h; sourceTree = "<group>"; };
 		197907181B52674C0079452C /* QYBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseViewController.h; sourceTree = SOURCE_ROOT; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
 		197907191B52674C0079452C /* QYBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = QYBaseViewController.m; sourceTree = SOURCE_ROOT; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
@@ -897,6 +912,51 @@
 			name = main;
 			sourceTree = "<group>";
 		};
+		196900DC1B6E5F7B0059E737 /* 编辑昵称 */ = {
+			isa = PBXGroup;
+			children = (
+				196900E11B6E658F0059E737 /* ManageNicknameViewController.h */,
+				196900E21B6E658F0059E737 /* ManageNicknameViewController.m */,
+			);
+			name = "编辑昵称";
+			sourceTree = "<group>";
+		};
+		196900E01B6E63580059E737 /* 手机号认证 */ = {
+			isa = PBXGroup;
+			children = (
+				196900DD1B6E60360059E737 /* PhoneNumberIdentifyViewController.h */,
+				196900DE1B6E60360059E737 /* PhoneNumberIdentifyViewController.m */,
+			);
+			name = "手机号认证";
+			sourceTree = "<group>";
+		};
+		196900E41B6E67BC0059E737 /* 编辑个性签名 */ = {
+			isa = PBXGroup;
+			children = (
+				196900E51B6E67DD0059E737 /* ManageSignatureViewController.h */,
+				196900E61B6E67DD0059E737 /* ManageSignatureViewController.m */,
+			);
+			name = "编辑个性签名";
+			sourceTree = "<group>";
+		};
+		196900E91B6E6AEE0059E737 /* 意见反馈 */ = {
+			isa = PBXGroup;
+			children = (
+				196900EA1B6E6B250059E737 /* FeedbackViewController.h */,
+				196900EB1B6E6B250059E737 /* FeedbackViewController.m */,
+			);
+			name = "意见反馈";
+			sourceTree = "<group>";
+		};
+		196900ED1B6E6E5A0059E737 /* 文字分享 */ = {
+			isa = PBXGroup;
+			children = (
+				196900EE1B6E6E7E0059E737 /* TextShareViewController.h */,
+				196900EF1B6E6E7E0059E737 /* TextShareViewController.m */,
+			);
+			name = "文字分享";
+			sourceTree = "<group>";
+		};
 		197170D11B3294CF00B34AB1 /* header */ = {
 			isa = PBXGroup;
 			children = (
@@ -1351,6 +1411,7 @@
 			isa = PBXGroup;
 			children = (
 				6E1EC9C91B510269003E346F /* 添加 */,
+				196900ED1B6E6E5A0059E737 /* 文字分享 */,
 				6E1A9B9A1B50A4BE0046B8AB /* Manager */,
 				6E1A9B831B50A4300046B8AB /* ViewController */,
 				6E1A9B821B50A3F80046B8AB /* View */,
@@ -1405,6 +1466,10 @@
 		6E1A9BA71B50A6650046B8AB /* 设置 */ = {
 			isa = PBXGroup;
 			children = (
+				6E1EC9CD1B510504003E346F /* 设置-摄像机权限管理 */,
+				6E07D0A71B11D9CF00FE11A4 /* 设置-摄像机参数设置 */,
+				6E1EC9C01B50FFBD003E346F /* 设置-账号信息 */,
+				6E18D0FD1B281BD900802C49 /* 设置界面-密码管理 */,
 				6E1EC9B71B50F69B003E346F /* SystemSettingsTableViewController.h */,
 				6E1EC9B81B50F69B003E346F /* SystemSettingsTableViewController.m */,
 				6E1EC9B91B50F69B003E346F /* SystemSettingsTableViewCell.h */,
@@ -1418,6 +1483,9 @@
 		6E1EC9C01B50FFBD003E346F /* 设置-账号信息 */ = {
 			isa = PBXGroup;
 			children = (
+				196900DC1B6E5F7B0059E737 /* 编辑昵称 */,
+				196900E01B6E63580059E737 /* 手机号认证 */,
+				196900E41B6E67BC0059E737 /* 编辑个性签名 */,
 				6E1EC9C11B50FFD4003E346F /* AccountInfoViewController.h */,
 				6E1EC9C21B50FFD4003E346F /* AccountInfoViewController.m */,
 				6E1EC9C31B50FFD4003E346F /* AccountInfoTableViewCell.h */,
@@ -1779,15 +1847,12 @@
 		6EFEFE321B0CC036001E425B /* 主界面 */ = {
 			isa = PBXGroup;
 			children = (
+				196900E91B6E6AEE0059E737 /* 意见反馈 */,
 				6E1A9BA71B50A6650046B8AB /* 设置 */,
 				6E62A0F01B4417150001E3A2 /* 二维码配置wifi */,
 				6E62A0F41B441DA70001E3A2 /* 群组管理 */,
 				6EDF09B61B299CD800413348 /* 我的相册 */,
 				6EDF09AA1B2930DE00413348 /* 二维码名片 */,
-				6E18D0FD1B281BD900802C49 /* 设置界面-密码管理 */,
-				6E1EC9C01B50FFBD003E346F /* 设置-账号信息 */,
-				6E07D0A71B11D9CF00FE11A4 /* 设置-摄像机参数设置 */,
-				6E1EC9CD1B510504003E346F /* 设置-摄像机权限管理 */,
 				6EFEFE331B0CC03C001E425B /* 左侧栏 */,
 				6EFEFE341B0CC043001E425B /* 右侧栏 */,
 				6EFEFE371B0CC11E001E425B /* tab-摄像机 */,
@@ -2056,6 +2121,7 @@
 				1938CCBB1B24BCEA009C4AE5 /* JRMDataFormatUtils.m in Sources */,
 				6E62A0FA1B441E320001E3A2 /* GroupManageViewController.m in Sources */,
 				6E75AC9F1B281E8300A0C919 /* GroupTableViewCell.m in Sources */,
+				196900E31B6E658F0059E737 /* ManageNicknameViewController.m in Sources */,
 				6E1EC9CC1B510289003E346F /* SlidingViewManager.m in Sources */,
 				6E9BA9521B0CB8FB009D87BE /* JVRightDrawerTableViewController.m in Sources */,
 				6E9BA9501B0CB8FB009D87BE /* JVRightDrawerTableViewCell.m in Sources */,
@@ -2097,7 +2163,9 @@
 				6E1A9B921B50A4410046B8AB /* WFTextView.m in Sources */,
 				6E1A9B951B50A4410046B8AB /* YMButton.m in Sources */,
 				198530351B272C3300EB96F7 /* QYUser.m in Sources */,
+				196900EC1B6E6B250059E737 /* FeedbackViewController.m in Sources */,
 				19ED2EED1AECF84F00E9DBEA /* ViewController.m in Sources */,
+				196900E71B6E67DD0059E737 /* ManageSignatureViewController.m in Sources */,
 				6E1A9BA51B50A4CB0046B8AB /* NSString+NSString_ILExtension.m in Sources */,
 				6E4BB92F1B51528E00070F6F /* QY_SKSTableView.m in Sources */,
 				6E62A0F31B44173F0001E3A2 /* WifiSettingViewController.m in Sources */,
@@ -2136,6 +2204,7 @@
 				1938CCB11B24AC32009C4AE5 /* JRMvalueDescription.m in Sources */,
 				1985304A1B28B9BC00EB96F7 /* QY_XMLFormatter.m in Sources */,
 				1979071A1B52674C0079452C /* QYBaseViewController.m in Sources */,
+				196900DF1B6E60360059E737 /* PhoneNumberIdentifyViewController.m in Sources */,
 				6E1A9BA61B50A4CB0046B8AB /* YMTextData.m in Sources */,
 				195C16191B3E8E0A00A316FE /* QY_JRMResponse.m in Sources */,
 				198BADF91AF0B51700B4E2E6 /* QRCodeGenerator.m in Sources */,
@@ -2143,6 +2212,7 @@
 				19589C281B566C89005246BC /* QY_attache+QY_JPRO_DATA_FORMAT.m in Sources */,
 				6E75ACA01B281E8300A0C919 /* SearchTableViewCell.m in Sources */,
 				19A6953B1AFB44C500F60D03 /* QYNotify.m in Sources */,
+				196900F01B6E6E7E0059E737 /* TextShareViewController.m in Sources */,
 				19602FDB1B665CD10064BC87 /* QY_cameraSetting.m in Sources */,
 				6E4BB9271B5140C800070F6F /* RacentTableViewCell.m in Sources */,
 				19ED2EE41AECF84F00E9DBEA /* main.m in Sources */,

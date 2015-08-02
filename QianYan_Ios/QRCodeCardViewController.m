@@ -51,9 +51,9 @@
     self.QRCodeImageView.image = image ;
     
     self.usernameLabel.text = self.user.username ;
-    self.genderLabel.text = self.user.gender ;
+    self.genderLabel.text = self.user.coreUser.gender ;
 //    self.ageLabel.text = @"29岁" ;
-    self.locationLabel.text = self.user.location ;    
+    self.locationLabel.text = self.user.coreUser.location ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

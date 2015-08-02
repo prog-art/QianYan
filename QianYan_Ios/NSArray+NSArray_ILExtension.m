@@ -10,8 +10,7 @@
 
 @implementation NSArray (NSArray_ILExtension)
 
-- (NSArray *)offsetRangesInArrayBy:(NSUInteger)offset
-{
+- (NSArray *)offsetRangesInArrayBy:(NSUInteger)offset {
     NSUInteger aOffset = 0;
     NSUInteger prevLength = 0;
     

@@ -593,41 +593,12 @@
         }
             
         case -2 : {
-            [QYUser registeName:@"793951787" Password:testPassword1 complection:^(QYUser *registedUser, NSError *error) {
-                if ( !error ) {
-                    QYDebugLog(@"注册成功 userId = %@",registedUser.userId) ;
-                    
-                    [registedUser uploadProfileComplection:^(BOOL success, NSError *error) {
-                        if ( success ) {
-                            QYDebugLog(@"上传profile成功") ;
-                        } else {
-                            QYDebugLog(@"上传profile成功失败 error = %@",error) ;
-                        }
-                    }] ;
-                    
-                } else {
-                    QYDebugLog(@"注册失败 error = %@",error) ;
-                }
-            }] ;
+#warning 重写
             break ;
         }
             
         case -4 : {
-            [QYUser loginName:@"793951787" Password:testPassword1 complection:^(BOOL success, NSError *error) {
-                if ( success ) {
-                    QYDebugLog(@"登录成功") ;
-                    [[QYUser currentUser] uploadProfileComplection:^(BOOL success, NSError *error) {
-                        if ( success ) {
-                            QYDebugLog(@"上传profile成功") ;
-                        } else {
-                            QYDebugLog(@"上传profile成功失败 error = %@",error) ;
-                        }
-                    }] ;
-                    
-                } else {
-                    QYDebugLog(@"登录失败 error = %@",error) ;
-                }
-            }] ;
+#warning 重写
             break ;
         }
             

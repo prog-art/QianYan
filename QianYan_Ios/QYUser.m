@@ -53,23 +53,8 @@ static QYUser *_currentUser = nil ;
 }
 
 - (void)setup {
-    
     //默认值
-    self.userId = @"" ;
-    self.username = @"" ;
-    self.gender = @"男" ;
-    self.location = nil ;
-    self.birthday = [NSDate date] ;
-    self.signature = @"" ;
-    self.nickname = @"" ;
-    self.remarkname = @"" ;
-    self.telephone = @"" ;
-    self.email = @"" ;
-    self.userJss = @"" ;
-    self.userFriendList = @[] ;
-    self.userCameraList = @[] ;
 }
-
 
 #pragma mark - 注册
 
@@ -111,23 +96,6 @@ static QYUser *_currentUser = nil ;
     }] ;
 }
 
-- (void)uploadProfileComplection:(QYResultBlock)complection {
-    complection = ^(BOOL result , NSError *error) {
-        if ( complection ) {
-            complection(result,error) ;
-        }
-    } ;
-
-    QYDebugLog(@"上传profile.xml") ;
-    [self.coreUser saveUserInfoComplection:^(QY_user *user, NSError *error) {
-        if ( user && !error ) {
-            complection(true,nil) ;
-        } else {
-            complection(false,error) ;
-        }
-    }] ;
-}
-
 #pragma mark - 登录
 
 + (void)loginName:(NSString *)username Password:(NSString *)password complection:(QYResultBlock)complection {
@@ -150,17 +118,21 @@ static QYUser *_currentUser = nil ;
                     
                     user.coreUser = [QY_appDataCenter userWithId:user.userId] ;
 
-                    
-                    [user.coreUser fetchJproServerInfoComplection:^(BOOL success, NSError *error) {
+                    [user.coreUser fetchUserInfoComplection:^(id object, NSError *error) {
                         if ( success ) {
                             _currentUser = user ;
                             [QY_appDataCenter saveObject:nil error:NULL] ;
                             complection(TRUE,nil) ;
+                            
+                            //偷偷拉取用户手机资料
+                            [QYUtils runInGlobalQueue:^{
+                                [user.coreUser fetchTelephoneComplection:nil] ;
+                            }] ;
+                            
                         } else {
                             complection(false,error) ;
                         }
                     }] ;
-
                 } else {
                     QYDebugLog(@"通过用户名获取UserId出错 error = %@",error) ;
                     error = [NSError QYErrorWithCode:JRM_GET_USERID_BY_ID_ERROR
@@ -177,18 +149,18 @@ static QYUser *_currentUser = nil ;
     
 }
 
-- (void)downloadProfileComplection:(QYResultBlock)complection {
-    assert(complection) ;
-    
-    [self.coreUser fetchUserInfoComplection:^(QY_user *user, NSError *error) {
-        if ( user && !error ) {
-            complection(YES,nil) ;
-        } else {
-            NSError *error = [NSError QYErrorWithCode:JPRO_DOWNLOAD_PROFILE_ERROR description:@"下载PROFILE的时候出错"] ;
-            complection(false,error) ;
-        }
-    }] ;
-}
+//- (void)downloadProfileComplection:(QYResultBlock)complection {
+//    assert(complection) ;
+//    
+//    [self.coreUser fetchUserInfoComplection:^(QY_user *user, NSError *error) {
+//        if ( user && !error ) {
+//            complection(YES,nil) ;
+//        } else {
+//            NSError *error = [NSError QYErrorWithCode:JPRO_DOWNLOAD_PROFILE_ERROR description:@"下载PROFILE的时候出错"] ;
+//            complection(false,error) ;
+//        }
+//    }] ;
+//}
 
 #pragma mark - 注销
 
@@ -207,7 +179,7 @@ static QYUser *_currentUser = nil ;
 
 - (QY_user *)coreUser {
     if ( !_coreUser ) {
-        _coreUser = [QY_user findUserById:self.userId] ;
+        _coreUser = [QY_user insertUserById:self.userId] ;
     }
     return _coreUser ;
 }

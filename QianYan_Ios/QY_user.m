@@ -97,6 +97,7 @@
     } ;
     
     if ( !self.jpro ) {
+        QYDebugLog(@"jpro 信息不存在，拉取jrm") ;
         [self fetchJproServerInfoComplection:^(BOOL success, NSError *error) {
             if ( success ) {
                 [self fetchUserInfoComplection:complection] ;
@@ -107,12 +108,15 @@
         return ;
     }
     
+    
     NSString *path = [QY_JPROUrlFactor pathForUserProfile:self.userId] ;
     
     [[QY_JPROHttpService shareInstance] downloadFileFromPath:path complection:^(NSString *xmlStr, NSError *error) {
         if ( xmlStr ) {
             NSError *phraseError ;
             [QY_XMLService initUser:self withProfileXMLStr:xmlStr error:&phraseError] ;
+            
+            
             
             //save
             [QY_appDataCenter saveObject:nil error:NULL] ;
@@ -164,6 +168,74 @@
             complection(nil,error) ;
         }
     }] ;
+}
+
+#pragma mark - jpro_friend
+
+- (void)addFriendById:(NSString *)friendId complection:(QYResultBlock)complection {
+    assert(friendId && friendId!=self.userId) ;
+    complection = ^(BOOL result,NSError *error) {
+        if ( complection ) {
+            complection(result,error) ;
+        }
+    } ;
+    
+    QY_user *friend = [QY_user insertUserById:friendId] ;
+    QY_user *me = self ;
+    
+    [friend fetchUserInfoComplection:^(QY_user *user, NSError *error) {
+        if ( user && !error ) {
+            [me fetchUserInfoComplection:^(QY_user *user2, NSError *error) {
+                if ( user2 && !error ) {
+                    
+                    QY_friendSetting *me2Friend = [QY_friendSetting settingFromOwner:me toFriend:friend] ;
+                    
+                    [me2Friend saveComplection:^(BOOL success, NSError *error) {
+                        if ( success ) {
+                            QYDebugLog(@"单项添加成功") ;
+                            [QY_appDataCenter saveObject:nil error:NULL] ;
+                            
+                            QY_friendSetting *friend2Me = [QY_friendSetting settingFromOwner:friend toFriend:me] ;
+                            
+                            [friend2Me saveComplection:^(BOOL success, NSError *error) {
+                                if ( success ) {
+                                    QYDebugLog(@"双向添加成功") ;
+                                    [QY_appDataCenter saveObject:nil error:NULL] ;
+                                    [QYUtils alert:@"添加好友成功"] ;
+                                    complection(true,nil) ;
+                                } else {
+                                    [[QY_appDataCenter managedObjectContext] undo] ;
+                                    complection(false,error) ;
+                                }
+                            }] ;
+                            
+                        } else {
+                            [[QY_appDataCenter managedObjectContext] undo] ;
+                            complection(false,error) ;
+                        }
+                    }] ;
+                    
+                } else {
+                    [QYUtils alertError:error] ;
+                    complection(false,error) ;
+                }
+            }] ;
+        } else {
+            [QYUtils alertError:error] ;
+            complection(false,error) ;
+        }
+    }] ;
+}
+
+- (void)deleteFriendById:(NSString *)friendId complection:(QYResultBlock)complection {
+    assert(friendId && friendId!=self.userId) ;
+    complection = ^(BOOL result,NSError *error) {
+        if ( complection ) {
+            complection(result,error) ;
+        }
+    } ;
+#warning 没写。
+    
 }
 
 - (void)fetchFriendsComplection:(QYArrayBlock)complection {
@@ -240,6 +312,50 @@
         [QY_appDataCenter saveObject:nil error:NULL] ;
         complection([self.friendSettings allObjects],error) ;
     }) ;
+}
+
+#pragma mark - phone
+
+- (void)applyValidateCodeForTelephone:(NSString *)telephone validateCode:(NSString *)code complection:(QYResultBlock)complection {
+    assert(self.userId) ;
+    assert(telephone) ;
+    [[QY_SocketAgent shareInstance] verifyTelephoneForUser:self.userId Telephone:telephone VerifyCode:code Complection:complection] ;
+}
+
+- (void)saveTelephone:(NSString *)telephone Complection:(QYResultBlock)complection {
+    complection = ^(BOOL result,NSError *error) {
+        if ( complection ) {
+            complection(result,error) ;
+        }
+    } ;
+
+    [[QY_SocketAgent shareInstance] bindingTelephoneForUser:self.userId Telephone:telephone Complection:^(BOOL success, NSError *error) {
+        if ( success ) {
+            self.phone = telephone ;
+            [QY_appDataCenter saveObject:nil error:NULL] ;
+            complection(true,nil) ;            
+        } else {
+            complection(false,error) ;
+        }
+    }] ;    
+}
+
+- (void)fetchTelephoneComplection:(QYResultBlock)complection {
+    complection = ^(BOOL result,NSError *error) {
+        if ( complection ) {
+            complection(result,error) ;
+        }
+    } ;
+    
+    [[QY_SocketAgent shareInstance] getTelephoneByUserId:self.userId Complection:^(NSDictionary *info, NSError *error) {
+        if ( info && !error ) {
+            NSString *phone = info[ParameterKey_userPhone] ;
+            self.phone = phone ;
+            complection(true,error) ;
+        } else {
+            complection(false,error) ;
+        }
+    }] ;
 }
 
 #pragma mark - getter && setter

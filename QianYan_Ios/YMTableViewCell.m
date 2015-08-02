@@ -13,68 +13,69 @@
 
 #define kImageTag 9999
 
-
-@implementation YMTableViewCell
-{
+@interface YMTableViewCell () {
     UIButton *foldBtn;
     YMTextData *tempDate;
     UIImageView *replyImageView;
-//    NSMutableArray *textFieldArray;
+    //    NSMutableArray *textFieldArray;
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+@end
+
+@implementation YMTableViewCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier] ;
     if (self) {
         // Initialization code
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = [UIColor clearColor];
-        UIImageView *headerImage = [[UIImageView alloc] initWithFrame:CGRectMake(8, 3, 36, 36)];
-        headerImage.backgroundColor = [UIColor clearColor];
-        headerImage.image = [UIImage imageNamed:@"mao.jpg"];
-        CALayer *layer = [headerImage layer];
-        [layer setMasksToBounds:YES];
-        [layer setCornerRadius:18.0];
-        [layer setBorderWidth:0.5];
-        [layer setBorderColor:[[UIColor colorWithRed:63/255.0 green:107/255.0 blue:252/255.0 alpha:1.0] CGColor]];
-        [self.contentView addSubview:headerImage];
+        self.selectionStyle = UITableViewCellSelectionStyleNone ;
+        self.backgroundColor = [UIColor clearColor] ;
+        UIImageView *headerImage = [[UIImageView alloc] initWithFrame:CGRectMake(8, 3, 36, 36)] ;
+        headerImage.backgroundColor = [UIColor clearColor] ;
+        headerImage.image = [UIImage imageNamed:@"mao.jpg"] ;
+        CALayer *layer = [headerImage layer] ;
+        [layer setMasksToBounds:YES] ;
+        [layer setCornerRadius:18.0] ;
+        [layer setBorderWidth:0.5] ;
+        [layer setBorderColor:[[UIColor colorWithRed:63/255.0 green:107/255.0 blue:252/255.0 alpha:1.0] CGColor]] ;
+        [self.contentView addSubview:headerImage] ;
         
-        UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(48, 5, screenWidth - 120, TableHeader/2)];
-        nameLbl.textAlignment = NSTextAlignmentLeft;
-        nameLbl.text = @"迪恩·温彻斯特";
-        nameLbl.font = [UIFont systemFontOfSize:15.0];
+        UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(48, 5, screenWidth - 120, TableHeader/2)] ;
+        nameLbl.textAlignment = NSTextAlignmentLeft ;
+        nameLbl.text = @"迪恩·温彻斯特" ;
+        nameLbl.font = [UIFont systemFontOfSize:15.0] ;
         nameLbl.textColor = [UIColor colorWithRed:199/255.0 green:101/255.0 blue:4/255.0 alpha:1.0];
-        [self.contentView addSubview:nameLbl];
+        [self.contentView addSubview:nameLbl] ;
         
         
         
-        UILabel *introLbl = [[UILabel alloc] initWithFrame:CGRectMake(48, 5 + TableHeader/2 , screenWidth - 120, TableHeader/2)];
-        introLbl.numberOfLines = 1;
-        introLbl.font = [UIFont systemFontOfSize:14.0];
-        introLbl.textColor = [UIColor grayColor];
-        introLbl.text = @"这个人很懒，什么都没有留下";
-        //[self.contentView addSubview:introLbl];
+        UILabel *introLbl = [[UILabel alloc] initWithFrame:CGRectMake(48, 5 + TableHeader/2 , screenWidth - 120, TableHeader/2)] ;
+        introLbl.numberOfLines = 1 ;
+        introLbl.font = [UIFont systemFontOfSize:14.0] ;
+        introLbl.textColor = [UIColor grayColor] ;
+        introLbl.text = @"这个人很懒，什么都没有留下" ;
+        //[self.contentView addSubview:introLbl] ;
         
-        _imageArray = [[NSMutableArray alloc] init];
-        _ymTextArray = [[NSMutableArray alloc] init];
-        _ymShuoshuoArray = [[NSMutableArray alloc] init];
+        _imageArray = [[NSMutableArray alloc] init] ;
+        _ymTextArray = [[NSMutableArray alloc] init] ;
+        _ymShuoshuoArray = [[NSMutableArray alloc] init] ;
         
-        foldBtn = [UIButton buttonWithType:0];
-        [foldBtn setTitle:@"展开" forState:0];
-        foldBtn.backgroundColor = [UIColor clearColor];
-        foldBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
-        [foldBtn setTitleColor:[UIColor grayColor] forState:0];
-        [foldBtn addTarget:self action:@selector(foldText) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:foldBtn];
+        foldBtn = [UIButton buttonWithType:0] ;
+        [foldBtn setTitle:@"展开" forState:0] ;
+        foldBtn.backgroundColor = [UIColor clearColor] ;
+        foldBtn.titleLabel.font = [UIFont systemFontOfSize:15.0] ;
+        [foldBtn setTitleColor:[UIColor grayColor] forState:0] ;
+        [foldBtn addTarget:self action:@selector(foldText) forControlEvents:UIControlEventTouchUpInside] ;
+        [self.contentView addSubview:foldBtn] ;
         
-        replyImageView = [[UIImageView alloc] init];
+        replyImageView = [[UIImageView alloc] init] ;
         
-        replyImageView.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
-        [self.contentView addSubview:replyImageView];
+        replyImageView.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0] ;
+        [self.contentView addSubview:replyImageView] ;
         
-        _replyBtn = [YMButton buttonWithType:0];
-        [_replyBtn setImage:[UIImage imageNamed:@"社交-评论按钮.png"] forState:0];
-        [self.contentView addSubview:_replyBtn];
+        _replyBtn = [YMButton buttonWithType:0] ;
+        [_replyBtn setImage:[UIImage imageNamed:@"社交-评论按钮.png"] forState:0] ;
+        [self.contentView addSubview:_replyBtn] ;
         
 //        if (textFieldArray.count == 0) {
 //            textFieldArray = [NSMutableArray array];
@@ -83,7 +84,7 @@
     return self;
 }
 
-- (void)foldText{
+- (void)foldText {
     
     if (tempDate.foldOrNot == YES) {
         tempDate.foldOrNot = NO;
@@ -98,13 +99,11 @@
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
+    [super setSelected:selected animated:animated] ;
 }
 
 
-- (void)setYMViewWith:(YMTextData *)ymData{
+- (void)setYMViewWith:(YMTextData *)ymData {
     
     // NSLog(@"width = %f",screenWidth);
     

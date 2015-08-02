@@ -113,6 +113,7 @@ static NSMutableDictionary * gHistory;
     UIButton            *_infoButton;
     UITableView         *_tableView;
     UIActivityIndicatorView *_activityIndicatorView;
+    UIActivityIndicatorView *_startActivityIndicatorView;
     UILabel             *_subtitlesLabel;
     UIBarButtonItem     *_settingsBtnItem;
     
@@ -255,6 +256,12 @@ static NSMutableDictionary * gHistory;
     _activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     
     [self.view addSubview:_activityIndicatorView];
+    
+    _startActivityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhiteLarge];
+    _startActivityIndicatorView.center = CGPointMake(160, 220);
+    _startActivityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    
+    [self.view addSubview:_startActivityIndicatorView];
     
     CGFloat width = bounds.size.width;
     CGFloat height = 568;
@@ -403,6 +410,7 @@ _messageLabel.hidden = YES;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated] ;
     self.view.backgroundColor = [UIColor whiteColor];
+    [self.tabBarController.tabBar setHidden:YES];
 //    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
 //    NSString *path = @"http://www.qeebu.com/newe/Public/Attachment/99/52958fdb45565.mp4";
 //    NSAssert(path.length > 0, @"empty path");

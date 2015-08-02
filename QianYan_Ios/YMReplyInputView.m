@@ -226,8 +226,7 @@
 
 #pragma mark - Public Methods
 
-- (NSString*)text
-{
+- (NSString*)commentText {
     return textView.text;
 }
 

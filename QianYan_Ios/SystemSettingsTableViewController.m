@@ -109,6 +109,7 @@
                     break;
                     
                 case 1:
+                    [self.navigationController pushViewController:[[AppDelegate globalDelegate] PasswordManageViewController] animated:YES];
                     break;
                     
                 default:

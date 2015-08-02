@@ -11,8 +11,7 @@
 #import "WFTextView.h"
 #import "YMButton.h"
 
-
-@protocol cellDelegate <NSObject>
+@protocol QY_socialCellDelegate <NSObject>
 
 - (void)changeFoldState:(YMTextData *)ymD onCellRow:(NSInteger) cellStamp;
 - (void)showImageViewWithImageViews:(NSArray *)imageViews byClickWhich:(NSInteger)clickTag;
@@ -21,10 +20,13 @@
 
 @interface YMTableViewCell : UITableViewCell<WFCoretextDelegate>
 
-@property (nonatomic,strong) NSMutableArray * imageArray;
-@property (nonatomic,strong) NSMutableArray * ymTextArray;
-@property (nonatomic,strong) NSMutableArray * ymShuoshuoArray;
-@property (nonatomic,assign) id<cellDelegate> delegate;
+@property (weak) id<QY_socialCellDelegate> delegate ;
+
+@property (nonatomic,strong) NSMutableArray * imageArray ;
+@property (nonatomic,strong) NSMutableArray * ymTextArray ;
+@property (nonatomic,strong) NSMutableArray * ymShuoshuoArray ;
+
+
 @property (nonatomic,assign) NSInteger stamp;
 @property (nonatomic,strong) YMButton *replyBtn;
 

@@ -47,17 +47,33 @@
 
 + (QY_user *)insertUserById:(NSString *)userId ;
 
-#pragma mark - 远端数据库交互
-
-- (void)fetchJproServerInfoComplection:(QYResultBlock)complection ;
+#pragma mark - jpro 远端数据库交互
 
 - (void)fetchUserInfoComplection:(QYObjectBlock)complection ;
 
 - (void)saveUserInfoComplection:(QYObjectBlock)complection ;
 
+#pragma mark - jpro_friend
+
+- (void)addFriendById:(NSString *)friendId complection:(QYResultBlock)complection ;
+
+- (void)deleteFriendById:(NSString *)friendId complection:(QYResultBlock)complection ;
+
 - (void)fetchFriendsComplection:(QYArrayBlock)complection ;
 
+#pragma mark - jpro_camera
+
 - (void)fetchCamerasComplection:(QYArrayBlock)complection ;
+
+#pragma mark - jrm[phone,jpro]
+
+- (void)fetchJproServerInfoComplection:(QYResultBlock)complection ;
+
+- (void)applyValidateCodeForTelephone:(NSString *)telephone validateCode:(NSString *)code complection:(QYResultBlock)complection ;
+
+- (void)saveTelephone:(NSString *)telephone Complection:(QYResultBlock)complection ;
+
+- (void)fetchTelephoneComplection:(QYResultBlock)complection ;
 
 #pragma mark - getter && setter
 

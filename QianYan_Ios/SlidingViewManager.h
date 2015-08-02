@@ -11,9 +11,9 @@
 
 @interface SlidingViewManager : NSObject
 
-- (id)initWithInnerView:(UIView*)_innerView containerView:(UIView *)_containerView maskView:(UIView *)_maskView;
-- (void)slideViewIn;
-- (void)slideViewOut;
+- (id)initWithInnerView:(UIView*)_innerView containerView:(UIView *)_containerView maskView:(UIView *)_maskView ;
+- (void)slideViewIn ;
+- (void)slideViewOut ;
 
 @end
 

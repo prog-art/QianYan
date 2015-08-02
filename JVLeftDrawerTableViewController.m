@@ -127,8 +127,10 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVLeftDrawerCellReuseId
         destinationViewController = [[AppDelegate globalDelegate] CameraSettingCollectionViewController];
         
         [self test:destinationViewController] ;
-    } else {
+    } else if (indexPath.row == 6) {
+        destinationViewController = [[AppDelegate globalDelegate] FeedbackViewController];
         
+        [self test:destinationViewController] ;
     }
     
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];

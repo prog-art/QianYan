@@ -12,7 +12,7 @@
 
 @interface WXViewController : UIViewController
 
-- (IBAction)demoButtonClicked:(id)sender;
+- (IBAction)showSharingControlBtnClicked:(id)sender;
 @property (strong) UIView *maskView;
 @property BOOL isShow; // 弹出状态
 @property (strong) UIView *notificationView;
@@ -25,8 +25,6 @@
 @property (strong) UILabel *wordShareLabel;
 @property (strong) UILabel *pictureShareLabel;
 @property (strong) UILabel *videoShareLabel;
-
-@property (strong) UITapGestureRecognizer *tapGestureRecognizer;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *addButtonItem;
 

@@ -10,10 +10,10 @@
 
 @interface ILRegularExpressionManager : NSObject
 
-+ (NSArray *)itemIndexesWithPattern:(NSString *)pattern inString:(NSString *)findingString;
++ (NSArray *)itemIndexesWithPattern:(NSString *)pattern inString:(NSString *)findingString ;
 
-+ (NSMutableArray *)matchMobileLink:(NSString *)pattern;
++ (NSMutableArray *)matchMobileLink:(NSString *)pattern ;
 
-+ (NSMutableArray *)matchWebLink:(NSString *)pattern;
++ (NSMutableArray *)matchWebLink:(NSString *)pattern ;
 
 @end

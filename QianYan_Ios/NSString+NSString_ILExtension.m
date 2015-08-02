@@ -10,8 +10,7 @@
 
 @implementation NSString (NSString_ILExtension)
 
-- (NSString *)replaceCharactersAtIndexes:(NSArray *)indexes withString:(NSString *)aString
-{
+- (NSString *)replaceCharactersAtIndexes:(NSArray *)indexes withString:(NSString *)aString {
     NSAssert(indexes != nil, @"%s: indexes 不可以为nil", __PRETTY_FUNCTION__);
     NSAssert(aString != nil, @"%s: aString 不可以为nil", __PRETTY_FUNCTION__);
     
@@ -34,8 +33,7 @@
     return raw;
 }
 
-- (NSMutableArray *)itemsForPattern:(NSString *)pattern captureGroupIndex:(NSUInteger)index
-{
+- (NSMutableArray *)itemsForPattern:(NSString *)pattern captureGroupIndex:(NSUInteger)index {
     if ( !pattern )
         return nil;
     

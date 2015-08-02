@@ -53,4 +53,8 @@
  */
 + (void)pickImageFromCameraAtController:(UIViewController *)controller ;
 
+#pragma makr - 验证码
+
++ (NSString *)getAValidateCodeLength:(NSUInteger)len ;
+
 @end

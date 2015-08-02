@@ -12,11 +12,14 @@
 #import "QY_Common.h"
 #import "QY_FileService.h"
 #import <UIImageView+AFNetworking.h>
+#import "AppDelegate.h"
 
 @interface AccountInfoViewController () <UITableViewDataSource, UITableViewDelegate,UIActionSheetDelegate,UINavigationBarDelegate,UIImagePickerControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UIButton *avatarBtn;
+
+@property (weak) QY_user *currentUser ;
 
 @end
 
@@ -52,11 +55,16 @@
                                  placeholderImage:avatarImage] ;
     }
     
+    self.currentUser = [QYUser currentUser].coreUser ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tabBarController.tabBar setHidden:YES];
+    
+    self.currentUser.userId ;
+    QYDebugLog(@"user = %@",self.currentUser) ;
+    [self.tableView reloadData] ;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -98,77 +106,212 @@
     
     NSArray *account_nib = [[NSBundle mainBundle]loadNibNamed:@"AccountInfoTableViewCell" owner:self options:nil];
 
+    NSInteger section = indexPath.section ;
+    NSInteger row = indexPath.row ;
     
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            for(id oneObject in account_nib){
-                if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
-                    accountCell = (AccountInfoTableViewCell *)oneObject;
-                    accountCell.leftLabelText = @"昵称";
-                    accountCell.rightLabelText = @"大静静";
-                    return accountCell;
+    switch ( section ) {
+        case 0 : {
+            //0
+            switch ( row ) {
+                case 0 : {
+                    
+                    for(id oneObject in account_nib){
+                        if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
+                            accountCell = (AccountInfoTableViewCell *)oneObject;
+                            accountCell.leftLabelText = @"昵称";
+                            accountCell.rightLabelText = self.currentUser.nickname ;
+                            return accountCell;
+                        }
+                    }
+                    
+                    break ;
                 }
+                    
+                default:
+                    return cell ;
+                    break;
             }
-        } else {
-            return cell;
+            
+            
+            break ;
         }
-    } else {
-        switch (indexPath.row) {
-            case 0:
-                for(id oneObject in account_nib){
-                    if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
-                        accountCell = (AccountInfoTableViewCell *)oneObject;
-                        accountCell.leftLabelText = @"手机号认证";
-                        accountCell.rightLabelText = @"13550621456";
+            
+        case 1 : {
+            //1
+            switch ( row ) {
+                case 0 : {
+                    
+                    for(id oneObject in account_nib){
+                        if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
+                            accountCell = (AccountInfoTableViewCell *)oneObject;
+                            accountCell.leftLabelText = @"手机号认证";
+                            accountCell.rightLabelText = self.currentUser.phone ;
+                        }
                     }
+                    
+                    break ;
                 }
-                return accountCell;
-                break;
-                
-            case 1:
-                for(id oneObject in account_nib){
-                    if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
-                        accountCell = (AccountInfoTableViewCell *)oneObject;
-                        accountCell.leftLabelText = @"邮箱认证";
-                        accountCell.rightLabelText = @"stephy@sohu.com";
+                    
+                case 1:
+                    for(id oneObject in account_nib){
+                        if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
+                            accountCell = (AccountInfoTableViewCell *)oneObject;
+                            accountCell.leftLabelText = @"邮箱认证";
+                            accountCell.rightLabelText = self.currentUser.email ;
+                        }
                     }
-                }
-                return accountCell;
-                break;
-                
-            case 2:
-                for(id oneObject in account_nib){
-                    if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
-                        accountCell = (AccountInfoTableViewCell *)oneObject;
-                        accountCell.leftLabelText = @"个性签名";
-                        accountCell.rightLabelText = @"80后的奋斗!";
+                    return accountCell;
+                    break;
+                    
+                case 2:
+                    for(id oneObject in account_nib){
+                        if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
+                            accountCell = (AccountInfoTableViewCell *)oneObject;
+                            accountCell.leftLabelText = @"个性签名";
+                            accountCell.rightLabelText = self.currentUser.signature ;
+                        }
                     }
-                }
-                return accountCell;
-                break;
-                
-            case 3:
-                for(id oneObject in account_nib){
-                    if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
-                        accountCell = (AccountInfoTableViewCell *)oneObject;
-                        accountCell.leftLabelText = @"地区";
-                        accountCell.rightLabelText = @"北京 丰台区";
+                    return accountCell;
+                    break;
+                    
+                case 3:
+                    for(id oneObject in account_nib){
+                        if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
+                            accountCell = (AccountInfoTableViewCell *)oneObject;
+                            accountCell.leftLabelText = @"地区";
+                            accountCell.rightLabelText = @"北京 丰台区";
+                        }
                     }
-                }
-                return accountCell;
-                break;
-                
-            default:
-                break;
+                    return accountCell;
+                    break;
+                    
+                    
+                default:
+                    return accountCell ;
+                    break;
+            }
         }
+            
+        default:
+            
+            return accountCell ;
+            
+            break;
     }
-    return accountCell;
+//    
+//    if (indexPath.section == 0) {
+//        if (indexPath.row == 0) {
+//            for(id oneObject in account_nib){
+//                if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
+//                    accountCell = (AccountInfoTableViewCell *)oneObject;
+//                    accountCell.leftLabelText = @"昵称";
+//                    accountCell.rightLabelText = @"大静静";
+//                    return accountCell;
+//                }
+//            }
+//        } else {
+//            return cell;
+//        }
+//    } else {
+//        switch (indexPath.row) {
+//            case 0:
+//                for(id oneObject in account_nib){
+//                    if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
+//                        accountCell = (AccountInfoTableViewCell *)oneObject;
+//                        accountCell.leftLabelText = @"手机号认证";
+//                        accountCell.rightLabelText = @"13550621456";
+//                    }
+//                }
+//                return accountCell;
+//                break;
+//                
+//            case 1:
+//                for(id oneObject in account_nib){
+//                    if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
+//                        accountCell = (AccountInfoTableViewCell *)oneObject;
+//                        accountCell.leftLabelText = @"邮箱认证";
+//                        accountCell.rightLabelText = @"stephy@sohu.com";
+//                    }
+//                }
+//                return accountCell;
+//                break;
+//                
+//            case 2:
+//                for(id oneObject in account_nib){
+//                    if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
+//                        accountCell = (AccountInfoTableViewCell *)oneObject;
+//                        accountCell.leftLabelText = @"个性签名";
+//                        accountCell.rightLabelText = @"80后的奋斗!";
+//                    }
+//                }
+//                return accountCell;
+//                break;
+//                
+//            case 3:
+//                for(id oneObject in account_nib){
+//                    if([oneObject isKindOfClass:[AccountInfoTableViewCell class]]) {
+//                        accountCell = (AccountInfoTableViewCell *)oneObject;
+//                        accountCell.leftLabelText = @"地区";
+//                        accountCell.rightLabelText = @"北京 丰台区";
+//                    }
+//                }
+//                return accountCell;
+//                break;
+//                
+//            default:
+//                break;
+//        }
+//    }
+//    return accountCell;
+    return accountCell ;
 }
 
 #pragma mark -- Table View Delegate
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.section) {
+        case 0:
+            switch (indexPath.row) {
+                case 0:
+                    [self.navigationController pushViewController:[[AppDelegate globalDelegate] ManageNicknameViewController] animated:YES];
+                    break;
+                    
+                case 1:
+                    [self.navigationController pushViewController:[[AppDelegate globalDelegate] QRCodeCardViewController] animated:YES];
+                    break;
+                    
+                default:
+                    break;
+            }
+            break;
+            
+        case 1:
+            switch (indexPath.row) {
+                case 0:
+                    [self.navigationController pushViewController:[[AppDelegate globalDelegate] PhoneNumberIdentifyViewController] animated:YES];
+                    break;
+                    
+                case 1:
+                    
+                    break;
+                    
+                case 2:
+                    [self.navigationController pushViewController:[[AppDelegate globalDelegate] ManageSignatureViewController] animated:YES];
+                    break;
+                    
+                case 3:
+                    
+                    break;
+                    
+                default:
+                    break;
+            }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - 

@@ -31,6 +31,16 @@
     _isShowPassword = NO;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tabBarController.tabBar setHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.tabBarController.tabBar setHidden:NO];
+}
+
 #pragma mark -- IBAction
 
 - (IBAction)doneBtnClicked:(id)sender {
@@ -52,12 +62,12 @@
 
 - (IBAction)showPasswordBtnClicked:(id)sender {
     if (_isShowPassword) {
-        [_showPasswordBtn setImage:[UIImage imageNamed:@"显示密码（选中）.png"] forState:UIControlStateNormal];
+        [_showPasswordBtn setImage:[UIImage imageNamed:@"显示密码.png"] forState:UIControlStateNormal];
         _isShowPassword = NO;
         _oldPasswordTextField.secureTextEntry = YES;
         _passwordTextField.secureTextEntry = YES;
     } else {
-        [_showPasswordBtn setImage:[UIImage imageNamed:@"显示密码.png"] forState:UIControlStateNormal];
+        [_showPasswordBtn setImage:[UIImage imageNamed:@"显示密码（选中）.png"] forState:UIControlStateNormal];
         _isShowPassword = YES;
         _oldPasswordTextField.secureTextEntry = NO;
         _passwordTextField.secureTextEntry = NO;

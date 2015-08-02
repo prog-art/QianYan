@@ -241,15 +241,17 @@
 
 + (void)initUser:(QY_user *)user withProfileXMLStr:(NSString *)xmlStr error:(NSError **)error {
     assert(user) ;
+    QYDebugLog(@"init user xmlStr = %@",xmlStr) ;
     
     GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:error] ;
     
-    if ( error ) {
+    if ( *error ) {
         [QYUtils alertError:*error] ;
     } else {
         GDataXMLElement *root = [xmlDoc rootElement] ;
         
         user.userName = [self getStringValueForElement:root name:@"username"] ;
+        user.nickname = [self getStringValueForElement:root name:@"nickname"] ;
         user.gender = [self getStringValueForElement:root name:@"gender"] ;
         user.location = [self getStringValueForElement:root name:@"location"] ;
         

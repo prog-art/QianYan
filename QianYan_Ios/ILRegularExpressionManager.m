@@ -10,8 +10,7 @@
 
 @implementation ILRegularExpressionManager
 
-+ (NSArray *)itemIndexesWithPattern:(NSString *)pattern inString:(NSString *)findingString
-{
++ (NSArray *)itemIndexesWithPattern:(NSString *)pattern inString:(NSString *)findingString {
     NSAssert(pattern != nil, @"%s: pattern 不可以为 nil", __PRETTY_FUNCTION__);
     NSAssert(findingString != nil, @"%s: findingString 不可以为 nil", __PRETTY_FUNCTION__);
     
@@ -48,7 +47,7 @@
     return ranges;
 }
 
-+ (NSMutableArray *)matchMobileLink:(NSString *)pattern{
++ (NSMutableArray *)matchMobileLink:(NSString *)pattern {
 
     NSMutableArray *linkArr = [NSMutableArray arrayWithCapacity:0];
     NSRegularExpression*regular=[[NSRegularExpression alloc]initWithPattern:@"(\\(86\\))?(13[0-9]|15[0-35-9]|18[0125-9])\\d{8}" options:NSRegularExpressionDotMatchesLineSeparators|NSRegularExpressionCaseInsensitive error:nil];
@@ -70,7 +69,7 @@
 
 
 
-+ (NSMutableArray *)matchWebLink:(NSString *)pattern{
++ (NSMutableArray *)matchWebLink:(NSString *)pattern {
 
    // NSLog(@"go here? go here? go here ?");
     

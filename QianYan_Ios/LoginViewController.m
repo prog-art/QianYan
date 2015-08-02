@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *inputEmailOrPhoneNumberTextField;
 @property (weak, nonatomic) IBOutlet UITextField *inputPasswordTextField;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loginIndicatorView;
 @end
 
 @implementation LoginViewController
@@ -31,8 +32,9 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning] ;
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+    [_loginIndicatorView stopAnimating];
 }
 
 #pragma mark - IBAction
@@ -43,6 +45,8 @@
 
 - (IBAction)loginBtnClicked:(id)sender {
     //这里检测密码长度
+    
+    [_loginIndicatorView startAnimating];
     
     NSString *username = self.inputEmailOrPhoneNumberTextField.text ;
     NSString *password = self.inputPasswordTextField.text ;
