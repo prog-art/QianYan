@@ -1223,6 +1223,78 @@ BOOL makeFIleUrlReachabily(NSURL *fileUrl) {
                Complection:complection] ;
 }
 
+- (void)deleteFriendWithFriendId:(NSString *)friendId selfId:(NSString *)selfId complection:(QYResultBlock)complection {
+    complection = ^(BOOL result,NSError *error) {
+        if ( complection ) {
+            complection(result,error) ;
+        }
+    } ;
+    
+#warning 这里对JPRO的操作，不应该客户端来保证原子性！！一旦某个操作失败很容易导致数据被污染。
+    QYDebugLog(@"删除好友 friendId = %@",friendId) ;
+    
+    if ( !friendId || !selfId ) {
+        NSError *error = [NSError QYErrorWithCode:PARAMETER_NULL_ERROR description:@"参数为空"] ;
+        complection(FALSE,error) ;
+        return ;
+    }
+    
+    dispatch_group_t group = dispatch_group_create() ;
+    
+    __block NSError *error1 ;
+    __block NSError *error2 ;
+    
+    dispatch_group_async(group, dispatch_get_global_queue(0, 0), ^{
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0) ;
+        //删除自己
+        NSString *path = [QY_JPROUrlFactor pathForUserFriendList:friendId FriendId:selfId] ;
+        
+        [self clearDocumentOnPath:path Complection:^(BOOL success, NSError *error) {
+            if ( success ) {
+                QYDebugLog(@"删除自己成功") ;
+            } else {
+                QYDebugLog(@"删除自己失败 error = %@",error) ;
+                error1 = error ;
+            }
+            
+            dispatch_semaphore_signal(sema) ;
+        }] ;
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER) ;
+        QYDebugLog(@"删除自己完成") ;
+    }) ;
+    
+    dispatch_group_async(group, dispatch_get_global_queue(0, 0), ^{
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0) ;
+        //删除别人
+        NSString *path = [QY_JPROUrlFactor pathForUserFriendList:selfId FriendId:friendId] ;
+        
+        [self clearDocumentOnPath:path Complection:^(BOOL success, NSError *error) {
+            if ( success ) {
+                QYDebugLog(@"删除别人成功") ;
+            } else {
+                QYDebugLog(@"删除别人失败 error = %@",error) ;
+                error2 = error ;
+            }
+            dispatch_semaphore_signal(sema) ;
+        }] ;
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER) ;
+        QYDebugLog(@"删除别人完成") ;
+    }) ;
+
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        if ( !error2 && !error1 ) {
+            QYDebugLog(@"远端数据删除成功，回调后请删除本地数据库数据") ;
+            complection(TRUE,nil) ;
+        } else {
+#warning 如果出现这步，就非常严重了。
+            NSError *error = error1 ? : error2 ;
+            complection(FALSE,error) ;
+        } ;
+        
+    }) ;
+    
+}
+
 /**
  *  下载文件到内存
  *

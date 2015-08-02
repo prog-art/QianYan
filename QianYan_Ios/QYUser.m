@@ -268,7 +268,6 @@ static QYUser *_currentUser = nil ;
 #pragma mark - getter & setter
 
 - (QY_user *)coreUser {
-    QYDebugLog(@"middle") ;
     if ( !_coreUser ) {
         _coreUser = [QY_user findUserById:self.userId] ;
     }

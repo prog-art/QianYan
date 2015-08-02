@@ -33,6 +33,15 @@
  */
 - (void)setUserAvatarForUser:(NSString *)userId image:(UIImage *)avatar Complection:(QYResultBlock)complection ;
 
+/**
+ *  负责删除远端friendlist中，双方的部分。本地数据由调用者在回调中负责删除。
+ *
+ *  @param friendId    朋友的Id
+ *  @param selfId      自己的Id
+ *  @param complection
+ */
+- (void)deleteFriendWithFriendId:(NSString *)friendId selfId:(NSString *)selfId complection:(QYResultBlock)complection ;
+
 #pragma mark - test
 
 - (void)testUpload ;

@@ -84,7 +84,8 @@
                      [NSDictionary dictionaryWithDesc:@"[ok]-410 查询所有Camera" cmd:@(-410)],
                      [NSDictionary dictionaryWithDesc:@"[ok]-411 删除所有Camera" cmd:@(-411)]] ;
     
-    appCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-1 user登录" cmd:@(-1)],
+    appCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-1 user登录 to main" cmd:@(-1)],
+                [NSDictionary dictionaryWithDesc:@"[ok]1 user登录 not to main" cmd:@1],
                 [NSDictionary dictionaryWithDesc:@"-12 user登录错误密码" cmd:@(-12)],
                 [NSDictionary dictionaryWithDesc:@"[ok]-2 user注册" cmd:@(-2)],
                 [NSDictionary dictionaryWithDesc:@"[ok]-3 扫一扫" cmd:@(-3)],
@@ -367,7 +368,7 @@
         }
             
         case -309 : {
-            [self deleteFriendWithId:@"10000133" complection:^(BOOL success, NSError *error) {
+            [self deleteFriendWithId:@"10000145" complection:^(BOOL success, NSError *error) {
                 if ( success ) {
                     QYDebugLog(@"删除成功") ;
                 } else {
@@ -550,8 +551,22 @@
             [QY_QRCodeUtils startQRScanWithNavigationController:self.navigationController Delegate:self] ;
             break ;
         }
+            
+        case 1 : {
+            //登录 not to main
+            [QYUser loginName:testUsername Password:testPassword2 complection:^(BOOL success, NSError *error) {
+                if ( success ) {
+                    QYDebugLog(@"登陆成功") ;
+                } else {
+                    QYDebugLog(@"登陆失败 error = %@",error) ;
+                    [QYUtils alertError:error] ;
+                }
+            }] ;
+            break ;
+        }
+            
         case -1 : {
-            //登录
+            //登录 to main
             [QYUser loginName:testUsername Password:testPassword2 complection:^(BOOL success, NSError *error) {
                 if ( success ) {
                     QYDebugLog(@"登陆成功") ;

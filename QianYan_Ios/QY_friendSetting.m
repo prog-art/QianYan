@@ -41,4 +41,10 @@
     return [[self xmlStringForSaveAtJpro] dataUsingEncoding:NSUTF8StringEncoding] ;
 }
 
+#pragma mark -
+
+- (NSString *)displayName {
+    return self.remarkName ? : self.toFriend.nickname ;
+}
+
 @end

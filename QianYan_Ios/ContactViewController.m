@@ -24,7 +24,8 @@
 @property (nonatomic, strong) UIRefreshControl *refreshControl ;
 @property (nonatomic, strong) NSMutableArray *indexTitle ;
 
-@property (atomic) NSMutableDictionary *myFriends ;
+//@{friendId:QY_friendSetting} ;
+@property (nonatomic) NSMutableDictionary *myFriends ;
 
 @end
 
@@ -41,6 +42,17 @@
     return _refreshControl ;
 }
 
+- (NSMutableDictionary *)myFriends {
+    if ( !_myFriends ) {
+        _myFriends = [NSMutableDictionary dictionary] ;
+        
+        [[QYUser currentUser].coreUser.friendSettings enumerateObjectsUsingBlock:^(QY_friendSetting *setting, BOOL *stop) {
+            [_myFriends setObject:setting forKey:setting.toFriend.userId] ;
+        }] ;
+    }
+    return _myFriends ;
+}
+
 #pragma mark - UIRefreshControl Selector
 
 - (void)refreshFriends:(UIRefreshControl *)refreshControl {
@@ -48,117 +60,29 @@
         [refreshControl beginRefreshing] ;
     }
     
-    NSString *path = [NSString stringWithFormat:@"user/%@/friendlist",[QYUser currentUser].userId] ;
-    
-    [[QY_JPROHttpService shareInstance] getDocumentListForPath:path Complection:^(NSArray *objects, NSError *error) {
-        
+    [[QYUser currentUser].coreUser fetchFriendsComplection:^(NSArray *friendSettings, NSError *error) {
         if ( refreshControl ) {
             [refreshControl endRefreshing] ;
         }
         
-        if ( objects ) {
-            QYDebugLog(@"friendList = %@",objects) ;
-            [self fetchUserInfo:objects] ;
-            
-        } else {
-            QYDebugLog(@"erro = %@",error) ;
+        if ( friendSettings ) {
+            //置空，refresh的时候会调用这个。lazy loading
+            _myFriends = nil ;
+            [self.tableView reloadData] ;
+        }
+        
+        if ( error ) {
             [QYUtils alertError:error] ;
         }
         
     }] ;
-    
 }
-
-- (void)fetchUserInfo:(NSArray *)friends {
-    //@[100000133.xml]
-    
-    //check
-    NSMutableArray *noDataFriendNames = [NSMutableArray array] ;
-    
-    [friends enumerateObjectsUsingBlock:^(NSString *fileName, NSUInteger idx, BOOL *stop) {
-        NSString *tempFileName = [fileName stringByDeletingPathExtension] ;
-        QY_user *localFriend = [QY_user findUserById:tempFileName] ;
-        
-        if ( localFriend ) {
-            [self.myFriends setObject:localFriend forKey:tempFileName] ;
-            QYDebugLog(@"localFriend = %@",localFriend) ;
-        } else {
-            [noDataFriendNames addObject:fileName] ;
-        }
-    }] ;
-    
-    QYDebugLog(@"noDataFriendNames = %@",noDataFriendNames) ;
-    
-    //没有数据的去服务器拿
-    
-    dispatch_group_t group = dispatch_group_create() ;
-    [noDataFriendNames enumerateObjectsUsingBlock:^(NSString *fileName, NSUInteger idx, BOOL *stop) {
-        
-        dispatch_group_async(group, dispatch_get_global_queue(0, 0), ^{
-            NSString *path = [NSString stringWithFormat:@"user/%@/friendlist/%@",[QYUser currentUser].userId,fileName] ;
-            
-            dispatch_semaphore_t sema = dispatch_semaphore_create(0) ;
-            
-            [[QY_JPROHttpService shareInstance] downloadFileFromPath:path complection:^(NSString *xmlStr , NSError *error) {
-                if ( xmlStr ) {
-                    QYDebugLog(@"file = %@,content = %@",fileName,xmlStr) ;
-                    QY_friendSetting *friendSetting = [QY_XMLService getSesttingFromIdXML:xmlStr] ;
-                
-                    QY_user *friend = friendSetting.toFriend ;
-                    
-                    QYDebugLog(@"friend = %@",friend) ;
-                    
-                    [self.myFriends setObject:friend forKey:friend.userId] ;
-                    
-                } else {
-                    QYDebugLog(@"error = %@",error) ;
-                }
-                dispatch_semaphore_signal(sema) ;
-            }] ;
-            dispatch_time_t timeout = dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC) ;
-            dispatch_semaphore_wait(sema, timeout) ;
-            QYDebugLog(@"group %lu ok",(unsigned long)idx) ;
-        }) ;
-    }] ;
-    
-    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        QYDebugLog(@"请求结束！") ;
-        [self didReceiveUserData] ;
-    }) ;
-}
-
-- (void)didReceiveUserData {
-    QYDebugLog(@"接收到了所有的数据。") ;
-
-    [self.refreshControl endRefreshing] ;
-    [self.tableView reloadData] ;
-    
-    [QY_appDataCenter saveObject:nil error:NULL] ;
-}
-
 
 #pragma mark - life Cycle
 
-- (void)getFriendsFromDataBase {
-    self.myFriends = [NSMutableDictionary dictionary] ;
-    
-    QYUser *curUser = [QYUser currentUser] ;
-    
-    QY_user *coreUser = curUser.coreUser ;
-    
-    NSArray *friendsArr = [coreUser.friends allObjects] ;
-
-    [friendsArr enumerateObjectsUsingBlock:^(QY_user *friend, NSUInteger idx, BOOL *stop) {
-        [self.myFriends setObject:friend forKey:friend.userId] ;
-    }] ;
-}
-
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self getFriendsFromDataBase] ;
-    
-    
+    [super viewDidLoad] ;
+
     NSArray *sectionIndex = @[@"🔍", @"", @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N",@"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", @"#"] ;
     _indexTitle = [sectionIndex mutableCopy] ;
     
@@ -194,8 +118,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSLog(@"cell selected at index path %ld:%ld", (long)indexPath.section, (long)indexPath.row);
-//    NSLog(@"selected cell index path is %@", [self.tableView indexPathForSelectedRow]);
     if (!tableView.isEditing) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
@@ -255,10 +177,9 @@
             [cell setRightUtilityButtons:[self rightButtons] WithButtonWidth:90.0f];
             cell.delegate = self;
             
+            QY_friendSetting *friendSetting = [self.myFriends allValues][indexPath.row] ;
             
-            QY_user *friend = [self.myFriends allValues][indexPath.row] ;
-            
-            cell.label.text = friend.userName ;
+            cell.label.text = friendSetting.displayName ;
             
             return cell;
             break ;
@@ -321,6 +242,8 @@
             NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
             
             [QYUtils alert:@"删除好友正在做～"] ;
+            
+            
             
 //            [_testArray[cellIndexPath.section-2] removeObjectAtIndex:cellIndexPath.row];
 //            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];

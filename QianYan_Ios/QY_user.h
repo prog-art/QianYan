@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "QY_Block_Define.h"
+
 @class QY_camera, QY_cameraGroup, QY_cameraSetting, QY_feed, QY_friendGroup, QY_friendSetting, QY_user;
 
 @interface QY_user : NSManagedObject
@@ -17,6 +19,8 @@
 @property (nonatomic, retain) NSDate * birthday;
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * gender;
+
+#warning 待删除字段，分离为jproIp 和 jproPort，提供同名jpro方法，组装jproIp:jproPort
 @property (nonatomic, retain) NSString * jpro;
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSString * nickname;
@@ -30,17 +34,33 @@
 @property (nonatomic, retain) NSSet *diggedFeeds;
 @property (nonatomic, retain) NSSet *feeds;
 @property (nonatomic, retain) NSSet *friendGroups;
+
+#warning 待删除字段，保留friendSettings，提供同名friends方法，转发消息给friendSettings.toFreidns
 @property (nonatomic, retain) NSSet *friends;
 @property (nonatomic, retain) NSSet *friendSettings;
 @property (nonatomic, retain) NSSet *inGroups;
 @property (nonatomic, retain) NSSet *sharedCameras;
 @property (nonatomic, retain) NSSet *inSettings;
 
+#pragma mark - 数据库交互
+
 + (QY_user *)user ;
 
 + (QY_user *)findUserById:(NSString *)userId ;
 
 + (QY_user *)insertUserById:(NSString *)userId ;
+
+#pragma mark - 远端数据库交互
+
+- (void)fetchUserInfoComplection:(QYObjectBlock)complection ;
+
+- (void)fetchFriendsComplection:(QYArrayBlock)complection ;
+
+- (void)fetchCamerasComplection:(QYArrayBlock)complection ;
+
+#pragma mark - getter
+
+//- (NSString *)jpro ;
 
 @end
 

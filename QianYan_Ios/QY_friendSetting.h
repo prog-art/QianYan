@@ -32,4 +32,8 @@
 
 - (NSData *)xmlStringDataForTransportByHttp ;
 
+#pragma mark - 
+
+- (NSString *)displayName ;
+
 @end
