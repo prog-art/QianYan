@@ -10,6 +10,8 @@
 
 @interface QY_comment (QY_JPRO_DATA_FORMAT)
 
++ (QY_comment *)commentWithId:(NSString *)commentId ;
+
 + (NSSet *)commentWithDicArray:(NSArray *)dicArray ;
 
 @end

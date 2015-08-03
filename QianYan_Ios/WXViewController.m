@@ -38,9 +38,9 @@ lineBreakMode:mode].height : 0.f;
 #define kSocial2WordSharingSegueId @"Social2WordSharingSegueId"
 
 @interface WXViewController ()<UITableViewDataSource,UITableViewDelegate,QY_socialCellDelegate,QY_commentDelegate> {
-    NSMutableArray *_imageDataSource;
+//    NSMutableArray *_imageDataSource;
     
-    NSMutableArray *_contentDataSource;//模拟接口给的数据
+//    NSMutableArray *_contentDataSource;//模拟接口给的数据
     
     NSMutableArray *_tableDataSource;//tableview数据源
     
@@ -53,6 +53,11 @@ lineBreakMode:mode].height : 0.f;
     YMReplyInputView *replyView ;
     
 }
+
+@property (nonatomic, strong) UIRefreshControl *refreshControl ;
+
+@property (nonatomic, strong) NSMutableArray *feeds ;
+
 @end
 
 @implementation WXViewController
@@ -109,7 +114,6 @@ lineBreakMode:mode].height : 0.f;
 }
 
 - (void)initTableview {
-    
     mainTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] ;
     mainTable.backgroundColor = [UIColor clearColor] ;
     // mainTable.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -117,69 +121,141 @@ lineBreakMode:mode].height : 0.f;
     mainTable.dataSource = self ;
     [self.view addSubview:mainTable] ;
     
+    [mainTable addSubview:self.refreshControl] ;
 }
 
-- (void)configImageData {
-    
-    _imageDataSource = [NSMutableArray arrayWithCapacity:0];
-    [_imageDataSource addObject:@"1.jpg"];
-    [_imageDataSource addObject:@"2.jpg"];
-    [_imageDataSource addObject:@"3.jpg"];
-    [_imageDataSource addObject:@"1.jpg"];
-    [_imageDataSource addObject:@"2.jpg"];
-    [_imageDataSource addObject:@"3.jpg"];
-    [_imageDataSource addObject:@"1.jpg"];
-    [_imageDataSource addObject:@"2.jpg"];
-    [_imageDataSource addObject:@"3.jpg"];
+- (UIRefreshControl *)refreshControl {
+    if ( !_refreshControl ) {
+        _refreshControl = [[UIRefreshControl alloc] init] ;
+        [_refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged] ;
+    }
+    return _refreshControl ;
 }
 
-- (void)loadTextData{
+- (void)refresh:(UIRefreshControl *)refreshControl {
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSMutableArray * ymDataArray = [NSMutableArray array] ;
-       
-        for (int i = 0 ; i < dataCount ; i ++) {
-            
-            //模拟数据 随机3组回复 以及图片
-            NSMutableArray * array = [NSMutableArray array] ;
-            NSMutableArray * userDefineAttriArray = [NSMutableArray array] ;
-            int randomReplyCount = arc4random() % 6 + 1;
-            for (int k = 0; k < randomReplyCount ; k ++) {
-                //[array addObject:[_contentDataSource objectAtIndex:arc4random() % 6]];
-                NSMutableArray *tempDefineArr = [NSMutableArray array] ;
-                NSString *range = NSStringFromRange(NSMakeRange(0, 2)) ;
-                
-                [tempDefineArr addObject:range] ;
-                [userDefineAttriArray addObject:tempDefineArr] ;
-            }
-            
-            
-            NSMutableArray * imageArray = [NSMutableArray array] ;
-            int randomImageCount = arc4random() % 9 + 1 ;
-            
-            for (int j = 0; j < randomImageCount; j ++) {
-                [imageArray addObject:[_imageDataSource objectAtIndex:arc4random() % 9]] ;
-            }
-
-            
-            //图片上面说说部分
-            NSString *aboveString = [_shuoshuoDatasSource objectAtIndex:arc4random() % 6] ;
-            
-            YMTextData *ymData = [[YMTextData alloc] init] ;
-            ymData.showImageArray = imageArray ;
-            ymData.foldOrNot = YES ;
-            ymData.showShuoShuo = aboveString ;
-            ymData.defineAttrData = userDefineAttriArray ;
-            ymData.replyDataSource = array ;
-            [ymDataArray addObject:ymData] ;
-            
+    [[QY_JPROHttpService shareInstance] getFeedListWithPage:0 NumPerPage:10 UserId:nil StartId:nil EndId:nil Check:nil Complection:^(NSArray *objects, NSError *error) {
+        if ( refreshControl ) {
+            [refreshControl endRefreshing] ;
         }
-        [self calculateHeight:ymDataArray] ;
         
-    });
+        if ( objects && !error ) {
+            QYDebugLog(@"feeds = %@",objects) ;
+            [QYUtils runInGlobalQueue:^{
+                [self phraseFeedsData:objects] ;
+            }] ;
+        } else {
+            [QYUtils alertError:error] ;
+        }
+    }] ;
 }
 
+- (void)phraseFeedsData:(NSArray *)feeds {
+    
+    NSMutableSet *set = [NSMutableSet setWithArray:self.feeds] ;
+    
+    [feeds enumerateObjectsUsingBlock:^(NSDictionary *feedDic, NSUInteger idx, BOOL *stop) {
+        NSString *feedId = [feedDic[QY_key_id] stringValue] ;
+        
+        QY_feed *feed = [QY_feed feedWithId:feedId] ;
+        
+        [feed initWithFeedDic:feedDic] ;
+        
+        QYDebugLog(@"feed = %@",feed) ;
+        
+        [set addObject:feed] ;
+    }] ;
+    
+    [QY_appDataCenter saveObject:nil error:NULL] ;
+    
+    self.feeds = [[set allObjects] mutableCopy] ;
+    
+    [self maunallyReloadData] ;
+}
+
+- (void)maunallyReloadData {
+    
+    NSMutableArray *ymDataArray = [NSMutableArray array] ;
+    
+    [self.feeds enumerateObjectsUsingBlock:^(QY_feed *feed , NSUInteger idx, BOOL *stop) {
+        YMTextData *ymData = [[YMTextData alloc] init] ;
+        
+//        NSInteger commentCount = [feed.commentCount integerValue] ;
+        NSMutableArray *comments = [NSMutableArray array] ;
+        
+        NSMutableArray *userDefineAttriArray = [NSMutableArray array] ;
+        
+        [feed.comments enumerateObjectsUsingBlock:^(QY_comment *comment, BOOL *stop) {
+            
+            NSMutableArray *tempDefineArr = [NSMutableArray array] ;
+            NSString *range = NSStringFromRange(NSMakeRange(0, 2)) ;
+            
+            [tempDefineArr addObject:range] ;
+            
+            [userDefineAttriArray addObject:range] ;
+            
+            [comments addObject:comment.content] ;
+        }] ;
+        
+        ymData.showShuoShuo = feed.content ;
+        ymData.foldOrNot = YES ;//?
+//        ymData.showImageArray = ;//
+        ymData.defineAttrData = userDefineAttriArray ;
+        ymData.replyDataSource = comments;//回复？
+        ymData.name = feed.owner.nickname ? : feed.owner.userName ;
+        
+        [ymDataArray addObject:ymData] ;
+    }] ;
+    
+    [self calculateHeight:ymDataArray] ;
+}
+//
+//- (void)loadTextData{
+//    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        
+//        NSMutableArray * ymDataArray = [NSMutableArray array] ;
+//       
+//        for (int i = 0 ; i < dataCount ; i ++) {
+//            
+//            //模拟数据 随机3组回复 以及图片
+//            NSMutableArray * array = [NSMutableArray array] ;
+//            NSMutableArray * userDefineAttriArray = [NSMutableArray array] ;
+//            int randomReplyCount = arc4random() % 6 + 1;
+//            for (int k = 0; k < randomReplyCount ; k ++) {
+//                [array addObject:[_contentDataSource objectAtIndex:arc4random() % 6]];
+//                NSMutableArray *tempDefineArr = [NSMutableArray array] ;
+//                NSString *range = NSStringFromRange(NSMakeRange(0, 2)) ;
+//                
+//                [tempDefineArr addObject:range] ;
+//                [userDefineAttriArray addObject:tempDefineArr] ;
+//            }
+//            
+//            
+//            NSMutableArray * imageArray = [NSMutableArray array] ;
+//            int randomImageCount = arc4random() % 9 + 1 ;
+//            
+//            for (int j = 0; j < randomImageCount; j ++) {
+//                [imageArray addObject:[_imageDataSource objectAtIndex:arc4random() % 9]] ;
+//            }
+//
+//            
+//            //图片上面说说部分
+//            NSString *aboveString = [_shuoshuoDatasSource objectAtIndex:arc4random() % 6] ;
+//            
+//            YMTextData *ymData = [[YMTextData alloc] init] ;
+//            ymData.showImageArray = imageArray ;
+//            ymData.foldOrNot = YES ;
+//            ymData.showShuoShuo = aboveString ;
+//            ymData.defineAttrData = userDefineAttriArray ;
+//            ymData.replyDataSource = array ;
+//            [ymDataArray addObject:ymData] ;
+//            
+//        }
+//        [self calculateHeight:ymDataArray] ;
+//        
+//    });
+//}
 
 #pragma mark - life Cycle
 
@@ -187,29 +263,11 @@ lineBreakMode:mode].height : 0.f;
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-
+    
+    self.feeds = [NSMutableArray array] ;
     _tableDataSource = [NSMutableArray array] ;
     
-    _contentDataSource = [NSMutableArray array] ;//回复数据来源
-    [_contentDataSource addObject:kContentText1];
-    [_contentDataSource addObject:kContentText2];
-    [_contentDataSource addObject:kContentText3];
-    [_contentDataSource addObject:kContentText4];
-    [_contentDataSource addObject:kContentText5];
-    [_contentDataSource addObject:kContentText6];
-    
-    _shuoshuoDatasSource = [NSMutableArray array] ;//说说数据来源
-    
-    [_shuoshuoDatasSource addObject:kShuoshuoText1];
-    [_shuoshuoDatasSource addObject:kShuoshuoText2];
-    [_shuoshuoDatasSource addObject:kShuoshuoText3];
-    [_shuoshuoDatasSource addObject:kShuoshuoText4];
-    [_shuoshuoDatasSource addObject:kShuoshuoText5];
-    [_shuoshuoDatasSource addObject:kShuoshuoText6];
-    
-    [self initTableview];
-    [self configImageData];
-    [self loadTextData];
+    [self initTableview] ;
     
     [self setUpSocialSharingControl] ;
 }
@@ -224,17 +282,17 @@ lineBreakMode:mode].height : 0.f;
 - (void)wordShareButtonClicked:(id)sender {
     [self performSegueWithIdentifier:kSocial2WordSharingSegueId sender:self] ;
     
-    [_svm slideViewOut];
-    _isShow = NO;
-    _addButtonItem.image = [UIImage imageNamed:@"社交-添加.png"];
+    [_svm slideViewOut] ;
+    _isShow = NO ;
+    _addButtonItem.image = [UIImage imageNamed:@"社交-添加.png"] ;
 }
 
 - (void)pictureShareButtonClicked:(id)sender {
     [QYUtils alert:@"图片分享～正在施工"] ;
     
-    [_svm slideViewOut];
-    _isShow = NO;
-    _addButtonItem.image = [UIImage imageNamed:@"社交-添加.png"];
+    [_svm slideViewOut] ;
+    _isShow = NO ;
+    _addButtonItem.image = [UIImage imageNamed:@"社交-添加.png"] ;
 }
 
 - (void)videoShareButtonClicked:(id)sender {
@@ -259,7 +317,6 @@ lineBreakMode:mode].height : 0.f;
 
 #pragma mark - 计算高度
 - (void)calculateHeight:(NSMutableArray *)dataArray{
-   // NSDate* tmpStartData = [NSDate date];
     
     for (YMTextData *ymData in dataArray) {
         
@@ -272,16 +329,9 @@ lineBreakMode:mode].height : 0.f;
         
     }
     
-//    double deltaTime = [[NSDate date] timeIntervalSinceDate:tmpStartData];
-  //  NSLog(@"cost time = %f", deltaTime);
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-               [mainTable reloadData];
-      
-    });
-
-   
+    [QYUtils runInMainQueue:^{
+        [mainTable reloadData] ;
+    }] ;
 }
 
 - (void)backToPre {

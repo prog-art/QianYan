@@ -83,6 +83,8 @@
 
 - (NSSet *)friends ;
 
+- (NSArray *)visualableFeedItems ;
+
 @end
 
 @interface QY_user (CoreDataGeneratedAccessors)

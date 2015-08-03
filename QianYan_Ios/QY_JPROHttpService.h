@@ -40,7 +40,7 @@
  *  @param selfId      自己的Id
  *  @param complection
  */
-- (void)deleteFriendWithFriendId:(NSString *)friendId selfId:(NSString *)selfId complection:(QYResultBlock)complection ;
+- (void)deleteFriendWithFriendId:(NSString *)friendId selfId:(NSString *)selfId complection:(QYResultBlock)complection ; 
 
 #pragma mark - test
 

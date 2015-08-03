@@ -10,28 +10,55 @@
 
 #import "QY_jpro_parameter_key_marco.h"
 
+#import "QY_Common.h"
+
 @implementation QY_comment (QY_JPRO_DATA_FORMAT)
 
-- (instancetype)initWithDictionary:(NSDictionary *)commentDic {
-    if ( self = [super init] ) {
-        self.commentId = commentDic[QY_key_id] ;
-        NSArray *keys = @[QY_key_content,QY_key_pub_date,QY_key_user_id] ;
-        [keys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
-            [self setValue:commentDic[key] forKey:key] ;
-        }] ;
++ (QY_comment *)comment {
+    return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:[QY_appDataCenter managedObjectContext]] ;
+}
+
++ (QY_comment *)commentWithId:(NSString *)commentId {
+    assert(commentId) ;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"commentId = %@",commentId] ;
+    QY_comment *comment = (id)[QY_appDataCenter findObjectWithClassName:NSStringFromClass(self) predicate:predicate];
+    
+    if ( !comment ) {
+        comment = [self comment] ;
+        comment.commentId = commentId ;
     }
-    return self ;
+    
+    return comment ;
+}
+
+- (void)initWithDictionary:(NSDictionary *)commentDic {
+    
+#warning userId换为user!!![之后看换不换]
+    NSDictionary *keys2keys = @{QY_key_content:NSStringFromSelector(@selector(content)),
+                                QY_key_user_id:NSStringFromSelector(@selector(userId))} ;
+    
+    [keys2keys enumerateKeysAndObjectsUsingBlock:^(NSString *remoteKey, NSString *localKey, BOOL *stop) {
+        [self setValue:commentDic[remoteKey] forKey:localKey] ;
+    }] ;
+    
+    self.pubDate = [QYUtils timestampStr2date:[commentDic[QY_key_pub_date] stringValue]] ;
 }
 
 + (NSSet *)commentWithDicArray:(NSArray *)dicArray {
     if ( !dicArray ) return nil ;
-    NSMutableSet *result = [NSMutableSet set] ;
+    NSMutableSet *comments = [NSMutableSet set] ;
     
     [dicArray enumerateObjectsUsingBlock:^(NSDictionary *commentDic, NSUInteger idx, BOOL *stop) {
-        [result addObject:[[self alloc] initWithDictionary:commentDic]] ;
+        NSString *commentId = commentDic[QY_key_id] ;
+        QY_comment *comment = [self commentWithId:commentId] ;
+        
+        [comment initWithDictionary:commentDic] ;
+
+        [comments addObject:comment] ;
     }] ;
     
-    return result ;
+    return comments ;
 }
 
 @end

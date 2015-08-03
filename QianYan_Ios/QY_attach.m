@@ -6,11 +6,11 @@
 //  Copyright (c) 2015年 虎猫儿. All rights reserved.
 //
 
-#import "QY_attache.h"
+#import "QY_attach.h"
 #import "QY_feed.h"
 
 
-@implementation QY_attache
+@implementation QY_attach
 
 @dynamic attachId;
 @dynamic small;

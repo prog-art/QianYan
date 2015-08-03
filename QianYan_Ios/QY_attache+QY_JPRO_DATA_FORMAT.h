@@ -6,9 +6,11 @@
 //  Copyright (c) 2015年 虎猫儿. All rights reserved.
 //
 
-#import "QY_attache.h"
+#import "QY_attach.h"
 
-@interface QY_attache (QY_JPRO_DATA_FORMAT)
+@interface QY_attach (QY_JPRO_DATA_FORMAT)
+
++ (QY_attach *)attachWithId:(NSString *)attachId ;
 
 + (NSSet *)attacheWithDicArray:(NSArray *)dicArray ;
 

@@ -10,6 +10,8 @@
 
 @interface QY_feed (QY_JPRO_DATA_FORMAT)
 
-- (instancetype)initWithFeedDic:(NSDictionary *)feedDic ;
++ (QY_feed *)feedWithId:(NSString *)feedId ;
+
+- (void)initWithFeedDic:(NSDictionary *)feedDic ;
 
 @end

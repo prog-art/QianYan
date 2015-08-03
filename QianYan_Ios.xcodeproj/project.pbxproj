@@ -28,7 +28,7 @@
 		19602FB11B64F8080064BC87 /* QY_friendGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FB01B64F8080064BC87 /* QY_friendGroup.m */; };
 		19602FB41B64FB8B0064BC87 /* QY_cameraGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FB31B64FB8B0064BC87 /* QY_cameraGroup.m */; };
 		19602FC01B64FBA90064BC87 /* QY_feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FBF1B64FBA90064BC87 /* QY_feed.m */; };
-		19602FC31B64FBA90064BC87 /* QY_attache.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FC21B64FBA90064BC87 /* QY_attache.m */; };
+		19602FC31B64FBA90064BC87 /* QY_attach.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FC21B64FBA90064BC87 /* QY_attach.m */; };
 		19602FC61B64FBAA0064BC87 /* QY_comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FC51B64FBAA0064BC87 /* QY_comment.m */; };
 		19602FCF1B64FF010064BC87 /* QY_alertMessage+QY_JPRO_DATA_FORMAT.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FCE1B64FF010064BC87 /* QY_alertMessage+QY_JPRO_DATA_FORMAT.m */; };
 		19602FD51B6535270064BC87 /* QY_appDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FD41B6535270064BC87 /* QY_appDataCenter.m */; };
@@ -231,8 +231,8 @@
 		19602FB31B64FB8B0064BC87 /* QY_cameraGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_cameraGroup.m; sourceTree = "<group>"; };
 		19602FBE1B64FBA90064BC87 /* QY_feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_feed.h; sourceTree = "<group>"; };
 		19602FBF1B64FBA90064BC87 /* QY_feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_feed.m; sourceTree = "<group>"; };
-		19602FC11B64FBA90064BC87 /* QY_attache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_attache.h; sourceTree = "<group>"; };
-		19602FC21B64FBA90064BC87 /* QY_attache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_attache.m; sourceTree = "<group>"; };
+		19602FC11B64FBA90064BC87 /* QY_attach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_attach.h; sourceTree = "<group>"; };
+		19602FC21B64FBA90064BC87 /* QY_attach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_attach.m; sourceTree = "<group>"; };
 		19602FC41B64FBAA0064BC87 /* QY_comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_comment.h; sourceTree = "<group>"; };
 		19602FC51B64FBAA0064BC87 /* QY_comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_comment.m; sourceTree = "<group>"; };
 		19602FCD1B64FF010064BC87 /* QY_alertMessage+QY_JPRO_DATA_FORMAT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QY_alertMessage+QY_JPRO_DATA_FORMAT.h"; sourceTree = "<group>"; };
@@ -744,8 +744,8 @@
 			children = (
 				19602FC41B64FBAA0064BC87 /* QY_comment.h */,
 				19602FC51B64FBAA0064BC87 /* QY_comment.m */,
-				19602FC11B64FBA90064BC87 /* QY_attache.h */,
-				19602FC21B64FBA90064BC87 /* QY_attache.m */,
+				19602FC11B64FBA90064BC87 /* QY_attach.h */,
+				19602FC21B64FBA90064BC87 /* QY_attach.m */,
 				19602FBE1B64FBA90064BC87 /* QY_feed.h */,
 				19602FBF1B64FBA90064BC87 /* QY_feed.m */,
 				19602FD61B6566970064BC87 /* QY_alertMessage.h */,
@@ -2213,7 +2213,7 @@
 				1985303D1B2887CD00EB96F7 /* QY_FileService.m in Sources */,
 				196456A41B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m in Sources */,
 				6EDF09AD1B29311800413348 /* QRCodeCardViewController.m in Sources */,
-				19602FC31B64FBA90064BC87 /* QY_attache.m in Sources */,
+				19602FC31B64FBA90064BC87 /* QY_attach.m in Sources */,
 				6E7C075D1B3BE41200AC8EC3 /* AlertNotificationTableViewController.m in Sources */,
 				198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */,
 				6EE8E6681B11F768007C54E0 /* SettingsViewController.m in Sources */,

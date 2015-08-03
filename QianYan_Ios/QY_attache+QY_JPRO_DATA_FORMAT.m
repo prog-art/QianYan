@@ -10,32 +10,58 @@
 
 #import "CoreDataCategory.h"
 
-@implementation QY_attache (QY_JPRO_DATA_FORMAT)
+#import "QY_Common.h"
 
-- (instancetype)initWithDictionary:(NSDictionary *)attacheDic {
-    if ( self = [super init] ) {
-        self.attachId = attacheDic[QY_key_id] ;
-        NSArray *keys = @[QY_key_src,
-                          QY_key_user_id,
-                          QY_key_type,
-                          QY_key_small,
-                          QY_key_pub_date] ;
-        [keys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
-            [self setValue:attacheDic[key] forKey:key] ;
-        }] ;
+@implementation QY_attach (QY_JPRO_DATA_FORMAT)
+
++ (QY_attach *)attach {
+    QY_attach *attach = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:[QY_appDataCenter managedObjectContext]] ;
+    return attach ;
+}
+
++ (QY_attach *)attachWithId:(NSString *)attachId {
+    assert(attachId) ;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"attachId = %@",attachId] ;
+    QY_attach *attach = (id)[QY_appDataCenter findObjectWithClassName:NSStringFromClass(self) predicate:predicate];
+    
+    if ( !attach ) {
+        attach = [self attach] ;
+        attach.attachId = attachId ;
     }
-    return self ;
+    
+    return attach ;
+}
+
+- (void)initWithDictionary:(NSDictionary *)attacheDic {
+#warning attach的small字段呢？！！！
+    NSDictionary *keys2keys = @{QY_key_src:NSStringFromSelector(@selector(src)),
+                                QY_key_type:NSStringFromSelector(@selector(type)),
+                                QY_key_small:NSStringFromSelector(@selector(small)),
+                                } ;
+    
+    [keys2keys enumerateKeysAndObjectsUsingBlock:^(NSString *remoteKey, NSString *localKey, BOOL *stop) {
+        [self setValue:attacheDic[remoteKey] forKey:localKey] ;
+    }] ;
+    
+    self.userId = [attacheDic[QY_key_user_id] stringValue] ;
+    self.pubDate = [QYUtils timestampStr2date:[attacheDic[QY_key_pub_date] stringValue]] ;
 }
 
 + (NSSet *)attacheWithDicArray:(NSArray *)dicArray {
     if ( !dicArray ) return nil ;
-    NSMutableSet *result = [NSMutableSet set] ;
+    NSMutableSet *attaches = [NSMutableSet set] ;
     
     [dicArray enumerateObjectsUsingBlock:^(NSDictionary *attacheDic, NSUInteger idx, BOOL *stop) {
-        [result addObject:[[self alloc] initWithDictionary:attacheDic]] ;
+        NSString *attachId = [attacheDic[QY_key_id] stringValue] ;
+        QY_attach *attach = [self attachWithId:attachId] ;
+        
+        [attach initWithDictionary:attacheDic] ;
+        
+        [attaches addObject:attach] ;
     }] ;
     
-    return result ;
+    return attaches ;
 }
 
 @end

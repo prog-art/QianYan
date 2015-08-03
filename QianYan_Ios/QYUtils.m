@@ -107,4 +107,20 @@
     return validateCode ;
 }
 
+#pragma mark - NSDate && Timestamp
+
+//时间转时间戳的方法:
++ (NSString *)date2timestampStr:(NSDate *)date {
+    assert(date) ;
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[date timeIntervalSince1970]];
+    return timeSp ;
+}
+
+//时间戳转时间的方法
++ (NSDate *)timestampStr2date:(NSString *)timestamp {
+    assert(timestamp) ;
+    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[timestamp longLongValue]] ;
+    return confromTimesp ;
+}
+
 @end

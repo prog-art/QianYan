@@ -595,7 +595,6 @@ QYResultBlock packComplection(QYResultBlock complection) {
         
         NSNumber *type = @3 ;
 
-        
         if ( messageIds.count != 0 ) {
             [param setObject:[messageIds allObjects] forKey:QY_key_messages] ;
             type = @1 ;
@@ -661,19 +660,8 @@ QYResultBlock packComplection(QYResultBlock complection) {
     manager.responseSerializer = [AFJSONResponseSerializer serializer] ;
     
     [manager GET:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, NSArray *feedDicArray) {
-        QYDebugLog(@"获取状态列表feed 成功 response = %@",feedDicArray) ;
-        
-        NSMutableArray *feeds = [NSMutableArray array] ;
-        [feedDicArray enumerateObjectsUsingBlock:^(NSDictionary *feedDic, NSUInteger idx, BOOL *stop) {
-#warning 未测试
-            QY_feed *feed = [[QY_feed alloc] initWithFeedDic:feedDic] ;
-            [feeds addObject:feed] ;
-        }] ;
-        
-        complection(feeds,nil) ;
-        
+        complection(feedDicArray,nil) ;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        QYDebugLog(@"获取状态列表feed 失败 error = %@",error) ;
         complection(nil,error) ;
     }] ;
 }

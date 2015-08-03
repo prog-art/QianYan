@@ -28,4 +28,6 @@
 
 #import "QY_JPRO.h"
 
+#import "SVProgressHUD.h"
+
 #endif

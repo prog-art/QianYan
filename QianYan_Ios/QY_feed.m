@@ -8,10 +8,9 @@
 
 #import "QY_feed.h"
 #import "QY_AlertMessage.h"
-#import "QY_attache.h"
+#import "QY_attach.h"
 #import "QY_comment.h"
 #import "QY_user.h"
-
 
 @implementation QY_feed
 
@@ -23,6 +22,7 @@
 @dynamic feedId;
 @dynamic modDate;
 @dynamic pubDate;
+@dynamic content;
 @dynamic messages;
 @dynamic attaches;
 @dynamic owner;

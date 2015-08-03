@@ -57,4 +57,12 @@
 
 + (NSString *)getAValidateCodeLength:(NSUInteger)len ;
 
+#pragma mark - NSDate && Timestamp
+
+//时间转时间戳的方法:
++ (NSString *)date2timestampStr:(NSDate *)date ;
+
+//时间戳转时间的方法
++ (NSDate *)timestampStr2date:(NSString *)timestamp ;
+
 @end

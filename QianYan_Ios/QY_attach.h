@@ -11,7 +11,7 @@
 
 @class QY_feed;
 
-@interface QY_attache : NSManagedObject
+@interface QY_attach : NSManagedObject
 
 @property (nonatomic, retain) NSString * attachId;
 @property (nonatomic, retain) NSString * small;

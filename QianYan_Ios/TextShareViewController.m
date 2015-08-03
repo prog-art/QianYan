@@ -10,6 +10,7 @@
 
 #import "QY_Common.h"
 
+
 @interface TextShareViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextView *textShareTextView;
@@ -35,7 +36,24 @@
 
 - (IBAction)doneBtnClicked:(id)sender {
     NSString *str = self.textShareTextView.text ;
-    [QYUtils alert:str] ;
+    
+    if ( str.length != 0 ) {
+        [SVProgressHUD show] ;
+        [[QY_JPROHttpService shareInstance] createAttachFeedWithContent:str Attaches:nil Messages:nil Complection:^(id object, NSError *error) {
+            [SVProgressHUD dismiss] ;
+            if ( object && !error ) {
+                QYDebugLog(@"发表成功！") ;
+                [self.navigationController popViewControllerAnimated:YES] ;
+            } else {
+                QYDebugLog(@"发表失败 error = %@",error) ;
+                [QYUtils alertError:error] ;
+            }
+        }] ;
+        
+    } else {
+        [QYUtils alert:@"施主不要逗。"] ;
+    }
+
 }
 
 @end

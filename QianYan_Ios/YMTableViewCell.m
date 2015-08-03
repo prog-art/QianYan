@@ -40,25 +40,24 @@
         [layer setBorderColor:[[UIColor colorWithRed:63/255.0 green:107/255.0 blue:252/255.0 alpha:1.0] CGColor]] ;
         [self.contentView addSubview:headerImage] ;
         
-        UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(48, 5, screenWidth - 120, TableHeader/2)] ;
-        nameLbl.textAlignment = NSTextAlignmentLeft ;
-        nameLbl.text = @"迪恩·温彻斯特" ;
-        nameLbl.font = [UIFont systemFontOfSize:15.0] ;
-        nameLbl.textColor = [UIColor colorWithRed:199/255.0 green:101/255.0 blue:4/255.0 alpha:1.0];
-        [self.contentView addSubview:nameLbl] ;
+        //nameLabel
+        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(48, 5, screenWidth - 120, TableHeader/2)] ;
+        self.nameLabel.textAlignment = NSTextAlignmentLeft ;
+        self.nameLabel.text = @"" ;
+        self.nameLabel.font = [UIFont systemFontOfSize:15.0] ;
+        self.nameLabel.textColor = [UIColor colorWithRed:199/255.0 green:101/255.0 blue:4/255.0 alpha:1.0] ;
+        [self.contentView addSubview:self.nameLabel] ;
         
+//        UILabel *introLbl = [[UILabel alloc] initWithFrame:CGRectMake(48, 5 + TableHeader/2 , screenWidth - 120, TableHeader/2)] ;
+//        introLbl.numberOfLines = 1 ;
+//        introLbl.font = [UIFont systemFontOfSize:14.0] ;
+//        introLbl.textColor = [UIColor grayColor] ;
+//        introLbl.text = @"这个人很懒，什么都没有留下" ;
+//        [self.contentView addSubview:introLbl] ;
         
-        
-        UILabel *introLbl = [[UILabel alloc] initWithFrame:CGRectMake(48, 5 + TableHeader/2 , screenWidth - 120, TableHeader/2)] ;
-        introLbl.numberOfLines = 1 ;
-        introLbl.font = [UIFont systemFontOfSize:14.0] ;
-        introLbl.textColor = [UIColor grayColor] ;
-        introLbl.text = @"这个人很懒，什么都没有留下" ;
-        //[self.contentView addSubview:introLbl] ;
-        
-        _imageArray = [[NSMutableArray alloc] init] ;
-        _ymTextArray = [[NSMutableArray alloc] init] ;
-        _ymShuoshuoArray = [[NSMutableArray alloc] init] ;
+        _imageArray = [NSMutableArray array] ;
+        _ymTextArray = [NSMutableArray array] ;
+        _ymShuoshuoArray = [NSMutableArray array] ;
         
         foldBtn = [UIButton buttonWithType:0] ;
         [foldBtn setTitle:@"展开" forState:0] ;
@@ -104,10 +103,9 @@
 
 
 - (void)setYMViewWith:(YMTextData *)ymData {
-    
-    // NSLog(@"width = %f",screenWidth);
-    
     tempDate = ymData;
+    
+    [self.nameLabel setText:ymData.name] ;
     
     for ( int i = 0; i < _ymShuoshuoArray.count; i ++) {
         WFTextView * imageV = (WFTextView *)[_ymShuoshuoArray objectAtIndex:i];

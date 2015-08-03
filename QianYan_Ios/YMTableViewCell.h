@@ -30,6 +30,8 @@
 @property (nonatomic,assign) NSInteger stamp;
 @property (nonatomic,strong) YMButton *replyBtn;
 
+@property (nonatomic,strong) UILabel *nameLabel ;
+
 
 
 - (void)setYMViewWith:(YMTextData *)ymData;

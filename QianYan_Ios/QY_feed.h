@@ -9,23 +9,28 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class QY_AlertMessage, QY_attache, QY_comment, QY_user;
+@class QY_AlertMessage, QY_attach, QY_comment, QY_user;
 
 @interface QY_feed : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * type;
+@property (nonatomic, retain) NSNumber * type;//1视频,2图片,3文字
 @property (nonatomic, retain) NSNumber * attachCount;
 @property (nonatomic, retain) NSNumber * messageCount;
 @property (nonatomic, retain) NSNumber * commentCount;
 @property (nonatomic, retain) NSNumber * diggCount;
+
 @property (nonatomic, retain) NSString * feedId;
+@property (nonatomic, retain) NSString * content ;
+
 @property (nonatomic, retain) NSDate * modDate;
 @property (nonatomic, retain) NSDate * pubDate;
 @property (nonatomic, retain) NSSet *messages;
 @property (nonatomic, retain) NSSet *attaches;
-@property (nonatomic, retain) QY_user *owner;
 @property (nonatomic, retain) NSSet *comments;
+
+@property (nonatomic, retain) QY_user *owner;
 @property (nonatomic, retain) NSSet *diggedByUsers;
+
 @end
 
 @interface QY_feed (CoreDataGeneratedAccessors)
@@ -35,8 +40,8 @@
 - (void)addMessages:(NSSet *)values;
 - (void)removeMessages:(NSSet *)values;
 
-- (void)addAttachesObject:(QY_attache *)value;
-- (void)removeAttachesObject:(QY_attache *)value;
+- (void)addAttachesObject:(QY_attach *)value;
+- (void)removeAttachesObject:(QY_attach *)value;
 - (void)addAttaches:(NSSet *)values;
 - (void)removeAttaches:(NSSet *)values;
 

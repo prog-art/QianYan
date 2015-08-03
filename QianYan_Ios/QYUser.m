@@ -126,7 +126,10 @@ static QYUser *_currentUser = nil ;
                             
                             //偷偷拉取用户手机资料
                             [QYUtils runInGlobalQueue:^{
+#warning ！！！！
                                 [user.coreUser fetchTelephoneComplection:nil] ;
+                                [[QY_JPROHttpService shareInstance] jproLoginWithUserId:user.userId Password:user.password Complection:nil] ;
+                                
                             }] ;
                             
                         } else {

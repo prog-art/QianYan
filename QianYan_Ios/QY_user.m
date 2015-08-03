@@ -389,4 +389,19 @@
     return nil ;
 }
 
+- (NSArray *)visualableFeedItems {
+#warning 待优化
+//    NSMutableArray *feeds = [NSMutableArray array] ;
+//    
+//    [self.friends enumerateObjectsUsingBlock:^(QY_user *friend, BOOL *stop) {
+//        [feeds addObjectsFromArray:[friend.feeds allObjects]] ;
+//    }] ;
+//    [feeds addObjectsFromArray:[self.feeds allObjects]] ;
+//    
+//    NSSortDescriptor *desc = [NSSortDescriptor sortDescriptorWithKey:<#(NSString *)#> ascending:<#(BOOL)#>]
+//    
+//    [feeds sortedArrayUsingDescriptors:<#(NSArray *)#>] ;
+    return nil ;
+}
+
 @end

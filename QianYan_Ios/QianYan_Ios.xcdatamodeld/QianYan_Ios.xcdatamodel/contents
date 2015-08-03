@@ -10,14 +10,14 @@
         <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="shared2Feeds" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_feed" inverseName="messages" inverseEntity="QY_feed" syncable="YES"/>
     </entity>
-    <entity name="QY_attach" representedClassName="QY_attache" syncable="YES">
+    <entity name="QY_attach" representedClassName="QY_attach" syncable="YES">
         <attribute name="attachId" attributeType="String" syncable="YES"/>
         <attribute name="pubDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="small" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="src" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="belong2Feed" maxCount="1" deletionRule="Nullify" destinationEntity="QY_feed" inverseName="attaches" inverseEntity="QY_feed" syncable="YES"/>
+        <relationship name="belong2Feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QY_feed" inverseName="attaches" inverseEntity="QY_feed" syncable="YES"/>
     </entity>
     <entity name="QY_camera" representedClassName="QY_camera" syncable="YES">
         <attribute name="cameraId" attributeType="String" syncable="YES"/>
@@ -55,6 +55,7 @@
     <entity name="QY_feed" representedClassName="QY_feed" syncable="YES">
         <attribute name="attachCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="commentCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="diggCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="feedId" attributeType="String" syncable="YES"/>
         <attribute name="messageCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -110,15 +111,15 @@
     </entity>
     <fetchRequest name="FetchRequest" entity="QY_friendSetting" predicateString="owner.userId == 10000133 AND toFriend.userId == 10000145"/>
     <elements>
-        <element name="QY_alertMessage" positionX="25" positionY="-13" width="128" height="165"/>
-        <element name="QY_attach" positionX="-677" positionY="-229" width="128" height="148"/>
-        <element name="QY_camera" positionX="565" positionY="-558" width="128" height="223"/>
-        <element name="QY_cameraGroup" positionX="61" positionY="-409" width="128" height="118"/>
-        <element name="QY_cameraSetting" positionX="-675" positionY="-503" width="128" height="88"/>
-        <element name="QY_comment" positionX="-558" positionY="26" width="128" height="118"/>
-        <element name="QY_feed" positionX="-155" positionY="-270" width="128" height="238"/>
-        <element name="QY_friendGroup" positionX="-216" positionY="-676" width="128" height="133"/>
-        <element name="QY_friendSetting" positionX="-225" positionY="-333" width="128" height="148"/>
-        <element name="QY_user" positionX="-486" positionY="-648" width="128" height="375"/>
+        <element name="QY_alertMessage" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="QY_attach" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="QY_camera" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="QY_cameraGroup" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="QY_cameraSetting" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="QY_comment" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="QY_feed" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="QY_friendGroup" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="QY_friendSetting" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="QY_user" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

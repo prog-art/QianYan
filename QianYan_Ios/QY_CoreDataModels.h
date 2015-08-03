@@ -15,7 +15,7 @@
 
 #import "QY_comment.h"
 #import "QY_feed.h"
-#import "QY_attache.h"
+#import "QY_attach.h"
 #import "QY_alertMessage.h"
 
 #pragma mark - 用户

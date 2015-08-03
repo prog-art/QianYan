@@ -78,7 +78,30 @@
     }    
 }
 
-#pragma mark - Core Data 
+#pragma mark - Core Data 删
+
++ (BOOL)deleteObjectsWithClassName:(NSString *)className predicate:(NSPredicate *)predicate {
+    assert(className) ;
+    NSArray *objects = [self findObjectsWithClassName:className predicate:predicate] ;
+    
+    NSManagedObjectContext *context = [self managedObjectContext] ;
+    
+    [objects enumerateObjectsUsingBlock:^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
+        [context deleteObject:obj] ;
+    }] ;
+    
+    NSError *savingError = nil ;
+    
+    BOOL result = [self saveObject:nil error:&savingError] ;
+    
+    if ( result ) {
+        QYDebugLog(@"删除成功") ;
+    } else {
+        QYDebugLog(@"删除失败 error = %@",savingError) ;
+    }
+    
+    return result ;
+}
 
 #pragma mark - Core Data 查
 
@@ -116,31 +139,5 @@
     NSArray *objects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:error] ;
     return objects ;
 }
-
-#pragma mark - Core Data 删
-
-+ (BOOL)deleteObjectsWithClassName:(NSString *)className predicate:(NSPredicate *)predicate {
-    assert(className) ;
-    NSArray *objects = [self findObjectsWithClassName:className predicate:predicate] ;
-    
-    NSManagedObjectContext *context = [self managedObjectContext] ;
-    
-    [objects enumerateObjectsUsingBlock:^(NSManagedObject *obj, NSUInteger idx, BOOL *stop) {
-        [context deleteObject:obj] ;
-    }] ;
-    
-    NSError *savingError = nil ;
-    
-    BOOL result = [self saveObject:nil error:&savingError] ;
-    
-    if ( result ) {
-        QYDebugLog(@"删除成功") ;
-    } else {
-        QYDebugLog(@"删除失败 error = %@",savingError) ;
-    }
-    
-    return result ;
-}
-
 
 @end

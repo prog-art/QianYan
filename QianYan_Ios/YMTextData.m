@@ -14,32 +14,25 @@
 #import "WFTextView.h"
 
 @implementation YMTextData{
-    
-    BOOL isReplyView;
-    int tempInt;
+    BOOL isReplyView ;
+    int tempInt ;
 }
 
-
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        
-        self.completionReplySource = [[NSMutableArray alloc] init];
-        self.attributedData = [[NSMutableArray alloc] init];
-        self.attributedDataWF = [[NSMutableArray alloc] init];
-        self.showImageArray = [[NSMutableArray alloc] init];
-        _foldOrNot = YES;
-        _islessLimit = NO;
+- (id)init {
+    if ( self = [super init] ) {
+        self.completionReplySource = [NSMutableArray array] ;
+        self.attributedData = [NSMutableArray array] ;
+        self.attributedDataWF = [NSMutableArray array] ;
+        self.showImageArray = [NSMutableArray array] ;
+        _foldOrNot = YES ;
+        _islessLimit = NO ;
     }
     return self;
 }
 
 //计算replyview高度
-- (float) calculateReplyHeightWithWidth:(float)sizeWidth{
-    
-    
+- (float) calculateReplyHeightWithWidth:(float)sizeWidth {
+
     isReplyView = YES;
     float height = .0f;
     //NSLog(@" === %@",self.replyDataSource);
@@ -77,7 +70,7 @@
     
 }
 //图片高度
-- (void)calculateShowImageHeight{
+- (void)calculateShowImageHeight {
     
     if (self.showImageArray.count == 0) {
         self.showImageArray = 0;
@@ -87,7 +80,7 @@
     
 }
 
-- (void)matchString:(NSString *)dataSourceString fromView:(BOOL) isYMOrNot{
+- (void)matchString:(NSString *)dataSourceString fromView:(BOOL) isYMOrNot {
     
     if (isYMOrNot == YES) {
         
@@ -159,7 +152,7 @@
 }
 
 //说说高度
-- (float) calculateShuoshuoHeightWithWidth:(float)sizeWidth withUnFoldState:(BOOL)isUnfold{
+- (float)calculateShuoshuoHeightWithWidth:(float)sizeWidth withUnFoldState:(BOOL)isUnfold {
     
     isReplyView = NO;
     
@@ -200,6 +193,4 @@
     
     
 }
-
-
 @end
