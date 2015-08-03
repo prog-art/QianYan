@@ -31,6 +31,9 @@
 #define ManageSignatureViewControllerStoryBoardID @"ManageSignatureViewControllerStoryBoardID"
 #define FeedbackViewControllerStoryBoardID @"FeedbackViewControllerStoryBoardID"
 #define TextShareViewControllerStoryBoardID @"TextShareViewControllerStoryBoardID"
+#define WifiListViewControllerStoryBoardID @"WifiListViewControllerStoryBoardID"
+#define SearchFriendTableViewControllerStoryBoardID @"SearchFriendTableViewControllerStoryBoardID"
+#define QRCodeDetailViewControllerStoryBoardID @"QRCodeDetailViewControllerStoryBoardID"
 
 
 //static NSString * const kJVDrawersStoryboardName = @"Drawers";
@@ -397,6 +400,24 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
 
 - (UIViewController *)TextShareViewController {
     return [self.drawersStoryboard instantiateViewControllerWithIdentifier:TextShareViewControllerStoryBoardID] ;
+}
+
+#pragma mark -- Wifi List View Controller
+
+- (UITableViewController *)WifiListViewController {
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:WifiListViewControllerStoryBoardID] ;
+}
+
+#pragma mark -- Search Friend View Controller
+
+- (UITableViewController *)SearchFriendTableViewController {
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:SearchFriendTableViewControllerStoryBoardID] ;
+}
+
+#pragma mark -- QRCode Detail View Controller
+
+- (UIViewController *)QRCodeDetailViewController {
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:QRCodeDetailViewControllerStoryBoardID] ;
 }
 
 #pragma mark - Global Access Helper

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5Zc-oB-I65">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
@@ -167,7 +168,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IXp-6e-fen">
-                                <rect key="frame" x="48" y="385" width="225" height="49"/>
+                                <rect key="frame" x="48" y="385" width="234" height="68"/>
                                 <state key="normal" image="二维码配置wifi-按钮">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -199,6 +200,7 @@
                     <connections>
                         <outlet property="agreeBtn" destination="21o-YZ-o6p" id="jpp-Eu-Qdb"/>
                         <outlet property="autoSearchBtn" destination="IXp-6e-fen" id="Hz5-g4-Wgs"/>
+                        <segue destination="d5Y-80-K4o" kind="show" id="SnB-8P-pzG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UEj-az-Dgm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -335,6 +337,7 @@
                         <outlet property="addContactTableView" destination="3zj-NK-dfn" id="6jM-lG-GjQ"/>
                         <outlet property="searchBar" destination="cbi-Zi-Nbw" id="7c0-vA-nZj"/>
                         <segue destination="5Zc-oB-I65" kind="show" id="60M-uv-HM9"/>
+                        <segue destination="7sg-gA-bOp" kind="show" id="K8u-B6-eaH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sux-xG-g4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1558,17 +1561,166 @@
             </objects>
             <point key="canvasLocation" x="1989" y="1245"/>
         </scene>
+        <!--Wi-Fi列表-->
+        <scene sceneID="sEa-rk-QrJ">
+            <objects>
+                <tableViewController storyboardIdentifier="WifiListViewControllerStoryBoardID" id="d5Y-80-K4o" customClass="WifiListTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="vSW-yw-1i8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="60" id="qaw-yU-u3P" customClass="WifiListTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qaw-yU-u3P" id="Z2n-aT-uQb">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PpD-gi-59I">
+                                            <rect key="frame" x="20" y="37" width="203" height="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Yi-WE-0fO">
+                                            <rect key="frame" x="19" y="8" width="95" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="subTitleLabel" destination="PpD-gi-59I" id="dP3-0m-YeA"/>
+                                    <outlet property="wifiTitleLabel" destination="5Yi-WE-0fO" id="4Af-97-qus"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="d5Y-80-K4o" id="t1x-AM-kr1"/>
+                            <outlet property="delegate" destination="d5Y-80-K4o" id="aaB-bw-U9v"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Wi-Fi列表" id="HLM-7F-fYF"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="W6b-uq-40y" kind="show" id="HWe-H3-ASM"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ki5-K4-RCK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-777" y="651"/>
+        </scene>
+        <!--好友搜索-->
+        <scene sceneID="hVo-KI-tUV">
+            <objects>
+                <tableViewController storyboardIdentifier="SearchFriendTableViewControllerStoryBoardID" id="7sg-gA-bOp" customClass="SearchFriendTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="Gi9-MO-QV4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="60" id="DJy-d1-I1A" customClass="SearchFriendTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DJy-d1-I1A" id="dFO-dS-f7W">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFV-mF-UTv">
+                                            <rect key="frame" x="85" y="19" width="137" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qrc-X6-A7j">
+                                            <rect key="frame" x="19" y="6" width="48" height="48"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageView" destination="qrc-X6-A7j" id="nV0-6r-KUr"/>
+                                    <outlet property="nameLabel" destination="xFV-mF-UTv" id="ObI-2Z-TWU"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7sg-gA-bOp" id="5Rg-EC-yKc"/>
+                            <outlet property="delegate" destination="7sg-gA-bOp" id="4hR-Fw-hSZ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="好友搜索" id="xG1-HK-gNH"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UMc-TX-jhb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3138" y="-157"/>
+        </scene>
+        <!--二维码详情-->
+        <scene sceneID="v1e-oa-HNO">
+            <objects>
+                <viewController storyboardIdentifier="QRCodeDetailViewControllerStoryBoardID" id="W6b-uq-40y" customClass="QRCodeDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ka9-3K-vKs"/>
+                        <viewControllerLayoutGuide type="bottom" id="0li-sQ-bjQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="awp-sD-b8U">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6OR-dw-60F">
+                                <rect key="frame" x="38" y="455" width="244" height="47"/>
+                                <state key="normal" image="二维码详情-返回相机列表">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backToListBtnClicked:" destination="W6b-uq-40y" eventType="touchUpInside" id="juK-CJ-wVX"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="二维码详情-二维码" translatesAutoresizingMaskIntoConstraints="NO" id="28L-Jl-oBu">
+                                <rect key="frame" x="40" y="100" width="240" height="240"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="提示:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4NU-ax-RLI">
+                                <rect key="frame" x="40" y="363" width="39" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="请您用相机对准二维码，滴滴两声后" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEq-Yo-37v">
+                                <rect key="frame" x="40" y="387" width="272" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="表示您的相机已经连接成功。" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHK-nB-yU8">
+                                <rect key="frame" x="40" y="411" width="272" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="二维码详情" id="3tb-tz-Vef"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="QRCodeImageView" destination="28L-Jl-oBu" id="VOU-cv-jJp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pZp-nt-s3g" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1185" y="651"/>
+        </scene>
     </scenes>
     <resources>
         <image name="399-list1" width="19" height="15"/>
         <image name="portrait" width="56" height="56"/>
-        <image name="二维码名片-二维码" width="180" height="180"/>
-        <image name="二维码名片-付费会员" width="80" height="40"/>
-        <image name="二维码名片-头像" width="66" height="66"/>
-        <image name="二维码名片-背景" width="640" height="1136"/>
-        <image name="二维码配置wifi-同意" width="14" height="14"/>
+        <image name="二维码名片-二维码" width="90" height="90"/>
+        <image name="二维码名片-付费会员" width="40" height="20"/>
+        <image name="二维码名片-头像" width="33" height="33"/>
+        <image name="二维码名片-背景" width="320" height="568"/>
+        <image name="二维码详情-二维码" width="160" height="158"/>
+        <image name="二维码详情-返回相机列表" width="244" height="47"/>
+        <image name="二维码配置wifi-同意" width="7" height="7"/>
         <image name="二维码配置wifi-按钮" width="225" height="49"/>
-        <image name="二维码配置wifi-背景" width="640" height="1138"/>
+        <image name="二维码配置wifi-背景" width="320" height="569"/>
         <image name="公众账号" width="32" height="32"/>
         <image name="密码管理背景" width="320" height="568"/>
         <image name="报警通知-未读" width="30" height="15"/>

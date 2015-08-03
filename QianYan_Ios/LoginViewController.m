@@ -51,9 +51,9 @@
     NSString *username = self.inputEmailOrPhoneNumberTextField.text ;
     NSString *password = self.inputPasswordTextField.text ;
     
-//#warning 测试用
-//    username = @"18817870386" ;
-//    password = @"1234567" ;
+#warning 测试用
+    username = @"18817870386" ;
+    password = @"1234567" ;
 
     if ( [self isPasswordAvailable:password] && ![username isEqualToString:@""]) {
     
@@ -103,6 +103,7 @@
     
     return canChange;
 }
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];  //主要是[receiver resignFirstResponder]在哪调用就能把receiver对应的键盘往下收

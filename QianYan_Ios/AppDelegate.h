@@ -62,6 +62,9 @@
 @property (nonatomic, strong) UIViewController *ManageSignatureViewController;
 @property (nonatomic, strong) UIViewController *FeedbackViewController;
 @property (nonatomic, strong) UIViewController *TextShareViewController;
+@property (nonatomic, strong) UITableViewController *WifiListViewController;
+@property (nonatomic, strong) UITableViewController *SearchFriendTableViewController;
+@property (nonatomic, strong) UIViewController *QRCodeDetailViewController;
 
 
 - (void)toggleLeftDrawer:(id)sender animated:(BOOL)animated;

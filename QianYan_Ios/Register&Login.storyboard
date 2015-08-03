@@ -253,9 +253,9 @@
         <image name="注册按钮（不可用）" width="580" height="80"/>
         <image name="注册按钮（选中）" width="580" height="80"/>
         <image name="注册背景" width="640" height="1136"/>
-        <image name="登录按钮" width="580" height="80"/>
-        <image name="登录背景" width="640" height="1136"/>
-        <image name="登录（不可用）" width="580" height="80"/>
-        <image name="登录（选中）" width="580" height="80"/>
+        <image name="登录按钮" width="290" height="40"/>
+        <image name="登录背景" width="320" height="568"/>
+        <image name="登录（不可用）" width="290" height="40"/>
+        <image name="登录（选中）" width="290" height="40"/>
     </resources>
 </document>

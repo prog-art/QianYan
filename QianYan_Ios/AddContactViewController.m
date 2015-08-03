@@ -38,9 +38,12 @@
     [self.tabBarController.tabBar setHidden:YES];
 }
 
+
+
 #pragma mark -- Search Bar Delegate
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self searchWithText:searchBar.text];
     [searchBar resignFirstResponder] ;
 }
 
@@ -48,14 +51,19 @@
     
 }
 
+#warning 在这里写。
+- (void)searchWithText:(NSString *)text {
+    [self.navigationController pushViewController:[[AppDelegate globalDelegate] SearchFriendTableViewController] animated:YES] ;
+}
+
 #pragma mark -- Table View Datasource && Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 1 ;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 3 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

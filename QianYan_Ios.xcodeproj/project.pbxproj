@@ -60,6 +60,8 @@
 		1985304E1B29D5EA00EB96F7 /* NSError+QYError.m in Sources */ = {isa = PBXBuildFile; fileRef = 1985304D1B29D5EA00EB96F7 /* NSError+QYError.m */; };
 		198530501B2A619900EB96F7 /* fileManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1985304F1B2A619900EB96F7 /* fileManagerTest.m */; };
 		198530541B2B669900EB96F7 /* QY_JPROUrlFactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530531B2B669900EB96F7 /* QY_JPROUrlFactor.m */; };
+		1988CDB81B6FB35200B5B059 /* WifiListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1988CDB51B6FB35200B5B059 /* WifiListTableViewCell.m */; };
+		1988CDB91B6FB35200B5B059 /* WifiListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1988CDB71B6FB35200B5B059 /* WifiListTableViewController.m */; };
 		198B32E61B5F6CED000F207C /* QY_JMSService.m in Sources */ = {isa = PBXBuildFile; fileRef = 198B32E51B5F6CED000F207C /* QY_JMSService.m */; };
 		198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADED1AF0AB2600B4E2E6 /* QRCameraSwitchButton.m */; };
 		198BADF41AF0AB2600B4E2E6 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 198BADF01AF0AB2600B4E2E6 /* QRCodeReaderView.m */; };
@@ -69,6 +71,9 @@
 		19A140121B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A140111B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.m */; };
 		19A140171B5117F100A7746C /* QY_UserReloginDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A140161B5117F100A7746C /* QY_UserReloginDescriptor.m */; };
 		19A6953B1AFB44C500F60D03 /* QYNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A6953A1AFB44C500F60D03 /* QYNotify.m */; };
+		19C4E1321B6FB67C0003C67A /* SearchFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E12F1B6FB67C0003C67A /* SearchFriendTableViewCell.m */; };
+		19C4E1331B6FB67C0003C67A /* SearchFriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E1311B6FB67C0003C67A /* SearchFriendTableViewController.m */; };
+		19C4E1371B6FB93E0003C67A /* QRCodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E1361B6FB93E0003C67A /* QRCodeDetailViewController.m */; };
 		19ED2EE41AECF84F00E9DBEA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EE31AECF84F00E9DBEA /* main.m */; };
 		19ED2EE71AECF84F00E9DBEA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EE61AECF84F00E9DBEA /* AppDelegate.m */; };
 		19ED2EED1AECF84F00E9DBEA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EEC1AECF84F00E9DBEA /* ViewController.m */; };
@@ -289,6 +294,10 @@
 		1985304F1B2A619900EB96F7 /* fileManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fileManagerTest.m; sourceTree = "<group>"; };
 		198530521B2B669900EB96F7 /* QY_JPROUrlFactor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JPROUrlFactor.h; sourceTree = "<group>"; };
 		198530531B2B669900EB96F7 /* QY_JPROUrlFactor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JPROUrlFactor.m; sourceTree = "<group>"; };
+		1988CDB41B6FB35200B5B059 /* WifiListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiListTableViewCell.h; sourceTree = "<group>"; };
+		1988CDB51B6FB35200B5B059 /* WifiListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiListTableViewCell.m; sourceTree = "<group>"; };
+		1988CDB61B6FB35200B5B059 /* WifiListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiListTableViewController.h; sourceTree = "<group>"; };
+		1988CDB71B6FB35200B5B059 /* WifiListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiListTableViewController.m; sourceTree = "<group>"; };
 		198B32DD1B5F63F7000F207C /* QY_jpro_parameter_key_marco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_jpro_parameter_key_marco.h; sourceTree = "<group>"; };
 		198B32E11B5F6492000F207C /* QY_jms_marco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_jms_marco.h; sourceTree = "<group>"; };
 		198B32E21B5F6CA1000F207C /* QY_JMS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_JMS.h; sourceTree = "<group>"; };
@@ -318,6 +327,12 @@
 		19A140161B5117F100A7746C /* QY_UserReloginDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_UserReloginDescriptor.m; sourceTree = "<group>"; };
 		19A695391AFB44C500F60D03 /* QYNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYNotify.h; sourceTree = "<group>"; };
 		19A6953A1AFB44C500F60D03 /* QYNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYNotify.m; sourceTree = "<group>"; };
+		19C4E12E1B6FB67C0003C67A /* SearchFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendTableViewCell.h; sourceTree = "<group>"; };
+		19C4E12F1B6FB67C0003C67A /* SearchFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendTableViewCell.m; sourceTree = "<group>"; };
+		19C4E1301B6FB67C0003C67A /* SearchFriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendTableViewController.h; sourceTree = "<group>"; };
+		19C4E1311B6FB67C0003C67A /* SearchFriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendTableViewController.m; sourceTree = "<group>"; };
+		19C4E1351B6FB93E0003C67A /* QRCodeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeDetailViewController.h; sourceTree = "<group>"; };
+		19C4E1361B6FB93E0003C67A /* QRCodeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeDetailViewController.m; sourceTree = "<group>"; };
 		19ED2EDE1AECF84F00E9DBEA /* QianYan_Ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QianYan_Ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19ED2EE21AECF84F00E9DBEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19ED2EE31AECF84F00E9DBEA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1108,6 +1123,18 @@
 			name = "URL工具";
 			sourceTree = "<group>";
 		};
+		1988CDB31B6FB32600B5B059 /* Wi-Fi列表 */ = {
+			isa = PBXGroup;
+			children = (
+				19C4E1341B6FB92D0003C67A /* 二维码详情 */,
+				1988CDB41B6FB35200B5B059 /* WifiListTableViewCell.h */,
+				1988CDB51B6FB35200B5B059 /* WifiListTableViewCell.m */,
+				1988CDB61B6FB35200B5B059 /* WifiListTableViewController.h */,
+				1988CDB71B6FB35200B5B059 /* WifiListTableViewController.m */,
+			);
+			name = "Wi-Fi列表";
+			sourceTree = "<group>";
+		};
 		198B32DE1B5F6453000F207C /* JMS_TCP&UDP */ = {
 			isa = PBXGroup;
 			children = (
@@ -1235,6 +1262,26 @@
 				198530311B27215500EB96F7 /* testNetworkViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		19C4E12D1B6FB66B0003C67A /* 好友搜索 */ = {
+			isa = PBXGroup;
+			children = (
+				19C4E12E1B6FB67C0003C67A /* SearchFriendTableViewCell.h */,
+				19C4E12F1B6FB67C0003C67A /* SearchFriendTableViewCell.m */,
+				19C4E1301B6FB67C0003C67A /* SearchFriendTableViewController.h */,
+				19C4E1311B6FB67C0003C67A /* SearchFriendTableViewController.m */,
+			);
+			name = "好友搜索";
+			sourceTree = "<group>";
+		};
+		19C4E1341B6FB92D0003C67A /* 二维码详情 */ = {
+			isa = PBXGroup;
+			children = (
+				19C4E1351B6FB93E0003C67A /* QRCodeDetailViewController.h */,
+				19C4E1361B6FB93E0003C67A /* QRCodeDetailViewController.m */,
+			);
+			name = "二维码详情";
 			sourceTree = "<group>";
 		};
 		19ED2ED51AECF84F00E9DBEA = {
@@ -1777,6 +1824,7 @@
 		6E62A0F01B4417150001E3A2 /* 二维码配置wifi */ = {
 			isa = PBXGroup;
 			children = (
+				1988CDB31B6FB32600B5B059 /* Wi-Fi列表 */,
 				6E62A0F11B44173F0001E3A2 /* WifiSettingViewController.h */,
 				6E62A0F21B44173F0001E3A2 /* WifiSettingViewController.m */,
 			);
@@ -1808,6 +1856,7 @@
 		6E75ACA21B28266000A0C919 /* tab-联系人-添加好友 */ = {
 			isa = PBXGroup;
 			children = (
+				19C4E12D1B6FB66B0003C67A /* 好友搜索 */,
 				6E75ACA31B28268400A0C919 /* AddContactViewController.h */,
 				6E75ACA41B28268400A0C919 /* AddContactViewController.m */,
 			);
@@ -2110,6 +2159,7 @@
 			files = (
 				198530541B2B669900EB96F7 /* QY_JPROUrlFactor.m in Sources */,
 				6E75ACA11B281E8300A0C919 /* ContactViewController.m in Sources */,
+				1988CDB91B6FB35200B5B059 /* WifiListTableViewController.m in Sources */,
 				19602FD81B6566970064BC87 /* QY_alertMessage.m in Sources */,
 				6E1EC9BF1B50F69B003E346F /* SystemSettingsImageTableViewCell.m in Sources */,
 				6E67BBE21B0F81B00066C9CE /* ContactTableViewCell.m in Sources */,
@@ -2136,6 +2186,7 @@
 				6EDF09B91B299DCD00413348 /* MyPhotoGraphCollectionViewController.m in Sources */,
 				19ED2EE71AECF84F00E9DBEA /* AppDelegate.m in Sources */,
 				6E1EC9C71B50FFD4003E346F /* AccountInfoTableViewCell.m in Sources */,
+				1988CDB81B6FB35200B5B059 /* WifiListTableViewCell.m in Sources */,
 				19909B4E1AEEA04900CCB721 /* QYUtils.m in Sources */,
 				6EE8E6621B11F737007C54E0 /* SliderTableViewCell.m in Sources */,
 				6E1A9BA31B50A4CB0046B8AB /* ILRegularExpressionManager.m in Sources */,
@@ -2199,16 +2250,19 @@
 				6E4BB9281B5140C800070F6F /* RacentTableViewController.m in Sources */,
 				6E9BA9541B0CB8FB009D87BE /* CameraViewController.m in Sources */,
 				198530321B27215500EB96F7 /* testNetworkViewController.m in Sources */,
+				19C4E1331B6FB67C0003C67A /* SearchFriendTableViewController.m in Sources */,
 				19F91CF91B0F1B1000264AC0 /* QY_Contact.m in Sources */,
 				198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */,
 				1938CCB11B24AC32009C4AE5 /* JRMvalueDescription.m in Sources */,
 				1985304A1B28B9BC00EB96F7 /* QY_XMLFormatter.m in Sources */,
 				1979071A1B52674C0079452C /* QYBaseViewController.m in Sources */,
+				19C4E1371B6FB93E0003C67A /* QRCodeDetailViewController.m in Sources */,
 				196900DF1B6E60360059E737 /* PhoneNumberIdentifyViewController.m in Sources */,
 				6E1A9BA61B50A4CB0046B8AB /* YMTextData.m in Sources */,
 				195C16191B3E8E0A00A316FE /* QY_JRMResponse.m in Sources */,
 				198BADF91AF0B51700B4E2E6 /* QRCodeGenerator.m in Sources */,
 				6E1EC9D41B5105D5003E346F /* CameraSettingCollectionViewController.m in Sources */,
+				19C4E1321B6FB67C0003C67A /* SearchFriendTableViewCell.m in Sources */,
 				19589C281B566C89005246BC /* QY_attache+QY_JPRO_DATA_FORMAT.m in Sources */,
 				6E75ACA01B281E8300A0C919 /* SearchTableViewCell.m in Sources */,
 				19A6953B1AFB44C500F60D03 /* QYNotify.m in Sources */,

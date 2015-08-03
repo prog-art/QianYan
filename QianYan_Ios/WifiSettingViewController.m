@@ -7,6 +7,7 @@
 //
 
 #import "WifiSettingViewController.h"
+#import "AppDelegate.h"
 
 @interface WifiSettingViewController ()
 
@@ -28,6 +29,7 @@
 #pragma mark -- Actions
 
 - (IBAction)autoSearchBtnClicked:(id)sender {
+    [self.navigationController pushViewController:[[AppDelegate globalDelegate] WifiListViewController] animated:YES];
 }
 
 - (IBAction)agreeBtnClicked:(id)sender {
