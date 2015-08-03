@@ -26,6 +26,8 @@
 
 #import "QY_QRCode.h"
 
+#import "SVProgressHUD.h"
+
 #define DescKey @"desc"
 #define cmdKey  @"cmd"
 @interface NSDictionary (testNetwork)

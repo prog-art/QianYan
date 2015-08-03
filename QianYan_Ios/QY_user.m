@@ -172,6 +172,7 @@
 
 #pragma mark - jpro_friend
 
+//ok
 - (void)addFriendById:(NSString *)friendId complection:(QYResultBlock)complection {
     assert(friendId && friendId!=self.userId) ;
     complection = ^(BOOL result,NSError *error) {

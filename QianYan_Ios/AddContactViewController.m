@@ -14,6 +14,10 @@
 
 #import "QY_Common.h"
 
+#define kTelephoneLen 11
+#define kUserIdLen    8
+
+
 @interface AddContactViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *addContactTableView;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -51,9 +55,37 @@
     
 }
 
-#warning 在这里写。
 - (void)searchWithText:(NSString *)text {
-    [self.navigationController pushViewController:[[AppDelegate globalDelegate] SearchFriendTableViewController] animated:YES] ;
+    
+#warning 这里逻辑有点问题！
+//    NSInteger len = text.length ;
+//    switch (len) {
+//        case kTelephoneLen : {
+//            [[QY_SocketAgent shareInstance] getUserIdByTelephone:text Complection:^(NSDictionary *info, NSError *error) {
+//                
+//            }] ;
+//            break ;
+//        }
+//        
+//        case kUserIdLen : {
+//            
+//            [[QY_SocketAgent shareInstance] getUsernameByUserId:text Complection:^(NSDictionary *info, NSError *error) {
+//                
+//            }] ;
+//            
+//            break ;
+//        }
+//            
+//        default:
+//            //name
+//            [[QY_SocketAgent shareInstance] getUserIdByUsername:text Complection:^(NSDictionary *info, NSError *error) {
+//                
+//            }] ;
+//            
+//            break;
+//    }
+//    
+//    [self.navigationController pushViewController:[[AppDelegate globalDelegate] SearchFriendTableViewController] animated:YES] ;
 }
 
 #pragma mark -- Table View Datasource && Delegate

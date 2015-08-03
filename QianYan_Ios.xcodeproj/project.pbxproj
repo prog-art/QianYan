@@ -74,6 +74,8 @@
 		19C4E1321B6FB67C0003C67A /* SearchFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E12F1B6FB67C0003C67A /* SearchFriendTableViewCell.m */; };
 		19C4E1331B6FB67C0003C67A /* SearchFriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E1311B6FB67C0003C67A /* SearchFriendTableViewController.m */; };
 		19C4E1371B6FB93E0003C67A /* QRCodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E1361B6FB93E0003C67A /* QRCodeDetailViewController.m */; };
+		19C4E13D1B6FC68F0003C67A /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19C4E13A1B6FC68F0003C67A /* SVProgressHUD.bundle */; };
+		19C4E13E1B6FC68F0003C67A /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E13C1B6FC68F0003C67A /* SVProgressHUD.m */; };
 		19ED2EE41AECF84F00E9DBEA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EE31AECF84F00E9DBEA /* main.m */; };
 		19ED2EE71AECF84F00E9DBEA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EE61AECF84F00E9DBEA /* AppDelegate.m */; };
 		19ED2EED1AECF84F00E9DBEA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EEC1AECF84F00E9DBEA /* ViewController.m */; };
@@ -333,6 +335,10 @@
 		19C4E1311B6FB67C0003C67A /* SearchFriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendTableViewController.m; sourceTree = "<group>"; };
 		19C4E1351B6FB93E0003C67A /* QRCodeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeDetailViewController.h; sourceTree = "<group>"; };
 		19C4E1361B6FB93E0003C67A /* QRCodeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeDetailViewController.m; sourceTree = "<group>"; };
+		19C4E1391B6FC68F0003C67A /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		19C4E13A1B6FC68F0003C67A /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		19C4E13B1B6FC68F0003C67A /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		19C4E13C1B6FC68F0003C67A /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		19ED2EDE1AECF84F00E9DBEA /* QianYan_Ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QianYan_Ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19ED2EE21AECF84F00E9DBEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19ED2EE31AECF84F00E9DBEA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1241,6 +1247,7 @@
 		19909B461AEE98B200CCB721 /* ThirdPart_byHand */ = {
 			isa = PBXGroup;
 			children = (
+				19C4E1381B6FC68F0003C67A /* svprogress */,
 				19589CA21B5A1A18005246BC /* 语音 */,
 				6E32D9811B516712002A6301 /* FFMPEG */,
 				6EFEFE381B0CC171001E425B /* 可伸缩TableView */,
@@ -1282,6 +1289,17 @@
 				19C4E1361B6FB93E0003C67A /* QRCodeDetailViewController.m */,
 			);
 			name = "二维码详情";
+			sourceTree = "<group>";
+		};
+		19C4E1381B6FC68F0003C67A /* svprogress */ = {
+			isa = PBXGroup;
+			children = (
+				19C4E1391B6FC68F0003C67A /* SVProgressHUD-Prefix.pch */,
+				19C4E13A1B6FC68F0003C67A /* SVProgressHUD.bundle */,
+				19C4E13B1B6FC68F0003C67A /* SVProgressHUD.h */,
+				19C4E13C1B6FC68F0003C67A /* SVProgressHUD.m */,
+			);
+			path = svprogress;
 			sourceTree = "<group>";
 		};
 		19ED2ED51AECF84F00E9DBEA = {
@@ -2073,6 +2091,7 @@
 				19ED2EF01AECF84F00E9DBEA /* Main.storyboard in Resources */,
 				19ED2EF51AECF84F00E9DBEA /* LaunchScreen.xib in Resources */,
 				6EE8E6651B11F737007C54E0 /* SwitchTableViewCell.xib in Resources */,
+				19C4E13D1B6FC68F0003C67A /* SVProgressHUD.bundle in Resources */,
 				6E1EC9C81B50FFD4003E346F /* AccountInfoTableViewCell.xib in Resources */,
 				6E32DA051B51672A002A6301 /* kxmovie.bundle in Resources */,
 				6EE8E6631B11F737007C54E0 /* SliderTableViewCell.xib in Resources */,
@@ -2172,6 +2191,7 @@
 				6E62A0FA1B441E320001E3A2 /* GroupManageViewController.m in Sources */,
 				6E75AC9F1B281E8300A0C919 /* GroupTableViewCell.m in Sources */,
 				196900E31B6E658F0059E737 /* ManageNicknameViewController.m in Sources */,
+				19C4E13E1B6FC68F0003C67A /* SVProgressHUD.m in Sources */,
 				6E1EC9CC1B510289003E346F /* SlidingViewManager.m in Sources */,
 				6E9BA9521B0CB8FB009D87BE /* JVRightDrawerTableViewController.m in Sources */,
 				6E9BA9501B0CB8FB009D87BE /* JVRightDrawerTableViewCell.m in Sources */,
@@ -2348,7 +2368,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Min Lin (P9U7WU86CU)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2368,6 +2388,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "6e178b53-d8b5-4b57-8632-e412911603f2";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2389,7 +2410,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Min Lin (P9U7WU86CU)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2402,6 +2423,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "6e178b53-d8b5-4b57-8632-e412911603f2";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2413,7 +2435,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Min Lin (P9U7WU86CU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -2436,7 +2457,7 @@
 					"$(PROJECT_DIR)/QianYan_Ios/FFmpeg-iOS/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c35a7e7e-2cad-4c24-86cb-3ea9064fa119";
+				PROVISIONING_PROFILE = "6e178b53-d8b5-4b57-8632-e412911603f2";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2447,7 +2468,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Min Lin (P9U7WU86CU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -2470,7 +2490,7 @@
 					"$(PROJECT_DIR)/QianYan_Ios/FFmpeg-iOS/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c35a7e7e-2cad-4c24-86cb-3ea9064fa119";
+				PROVISIONING_PROFILE = "6e178b53-d8b5-4b57-8632-e412911603f2";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
