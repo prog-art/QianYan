@@ -88,14 +88,19 @@
         port = port * 16 * 16 + tempI ;
     }
     
-    self.complection(@{JDAS_DATA_JRM_IP_KEY:hostName,
-                       JDAS_DATA_JRM_PORT_KEY:@(port)},nil) ;
-    self.complection = nil ;
+    if ( self.complection ) {
+        self.complection(@{JDAS_DATA_JRM_IP_KEY:hostName,
+                           JDAS_DATA_JRM_PORT_KEY:@(port)},nil) ;
+        self.complection = nil ;
+    }
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    self.complection(nil,err) ;
-    self.complection = nil ;
+    
+    if ( self.complection ) {
+        self.complection(nil,err) ;
+        self.complection = nil ;
+    }
 }
 
 

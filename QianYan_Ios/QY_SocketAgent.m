@@ -205,10 +205,16 @@
             [info setObject:userId forKey:ParameterKey_userId] ;
         }
         
-        QYDebugLog(@"APINo = %ld response = %@ jms info = %@",APINo,response,info) ;
-        if ( complection ) {
-            complection(info,error) ;
-        }
+#warning 布丁！
+        [[QY_SocketService shareInstance] disconnectedJRMConnection] ;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            QYDebugLog(@"APINo = %ld response = %@ jms info = %@",APINo,response,info) ;
+            if ( complection ) {
+                complection(info,error) ;
+            }
+        });
+        
+
     }] ;
     
 }
@@ -255,8 +261,11 @@
         if ( result ) {
             weakSelf.userName = username ;
             weakSelf.userPassword = password ;
+        } else {
+#warning 布丁！            
+            [[QY_SocketService shareInstance] disconnectedJRMConnection] ;
         }
-        
+
         QYDebugLog(@"APINo = %ld response = %@",APINo,response) ;
         if ( complection ) {
             complection(result,error) ;

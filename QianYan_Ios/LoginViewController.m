@@ -56,8 +56,9 @@
 //    password = @"1234567" ;
 
     if ( [self isPasswordAvailable:password] && ![username isEqualToString:@""]) {
-        
+    
         [QYUser loginName:username Password:password complection:^(BOOL success, NSError *error) {
+            [_loginIndicatorView stopAnimating] ;
             if ( success ) {
                 QYDebugLog(@"登陆成功") ;
                 [QYUtils toMain] ;

@@ -85,42 +85,43 @@
             return ;
         }
         
-        [QYUser registeName:username Password:password complection:^(QYUser *registedUser, NSError *error) {
-            if ( !error ) {
-                QYDebugLog(@"注册成功 userId = %@",registedUser.userId) ;
-                
-                [registedUser.coreUser saveUserInfoComplection:^(id object, NSError *error) {
-                    if ( object && !error ) {
-                        QYDebugLog(@"上传用户资料成功") ;
-                        
-                        [QYUser loginName:username Password:password complection:^(BOOL success, NSError *error) {
-                            if ( success ) {
-                                QYDebugLog(@"登录成功") ;
-                                [QYUtils toMain] ;
-                            } else {
-                                QYDebugLog(@"登录失败 error = %@",error) ;
-                                [QYUtils alertError:error] ;
-                            }
-                        }] ;
-                        
-                    } else {
-                        QYDebugLog(@"上传用户资料失败 error = %@",error) ;
-                        [QYUtils alertError:error] ;
-                    }
-                }] ;
-                
-            } else {
-                QYDebugLog(@"注册失败 error = %@",error) ;
-                [QYUtils alertError:error] ;
-            }
-        }] ;
-        
     }
     if ([self.passwordTextField.text length] > 20) {
         //如果输入框内容大于20则弹出警告
         self.passwordTextField.text = [self.passwordTextField.text substringToIndex:20];
         [QYUtils alert:@"密码不能多于20位"];
+        return ;
     }
+    
+    [QYUser registeName:username Password:password complection:^(QYUser *registedUser, NSError *error) {
+        if ( !error ) {
+            QYDebugLog(@"注册成功 userId = %@",registedUser.userId) ;
+            
+            [registedUser.coreUser saveUserInfoComplection:^(id object, NSError *error) {
+                if ( object && !error ) {
+                    QYDebugLog(@"上传用户资料成功") ;
+                    
+                    [QYUser loginName:username Password:password complection:^(BOOL success, NSError *error) {
+                        if ( success ) {
+                            QYDebugLog(@"登录成功") ;
+                            [QYUtils toMain] ;
+                        } else {
+                            QYDebugLog(@"登录失败 error = %@",error) ;
+                            [QYUtils alertError:error] ;
+                        }
+                    }] ;
+                    
+                } else {
+                    QYDebugLog(@"上传用户资料失败 error = %@",error) ;
+                    [QYUtils alertError:error] ;
+                }
+            }] ;
+            
+        } else {
+            QYDebugLog(@"注册失败 error = %@",error) ;
+            [QYUtils alertError:error] ;
+        }
+    }] ;
 }
 
 - (IBAction)toLoginBtnClicked:(id)sender {
