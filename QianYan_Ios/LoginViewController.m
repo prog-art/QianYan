@@ -51,9 +51,9 @@
     NSString *username = self.inputEmailOrPhoneNumberTextField.text ;
     NSString *password = self.inputPasswordTextField.text ;
     
-#warning 测试用
-    username = @"18817870386" ;
-    password = @"1234567" ;
+//#warning 测试用
+//    username = @"18817870386" ;
+//    password = @"1234567" ;
 
     if ( [self isPasswordAvailable:password] && ![username isEqualToString:@""]) {
     
