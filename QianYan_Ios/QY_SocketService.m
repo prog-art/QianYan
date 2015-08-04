@@ -110,6 +110,7 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
     
     [self getJRMIPandJRMPORTWithComplection:^(NSDictionary *info, NSError *error) {
         if ( !error ) {
+            QYDebugLog(@"info = %@ self = %@",info,self) ;
             [self connectToJRMHost:self.JRM_IP Port:self.JRM_Port Complection:^(BOOL success, NSError *error) {
                 if ( success ) {
                     QYDebugLog(@"连接JRM成功") ;
@@ -146,6 +147,9 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
     }] ;
 }
 
+/**
+ *  连接到JRM服务器
+ */
 - (void)connectToJRMHost:(NSString *)host
                     Port:(NSUInteger)port
              Complection:(QYResultBlock)complection {
@@ -168,7 +172,7 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
  */
 - (void)startWithAPIDescriptor:(QY_JRMAPIDescriptor *)APIDescriptor
                    Complection:(QYJRMResponseBlock)complection {
-    QYDebugLog(@"开始工作") ;
+    QYDebugLog(@"\n\n------开始工作------") ;
     self.apiComplection = ^(QY_JRMResponse *result,NSError *error) {
         if ( complection ) {
             complection(result,error) ;
@@ -195,16 +199,11 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
                 [self.jrmSocket writeData:data withTimeout:10 tag:request.apiNo] ;
             } else {
                 QYDebugLog(@"连接失败 error = %@",error) ;
-                complection(nil,error) ;
+                self.apiComplection(nil,error) ;
+                self.apiComplection = nil ;
             }
         }] ;
     }
-    
-}
-
-
-- (void)disconnectedJRMConnection {
-    [self.jrmSocket disconnect] ;
 }
 
 /**
@@ -214,13 +213,19 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
     QYDebugLog(@"接收了所有的数据，并解析完成") ;
     
     QY_JRMAPIDescriptor *APIDesc = self.currentDescriptor ;
-    self.currentDescriptor = nil ;
-    QY_JRMResponse *response = APIDesc.response ;
-    
-    if ( self.apiComplection ) {
-        self.apiComplection(response,nil) ;
+
+
+    if ( APIDesc.request.keepConnecting ) {
+        //保持连接
+        self.currentDescriptor = nil ;
+        QY_JRMResponse *response = APIDesc.response ;
+        if ( self.apiComplection ) {
+            self.apiComplection(response,nil) ;
+        }
+    } else {
+        //不保持连接
+        [self.jrmSocket disconnect] ;
     }
-    
 }
 
 #pragma mark - getter && setter 
@@ -261,12 +266,20 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
         if ( self.apiComplection ) {
             self.apiComplection(nil,err) ;
             self.apiComplection = nil ;
+            self.currentDescriptor = nil ;
         }
     } else {
         QYDebugLog(@"JRM Socket did disconnect") ;
+        if ( self.apiComplection ) {
+            QY_JRMAPIDescriptor *APIDesc = self.currentDescriptor ;
+            self.currentDescriptor = nil ;
+            QY_JRMResponse *response = APIDesc.response ;
+            self.apiComplection(response,nil) ;
+        }
+        
     }
     
-    self.jrmSocket = nil ;
+    _jrmSocket = nil ;
     
 }
 

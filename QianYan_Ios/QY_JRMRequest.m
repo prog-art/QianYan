@@ -59,6 +59,7 @@ NSString *const kRequestException = @"RqeustException";
 - (instancetype)init {
     if ( self = [super init] ) {
         self.attachment = FALSE ;
+        self.keepConnecting = FALSE ;
     }
     return self ;
 }

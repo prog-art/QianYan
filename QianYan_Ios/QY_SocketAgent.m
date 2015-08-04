@@ -28,7 +28,7 @@
 @implementation QY_SocketAgent
 
 - (QY_UserReloginDescriptor *)shouldReLoginUserToJRM {
-    QY_UserReloginDescriptor *desc = [[QY_UserReloginDescriptor alloc] init];
+    QY_UserReloginDescriptor *desc = [[QY_UserReloginDescriptor alloc] init] ;
     if ( self.userName && self.userPassword ) {
         desc.shouldReLogin = TRUE ;
         desc.username = self.userName ;
@@ -71,11 +71,6 @@
 - (void)setState:(APP_State)state {
     _state = state ;
 }
-
-- (void)disconnected {
-    [[QY_SocketService shareInstance] disconnectedJRMConnection] ;
-}
-
 
 #pragma mark - QY_JRMAPIInterface
 
@@ -203,10 +198,11 @@
             info = [NSMutableDictionary dictionary] ;
             NSString *userId = [response valueAtIndex:0] ;
             [info setObject:userId forKey:ParameterKey_userId] ;
+            
+            self.userName = username ;
+            self.userPassword = password ;
         }
         
-#warning 布丁！
-        [[QY_SocketService shareInstance] disconnectedJRMConnection] ;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             QYDebugLog(@"APINo = %ld response = %@ jms info = %@",APINo,response,info) ;
             if ( complection ) {
@@ -240,6 +236,9 @@
                                                                                    valueType:JRMValueType_String]]
                                                       ValueCount:2
                                                   AttachmentData:nil] ;
+        
+#warning 针对JRM现状。。。登录之后如果断开并再次重新连接会出现无法连接JRM服务器的错误。
+        request.keepConnecting = YES ;
         return request ;
     } successRuleBlock:^QY_JRMAPIPhraseRule *{        
         QY_JRMAPIPhraseRule *successRule = [QY_JRMAPIPhraseRule ruleWithTargetCMD:DEVICE_LOGIN2JRM_OK
@@ -261,9 +260,6 @@
         if ( result ) {
             weakSelf.userName = username ;
             weakSelf.userPassword = password ;
-        } else {
-#warning 布丁！            
-            [[QY_SocketService shareInstance] disconnectedJRMConnection] ;
         }
 
         QYDebugLog(@"APINo = %ld response = %@",APINo,response) ;

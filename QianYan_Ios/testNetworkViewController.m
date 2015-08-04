@@ -132,8 +132,7 @@
                  [NSDictionary dictionaryWithDesc:@"[ok]-8 上传profile.xml" cmd:@(-8)],
                  [NSDictionary dictionaryWithDesc:@"-7 core data" cmd:@(-7)]] ;
 
-    jrmCmds = @[[NSDictionary dictionaryWithDesc:@"200 断开JRM连接" cmd:@(200)],
-                [NSDictionary dictionaryWithDesc:@"[ok] 212 获取jms服务器信息" cmd:@212],
+    jrmCmds = @[[NSDictionary dictionaryWithDesc:@"[ok] 212 获取jms服务器信息" cmd:@212],
                 [NSDictionary dictionaryWithDesc:@"[ok] 251 用户注册" cmd:@251],
                 [NSDictionary dictionaryWithDesc:@"[ok] 252 用户登录" cmd:@252],
                 [NSDictionary dictionaryWithDesc:@"10252 测试用户错误密码" cmd:@10252],
@@ -247,68 +246,7 @@
 
 #define testFeedId @"12"
 
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    switch ( editingStyle ) {
-//        case UITableViewCellEditingStyleDelete : {
-//            NSMutableArray *tempCmds = [cmds mutableCopy] ;
-//            [tempCmds removeObjectAtIndex:indexPath.row] ;
-//            
-//            cmds = tempCmds ;
-//            
-//            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight] ;
-//            break ;
-//        }
-//            
-//        case UITableViewCellEditingStyleInsert : {
-//            NSMutableArray *tempCmds = [cmds mutableCopy] ;
-//            
-//            [tempCmds insertObject:tempCmds[indexPath.row-1] atIndex:indexPath.row] ;
-//            
-//            cmds = tempCmds ;
-//            
-//            [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight] ;
-//            
-//            [QYUtils runAfterSecs:1.0 block:^{
-//                tableView.editing = NO ;
-//            }] ;
-//            
-//            break ;
-//        }
-//            
-//
-//        case UITableViewCellEditingStyleNone :
-//            
-//            break ;
-//        default:
-//            break;
-//    }
-//}
-//
-//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-////    return UITableViewCellEditingStyleDelete ;
-//    return UITableViewCellEditingStyleInsert ;
-//}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    [tableView beginUpdates] ;
-//    
-//    NSMutableArray *tempCmds = [cmds mutableCopy] ;
-//    [tempCmds removeObjectAtIndex:indexPath.row] ;
-//
-//    cmds = tempCmds ;
-//
-//    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight] ;
-//    
-//    
-//    [tableView endUpdates] ;
-//    return ;
-    
-//                [NSDictionary dictionaryWithDesc:@"-303 分享相机" cmd:@(-303)],
-//                [NSDictionary dictionaryWithDesc:@"-304 取消分享相机" cmd:@(-304)],
-//                [NSDictionary dictionaryWithDesc:@"-305 解绑相机" cmd:@(-305)],
-//                [NSDictionary dictionaryWithDesc:@"-307 不想让他看我的朋友圈状态" cmd:@(-307)],
-//                [NSDictionary dictionaryWithDesc:@"-308 不想看他的朋友圈状态" cmd:@(-308)],
     
     NSInteger cmd = [cmds[indexPath.section][indexPath.row][cmdKey] integerValue] ;
     switch (cmd) {
@@ -612,12 +550,6 @@
             break ;
         }
     
-            
-        case 200 : {
-            QYDebugLog(@"断开连接") ;
-            [[QY_SocketAgent shareInstance] disconnected] ;
-            break ;
-        }
         case 211 : {
             [[QY_SocketAgent shareInstance] deviceLoginRequestComplection:^(BOOL success, NSError *error) {
                 if ( success ) {

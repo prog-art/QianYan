@@ -48,8 +48,6 @@ extern NSString *const kNotificationName_finishDataReceive ;
                    Complection:(QYJRMResponseBlock)complection ;
 
 
-- (void)disconnectedJRMConnection ;
-
 /**
  *  当前处理的Descriptor
  */

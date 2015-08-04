@@ -46,8 +46,6 @@ typedef NS_ENUM(NSInteger, APP_State) {
 
 #pragma mark - test
 
-- (void)disconnected ;
-
 #pragma mark - JRM
 
 ///**

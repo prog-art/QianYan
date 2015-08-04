@@ -33,6 +33,11 @@
 #pragma mark
 
 /**
+ *  结束时是否保持连接
+ */
+@property (nonatomic) BOOL keepConnecting ;
+
+/**
  *  API编号
  */
 @property (nonatomic) JRM_REQUEST_OPERATION_TYPE apiNo ;

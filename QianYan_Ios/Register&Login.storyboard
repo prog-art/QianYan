@@ -225,9 +225,6 @@
                                     <action selector="WeiboLoginBtnClicked:" destination="VDI-yh-e3a" eventType="touchUpInside" id="WJb-Hq-4d2"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Aic-PI-JuZ">
-                                <rect key="frame" x="150" y="271" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -236,7 +233,6 @@
                     <connections>
                         <outlet property="inputEmailOrPhoneNumberTextField" destination="tGk-7P-u5W" id="7OC-ae-HId"/>
                         <outlet property="inputPasswordTextField" destination="zMn-kd-3kh" id="9Rj-e4-L13"/>
-                        <outlet property="loginIndicatorView" destination="Aic-PI-JuZ" id="qQG-T1-fpy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HIC-RA-koU" userLabel="First Responder" sceneMemberID="firstResponder"/>

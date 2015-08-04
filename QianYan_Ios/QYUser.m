@@ -113,7 +113,7 @@ static QYUser *_currentUser = nil ;
             QYDebugLog(@"登录成功 接下来去获取userId") ;
             [agent getUserIdByUsername:username Complection:^(NSDictionary *info, NSError *error) {
                 
-                if ( !error ) {
+                if ( info && !error ) {
                     user.userId = info[ParameterKey_userId] ;
                     
                     user.coreUser = [QY_appDataCenter userWithId:user.userId] ;

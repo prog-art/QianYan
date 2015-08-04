@@ -10,8 +10,7 @@
 
 #define ENGLISH_AND_NUMBERS @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@.\n"
 
-#import "QYUtils.h"
-#import "QYUser.h"
+#import "QY_Common.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>{
 }
@@ -19,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *inputEmailOrPhoneNumberTextField;
 @property (weak, nonatomic) IBOutlet UITextField *inputPasswordTextField;
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loginIndicatorView;
 @end
 
 @implementation LoginViewController
@@ -34,7 +32,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:YES];
-    [_loginIndicatorView stopAnimating];
 }
 
 #pragma mark - IBAction
@@ -46,19 +43,17 @@
 - (IBAction)loginBtnClicked:(id)sender {
     //这里检测密码长度
     
-    [_loginIndicatorView startAnimating];
-    
     NSString *username = self.inputEmailOrPhoneNumberTextField.text ;
     NSString *password = self.inputPasswordTextField.text ;
     
-//#warning 测试用
-//    username = @"18817870386" ;
-//    password = @"1234567" ;
+#warning 测试用
+    username = @"18817870386" ;
+    password = @"1234567" ;
 
     if ( [self isPasswordAvailable:password] && ![username isEqualToString:@""]) {
-    
+        [SVProgressHUD show] ;
         [QYUser loginName:username Password:password complection:^(BOOL success, NSError *error) {
-            [_loginIndicatorView stopAnimating] ;
+            [SVProgressHUD dismiss] ;
             if ( success ) {
                 QYDebugLog(@"登陆成功") ;
                 [QYUtils toMain] ;
