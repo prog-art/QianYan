@@ -9,80 +9,71 @@
 #import "SearchFriendTableViewController.h"
 #import "SearchFriendTableViewCell.h"
 
-@interface SearchFriendTableViewController () <UIAlertViewDelegate>
+#import "QY_Common.h"
+#import "AppDelegate.h"
+
+@interface SearchFriendTableViewController ()<UIAlertViewDelegate>
+
+@property QY_user *searchedUser ;
 
 @end
 
 @implementation SearchFriendTableViewController
 
++ (SearchFriendTableViewController *)viewControllerWithUser:(QY_user *)user {
+    assert(user) ;
+    SearchFriendTableViewController *vc = (id)[[AppDelegate globalDelegate] SearchFriendTableViewController] ;
+    vc.searchedUser = user ;
+    return vc ;
+}
+
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad] ;
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 1 ;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 1 ;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SearchFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    switch (indexPath.row) {
-        case 0:
-            cell.name = @"Allen";
-            return cell;
-            break;
-            
-        case 1:
-            cell.name = @"Allen Warden";
-            return cell;
-            break;
-            
-        case 2:
-            cell.name = @"Allen Wang";
-            return cell;
-            break;
-            
-        default:
-            break;
-    }
-    
-    return cell;
+    SearchFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath] ;
+    cell.name = self.searchedUser.nickname ;
+    return cell ;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *message = [NSString stringWithFormat:@"用户名:%@",self.searchedUser.nickname] ;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"是否添加好友" message:message delegate:self cancelButtonTitle:@"手滑了" otherButtonTitles:@"确认", nil] ;
+    [alertView show] ;
     
-    [self searchWithIndex:indexPath.row];
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES] ;
 }
 
-- (void)searchWithIndex:(NSInteger) index {
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请先填写账号!"
-//                                                    message:nil
-//                                                   delegate:self
-//                                          cancelButtonTitle:@"取消"
-//                                          otherButtonTitles:@"确定",nil];
-//    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-//    //UITextField *textField = [alert textFieldAtIndex:0];
-//    [alert show];
-}
+#pragma mark - UIAlertViewDelegate 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
-        case 0:
-            break;
-            
-        case 1:
-            
-            break;
-            
-        default:
-            break;
+    if ( buttonIndex != alertView.cancelButtonIndex ) {
+        if ( [[QYUser currentUser].coreUser.friends containsObject:self.searchedUser]) {
+            [QYUtils alert:@"已经是好友了～"] ;
+        } else {
+            [[QYUser currentUser].coreUser addFriendById:self.searchedUser.userId complection:^(BOOL success, NSError *error) {
+                if ( success ) {
+                    QYDebugLog(@"添加好友成功") ;
+                    [QYUtils alert:@"添加好友成功"] ;
+                    [[QY_Notify shareInstance] postFriendNotify] ;
+                    [self.navigationController popViewControllerAnimated:YES] ;
+                } else {
+                    [QYUtils alertError:error] ;
+                }
+            }] ;
+        }
     }
 }
 

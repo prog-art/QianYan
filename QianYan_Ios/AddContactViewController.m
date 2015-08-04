@@ -13,6 +13,8 @@
 
 
 #import "QY_Common.h"
+#import "QY_XMLService.h"
+#import "SearchFriendTableViewController.h"
 
 #define kTelephoneLen 11
 #define kUserIdLen    8
@@ -42,8 +44,6 @@
     [self.tabBarController.tabBar setHidden:YES];
 }
 
-
-
 #pragma mark -- Search Bar Delegate
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -57,35 +57,36 @@
 
 - (void)searchWithText:(NSString *)text {
     
-#warning 这里逻辑有点问题！
-//    NSInteger len = text.length ;
-//    switch (len) {
-//        case kTelephoneLen : {
-//            [[QY_SocketAgent shareInstance] getUserIdByTelephone:text Complection:^(NSDictionary *info, NSError *error) {
-//                
-//            }] ;
-//            break ;
-//        }
-//        
-//        case kUserIdLen : {
-//            
-//            [[QY_SocketAgent shareInstance] getUsernameByUserId:text Complection:^(NSDictionary *info, NSError *error) {
-//                
-//            }] ;
-//            
-//            break ;
-//        }
-//            
-//        default:
-//            //name
-//            [[QY_SocketAgent shareInstance] getUserIdByUsername:text Complection:^(NSDictionary *info, NSError *error) {
-//                
-//            }] ;
-//            
-//            break;
-//    }
-//    
-//    [self.navigationController pushViewController:[[AppDelegate globalDelegate] SearchFriendTableViewController] animated:YES] ;
+#warning 现只允许搜索userId
+    NSString *path = [QY_JPROUrlFactor pathForUserProfile:text] ;
+    
+    if ( [text isEqualToString:[QYUser currentUser].coreUser.userId ]) {
+        [QYUtils alert:@"这是你自己(・Д・)ノ"] ;
+    }
+    
+    [[QY_JPROHttpService shareInstance] downloadFileFromPath:path complection:^(NSString *xmlStr, NSError *error) {
+        if ( xmlStr ) {
+            NSError *phraseError ;
+            
+            QY_user *user = [QY_user insertUserById:text] ;
+            
+            [QY_XMLService initUser:user withProfileXMLStr:xmlStr error:&phraseError] ;
+            
+            //save
+            [QY_appDataCenter saveObject:nil error:NULL] ;
+            
+            if ( !phraseError && user ) {
+                UIViewController *vc = [SearchFriendTableViewController viewControllerWithUser:user] ;
+                
+                [self.navigationController pushViewController:vc animated:YES] ;
+            } else {
+                [QYUtils alert:@"查无此人"] ;
+            }
+        } else {
+            [QYUtils alert:@"查无此人"] ;
+        }
+    }] ;
+
 }
 
 #pragma mark -- Table View Datasource && Delegate

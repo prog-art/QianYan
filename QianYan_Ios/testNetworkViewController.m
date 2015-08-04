@@ -75,16 +75,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSLog(@"str 1 = %@ str2 = %@",@"qycam.com",@"50060") ;
-    NSLog(@"Ip:Port = %@:%@",@"qycam.com",@"50060") ;
-    
+
     self.tableView.delegate = self ;
     self.tableView.dataSource = self ;
     
     coreDataCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-400 查询所有User" cmd:@(-400)],
                      [NSDictionary dictionaryWithDesc:@"[ok]-410 查询所有Camera" cmd:@(-410)],
-                     [NSDictionary dictionaryWithDesc:@"[ok]-411 删除所有Camera" cmd:@(-411)]] ;
+                     [NSDictionary dictionaryWithDesc:@"[ok]-411 删除所有Camera" cmd:@(-411)],
+                     [NSDictionary dictionaryWithDesc:@"[ok]-412 查询有所feed" cmd:@(-412)],
+                     [NSDictionary dictionaryWithDesc:@"-413 查询能看见的feed" cmd:@(-413)]] ;
     
     appCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-1 user登录 to main" cmd:@(-1)],
                 [NSDictionary dictionaryWithDesc:@"[ok]1 user登录 not to main" cmd:@1],
@@ -100,7 +99,8 @@
                 [NSDictionary dictionaryWithDesc:@"[ok]-306 添加好友" cmd:@(-306)],
                 [NSDictionary dictionaryWithDesc:@"-307 不想让他看我的朋友圈状态" cmd:@(-307)],
                 [NSDictionary dictionaryWithDesc:@"-308 不想看他的朋友圈状态" cmd:@(-308)],
-                [NSDictionary dictionaryWithDesc:@"-309 删除好友" cmd:@(-309)],] ;
+                [NSDictionary dictionaryWithDesc:@"-309 删除好友" cmd:@(-309)],
+                [NSDictionary dictionaryWithDesc:@"-310 修复profile.xml" cmd:@(-310)]] ;
     
     jmsCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-201 获取单个摄像机的状态" cmd:@(-201)],
                 [NSDictionary dictionaryWithDesc:@"[ok]-202 获取多个摄像机的状态" cmd:@(-202)],
@@ -276,6 +276,26 @@
             break ;
         }
             
+        case -412 : {
+            NSArray *feeds = [QY_appDataCenter findObjectsWithClassName:NSStringFromClass([QY_feed class]) predicate:nil] ;
+            
+            [feeds enumerateObjectsUsingBlock:^(QY_feed *feed, NSUInteger idx, BOOL *stop) {
+                QYDebugLog(@"feedId = %@,feed = %@",feed.feedId,feed) ;                
+            }] ;
+            
+            break ;
+        }
+            
+        case -413 : {
+            NSArray *feeds = [[QY_user insertUserById:@"10000133"] visualableFeedItems] ;
+            
+            [feeds enumerateObjectsUsingBlock:^(QY_feed *feed, NSUInteger idx, BOOL *stop) {
+                QYDebugLog(@"feedId = %@,feed = %@",feed.feedId,feed) ;
+            }] ;
+            
+            break ;
+        }
+            
         case -302 : {
             //扫描机身二维码－生成wifi二维码－
 //            [self bindingCameraWithCameraId:testCameraId2] ;
@@ -317,6 +337,19 @@
                 }
             }] ;
             break ;
+        }
+            
+        case -310 : {
+            QY_user *user = [QY_user insertUserById:@"10000133"] ;
+            
+            user.userName = testUsername ;
+            [user saveUserInfoComplection:^(id object, NSError *error) {
+                if ( object && !error ) {
+                    [QY_appDataCenter saveObject:nil error:NULL] ;
+                } else {
+                    [QYUtils alertError:error] ;
+                }
+            }] ;            
         }
             
         case -201 : {

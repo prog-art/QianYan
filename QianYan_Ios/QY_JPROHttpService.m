@@ -613,7 +613,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
     [manager PUT:urlString parameters:param success:^(AFHTTPRequestOperation *operation, NSDictionary *feedIdDic) {
         QYDebugLog(@"发表状态feed 成功 feedId = %@",feedIdDic) ;
         
-        complection(feedIdDic[QY_key_id],nil) ;
+        complection([feedIdDic[QY_key_id] stringValue],nil) ;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         QYDebugLog(@"发表状态feed 失败 error = %@",error) ;
         complection(nil,error) ;
@@ -689,10 +689,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
     [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *feedDic) {
         QYDebugLog(@"获取某个状态feed 成功 response = %@",feedDic) ;
 
-#warning !
-//        QY_feed *feed = [[QY_feed alloc] initWithFeedDic:feedDic] ;
-//        
-//        complection(feed,nil) ;
+        complection(feedDic,nil) ;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         QYDebugLog(@"获取某个状态feed 失败 error = %@",error) ;
@@ -759,7 +756,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
     [manager PUT:urlString parameters:param success:^(AFHTTPRequestOperation *operation, NSDictionary *commentIdDic) {
         QYDebugLog(@"发表评论 成功 response = %@",commentIdDic) ;
         
-        complection(commentIdDic[QY_key_id],nil) ;
+        complection([commentIdDic[QY_key_id] stringValue],nil) ;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         QYDebugLog(@"发表评论 失败 error = %@",error) ;
@@ -1113,6 +1110,37 @@ QYResultBlock packComplection(QYResultBlock complection) {
     
 }
 
+#warning 临时接口
+
+/**
+ *  25.覆盖上传好友列表［临时用］
+ *
+ *  @param friendIds [包括自己]
+ *  @param complection
+ */
+- (void)coverRemoteFriendList:(NSArray *)friendIds complection:(QYResultBlock)complection {
+    assert(friendIds) ;
+    assert(complection) ;
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager] ;
+    NSString *urlString = [NSString stringWithFormat:@"%@/accounts/friendlist/",self.baseUrl] ;
+    manager.requestSerializer = [AFJSONRequestSerializer serializer] ;
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary] ;
+    {
+        [parameters setObject:friendIds forKey:@"friend_list"] ;
+    }
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializer] ;
+    
+    [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, NSArray *userIds) {
+        complection(TRUE,nil) ;
+        QYDebugLog(@"userIds = %@",userIds) ;        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        complection(false,error) ;
+    }] ;
+    
+}
 
 #pragma mark - Other Method
 

@@ -71,6 +71,7 @@
 		19A140121B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A140111B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.m */; };
 		19A140171B5117F100A7746C /* QY_UserReloginDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A140161B5117F100A7746C /* QY_UserReloginDescriptor.m */; };
 		19A6953B1AFB44C500F60D03 /* QYNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A6953A1AFB44C500F60D03 /* QYNotify.m */; };
+		19B1884A1B71112300F12EFB /* QY_Notify.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B188491B71112300F12EFB /* QY_Notify.m */; };
 		19C4E1321B6FB67C0003C67A /* SearchFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E12F1B6FB67C0003C67A /* SearchFriendTableViewCell.m */; };
 		19C4E1331B6FB67C0003C67A /* SearchFriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E1311B6FB67C0003C67A /* SearchFriendTableViewController.m */; };
 		19C4E1371B6FB93E0003C67A /* QRCodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E1361B6FB93E0003C67A /* QRCodeDetailViewController.m */; };
@@ -329,6 +330,8 @@
 		19A140161B5117F100A7746C /* QY_UserReloginDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_UserReloginDescriptor.m; sourceTree = "<group>"; };
 		19A695391AFB44C500F60D03 /* QYNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYNotify.h; sourceTree = "<group>"; };
 		19A6953A1AFB44C500F60D03 /* QYNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYNotify.m; sourceTree = "<group>"; };
+		19B188481B71112300F12EFB /* QY_Notify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_Notify.h; sourceTree = "<group>"; };
+		19B188491B71112300F12EFB /* QY_Notify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_Notify.m; sourceTree = "<group>"; };
 		19C4E12E1B6FB67C0003C67A /* SearchFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendTableViewCell.h; sourceTree = "<group>"; };
 		19C4E12F1B6FB67C0003C67A /* SearchFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendTableViewCell.m; sourceTree = "<group>"; };
 		19C4E1301B6FB67C0003C67A /* SearchFriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendTableViewController.h; sourceTree = "<group>"; };
@@ -1212,6 +1215,7 @@
 		19909B431AEE985700CCB721 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				19B188471B71110400F12EFB /* 通知中心 */,
 				19602FD01B6509250064BC87 /* 数据中心 */,
 				193545081B486F2B00ACE915 /* 网络 */,
 				1985304B1B29CB3600EB96F7 /* QYError */,
@@ -1269,6 +1273,15 @@
 				198530311B27215500EB96F7 /* testNetworkViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		19B188471B71110400F12EFB /* 通知中心 */ = {
+			isa = PBXGroup;
+			children = (
+				19B188481B71112300F12EFB /* QY_Notify.h */,
+				19B188491B71112300F12EFB /* QY_Notify.m */,
+			);
+			name = "通知中心";
 			sourceTree = "<group>";
 		};
 		19C4E12D1B6FB66B0003C67A /* 好友搜索 */ = {
@@ -2228,6 +2241,7 @@
 				6E2761BE1B08C03200247CCC /* RegisterViewController.m in Sources */,
 				19602FC61B64FBAA0064BC87 /* QY_comment.m in Sources */,
 				6E32DA061B51672A002A6301 /* KxMovieDecoder.m in Sources */,
+				19B1884A1B71112300F12EFB /* QY_Notify.m in Sources */,
 				195C16201B3EA5C800A316FE /* QY_SocketAgent.m in Sources */,
 				198530471B28B9AF00EB96F7 /* QY_XMLPhraser.m in Sources */,
 				6E1A9BA41B50A4CB0046B8AB /* NSArray+NSArray_ILExtension.m in Sources */,

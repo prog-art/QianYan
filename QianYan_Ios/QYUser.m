@@ -108,18 +108,22 @@ static QYUser *_currentUser = nil ;
     
     QY_SocketAgent *agent = [QY_SocketAgent shareInstance] ;
     
+    //1. login to JRM
     [agent userLoginRequestWithName:username Psd:password Complection:^(BOOL success, NSError *error) {
         if ( success ) {
             QYDebugLog(@"登录成功 接下来去获取userId") ;
+            
+            //2. get userId  from JRM
             [agent getUserIdByUsername:username Complection:^(NSDictionary *info, NSError *error) {
-                
                 if ( info && !error ) {
                     user.userId = info[ParameterKey_userId] ;
-                    
-                    user.coreUser = [QY_appDataCenter userWithId:user.userId] ;
+                    QYDebugLog(@"获取UserId 成功 userId = %@，接下来去拉取用户资料",user.userId) ;
 
+                    user.coreUser = [QY_appDataCenter userWithId:user.userId] ;
+                    //3. 拉取用户资料
                     [user.coreUser fetchUserInfoComplection:^(id object, NSError *error) {
                         if ( success ) {
+                            QYDebugLog(@"拉取用户资料成功") ;
                             _currentUser = user ;
                             [QY_appDataCenter saveObject:nil error:NULL] ;
                             complection(TRUE,nil) ;
@@ -129,10 +133,10 @@ static QYUser *_currentUser = nil ;
 #warning ！！！！
                                 [user.coreUser fetchTelephoneComplection:nil] ;
                                 [[QY_JPROHttpService shareInstance] jproLoginWithUserId:user.userId Password:user.password Complection:nil] ;
-                                
                             }] ;
                             
                         } else {
+                            QYDebugLog(@"拉取用户资料失败 %@",error) ;
                             complection(false,error) ;
                         }
                     }] ;
@@ -151,19 +155,6 @@ static QYUser *_currentUser = nil ;
     }] ;
     
 }
-
-//- (void)downloadProfileComplection:(QYResultBlock)complection {
-//    assert(complection) ;
-//    
-//    [self.coreUser fetchUserInfoComplection:^(QY_user *user, NSError *error) {
-//        if ( user && !error ) {
-//            complection(YES,nil) ;
-//        } else {
-//            NSError *error = [NSError QYErrorWithCode:JPRO_DOWNLOAD_PROFILE_ERROR description:@"下载PROFILE的时候出错"] ;
-//            complection(false,error) ;
-//        }
-//    }] ;
-//}
 
 #pragma mark - 注销
 

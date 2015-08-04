@@ -45,7 +45,6 @@
 #pragma mark - 
 
 - (void)didReceiveContactsSuccess:(BOOL)success Contacts:(NSArray *)contacts {
-    NSLog(@"contacts = %@",contacts) ;
 }
 
 @end

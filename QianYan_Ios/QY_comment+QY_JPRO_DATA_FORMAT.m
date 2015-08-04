@@ -35,12 +35,13 @@
 - (void)initWithDictionary:(NSDictionary *)commentDic {
     
 #warning userId换为user!!![之后看换不换]
-    NSDictionary *keys2keys = @{QY_key_content:NSStringFromSelector(@selector(content)),
-                                QY_key_user_id:NSStringFromSelector(@selector(userId))} ;
+    NSDictionary *keys2keys = @{QY_key_content:NSStringFromSelector(@selector(content))} ;
     
     [keys2keys enumerateKeysAndObjectsUsingBlock:^(NSString *remoteKey, NSString *localKey, BOOL *stop) {
         [self setValue:commentDic[remoteKey] forKey:localKey] ;
     }] ;
+    
+    self.userId = [commentDic[QY_key_user_id] stringValue] ;
     
     self.pubDate = [QYUtils timestampStr2date:[commentDic[QY_key_pub_date] stringValue]] ;
 }
@@ -50,7 +51,7 @@
     NSMutableSet *comments = [NSMutableSet set] ;
     
     [dicArray enumerateObjectsUsingBlock:^(NSDictionary *commentDic, NSUInteger idx, BOOL *stop) {
-        NSString *commentId = commentDic[QY_key_id] ;
+        NSString *commentId = [commentDic[QY_key_id] stringValue];
         QY_comment *comment = [self commentWithId:commentId] ;
         
         [comment initWithDictionary:commentDic] ;

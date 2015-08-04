@@ -30,4 +30,6 @@
 
 #import "SVProgressHUD.h"
 
+#import "QY_Notify.h"
+
 #endif

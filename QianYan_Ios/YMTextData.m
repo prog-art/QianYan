@@ -108,7 +108,7 @@
         //******自行添加**********
         
         if (_defineAttrData.count != 0) {
-            NSArray *tArr = [_defineAttrData objectAtIndex:tempInt];
+            NSArray *tArr = _defineAttrData[tempInt] ;
             for (int i = 0; i < [tArr count]; i ++) {
                 NSString *string = [dataSourceString substringWithRange:NSRangeFromString([tArr objectAtIndex:i])];
                 [totalArr addObject:[NSDictionary dictionaryWithObject:string forKey:NSStringFromRange(NSRangeFromString([tArr objectAtIndex:i]))]];

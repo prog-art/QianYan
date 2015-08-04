@@ -11,6 +11,8 @@
 
 #import "QY_Block_Define.h"
 
+@class UIImageView ;
+
 @class QY_camera, QY_cameraGroup, QY_cameraSetting, QY_feed, QY_friendGroup, QY_friendSetting;
 
 @interface QY_user : NSManagedObject
@@ -74,6 +76,12 @@
 - (void)saveTelephone:(NSString *)telephone Complection:(QYResultBlock)complection ;
 
 - (void)fetchTelephoneComplection:(QYResultBlock)complection ;
+
+#pragma mark - UI
+
+- (void)displayCycleAvatarAtImageView:(UIImageView *)avatarImageView ;
+
+- (void)displayAvatarAtImageView:(UIImageView *)avatarIamgeView ;
 
 #pragma mark - getter && setter
 

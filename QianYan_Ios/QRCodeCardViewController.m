@@ -42,29 +42,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
+    _tableView.dataSource = self ;
+    _tableView.delegate = self ;
     
-    //init QR Image
-    QYDebugLog(@"userId = %@",[QYUser currentUser].userId) ;
     UIImage *image = [QY_QRCodeUtils QY_generateQRImageOfPersonalCardWithUserId:[QYUser currentUser].userId] ;
     self.QRCodeImageView.image = image ;
     
-    self.usernameLabel.text = self.user.username ;
+    self.usernameLabel.text = self.user.coreUser.nickname ;
     self.genderLabel.text = self.user.coreUser.gender ;
-//    self.ageLabel.text = @"29岁" ;
+    
+    NSInteger age = [QYUtils ageWithDateOfBirth:self.user.coreUser.birthday?:[NSDate date]] ;
+    self.ageLabel.text = [NSString stringWithFormat:@"%ld岁",(long)age] ;
+    
     self.locationLabel.text = self.user.coreUser.location ;
+    
+    [[QYUser currentUser].coreUser displayCycleAvatarAtImageView:self.potraitImageView] ;
 }
 
+
+
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [self.tabBarController.tabBar setHidden:YES];
+    [super viewWillAppear:animated] ;
+    [self.navigationController setNavigationBarHidden:YES animated:YES] ;
+    [self.tabBarController.tabBar setHidden:YES] ;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [super viewWillDisappear:animated] ;
+    [self.navigationController setNavigationBarHidden:NO animated:YES] ;
 }
 
 #pragma mark - Table View Delegate
@@ -79,7 +84,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QRCodeCardTableViewCell *cell = [[QRCodeCardTableViewCell alloc] init];
-    
     NSArray *cell_nib = [[NSBundle mainBundle] loadNibNamed:@"QRCodeCardTableViewCell" owner:self options:nil] ;
     for(id oneObject in cell_nib ){
         if([oneObject isKindOfClass:[QRCodeCardTableViewCell class]]) {
@@ -87,7 +91,7 @@
             cell.accountID = self.user.userId ;
         }
     }
-    return cell;
+    return cell ;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

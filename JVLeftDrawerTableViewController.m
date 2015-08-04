@@ -12,6 +12,9 @@
 #import "JVFloatingDrawerViewController.h"
 #import "SettingsViewController.h"
 
+
+#import "QY_Common.h"
+
 static const CGFloat kJVTableViewTopInset = 110.0;
 static NSString * const kJVDrawerCellReuseIdentifier = @"JVLeftDrawerCellReuseIdentifier";
 
@@ -31,6 +34,7 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVLeftDrawerCellReuseId
     //头像按钮
     UIButton *potraitBtn = [[UIButton alloc] initWithFrame:CGRectMake(36, -40, 60, 60)];
     [potraitBtn setImage:[UIImage imageNamed:@"头像.png"] forState:UIControlStateNormal];
+    
     [potraitBtn addTarget:self action:@selector(potraitBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     //昵称按钮
@@ -44,6 +48,7 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVLeftDrawerCellReuseId
     imageView.image = [UIImage imageNamed:@"会员.png"];
     
     [self.view addSubview:potraitBtn];
+    [[QYUser currentUser].coreUser displayCycleAvatarAtImageView:potraitBtn.imageView] ;
     [self.view addSubview:nicknameBtn];
     [self.view addSubview:imageView];
 }

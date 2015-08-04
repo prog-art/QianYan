@@ -330,4 +330,14 @@ typedef void(^QY_DownloadComplectionBlock)(NSURL *filePath,NSError *error) ;
 - (void)clearDocumentOnPath:(NSString *)path
                 Complection:(QYResultBlock)complection ;
 
+#warning 临时接口
+
+/**
+ *  25.覆盖上传好友列表［临时用］
+ *
+ *  @param friendIds
+ *  @param complection
+ */
+- (void)coverRemoteFriendList:(NSArray *)friendIds complection:(QYResultBlock)complection ;
+
 @end

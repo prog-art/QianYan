@@ -55,6 +55,7 @@
 
 #pragma mark - UIRefreshControl Selector
 
+
 - (void)refreshFriends:(UIRefreshControl *)refreshControl {
     if ( refreshControl ) {
         [refreshControl beginRefreshing] ;
@@ -69,6 +70,23 @@
             //置空，refresh的时候会调用这个。lazy loading
             _myFriends = nil ;
             [self.tableView reloadData] ;
+            
+#warning 临时
+            [QYUtils runInGlobalQueue:^{
+                
+                NSMutableArray *friends = [[[QYUser currentUser].coreUser.friends allObjects] mutableCopy] ;
+                [friends addObject:[QYUser currentUser].coreUser] ;
+                
+                NSMutableArray *friendIds = [NSMutableArray array] ;
+                [friends enumerateObjectsUsingBlock:^(QY_user *user, NSUInteger idx, BOOL *stop) {
+                    [friendIds addObject:user.userId] ;
+                }] ;
+                
+                [[QY_JPROHttpService shareInstance] coverRemoteFriendList:friendIds complection:^(BOOL success, NSError *error) {
+                    
+                }] ;
+            }] ;
+            
         }
         
         if ( error ) {
@@ -97,11 +115,16 @@
     
     _sections = [[[UILocalizedIndexedCollation currentCollation] sectionIndexTitles] mutableCopy] ;
     
+    [[QY_Notify shareInstance] addFriendObserver:self selector:@selector(refresh)] ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tabBarController.tabBar setHidden:NO];
+}
+
+- (void)refresh {
+    [self refreshFriends:self.refreshControl] ;
 }
 
 #pragma mark - UITableViewDataSource
@@ -167,6 +190,7 @@
         }
             
         default : {
+#warning 写法可能有点问题？
             UMTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"UMCell" forIndexPath:indexPath];
             
             if ( !cell ) {
@@ -180,6 +204,8 @@
             QY_friendSetting *friendSetting = [self.myFriends allValues][indexPath.row] ;
             
             cell.label.text = friendSetting.displayName ;
+            
+            [friendSetting.toFriend displayCycleAvatarAtImageView:cell.imageView] ;
             
             return cell;
             break ;
@@ -213,10 +239,6 @@
 //    return ([indexPath row] * 10) + 60;
 //}
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Set background color of cell here if you don't want default white
-}
-
 #pragma mark - SWTableViewDelegate
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state {
@@ -242,8 +264,7 @@
             NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
             
             [QYUtils alert:@"删除好友正在做～"] ;
-            
-            
+
             
 //            [_testArray[cellIndexPath.section-2] removeObjectAtIndex:cellIndexPath.row];
 //            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];

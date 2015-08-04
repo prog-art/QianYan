@@ -51,7 +51,9 @@ typedef NS_ENUM(NSInteger, JRM_Socket_Read_tag) {
     NSError *error ;
     BOOL result = [self.jrmSocket connectToHost:host onPort:port error:&error] ;
     
-    if ( error || !result) {
+    QYDebugLog(@"result = %@ error = %@",result?@"成功":@"失败",error) ;
+    if ( error || !result ) {
+        QYDebugLog(@"失败") ;
         self.connect2JRMComplection(false,error) ;
         self.connect2JRMComplection = nil ;
     }
@@ -212,6 +214,7 @@ typedef NS_ENUM(NSInteger, JRM_Socket_Read_tag) {
     }
     
     if ( self.connect2JRMComplection ) {
+        QYDebugLog(@"连接失败。。error = %@",err) ;
         self.connect2JRMComplection(false,err) ;
         self.connect2JRMComplection = nil ;
     }

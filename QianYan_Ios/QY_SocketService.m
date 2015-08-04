@@ -110,7 +110,7 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
     
     [self getJRMIPandJRMPORTWithComplection:^(NSDictionary *info, NSError *error) {
         if ( !error ) {
-            QYDebugLog(@"info = %@ self = %@",info,self) ;
+            QYDebugLog(@"info = %@",info) ;
             [self connectToJRMHost:self.JRM_IP Port:self.JRM_Port Complection:^(BOOL success, NSError *error) {
                 if ( success ) {
                     QYDebugLog(@"连接JRM成功") ;
@@ -153,11 +153,7 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
 - (void)connectToJRMHost:(NSString *)host
                     Port:(NSUInteger)port
              Complection:(QYResultBlock)complection {
-    complection = ^(BOOL success , NSError *error) {
-        if ( complection ) {
-            complection(success,error) ;
-        }
-    } ;
+    assert(complection) ;
     self.socketDelegater.jrmSocket = self.jrmSocket ;
     [self.socketDelegater connectToJRMHost:host Port:port Complection:complection] ;
 }
@@ -199,8 +195,10 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
                 [self.jrmSocket writeData:data withTimeout:10 tag:request.apiNo] ;
             } else {
                 QYDebugLog(@"连接失败 error = %@",error) ;
-                self.apiComplection(nil,error) ;
-                self.apiComplection = nil ;
+                if ( self.apiComplection ) {
+                    self.apiComplection(nil,error) ;
+                    self.apiComplection = nil ;
+                }
             }
         }] ;
     }

@@ -19,6 +19,8 @@
 #import "NSError+QYError.h"
 #import "QY_XMLService.h"
 #import "QY_Socket.h"
+#import <UIKit/UIKit.h>
+#import <UIImageView+AFNetworking.h>
 
 @implementation QY_user
 
@@ -70,21 +72,24 @@
     assert(complection) ;
     assert(self.userId) ;
     
-    
-    [[QY_SocketAgent shareInstance] getJPROServerInfoForUser:self.userId Complection:^(NSDictionary *info, NSError *error) {
-        if ( !error && info ) {
-            self.jproIp   = info[ParameterKey_jproIp] ;
-            self.jproPort = info[ParameterKey_jproPort] ;
-//            self.jproPsd  = info[ParameterKey_jproPassword] ;
-            [QY_appDataCenter saveObject:nil error:NULL] ;
-            QYDebugLog(@"获得JPRO信息 = %@",self.jpro) ;
-            [[QY_JPROHttpService shareInstance] configIp:self.jproIp Port:self.jproPort] ;            
-            complection(TRUE,nil) ;
-        } else {
-            QYDebugLog(@"获取用户jpro服务器信息出错 error = %@",error) ;
-            error = [NSError QYErrorWithCode:JRM_GET_USER_JPRO_ERROR description:@"获取JPRO服务器信息出错。"] ;
-            complection(false,error) ;
-        }
+#warning JRM服务器问题太多了，这里如果不等待一段时间，连接JRM会失败。。
+    [QYUtils runAfterSecs:0.5f block:^{
+        QYDebugLog(@"UserId = %@,拉取JPRO服务器信息",self.userId) ;
+        [[QY_SocketAgent shareInstance] getJPROServerInfoForUser:self.userId Complection:^(NSDictionary *info, NSError *error) {
+            if ( !error && info ) {
+                self.jproIp   = info[ParameterKey_jproIp] ;
+                self.jproPort = info[ParameterKey_jproPort] ;
+                //            self.jproPsd  = info[ParameterKey_jproPassword] ;
+                [QY_appDataCenter saveObject:nil error:NULL] ;
+                QYDebugLog(@"获得JPRO信息 = %@",self.jpro) ;
+                [[QY_JPROHttpService shareInstance] configIp:self.jproIp Port:self.jproPort] ;
+                complection(TRUE,nil) ;
+            } else {
+                QYDebugLog(@"获取用户jpro服务器信息出错 error = %@",error) ;
+                error = [NSError QYErrorWithCode:JRM_GET_USER_JPRO_ERROR description:@"获取JPRO服务器信息出错。"] ;
+                complection(false,error) ;
+            }
+        }] ;
     }] ;
 }
 
@@ -108,6 +113,7 @@
         return ;
     }
     
+    QYDebugLog(@"jpro = %@",self.jpro) ;
     
     NSString *path = [QY_JPROUrlFactor pathForUserProfile:self.userId] ;
     
@@ -359,6 +365,35 @@
     }] ;
 }
 
+#pragma mark - UI
+
+- (void)displayCycleAvatarAtImageView:(UIImageView *)avatarImageView {
+    assert(avatarImageView) ;
+    [self displayAvatarAtImageView:avatarImageView] ;
+    [avatarImageView.layer setCornerRadius:CGRectGetHeight([avatarImageView bounds]) / 2.0f] ;
+    avatarImageView.layer.masksToBounds = YES ;
+}
+
+- (void)displayAvatarAtImageView:(UIImageView *)avatarIamgeView {
+    if (!avatarIamgeView) return ;
+    
+    UIImage *placeHolder = [UIImage imageNamed:@"二维码名片-头像"] ;
+    [avatarIamgeView setImage:placeHolder] ;
+    
+    NSString *path = [QY_JPROUrlFactor pathForUserAvatar:self.userId] ;
+
+#warning 缓存！！
+    [[QY_JPROHttpService shareInstance] downloadImageFromPath:path complection:^(UIImage *image, NSError *error) {
+        if ( image ) {
+            [QYUtils runInMainQueue:^{
+                [avatarIamgeView setImage:image] ;
+            }] ;
+        } else {
+            QYDebugLog(@"无头像或获取头像失败") ;
+        }
+    }] ;
+}
+
 #pragma mark - getter && setter
 
 - (NSString *)jpro {
@@ -390,18 +425,18 @@
 }
 
 - (NSArray *)visualableFeedItems {
-#warning 待优化
-//    NSMutableArray *feeds = [NSMutableArray array] ;
-//    
-//    [self.friends enumerateObjectsUsingBlock:^(QY_user *friend, BOOL *stop) {
-//        [feeds addObjectsFromArray:[friend.feeds allObjects]] ;
-//    }] ;
-//    [feeds addObjectsFromArray:[self.feeds allObjects]] ;
-//    
-//    NSSortDescriptor *desc = [NSSortDescriptor sortDescriptorWithKey:<#(NSString *)#> ascending:<#(BOOL)#>]
-//    
-//    [feeds sortedArrayUsingDescriptors:<#(NSArray *)#>] ;
-    return nil ;
+    NSMutableArray *friendIds = [NSMutableArray array] ;
+    [self.friends enumerateObjectsUsingBlock:^(QY_user *friend, BOOL *stop) {
+        [friendIds addObject:friend.userId] ;
+    }] ;
+    [friendIds addObject:self.userId] ;
+
+    NSArray *feeds ;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"owner.userId IN %@",friendIds] ;
+    feeds = [QY_appDataCenter findObjectsWithClassName:NSStringFromClass([QY_feed class]) predicate:predicate] ;
+#warning 排序！
+    
+    return feeds ;
 }
 
 @end

@@ -109,17 +109,17 @@
         <relationship name="inSettings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_friendSetting" inverseName="toFriend" inverseEntity="QY_friendSetting" syncable="YES"/>
         <relationship name="sharedCameras" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_camera" inverseName="shareUser" inverseEntity="QY_camera" syncable="YES"/>
     </entity>
-    <fetchRequest name="FetchRequest" entity="QY_friendSetting" predicateString="owner.userId == 10000133 AND toFriend.userId == 10000145"/>
+    <fetchRequest name="FetchRequest" entity="QY_feed" predicateString="feedId CONTAINS &quot;&quot;"/>
     <elements>
-        <element name="QY_alertMessage" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="QY_attach" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="QY_camera" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="QY_cameraGroup" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="QY_cameraSetting" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="QY_comment" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="QY_feed" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="QY_friendGroup" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="QY_friendSetting" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="QY_user" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="QY_alertMessage" positionX="0" positionY="0" width="128" height="165"/>
+        <element name="QY_attach" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="QY_camera" positionX="0" positionY="0" width="128" height="225"/>
+        <element name="QY_cameraGroup" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="QY_cameraSetting" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="QY_comment" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="QY_feed" positionX="0" positionY="0" width="128" height="255"/>
+        <element name="QY_friendGroup" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="QY_friendSetting" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="QY_user" positionX="0" positionY="0" width="128" height="375"/>
     </elements>
 </model>

@@ -8,10 +8,18 @@
 
 #import "QY_feed.h"
 
+#import "QY_Block_Define.h"
+
 @interface QY_feed (QY_JPRO_DATA_FORMAT)
 
 + (QY_feed *)feedWithId:(NSString *)feedId ;
 
 - (void)initWithFeedDic:(NSDictionary *)feedDic ;
+
+#pragma mark - operation
+
++ (void)fetchFeedWithId:(NSString *)feedId complection:(QYObjectBlock)complection ;
+
+- (void)addComment:(NSString *)content complection:(QYResultBlock)complection ;
 
 @end

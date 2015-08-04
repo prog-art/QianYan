@@ -186,7 +186,6 @@
         WFTextView * ymTextView = (WFTextView *)[_ymTextArray objectAtIndex:i];
         if (ymTextView.superview) {
             [ymTextView removeFromSuperview];
-            //  NSLog(@"here");
             
         }        
         
@@ -265,16 +264,8 @@
     }
     
     
-    
-    
-
-    
 //
 //    backView_H += 100;
-    
-    
-    
-    
     
     backView_H += (ymData.replyDataSource.count - 1)*5;
     
@@ -292,8 +283,7 @@
         _replyBtn.frame = CGRectMake(271, replyImageView.frame.origin.y - 26, 38, 18);
         
     }
-    NSLog(@"%f", _replyBtn.frame.origin.y);
-    
+//    NSLog(@"%f", _replyBtn.frame.origin.y);
 }
 
 #pragma mark - ilcoreTextDelegate

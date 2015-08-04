@@ -42,7 +42,7 @@
     [keys2keys enumerateKeysAndObjectsUsingBlock:^(NSString *remoteKey, NSString *localKey, BOOL *stop) {
         [self setValue:feedDic[remoteKey] forKey:localKey] ;
     }] ;
-
+    
     self.type = @([feedDic[QY_key_type] integerValue]) ;
     self.content = feedDic[QY_key_content] ;
     self.modDate = [QYUtils timestampStr2date:[feedDic[QY_key_mod_date] stringValue]] ;
@@ -59,9 +59,48 @@
     }
     
 #warning messages暂时不写！
-//    [self setMessages:[QY_alertMessage messageWithDicArray:feedDic[QY_key_messages]]] ;
+    //    [self setMessages:[QY_alertMessage messageWithDicArray:feedDic[QY_key_messages]]] ;
     [self setAttaches:[QY_attach attacheWithDicArray:feedDic[QY_key_attaches]]] ;//应该ok
-    [self setComments:[QY_comment commentWithDicArray:feedDic[QY_key_comment]]] ;
+    [self setComments:[QY_comment commentWithDicArray:feedDic[QY_key_comments]]] ;
+}
+
+#pragma mark - operation
+
++ (void)fetchFeedWithId:(NSString *)feedId complection:(QYObjectBlock)complection {
+    assert(feedId) ;
+    assert(complection) ;
+    
+    [[QY_JPROHttpService shareInstance] getFeedById:feedId Complection:^(NSDictionary *feedDic, NSError *error) {
+        if ( !error && feedDic ) {
+            NSString *feedId = [feedDic[QY_key_id] stringValue] ;
+            
+            QY_feed *feed = [QY_feed feedWithId:feedId] ;
+            
+            [feed initWithFeedDic:feedDic] ;
+            QYDebugLog(@"feed = %@",feed) ;
+            complection(feed,nil) ;
+            
+        } else {
+            QYDebugLog(@"error = %@",error) ;
+            complection(nil,error) ;
+        }
+    }] ;
+    
+}
+
+- (void)addComment:(NSString *)content complection:(QYResultBlock)complection {
+    if ( !content || content.length == 0 ) return ;
+    assert(complection) ;
+    assert(self.feedId) ;
+    
+    [[QY_JPROHttpService shareInstance] addCommentToFeed:self.feedId Comment:content Complection:^(NSString *commentId, NSError *error) {
+        if ( commentId && !error ) {
+            complection(true,nil) ;
+            [[QY_Notify shareInstance] postFeedNotifyWithId:self.feedId] ;
+        } else {
+            complection(false,error) ;
+        }
+    }] ;
 }
 
 @end

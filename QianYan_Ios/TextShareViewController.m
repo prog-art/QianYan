@@ -39,10 +39,13 @@
     
     if ( str.length != 0 ) {
         [SVProgressHUD show] ;
-        [[QY_JPROHttpService shareInstance] createAttachFeedWithContent:str Attaches:nil Messages:nil Complection:^(id object, NSError *error) {
+        [[QY_JPROHttpService shareInstance] createAttachFeedWithContent:str Attaches:nil Messages:nil Complection:^(NSString *feedId, NSError *error) {
             [SVProgressHUD dismiss] ;
-            if ( object && !error ) {
+            if ( feedId && !error ) {
                 QYDebugLog(@"发表成功！") ;
+                
+                [[QY_Notify shareInstance] postFeedNotifyWithId:feedId] ;
+                
                 [self.navigationController popViewControllerAnimated:YES] ;
             } else {
                 QYDebugLog(@"发表失败 error = %@",error) ;

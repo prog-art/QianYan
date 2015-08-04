@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class QY_user ;
+
 @interface SearchFriendTableViewController : UITableViewController
+
++ (SearchFriendTableViewController *)viewControllerWithUser:(QY_user *)user ;
 
 @end
