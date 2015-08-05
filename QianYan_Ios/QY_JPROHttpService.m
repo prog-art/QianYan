@@ -1234,7 +1234,6 @@ BOOL makeFIleUrlReachabily(NSURL *fileUrl) {
     
     NSString *path = [NSString stringWithFormat:@"user/%@/headpicture.jpg",userId] ;
     
-#warning 图片未压缩
     NSData *imageData = UIImageJPEGRepresentation(avatar, 1.0f) ;
     
     [self uploadFileToPath:path

@@ -107,4 +107,22 @@
     }] ;
 }
 
+- (void)removeComment:(QY_comment *)comment user:(QY_user *)user complection:(QYResultBlock)complection {
+    assert(comment) ;
+    assert(user) ;
+    assert(complection) ;
+    assert([user.userId isEqualToString:[QYUser currentUser].userId]) ;
+    
+    [[QY_JPROHttpService shareInstance] deleteCommentById:comment.commentId Complection:^(BOOL success, NSError *error) {
+        if ( success ) {
+            QYDebugLog(@"删除评论成功") ;
+            [[QY_appDataCenter managedObjectContext] deleteObject:comment] ;
+            complection(true,nil) ;
+        } else {
+            QYDebugLog(@"删除评论失败 error = %@",error) ;
+            complection(false,error) ;
+        }
+    }] ;
+}
+
 @end

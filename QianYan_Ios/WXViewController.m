@@ -505,8 +505,6 @@ lineBreakMode:mode].height : 0.f;
 
 #pragma mark - 评论说说回调
 - (void)YMReplyInputWithReply:(NSString *)replyText appendTag:(NSInteger)inputTag {
-#warning 施工中
-    
     QY_feed *feed = self.feeds[inputTag] ;
     
     if ( feed ) {
@@ -520,32 +518,11 @@ lineBreakMode:mode].height : 0.f;
             }
         }] ;
     }
-//    
-//    NSString *newString = [NSString stringWithFormat:@"%@:%@",kAdmin,replyText];//此处可扩展。已写死，包括内部逻辑也写死 在YMTextData里 自行添加部分
-//    
-//    YMTextData *ymData = (YMTextData *)[_tableDataSource objectAtIndex:inputTag];
-//    [ymData.replyDataSource addObject:newString];
-//    
-//    //清空属性数组。否则会重复添加
-//    [ymData.completionReplySource removeAllObjects];
-//    [ymData.attributedData removeAllObjects];
-//    
-//    NSString *rangeStr = NSStringFromRange(NSMakeRange(0, kAdmin.length));
-//    NSMutableArray *rangeArr = [[NSMutableArray alloc] init];
-//    [rangeArr addObject:rangeStr];
-//    [ymData.defineAttrData addObject:rangeArr];
-//    ymData.replyHeight = [ymData calculateReplyHeightWithWidth:self.view.frame.size.width];
-//    [_tableDataSource replaceObjectAtIndex:inputTag withObject:ymData];
-//    
-//    [mainTable reloadData];
-    
 }
 
 - (void)destorySelf {
-    
-    [replyView removeFromSuperview];
-    replyView = nil;
-
+    [replyView removeFromSuperview] ;
+    replyView = nil ;
 }
 
 @end

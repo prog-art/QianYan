@@ -31,67 +31,65 @@
 }
 
 //计算replyview高度
-- (float) calculateReplyHeightWithWidth:(float)sizeWidth {
+- (float)calculateReplyHeightWithWidth:(float)sizeWidth {
 
-    isReplyView = YES;
-    float height = .0f;
-    //NSLog(@" === %@",self.replyDataSource);
+    isReplyView = YES ;
+    float height = .0f ;
     
-    for (int i = 0; i < self.replyDataSource.count; i ++ ) {
+    for (int i = 0; i < self.replyDataSource.count ; i ++ ) {
         
-        tempInt = i;
+        tempInt = i ;
         
-        NSString *matchString = [self.replyDataSource objectAtIndex:i];
+        NSString *matchString = self.replyDataSource[i] ;
         
-        NSArray *itemIndexs = [ILRegularExpressionManager itemIndexesWithPattern:EmotionItemPattern inString:matchString];
+        NSArray *itemIndexs = [ILRegularExpressionManager itemIndexesWithPattern:EmotionItemPattern inString:matchString] ;
         
         NSString *newString = [matchString replaceCharactersAtIndexes:itemIndexs
-                                                           withString:PlaceHolder];
+                                                           withString:PlaceHolder] ;
         //存新的
-        [self.completionReplySource addObject:newString];
+        [self.completionReplySource addObject:newString] ;
         
         
+        [self matchString:newString fromView:isReplyView] ;
         
-        [self matchString:newString fromView:isReplyView];
+        WFTextView *_ilcoreText = [[WFTextView alloc] initWithFrame:CGRectMake(offSet_X,10, sizeWidth - offSet_X * 2, 0)] ;
         
-        WFTextView *_ilcoreText = [[WFTextView alloc] initWithFrame:CGRectMake(offSet_X,10, sizeWidth - offSet_X * 2, 0)];
+        _ilcoreText.isDraw = NO ;
         
-        _ilcoreText.isDraw = NO;
-        
-        [_ilcoreText setOldString:[self.replyDataSource objectAtIndex:i] andNewString:newString];
+        [_ilcoreText setOldString:self.replyDataSource[i] andNewString:newString] ;
         
         height =  height + [_ilcoreText getTextHeight] + 5;
         
     }
     
-    [self calculateShowImageHeight];
+    [self calculateShowImageHeight] ;
     
     return height;
     
 }
+
 //图片高度
 - (void)calculateShowImageHeight {
     
-    if (self.showImageArray.count == 0) {
-        self.showImageArray = 0;
+    if (self.showImageArray.count == 0 ) {
+        self.showImageHeight = 0 ;
     }else{
-        self.showImageHeight = (ShowImage_H + 10) * ((self.showImageArray.count - 1)/3 + 1);
+        self.showImageHeight = (ShowImage_H + 10) * ( (self.showImageArray.count - 1)/3 + 1) ;
     }
     
 }
 
-- (void)matchString:(NSString *)dataSourceString fromView:(BOOL) isYMOrNot {
+- (void)matchString:(NSString *)dataSourceString fromView:(BOOL)isYMOrNot {
     
     if (isYMOrNot == YES) {
         
-        NSMutableArray *totalArr = [NSMutableArray arrayWithCapacity:0];
+        NSMutableArray *totalArr = [NSMutableArray arrayWithCapacity:0] ;
         
         //**********号码******
         
         NSMutableArray *mobileLink = [ILRegularExpressionManager matchMobileLink:dataSourceString];
         for (int i = 0; i < mobileLink.count; i ++) {
-            
-            [totalArr addObject:[mobileLink objectAtIndex:i]];
+            [totalArr addObject:mobileLink[i]] ;
         }
         
         //*************************
@@ -109,9 +107,9 @@
         
         if (_defineAttrData.count != 0) {
             NSArray *tArr = _defineAttrData[tempInt] ;
-            for (int i = 0; i < [tArr count]; i ++) {
-                NSString *string = [dataSourceString substringWithRange:NSRangeFromString([tArr objectAtIndex:i])];
-                [totalArr addObject:[NSDictionary dictionaryWithObject:string forKey:NSStringFromRange(NSRangeFromString([tArr objectAtIndex:i]))]];
+            for (int i = 0; i < tArr.count ; i ++) {
+                NSString *string = [dataSourceString substringWithRange:NSRangeFromString(tArr[i])] ;
+                [totalArr addObject:[NSDictionary dictionaryWithObject:string forKey:NSStringFromRange(NSRangeFromString(tArr[i]))]] ;
             }
             
         }
@@ -125,10 +123,9 @@
         
         //**********号码******
         
-        NSMutableArray *mobileLink = [ILRegularExpressionManager matchMobileLink:dataSourceString];
+        NSMutableArray *mobileLink = [ILRegularExpressionManager matchMobileLink:dataSourceString] ;
         for (int i = 0; i < mobileLink.count; i ++) {
-            
-            [self.attributedDataWF addObject:[mobileLink objectAtIndex:i]];
+            [self.attributedDataWF addObject:mobileLink[i]] ;
         }
         
         //*************************
@@ -136,10 +133,9 @@
         
         //***********匹配网址*********
         
-        NSMutableArray *webLink = [ILRegularExpressionManager matchWebLink:dataSourceString];
+        NSMutableArray *webLink = [ILRegularExpressionManager matchWebLink:dataSourceString] ;
         for (int i = 0; i < webLink.count; i ++) {
-            
-            [self.attributedDataWF addObject:[webLink objectAtIndex:i]];
+            [self.attributedDataWF addObject:[webLink objectAtIndex:i]] ;
         }
         
         //******自行添加**********
@@ -147,50 +143,42 @@
         //        [self.attributedDataWF addObject:[NSDictionary dictionaryWithObject:string forKey:NSStringFromRange(NSMakeRange(0, 3))]];
         //**********************
     }
-    
-    
 }
 
 //说说高度
 - (float)calculateShuoshuoHeightWithWidth:(float)sizeWidth withUnFoldState:(BOOL)isUnfold {
     
-    isReplyView = NO;
+    isReplyView = NO ;
     
-    NSString *matchString =  _showShuoShuo;
+    NSString *matchString =  _showShuoShuo ;
     
-    NSArray *itemIndexs = [ILRegularExpressionManager itemIndexesWithPattern:EmotionItemPattern inString:matchString];
+    NSArray *itemIndexs = [ILRegularExpressionManager itemIndexesWithPattern:EmotionItemPattern inString:matchString] ;
     
     NSString *newString = [matchString replaceCharactersAtIndexes:itemIndexs
-                                                       withString:PlaceHolder];
+                                                       withString:PlaceHolder] ;
     //存新的
-    self.completionShuoshuo = newString;
+    self.completionShuoshuo = newString ;
     
-    [self matchString:newString fromView:isReplyView];
+    [self matchString:newString fromView:isReplyView] ;
     
-    WFTextView *_wfcoreText = [[WFTextView alloc] initWithFrame:CGRectMake(20,10, sizeWidth - 2*20, 0)];
+    WFTextView *_wfcoreText = [[WFTextView alloc] initWithFrame:CGRectMake(20,10, sizeWidth - 2*20, 0)] ;
     
-    _wfcoreText.isDraw = NO;
+    _wfcoreText.isDraw = NO ;
     
-    [_wfcoreText setOldString:_showShuoShuo andNewString:newString];
+    [_wfcoreText setOldString:_showShuoShuo andNewString:newString] ;
     
     if ([_wfcoreText getTextLines] <= limitline) {
-        self.islessLimit = YES;
+        self.islessLimit = YES ;
     }else{
-        self.islessLimit = NO;
+        self.islessLimit = NO ;
     }
     
     if (!isUnfold) {
-        
-        _wfcoreText.isFold = YES;
-        
+        _wfcoreText.isFold = YES ;
     }else{
-        
-        _wfcoreText.isFold = NO;
-        
-        
+        _wfcoreText.isFold = NO ;
     }
-    return [_wfcoreText getTextHeight];
-    
-    
+    return [_wfcoreText getTextHeight] ;
 }
+
 @end

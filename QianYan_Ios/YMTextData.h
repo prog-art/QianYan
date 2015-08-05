@@ -12,6 +12,8 @@
 
 @property (nonatomic,strong) NSMutableArray *replyDataSource;//回复内容数据源（未处理）
 @property (nonatomic,assign) float           replyHeight;//回复高度
+
+@property (nonatomic,strong) NSString       *showShuoShuo;//说说部分
 @property (nonatomic,assign) float           shuoshuoHeight;//折叠说说高度
 @property (nonatomic,assign) float           unFoldShuoHeight;//展开说说高度
 
@@ -25,7 +27,7 @@
 
 @property (nonatomic,strong) NSString *      name ;//名字
 @property (nonatomic,assign) BOOL            foldOrNot;//是否折叠
-@property (nonatomic,strong) NSString       *showShuoShuo;//说说部分
+
 @property (nonatomic,strong) NSString       *completionShuoshuo;//说说部分（处理后）
 @property (nonatomic,assign) BOOL            islessLimit;//是否小于最低限制 宏定义最低限制是 limitline
 /**
@@ -35,7 +37,7 @@
  *
  *  @return 返回高度
  */
-- (float) calculateReplyHeightWithWidth:(float)sizeWidth;
+- (float)calculateReplyHeightWithWidth:(float)sizeWidth;
 
 /**
  *  计算折叠还是展开的说说的高度
@@ -45,8 +47,6 @@
  *
  *  @return 高度
  */
-- (float) calculateShuoshuoHeightWithWidth:(float)sizeWidth withUnFoldState:(BOOL)isUnfold;
-
-
+- (float)calculateShuoshuoHeightWithWidth:(float)sizeWidth withUnFoldState:(BOOL)isUnfold;
 
 @end

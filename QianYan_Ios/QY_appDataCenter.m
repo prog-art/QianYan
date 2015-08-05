@@ -103,6 +103,16 @@
     return result ;
 }
 
++ (BOOL)deleteobject:(NSManagedObject *)object {
+    if ( !object ) return FALSE ;
+    
+    [[self managedObjectContext] deleteObject:object] ;
+    
+    [self saveObject:nil error:NULL] ;
+    
+    return TRUE ;    
+}
+
 #pragma mark - Core Data 查
 
 + (NSManagedObject *)findObjectWithClassName:(NSString *)className predicate:(NSPredicate *)predicate {

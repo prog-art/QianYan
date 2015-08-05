@@ -22,4 +22,7 @@
 
 - (void)addComment:(NSString *)content complection:(QYResultBlock)complection ;
 
+#warning 接口设计有误
+- (void)removeComment:(QY_comment *)comment user:(QY_user *)user complection:(QYResultBlock)complection ;
+
 @end

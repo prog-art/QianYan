@@ -29,4 +29,6 @@
 
 + (BOOL)deleteObjectsWithClassName:(NSString *)className predicate:(NSPredicate *)predicate ;
 
++ (BOOL)deleteobject:(NSManagedObject *)object ;
+
 @end
