@@ -214,29 +214,22 @@
     float backView_H = 0;
     
     for (int i = 0; i < ymData.replyDataSource.count; i ++ ) {  //评论部分
-        
-//        if (index != oldIndex) {
-//            
-//        }
-        
+
         WFTextView *_ilcoreText = [[WFTextView alloc] initWithFrame:CGRectMake(offSet_X,TableHeader + 10 + ShowImage_H + (ShowImage_H + 10)*(scale_Y/3) + origin_Y + hhhh + kDistance + (ymData.islessLimit?0:30) + balanceHeight + kReplyBtnDistance, 260, 0)];
         
         if (i == 0) {
             backView_Y = TableHeader + 10 + ShowImage_H + (ShowImage_H + 10)*(scale_Y/3) + origin_Y + hhhh + kDistance + (ymData.islessLimit?0:30);
         }
         
-        _ilcoreText.delegate = self;
-        
-        _ilcoreText.attributedData = [ymData.attributedData objectAtIndex:i];
+        _ilcoreText.delegate = self ;
+        _ilcoreText.attributedData = ymData.attributedData[i] ;
         
         
         [_ilcoreText setOldString:[ymData.replyDataSource objectAtIndex:i] andNewString:[ymData.completionReplySource objectAtIndex:i]];
         
         _ilcoreText.frame = CGRectMake(offSet_X,TableHeader + 10 + ShowImage_H + (ShowImage_H + 10)*(scale_Y/3) + origin_Y + hhhh + kDistance + (ymData.islessLimit?0:30) + balanceHeight + kReplyBtnDistance - 25, 260, [_ilcoreText getTextHeight]);
-        [self.contentView addSubview:_ilcoreText];
-        
-        
-        
+        _ilcoreText.tag = i ;
+        [self.contentView addSubview:_ilcoreText] ;
 //        UITextField *commentTextField = [[UITextField alloc] init];
 //        commentTextField.backgroundColor = [UIColor greenColor];
 //        
@@ -296,30 +289,29 @@
 //    NSLog(@"%f", _replyBtn.frame.origin.y);
 }
 
-#pragma mark - ilcoreTextDelegate
-- (void)clickMyself:(NSString *)clickString{
-    
-    //延迟调用下  可去掉 下同
+#pragma mark - WFCoretextDelegate
+
+- (void)textView:(WFTextView *)view didClickWFCoretext:(NSString *)clickedString {
+    NSInteger index = view.tag ;
+
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:clickString message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:clickedString message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
         [alert show];
-        
         
     });
     
-    
 }
 
-- (void)clickWFCoretext:(NSString *)clickString{
+- (void)textViewDidClickAllText:(WFTextView *)view {
+    NSInteger index = view.tag ;
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:clickString message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UI正在施工中，删除等待UI接口设计完善～～" message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
         [alert show];
-        
         
     });
     

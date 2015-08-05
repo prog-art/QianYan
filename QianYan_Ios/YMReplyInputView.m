@@ -14,35 +14,27 @@
 
 @implementation NSString (HXReplyInputView)
 
-- (CGSize) sizeForFont:(UIFont *)font
-{
-    if ([self respondsToSelector:@selector(sizeWithAttributes:)])
-    {
+- (CGSize)sizeForFont:(UIFont *)font {
+    if ([self respondsToSelector:@selector(sizeWithAttributes:)]) {
         NSDictionary* attribs = @{NSFontAttributeName:font};
         return ([self sizeWithAttributes:attribs]);
     }
     return ([self sizeWithFont:font]);
-   // return
 }
 
-- (CGSize) sizeForFont:(UIFont*)font
+- (CGSize)sizeForFont:(UIFont*)font
      constrainedToSize:(CGSize)constraint
-         lineBreakMode:(NSLineBreakMode)lineBreakMode
-{
+         lineBreakMode:(NSLineBreakMode)lineBreakMode {
     CGSize size;
-    if ([self respondsToSelector:@selector(sizeWithAttributes:)])
-    {
+    if ([self respondsToSelector:@selector(sizeWithAttributes:)]) {
         NSDictionary *attributes = @{NSFontAttributeName:font};
         
         CGSize boundingBox = [self boundingRectWithSize:constraint options: NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
         
         size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height));
-    }
-    else
-    {
+    } else {
         size = [self sizeWithFont:font constrainedToSize:constraint lineBreakMode:lineBreakMode];
     }
-    
     return size;
 }
 
@@ -58,11 +50,7 @@
 
 @synthesize keyboardHeight;
 
-
-
-
-- (void) composeView
-{
+- (void)composeView {
   
     keyboardAnimationDuration = 0.4f;
     self.keyboardHeight = 216;
@@ -122,8 +110,7 @@
     [self showCommentView];
  }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     
   //最上面的一条细线
@@ -145,32 +132,26 @@
     sendButton.frame = CGRectMake(screenWidth - 10 - 55,textView.frame.origin.y, 55, 27);
 }
 
-- (void) awakeFromNib
-{
+- (void) awakeFromNib {
     [self composeView];
 }
 
-- (void)willMoveToSuperview:(UIView *)newSuperview
-{
+- (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
     
-    if (newSuperview == nil)
-    {
+    if (newSuperview == nil) {
         [self listenForKeyboardNotifications:NO];
     }
-    else
-    {
+    else {
         [self listenForKeyboardNotifications:YES];
     }
 }
 
-- (void) adjustTextInputHeightForText:(NSString*)text animated:(BOOL)animated
-{
+- (void)adjustTextInputHeightForText:(NSString*)text animated:(BOOL)animated {
     int h1 = [text sizeForFont:textView.font].height;
     int h2 = [text sizeForFont:textView.font constrainedToSize:CGSizeMake(textView.frame.size.width - 16, 170.0f) lineBreakMode:NSLineBreakByWordWrapping].height;
 
-    [UIView animateWithDuration:(animated ? .1f : 0) animations:^
-     {
+    [UIView animateWithDuration:(animated ? .1f : 0) animations:^{
          int h = h2 == h1 ? inputHeightWithShadow : h2 + 24;
          if (h>78) {
              h =78;
@@ -188,12 +169,10 @@
      } completion:^(BOOL finished){ }];
 }
 
-- (id) initWithFrame:(CGRect)frame andAboveView:(UIView *)bgView
-{
+- (id)initWithFrame:(CGRect)frame andAboveView:(UIView *)bgView {
     self = [super initWithFrame:frame];
     
-    if (self)
-    {
+    if (self) {
         tapView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, screenHeight)];
         tapView.backgroundColor = [UIColor blackColor];
         tapView.userInteractionEnabled = YES;
@@ -210,13 +189,11 @@
     return self;
 }
 
-- (void) fitText
-{
+- (void)fitText {
     [self adjustTextInputHeightForText:textView.text animated:YES];
 }
 
-- (BOOL)resignFirstResponder
-{
+- (BOOL)resignFirstResponder {
     if (super.isFirstResponder)
         return [super resignFirstResponder];
     else if ([textView isFirstResponder])
@@ -230,24 +207,20 @@
     return textView.text;
 }
 
-- (void) setText:(NSString*)text
-{
+- (void) setText:(NSString*)text {
     textView.text = text;
     lblPlaceholder.hidden = text.length > 0;
     [self fitText];
 }
 
-- (void) setPlaceholder:(NSString*)text
-{
+- (void) setPlaceholder:(NSString*)text {
     lblPlaceholder.text = text;
 }
 
 #pragma mark - Display
 
-- (void)beganEditing
-{
-    if (_autoResizeOnKeyboardVisibilityChanged)
-    {
+- (void)beganEditing {
+    if (_autoResizeOnKeyboardVisibilityChanged) {
         UIViewAnimationOptions opt = animationOptionsWithCurve(keyboardAnimationCurve);
         
         [UIView animateWithDuration:keyboardAnimationDuration delay:0 options:opt animations:^
@@ -258,10 +231,8 @@
     }
 }
 
-- (void)endedEditing
-{
-    if (_autoResizeOnKeyboardVisibilityChanged)
-    {
+- (void)endedEditing {
+    if (_autoResizeOnKeyboardVisibilityChanged) {
         UIViewAnimationOptions opt = animationOptionsWithCurve(keyboardAnimationCurve);
         
         [UIView animateWithDuration:keyboardAnimationDuration delay:0 options:opt animations:^
@@ -277,18 +248,14 @@
 
 #pragma mark - Keyboard Notifications
 
-- (void)listenForKeyboardNotifications:(BOOL)listen
-{
-    if (listen)
-    {
+- (void)listenForKeyboardNotifications:(BOOL)listen {
+    if (listen) {
         [self listenForKeyboardNotifications:NO];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    }
-    else
-    {
+    } else {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
@@ -296,8 +263,7 @@
     }
 }
 
-- (void)updateKeyboardProperties:(NSNotification*)n
-{
+- (void)updateKeyboardProperties:(NSNotification*)n {
     NSNumber *d = [[n userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     if (d!=nil && [d isKindOfClass:[NSNumber class]])
         keyboardAnimationDuration = [d floatValue];
@@ -314,57 +280,46 @@
 
 }
 
-- (void)keyboardWillShow:(NSNotification*)n
-{
+- (void)keyboardWillShow:(NSNotification*)n {
     _autoResizeOnKeyboardVisibilityChanged = YES;
     [self updateKeyboardProperties:n];
 
 }
 
-- (void)keyboardWillHide:(NSNotification*)n
-{
+- (void)keyboardWillHide:(NSNotification*)n {
     [self updateKeyboardProperties:n];
 
 }
 
-- (void)keyboardDidHide:(NSNotification*)n
-{
+- (void)keyboardDidHide:(NSNotification*)n {
 
 }
 
-- (void)keyboardDidShow:(NSNotification*)n
-{
-    if ([textView isFirstResponder])
-    {
+- (void)keyboardDidShow:(NSNotification*)n {
+    if ([textView isFirstResponder]) {
         [self beganEditing];
     }
 
 }
 
-static inline UIViewAnimationOptions animationOptionsWithCurve(UIViewAnimationCurve curve)
-{
+static inline UIViewAnimationOptions animationOptionsWithCurve(UIViewAnimationCurve curve) {
     UIViewAnimationOptions opt = (UIViewAnimationOptions)curve;
     return opt << 16;
 }
 
 #pragma mark - UITextFieldDelegate Delegate
 
-- (void) textViewDidBeginEditing:(UITextView*)textview
-{
+- (void)textViewDidBeginEditing:(UITextView*)textview {
     [self beganEditing];
-   
-
 }
 
-- (void) textViewDidEndEditing:(UITextView*)textview
-{
+- (void)textViewDidEndEditing:(UITextView*)textview {
     [self endedEditing];
    
     _autoResizeOnKeyboardVisibilityChanged = NO;
 }
 
-- (BOOL) textView:(UITextView*)textview shouldChangeTextInRange:(NSRange)range replacementText:(NSString*)text
-{
+- (BOOL)textView:(UITextView*)textview shouldChangeTextInRange:(NSRange)range replacementText:(NSString*)text {
     if ([text isEqualToString:@"\n"])
     {
         [self performSelector:@selector(returnButtonPressed:) withObject:nil afterDelay:.1];
@@ -383,8 +338,7 @@ static inline UIViewAnimationOptions animationOptionsWithCurve(UIViewAnimationCu
     return YES;
 }
 
-- (void) textViewDidChange:(UITextView*)textview
-{
+- (void)textViewDidChange:(UITextView*)textview {
 
     lblPlaceholder.hidden = textview.text.length > 0;
     
@@ -399,8 +353,7 @@ static inline UIViewAnimationOptions animationOptionsWithCurve(UIViewAnimationCu
 
 #pragma mark THChatInput Delegate
 
-- (void) sendButtonPressed:(id)sender
-{
+- (void)sendButtonPressed:(id)sender {
    
     if ([textView.text isEqualToString:@""]) {
         
@@ -414,16 +367,11 @@ static inline UIViewAnimationOptions animationOptionsWithCurve(UIViewAnimationCu
 }
 
 
-
-
-
-- (void)returnButtonPressed:(id)sender
-{
+- (void)returnButtonPressed:(id)sender {
     [self sendButtonPressed:sender];
 }
 
-- (void)showCommentView
-{
+- (void)showCommentView {
     
     self.hidden = NO;
     tapView.hidden = NO;
@@ -436,8 +384,7 @@ static inline UIViewAnimationOptions animationOptionsWithCurve(UIViewAnimationCu
 
 }
 
-- (void)disappear
-{
+- (void)disappear {
     [self endedEditing];
     self.hidden = YES;
     tapView.hidden = YES;

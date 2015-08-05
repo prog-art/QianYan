@@ -22,8 +22,7 @@
 
 
 
-@implementation WFTextView
-{
+@implementation WFTextView {
     NSString *_oldString;
     NSString *_newString;
     
@@ -36,18 +35,15 @@
 //@synthesize cellHeight = _cellHeight;
 @synthesize isDraw = _isDraw;
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
+- (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        
         //[self setup];
     }
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         
@@ -62,16 +58,13 @@
     return self;
 }
 
-- (void)dealloc{
-    
+- (void)dealloc {
     if (typesetter != NULL) {
-        
         CFRelease(typesetter);
     }
-
 }
 
-- (void)setOldString:(NSString *)oldString andNewString:(NSString *)newString{
+- (void)setOldString:(NSString *)oldString andNewString:(NSString *)newString {
     
     _oldString = oldString;
     _newString = newString;
@@ -81,8 +74,7 @@
 
 
 #pragma mark - Cook the emotion string
-- (void)cookEmotionString
-{
+- (void)cookEmotionString {
     
     // 使用正则表达式查找特殊字符的位置
     NSArray *itemIndexes = [ILRegularExpressionManager itemIndexesWithPattern:
@@ -112,11 +104,9 @@
 #pragma mark - Utility for emotions relative operations 颜色
 // 根据调整后的字符串，生成绘图时使用的 attribute string
 - (NSAttributedString *)createAttributedEmotionStringWithRanges:(NSArray *)ranges
-                                                      forString:(NSString*)aString
-{
+                                                      forString:(NSString*)aString {
     
-    
-    
+        
     NSMutableAttributedString *attrString =
     [[NSMutableAttributedString alloc] initWithString:aString];
     helvetica = CTFontCreateWithName(CFSTR("Helvetica"),FontSize, NULL);
@@ -144,14 +134,12 @@
 }
 
 // 通过表情名获得表情的图片
-- (UIImage *)getEmotionForKey:(NSString *)key
-{
+- (UIImage *)getEmotionForKey:(NSString *)key {
     NSString *nameStr = [NSString stringWithFormat:@"%@.png",key];
     return [UIImage imageNamed:nameStr];
 }
 
-CTRunDelegateRef newEmotionRunDelegate()
-{
+CTRunDelegateRef newEmotionRunDelegate() {
     static NSString *emotionRunName = @"com.cocoabit.CBEmotionView.emotionRunName";
     
     CTRunDelegateCallbacks imageCallbacks;
@@ -167,30 +155,25 @@ CTRunDelegateRef newEmotionRunDelegate()
 }
 
 #pragma mark - Run delegate
-void WFRunDelegateDeallocCallback( void* refCon )
-{
+void WFRunDelegateDeallocCallback( void* refCon ) {
    // CFRelease(refCon);
 }
 
-CGFloat WFRunDelegateGetAscentCallback( void *refCon )
-{
+CGFloat WFRunDelegateGetAscentCallback( void *refCon ) {
     return FontHeight;
 }
 
-CGFloat WFRunDelegateGetDescentCallback(void *refCon)
-{
+CGFloat WFRunDelegateGetDescentCallback(void *refCon) {
     return 0.0;
 }
 
-CGFloat WFRunDelegateGetWidthCallback(void *refCon)
-{
+CGFloat WFRunDelegateGetWidthCallback(void *refCon) {
     // EmotionImageWidth + 2 * ImageLeftPadding
     return  19.0;
 }
 
 #pragma mark - Drawing
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
     // 没有内容时取消本次绘制
     if (!typesetter)   return;
     
@@ -240,16 +223,15 @@ CGFloat WFRunDelegateGetWidthCallback(void *refCon)
 
 // 翻转坐标系
 static inline
-void Flip_Context(CGContextRef context, CGFloat offset) // offset为字体的高度
-{
+void Flip_Context(CGContextRef context, CGFloat offset) {
+    // offset为字体的高度
     CGContextScaleCTM(context, 1, -1);
     CGContextTranslateCTM(context, 0, -offset);
 }
 
 // 生成每个表情的 frame 坐标
 static inline
-CGPoint Emoji_Origin_For_Line(CTLineRef line, CGPoint lineOrigin, CTRunRef run)
-{
+CGPoint Emoji_Origin_For_Line(CTLineRef line, CGPoint lineOrigin, CTRunRef run) {
     CGFloat x = lineOrigin.x + CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL) + ImageLeftPadding;
     CGFloat y = lineOrigin.y - ImageTopPadding;
     return CGPointMake(x, y);
@@ -257,8 +239,7 @@ CGPoint Emoji_Origin_For_Line(CTLineRef line, CGPoint lineOrigin, CTRunRef run)
 
 
 // 绘制每行中的表情
-void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint lineOrigin)
-{
+void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint lineOrigin) {
     CFArrayRef runs = CTLineGetGlyphRuns(line);
     
     // 统计有多少个run
@@ -283,7 +264,7 @@ void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint
 }
 
 
-- (float)getTextHeight{
+- (float)getTextHeight {
     
     CGFloat w = CGRectGetWidth(self.frame);
     CGFloat y = 0;
@@ -311,7 +292,7 @@ void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint
 
 
 
-- (int)getTextLines{
+- (int)getTextLines {
     
     int textlines = 0;
     CGFloat w = CGRectGetWidth(self.frame);
@@ -338,7 +319,7 @@ void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint
 
 
 #pragma mark -点击自己
-- (void)tapMyself:(UITapGestureRecognizer *)gesture{
+- (void)tapMyself:(UITapGestureRecognizer *)gesture {
     
     CGPoint point = [gesture locationInView:self];
     
@@ -393,7 +374,7 @@ void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint
     
 }
 
-- (BOOL)judgeIndexInSelectedRange:(CFIndex) index withWorkLine:(CTLineRef)workctLine{
+- (BOOL)judgeIndexInSelectedRange:(CFIndex) index withWorkLine:(CTLineRef)workctLine {
     
     for (int i = 0; i < _attributedData.count; i ++) {
         
@@ -414,7 +395,7 @@ void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint
             [self drawViewFromRects:arr withDictValue:[[_attributedData objectAtIndex:i] valueForKey:key]];
             
             NSString *feedString = [[_attributedData objectAtIndex:i] valueForKey:key];
-            [_delegate clickWFCoretext:feedString];
+            [_delegate textView:self didClickWFCoretext:feedString] ;
             return YES;
         }
         
@@ -422,11 +403,10 @@ void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint
     }
     
     return NO;
-    
-    
+        
 }
 
-- (NSMutableArray *)getSelectedCGRectWithClickRange:(NSRange)tempRange{
+- (NSMutableArray *)getSelectedCGRectWithClickRange:(NSRange)tempRange {
     
     NSMutableArray *clickRects = [[NSMutableArray alloc] init];
     CGFloat w = CGRectGetWidth(self.frame);
@@ -465,8 +445,7 @@ void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint
 }
 
 //超出1行 处理
-- (NSRange)rangeIntersection:(NSRange)first withSecond:(NSRange)second
-{
+- (NSRange)rangeIntersection:(NSRange)first withSecond:(NSRange)second {
     NSRange result = NSMakeRange(NSNotFound, 0);
     if (first.location > second.location)
     {
@@ -484,8 +463,7 @@ void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint
 }
 
 
-- (void)drawViewFromRects:(NSArray *)array withDictValue:(NSString *)value
-{
+- (void)drawViewFromRects:(NSArray *)array withDictValue:(NSString *)value {
     //用户名可能超过1行的内容 所以记录在数组里，有多少元素 就有多少view
     // selectedViewLinesF = array.count;
     
@@ -503,13 +481,14 @@ void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint
 }
 
 
-- (void)clickAllContext{
+- (void)clickAllContext {
     
     UIView *myselfSelected = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height + 2)];
     myselfSelected.tag = 10101;
     [self insertSubview:myselfSelected belowSubview:self];
     myselfSelected.backgroundColor = kSelf_SelectedColor;
-    [_delegate clickWFCoretext:@""];
+    
+    [_delegate textViewDidClickAllText:self] ;
     
     __weak typeof(self) weakSelf = self;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));

@@ -12,11 +12,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol WFCoretextDelegate <NSObject>
-
-- (void)clickWFCoretext:(NSString *)clickString;
-
-@end
+@protocol WFCoretextDelegate ;
 
 @interface WFTextView : UIView
 
@@ -35,5 +31,15 @@
 - (int)getTextLines;
 
 - (float)getTextHeight;
+
+@end
+
+@protocol WFCoretextDelegate <NSObject>
+
+- (void)clickWFCoretext:(NSString *)clickString;
+
+- (void)textView:(WFTextView *)view didClickWFCoretext:(NSString *)clickedString ;
+
+- (void)textViewDidClickAllText:(WFTextView *)view ;
 
 @end
