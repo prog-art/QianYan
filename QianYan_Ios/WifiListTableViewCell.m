@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *subTitleLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *wifiImageView;
+
 @end
 
 @implementation WifiListTableViewCell
@@ -32,6 +34,14 @@
 
 - (NSString *)subTitle {
     return _subTitleLabel.text;
+}
+
+- (void)setWifiImage:(UIImage *)wifiImage {
+    _wifiImageView.image = wifiImage;
+}
+
+- (UIImage *)wifiImage {
+    return _wifiImageView.image;
 }
 
 - (void)awakeFromNib {

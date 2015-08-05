@@ -65,6 +65,9 @@
 @property (nonatomic, strong) UITableViewController *WifiListViewController;
 @property (nonatomic, strong) UITableViewController *SearchFriendTableViewController;
 @property (nonatomic, strong) UIViewController *QRCodeDetailViewController;
+@property (nonatomic, strong) UIViewController *SetRemarkNameViewController;
+@property (nonatomic, strong) UITableViewController *CameraAllocationTableViewController;
+@property (nonatomic, strong) UIViewController *InfoSettingViewController;
 
 
 - (void)toggleLeftDrawer:(id)sender animated:(BOOL)animated;

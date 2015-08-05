@@ -14,4 +14,6 @@
 
 @property (strong) NSString *subTitle;
 
+@property (strong) UIImage *wifiImage;
+
 @end

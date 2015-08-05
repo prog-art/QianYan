@@ -34,6 +34,9 @@
 #define WifiListViewControllerStoryBoardID @"WifiListViewControllerStoryBoardID"
 #define SearchFriendTableViewControllerStoryBoardID @"SearchFriendTableViewControllerStoryBoardID"
 #define QRCodeDetailViewControllerStoryBoardID @"QRCodeDetailViewControllerStoryBoardID"
+#define SetRemarkNameViewControllerStoryBoardID @"SetRemarkNameViewControllerStoryBoardID"
+#define CameraAllocationTableViewControllerStoryBoardID @"CameraAllocationTableViewControllerStoryBoardID"
+#define InfoSettingViewControllerStoryBoardID @"InfoSettingViewControllerStoryBoardID"
 
 
 //static NSString * const kJVDrawersStoryboardName = @"Drawers";
@@ -418,6 +421,24 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
 
 - (UIViewController *)QRCodeDetailViewController {
     return [self.drawersStoryboard instantiateViewControllerWithIdentifier:QRCodeDetailViewControllerStoryBoardID] ;
+}
+
+#pragma mark -- Set Remark Name View Controller
+
+- (UIViewController *)SetRemarkNameViewController {
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:SetRemarkNameViewControllerStoryBoardID] ;
+}
+
+#pragma mark -- Camera Allocation Table View Controller
+
+- (UITableViewController *)CameraAllocationTableViewController {
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:CameraAllocationTableViewControllerStoryBoardID] ;
+}
+
+#pragma mark -- Info Setting View Controller
+
+- (UIViewController *)InfoSettingViewController {
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:InfoSettingViewControllerStoryBoardID] ;
 }
 
 #pragma mark - Global Access Helper

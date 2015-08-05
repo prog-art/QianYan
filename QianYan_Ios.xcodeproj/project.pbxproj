@@ -72,6 +72,10 @@
 		19A140171B5117F100A7746C /* QY_UserReloginDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A140161B5117F100A7746C /* QY_UserReloginDescriptor.m */; };
 		19A6953B1AFB44C500F60D03 /* QYNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A6953A1AFB44C500F60D03 /* QYNotify.m */; };
 		19B1884A1B71112300F12EFB /* QY_Notify.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B188491B71112300F12EFB /* QY_Notify.m */; };
+		19C3DE681B71CD36006253E5 /* SetRemarkNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3DE671B71CD36006253E5 /* SetRemarkNameViewController.m */; };
+		19C3DE6E1B71CE41006253E5 /* CameraAllocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3DE6B1B71CE41006253E5 /* CameraAllocationTableViewCell.m */; };
+		19C3DE6F1B71CE41006253E5 /* CameraAllocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3DE6D1B71CE41006253E5 /* CameraAllocationTableViewController.m */; };
+		19C3DE731B71CFC0006253E5 /* InfoSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3DE721B71CFC0006253E5 /* InfoSettingViewController.m */; };
 		19C4E1321B6FB67C0003C67A /* SearchFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E12F1B6FB67C0003C67A /* SearchFriendTableViewCell.m */; };
 		19C4E1331B6FB67C0003C67A /* SearchFriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E1311B6FB67C0003C67A /* SearchFriendTableViewController.m */; };
 		19C4E1371B6FB93E0003C67A /* QRCodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E1361B6FB93E0003C67A /* QRCodeDetailViewController.m */; };
@@ -332,6 +336,14 @@
 		19A6953A1AFB44C500F60D03 /* QYNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYNotify.m; sourceTree = "<group>"; };
 		19B188481B71112300F12EFB /* QY_Notify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_Notify.h; sourceTree = "<group>"; };
 		19B188491B71112300F12EFB /* QY_Notify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_Notify.m; sourceTree = "<group>"; };
+		19C3DE661B71CD36006253E5 /* SetRemarkNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetRemarkNameViewController.h; sourceTree = "<group>"; };
+		19C3DE671B71CD36006253E5 /* SetRemarkNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetRemarkNameViewController.m; sourceTree = "<group>"; };
+		19C3DE6A1B71CE41006253E5 /* CameraAllocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraAllocationTableViewCell.h; sourceTree = "<group>"; };
+		19C3DE6B1B71CE41006253E5 /* CameraAllocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraAllocationTableViewCell.m; sourceTree = "<group>"; };
+		19C3DE6C1B71CE41006253E5 /* CameraAllocationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraAllocationTableViewController.h; sourceTree = "<group>"; };
+		19C3DE6D1B71CE41006253E5 /* CameraAllocationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraAllocationTableViewController.m; sourceTree = "<group>"; };
+		19C3DE711B71CFC0006253E5 /* InfoSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoSettingViewController.h; sourceTree = "<group>"; };
+		19C3DE721B71CFC0006253E5 /* InfoSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoSettingViewController.m; sourceTree = "<group>"; };
 		19C4E12E1B6FB67C0003C67A /* SearchFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendTableViewCell.h; sourceTree = "<group>"; };
 		19C4E12F1B6FB67C0003C67A /* SearchFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendTableViewCell.m; sourceTree = "<group>"; };
 		19C4E1301B6FB67C0003C67A /* SearchFriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendTableViewController.h; sourceTree = "<group>"; };
@@ -1284,6 +1296,35 @@
 			name = "通知中心";
 			sourceTree = "<group>";
 		};
+		19C3DE651B71CD16006253E5 /* 设置备注名 */ = {
+			isa = PBXGroup;
+			children = (
+				19C3DE661B71CD36006253E5 /* SetRemarkNameViewController.h */,
+				19C3DE671B71CD36006253E5 /* SetRemarkNameViewController.m */,
+			);
+			name = "设置备注名";
+			sourceTree = "<group>";
+		};
+		19C3DE691B71CE33006253E5 /* 相机分配 */ = {
+			isa = PBXGroup;
+			children = (
+				19C3DE6A1B71CE41006253E5 /* CameraAllocationTableViewCell.h */,
+				19C3DE6B1B71CE41006253E5 /* CameraAllocationTableViewCell.m */,
+				19C3DE6C1B71CE41006253E5 /* CameraAllocationTableViewController.h */,
+				19C3DE6D1B71CE41006253E5 /* CameraAllocationTableViewController.m */,
+			);
+			name = "相机分配";
+			sourceTree = "<group>";
+		};
+		19C3DE701B71CF82006253E5 /* 资料设置 */ = {
+			isa = PBXGroup;
+			children = (
+				19C3DE711B71CFC0006253E5 /* InfoSettingViewController.h */,
+				19C3DE721B71CFC0006253E5 /* InfoSettingViewController.m */,
+			);
+			name = "资料设置";
+			sourceTree = "<group>";
+		};
 		19C4E12D1B6FB66B0003C67A /* 好友搜索 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1488,6 +1529,8 @@
 		6E1A9B811B50A1DB0046B8AB /* tab-社交 */ = {
 			isa = PBXGroup;
 			children = (
+				19C3DE701B71CF82006253E5 /* 资料设置 */,
+				19C3DE651B71CD16006253E5 /* 设置备注名 */,
 				6E1EC9C91B510269003E346F /* 添加 */,
 				196900ED1B6E6E5A0059E737 /* 文字分享 */,
 				6E1A9B9A1B50A4BE0046B8AB /* Manager */,
@@ -1985,6 +2028,7 @@
 		6EFEFE371B0CC11E001E425B /* tab-摄像机 */ = {
 			isa = PBXGroup;
 			children = (
+				19C3DE691B71CE33006253E5 /* 相机分配 */,
 				6E4BB92C1B51527500070F6F /* view */,
 				6E4BB9231B5140C800070F6F /* RacentTableViewCell.h */,
 				6E4BB9241B5140C800070F6F /* RacentTableViewCell.m */,
@@ -2197,10 +2241,12 @@
 				6E67BBE21B0F81B00066C9CE /* ContactTableViewCell.m in Sources */,
 				6E2761BF1B08C03200247CCC /* LoginViewController.m in Sources */,
 				6E4BB92B1B51441600070F6F /* CameraSubTableViewCell.m in Sources */,
+				19C3DE6F1B71CE41006253E5 /* CameraAllocationTableViewController.m in Sources */,
 				6E18D1001B281C2800802C49 /* PasswordManageViewController.m in Sources */,
 				196456B11B0617F800EA4E14 /* QY_ChineseStringUtils.m in Sources */,
 				1938CCB81B24BC2B009C4AE5 /* JRMDataParseUtils.m in Sources */,
 				1938CCBB1B24BCEA009C4AE5 /* JRMDataFormatUtils.m in Sources */,
+				19C3DE6E1B71CE41006253E5 /* CameraAllocationTableViewCell.m in Sources */,
 				6E62A0FA1B441E320001E3A2 /* GroupManageViewController.m in Sources */,
 				6E75AC9F1B281E8300A0C919 /* GroupTableViewCell.m in Sources */,
 				196900E31B6E658F0059E737 /* ManageNicknameViewController.m in Sources */,
@@ -2231,6 +2277,7 @@
 				198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */,
 				6EE8E6681B11F768007C54E0 /* SettingsViewController.m in Sources */,
 				6E75ACA51B28268400A0C919 /* AddContactViewController.m in Sources */,
+				19C3DE681B71CD36006253E5 /* SetRemarkNameViewController.m in Sources */,
 				196456AB1B0617A700EA4E14 /* pinyin.c in Sources */,
 				1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */,
 				6E32DA071B51672A002A6301 /* KxMovieGLView.m in Sources */,
@@ -2313,6 +2360,7 @@
 				6E1EC9BD1B50F69B003E346F /* SystemSettingsTableViewController.m in Sources */,
 				195C15E11B3B044300A316FE /* QY_JRMAPIDescriptor.m in Sources */,
 				6E75AC9E1B281E8300A0C919 /* UMTableViewCell.m in Sources */,
+				19C3DE731B71CFC0006253E5 /* InfoSettingViewController.m in Sources */,
 				6EE8E65E1B11F737007C54E0 /* ButtonTableViewCell.m in Sources */,
 				6E1A9B941B50A4410046B8AB /* YMShowImageView.m in Sources */,
 				1908F1A21B64CB7000E8E81C /* QianYan_Ios.xcdatamodeld in Sources */,
