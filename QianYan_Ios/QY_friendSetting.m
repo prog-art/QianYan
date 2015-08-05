@@ -135,7 +135,7 @@
 }
 
 - (NSString *)displayName {
-    return self.remarkName ? : self.toFriend.nickname ;
+    return self.remarkName ? : self.toFriend.displayName ;
 }
 
 @end

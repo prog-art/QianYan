@@ -25,8 +25,6 @@
 
 #pragma mark - 本地数据库交互
 
-//+ (QY_friendSetting *)setting ;
-
 + (QY_friendSetting *)settingFromOwner:(QY_user *)owner toFriend:(QY_user *)toFriend ;
 
 #pragma mark - 远端数据库交互 

@@ -12,6 +12,7 @@
 #import "QY_Block_Define.h"
 
 @class UIImageView ;
+@class UIImage ;
 
 @class QY_camera, QY_cameraGroup, QY_cameraSetting, QY_feed, QY_friendGroup, QY_friendSetting;
 
@@ -83,6 +84,8 @@
 
 - (void)displayAvatarAtImageView:(UIImageView *)avatarIamgeView ;
 
+- (void)saveAvatar:(UIImage *)avatar complection:(QYResultBlock)complection ;
+
 #pragma mark - getter && setter
 
 - (NSString *)jpro ;
@@ -92,6 +95,8 @@
 - (NSSet *)friends ;
 
 - (NSArray *)visualableFeedItems ;
+
+- (NSString *)displayName ;
 
 @end
 

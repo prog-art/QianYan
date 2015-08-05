@@ -31,7 +31,7 @@
 @property (nonatomic,strong) YMButton *replyBtn;
 
 @property (nonatomic,strong) UILabel *nameLabel ;
-
+@property (nonatomic,strong) UIImageView *avatarImageView ;
 
 
 - (void)setYMViewWith:(YMTextData *)ymData;

@@ -10,8 +10,6 @@
 
 @interface SystemSettingsImageTableViewCell ()
 
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
-
 @property (strong, nonatomic) IBOutlet UILabel *label;
 
 @end

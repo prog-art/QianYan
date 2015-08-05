@@ -12,6 +12,78 @@
 
 @implementation QY_FileService
 
+#pragma mark - operation
+
++ (BOOL)saveAvatar:(UIImage *)avatar forUserId:(NSString *)userId {
+    BOOL result = FALSE ;
+    if ( !avatar || !userId ) return result ;
+    
+    NSString *path = [self getAvatarPathByUserId:userId] ;
+    
+    NSData *avatarData = UIImageJPEGRepresentation(avatar, 1.0f) ;
+    if ( !avatarData ) {
+        avatarData = UIImagePNGRepresentation(avatar) ;
+    }
+    
+    result = [self saveFileAtPath:path Data:avatarData] ;
+    
+    return result ;
+}
+
++ (UIImage *)getAvatarByUserId:(NSString *)userId {
+    assert(userId) ;
+    return [self getImageDataAtPath:[self getAvatarPathByUserId:userId]] ;
+}
+
++ (NSString *)getAvatarPathByUserId:(NSString *)userId {
+    assert(userId) ;
+    NSString *avatarDirPath = [self getAvatarPath] ;
+    if ( !avatarDirPath ) return nil ;
+    return [[self getAvatarPath] stringByAppendingPathComponent:userId] ;
+}
+
++ (NSString *)getAvatarPath {
+    NSString *avatarPath = [[self getDocPath] stringByAppendingPathComponent:@"avatar"] ;
+    if ( [self validateFolderForAvatar:avatarPath] ) return avatarPath ;
+    return nil ;
+}
+
+/**
+ *  检查头像文件夹是否存在，不存在就建一个。
+ */
++ (BOOL)validateFolderForAvatar:(NSString *)avatarPath {
+    assert(avatarPath) ;
+    static BOOL result = FALSE ;
+    
+    if ( result ) return TRUE ;
+    
+    NSFileManager *manager = [self fileManager] ;
+    BOOL isDir = YES ;
+    if ( [manager fileExistsAtPath:avatarPath isDirectory:&isDir] == TRUE ) {
+        result = YES ;
+        return result ;
+    }
+    
+    NSError *error ;
+    
+    [manager createDirectoryAtPath:avatarPath
+       withIntermediateDirectories:YES
+                        attributes:nil
+                             error:&error] ;
+    
+    if ( error ) {
+        result = FALSE ;
+        QYDebugLog(@"创建文件夹失败 error = %@",error) ;
+    } else {
+        result = TRUE ;
+    }
+
+    return result ;
+}
+
+
+#pragma mark - Old
+
 /**
  *  创建用户的专属文件夹
  *

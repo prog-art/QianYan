@@ -76,6 +76,7 @@
 		19C3DE6E1B71CE41006253E5 /* CameraAllocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3DE6B1B71CE41006253E5 /* CameraAllocationTableViewCell.m */; };
 		19C3DE6F1B71CE41006253E5 /* CameraAllocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3DE6D1B71CE41006253E5 /* CameraAllocationTableViewController.m */; };
 		19C3DE731B71CFC0006253E5 /* InfoSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3DE721B71CFC0006253E5 /* InfoSettingViewController.m */; };
+		19C3DE771B725624006253E5 /* QY_CacheService.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3DE761B725624006253E5 /* QY_CacheService.m */; };
 		19C4E1321B6FB67C0003C67A /* SearchFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E12F1B6FB67C0003C67A /* SearchFriendTableViewCell.m */; };
 		19C4E1331B6FB67C0003C67A /* SearchFriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E1311B6FB67C0003C67A /* SearchFriendTableViewController.m */; };
 		19C4E1371B6FB93E0003C67A /* QRCodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E1361B6FB93E0003C67A /* QRCodeDetailViewController.m */; };
@@ -344,6 +345,8 @@
 		19C3DE6D1B71CE41006253E5 /* CameraAllocationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraAllocationTableViewController.m; sourceTree = "<group>"; };
 		19C3DE711B71CFC0006253E5 /* InfoSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoSettingViewController.h; sourceTree = "<group>"; };
 		19C3DE721B71CFC0006253E5 /* InfoSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoSettingViewController.m; sourceTree = "<group>"; };
+		19C3DE751B725624006253E5 /* QY_CacheService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_CacheService.h; sourceTree = "<group>"; };
+		19C3DE761B725624006253E5 /* QY_CacheService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_CacheService.m; sourceTree = "<group>"; };
 		19C4E12E1B6FB67C0003C67A /* SearchFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendTableViewCell.h; sourceTree = "<group>"; };
 		19C4E12F1B6FB67C0003C67A /* SearchFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendTableViewCell.m; sourceTree = "<group>"; };
 		19C4E1301B6FB67C0003C67A /* SearchFriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendTableViewController.h; sourceTree = "<group>"; };
@@ -1227,6 +1230,7 @@
 		19909B431AEE985700CCB721 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				19C3DE741B7255F8006253E5 /* 缓存 */,
 				19B188471B71110400F12EFB /* 通知中心 */,
 				19602FD01B6509250064BC87 /* 数据中心 */,
 				193545081B486F2B00ACE915 /* 网络 */,
@@ -1323,6 +1327,15 @@
 				19C3DE721B71CFC0006253E5 /* InfoSettingViewController.m */,
 			);
 			name = "资料设置";
+			sourceTree = "<group>";
+		};
+		19C3DE741B7255F8006253E5 /* 缓存 */ = {
+			isa = PBXGroup;
+			children = (
+				19C3DE751B725624006253E5 /* QY_CacheService.h */,
+				19C3DE761B725624006253E5 /* QY_CacheService.m */,
+			);
+			name = "缓存";
 			sourceTree = "<group>";
 		};
 		19C4E12D1B6FB66B0003C67A /* 好友搜索 */ = {
@@ -2281,6 +2294,7 @@
 				196456AB1B0617A700EA4E14 /* pinyin.c in Sources */,
 				1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */,
 				6E32DA071B51672A002A6301 /* KxMovieGLView.m in Sources */,
+				19C3DE771B725624006253E5 /* QY_CacheService.m in Sources */,
 				6E32DA041B51672A002A6301 /* KxAudioManager.m in Sources */,
 				19602FB11B64F8080064BC87 /* QY_friendGroup.m in Sources */,
 				6EE8E6601B11F737007C54E0 /* OnlyButtonTableViewCell.m in Sources */,

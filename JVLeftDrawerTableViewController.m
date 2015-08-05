@@ -20,51 +20,88 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVLeftDrawerCellReuseId
 
 @interface JVLeftDrawerTableViewController ()
 
+@property (strong,nonatomic) UIImageView *avatarImageView ;
+@property (strong,nonatomic) UILabel *nameLabel ;
+
 @end
 
 @implementation JVLeftDrawerTableViewController
+
+#pragma mark - getter && setter 
+
+- (UIImageView *)avatarImageView {
+    if ( !_avatarImageView ) {
+        _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(36, -40, 60, 60)] ;
+        _avatarImageView.userInteractionEnabled = YES ;
+        UITapGestureRecognizer *singleTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(potraitBtnClicked:)] ;
+        [_avatarImageView addGestureRecognizer:singleTap1] ;
+    }
+    return _avatarImageView ;
+}
+
+- (UILabel *)nameLabel {
+    if ( !_nameLabel ) {
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(98, -36, 80, 25)] ;
+        _nameLabel.font = [UIFont systemFontOfSize:15.0f] ;
+        _nameLabel.text = @"" ;
+    }
+    return _nameLabel ;
+}
+
+#pragma mark -
+
+- (void)setUpUIControls {
+    //头像
+    [self.view addSubview:self.avatarImageView] ;
+    
+    //昵称
+    [self.view addSubview:self.nameLabel] ;
+    
+    //会员图片
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(110, -10, 85, 24)];
+    imageView.image = [UIImage imageNamed:@"会员.png"];
+    [self.view addSubview:imageView];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.contentInset = UIEdgeInsetsMake(kJVTableViewTopInset, 0.0, 0.0, 0.0);
-    self.clearsSelectionOnViewWillAppear = NO;
+    self.clearsSelectionOnViewWillAppear = NO ;
     
-    //头像按钮
-    UIButton *potraitBtn = [[UIButton alloc] initWithFrame:CGRectMake(36, -40, 60, 60)];
-    [potraitBtn setImage:[UIImage imageNamed:@"头像.png"] forState:UIControlStateNormal];
+    [self setUpUIControls] ;
     
-    [potraitBtn addTarget:self action:@selector(potraitBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [[QY_Notify shareInstance] addAvatarObserver:self selector:@selector(reloadAvatar)] ;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated] ;
     
-    //昵称按钮
-    UIButton *nicknameBtn = [[UIButton alloc] initWithFrame:CGRectMake(98, -36, 80, 25)];
-    nicknameBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
-    [nicknameBtn setTitle:@"大静静" forState:UIControlStateNormal];
-    [nicknameBtn addTarget:self action:@selector(nicknameBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    //会员图片
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(110, -10, 85, 24)];
-    imageView.image = [UIImage imageNamed:@"会员.png"];
-    
-    [self.view addSubview:potraitBtn];
-    [[QYUser currentUser].coreUser displayCycleAvatarAtImageView:potraitBtn.imageView] ;
-    [self.view addSubview:nicknameBtn];
-    [self.view addSubview:imageView];
+    [[QYUser currentUser].coreUser displayCycleAvatarAtImageView:self.avatarImageView] ;
+    self.nameLabel.text = [[QYUser currentUser].coreUser displayName] ;
+}
+
+- (void)reloadAvatar {
+    [[QYUser currentUser].coreUser displayCycleAvatarAtImageView:self.avatarImageView] ;
+}
+
+- (void)dealloc {
+    [[QY_Notify shareInstance] removeAvatarObserver:self] ;
 }
 
 #pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 1 ;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return 7 ;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 48;
+    return 48 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -141,10 +178,6 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVLeftDrawerCellReuseId
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO] ;
-}
-
-- (void)nicknameBtnClicked:(UIButton *)sender{
-
 }
 
 - (void)potraitBtnClicked:(UIButton *)sender{

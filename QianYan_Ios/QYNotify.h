@@ -10,7 +10,10 @@
 
 #define QY_NOTIFICATION_JDAS_GET_IPandPORT @"QY_NOTIFICATION_JDAS_GET_IPandPORT"
 
+#warning 注意重构QY_Notify..
 @interface QYNotify : NSObject
+
+
 
 +(instancetype)shareInstance ;
 

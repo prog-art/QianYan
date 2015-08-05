@@ -11,6 +11,14 @@
 
 @interface QY_FileService : NSObject
 
+#pragma mark - operation 
+
++ (BOOL)saveAvatar:(UIImage *)avatar forUserId:(NSString *)userId ;
+
++ (UIImage *)getAvatarByUserId:(NSString *)userId ;
+
+#pragma mark - old
+
 /**
  *  检查是否存在用户专用文件夹，不存在就创建用户的专属文件夹。
  *  Usage : 1.用户注册成功时使用

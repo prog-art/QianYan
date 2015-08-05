@@ -13,6 +13,8 @@
 #import "AccountInfoViewController.h"
 #import "AppDelegate.h"
 
+#import "QY_Common.h"
+
 @interface SystemSettingsTableViewController ()
 
 @end
@@ -22,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] init];
+    
+    [[QY_Notify shareInstance] addAvatarObserver:self selector:@selector(reloadAvatar)] ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -32,6 +36,15 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.tabBarController.tabBar setHidden:NO];
+}
+
+- (void)reloadAvatar {
+#warning 能改成upload单个吗？
+    [self.tableView reloadData] ;
+}
+
+- (void)dealloc {
+    [[QY_Notify shareInstance] removeAvatarObserver:self] ;
 }
 
 #pragma mark - Table view data source
@@ -70,7 +83,8 @@
     SystemSettingsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     if (indexPath.section == 0) {
-        imageCell.image = [UIImage imageNamed:@"portrait"];
+//        imageCell.image = [UIImage imageNamed:@"portrait"];
+        [[QYUser currentUser].coreUser displayAvatarAtImageView:imageCell.imageView] ;
         return imageCell;
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {

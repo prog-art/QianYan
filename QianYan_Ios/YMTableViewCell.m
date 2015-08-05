@@ -24,21 +24,31 @@
 
 @implementation YMTableViewCell
 
+#pragma mark - getter && setter
+
+- (UIImageView *)avatarImageView {
+    if ( !_avatarImageView ) {
+        _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(8, 3, 36, 36)] ;
+        _avatarImageView.backgroundColor = [UIColor clearColor] ;
+        _avatarImageView.image = [UIImage imageNamed:@"mao.jpg"] ;
+        CALayer *layer = [_avatarImageView layer] ;
+        [layer setMasksToBounds:YES] ;
+        [layer setCornerRadius:18.0] ;
+        [layer setBorderWidth:0.5] ;
+        [layer setBorderColor:[[UIColor colorWithRed:63/255.0 green:107/255.0 blue:252/255.0 alpha:1.0] CGColor]] ;
+    }
+    return _avatarImageView ;
+}
+
+#pragma mark -
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier] ;
     if (self) {
         // Initialization code
         self.selectionStyle = UITableViewCellSelectionStyleNone ;
         self.backgroundColor = [UIColor clearColor] ;
-        UIImageView *headerImage = [[UIImageView alloc] initWithFrame:CGRectMake(8, 3, 36, 36)] ;
-        headerImage.backgroundColor = [UIColor clearColor] ;
-        headerImage.image = [UIImage imageNamed:@"mao.jpg"] ;
-        CALayer *layer = [headerImage layer] ;
-        [layer setMasksToBounds:YES] ;
-        [layer setCornerRadius:18.0] ;
-        [layer setBorderWidth:0.5] ;
-        [layer setBorderColor:[[UIColor colorWithRed:63/255.0 green:107/255.0 blue:252/255.0 alpha:1.0] CGColor]] ;
-        [self.contentView addSubview:headerImage] ;
+        [self.contentView addSubview:self.avatarImageView] ;
         
         //nameLabel
         self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(48, 5, screenWidth - 120, TableHeader/2)] ;

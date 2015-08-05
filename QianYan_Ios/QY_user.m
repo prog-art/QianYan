@@ -21,6 +21,7 @@
 #import "QY_Socket.h"
 #import <UIKit/UIKit.h>
 #import <UIImageView+AFNetworking.h>
+#import "QY_Notify.h"
 
 @implementation QY_user
 
@@ -382,16 +383,47 @@
     
     NSString *path = [QY_JPROUrlFactor pathForUserAvatar:self.userId] ;
 
-#warning 缓存！！
-    [[QY_JPROHttpService shareInstance] downloadImageFromPath:path complection:^(UIImage *image, NSError *error) {
-        if ( image ) {
-            [QYUtils runInMainQueue:^{
-                [avatarIamgeView setImage:image] ;
-            }] ;
+    UIImage *cachedImage = [[QY_CacheService shareInstance] getAvatarByUserId:self.userId] ;
+    if ( !cachedImage ) {
+        [[QY_JPROHttpService shareInstance] downloadImageFromPath:path complection:^(UIImage *image, NSError *error) {
+            if ( image ) {
+                [[QY_CacheService shareInstance] cacheAvatar:image forUserId:self.userId] ;
+                [QYUtils runInMainQueue:^{
+                    [avatarIamgeView setImage:image] ;
+                }] ;
+            } else {
+                QYDebugLog(@"无头像或获取头像失败") ;
+            }
+        }] ;
+    } else {
+        [QYUtils runInMainQueue:^{
+            [avatarIamgeView setImage:cachedImage] ;
+        }] ;
+    }
+}
+
+- (void)saveAvatar:(UIImage *)avatar complection:(QYResultBlock)complection {
+    if ( !avatar ) return ;
+    complection = ^(BOOL result,NSError *error) {
+        if ( complection ) {
+            complection(result,error) ;
+        }
+    } ;
+    
+    NSData *imageData = UIImageJPEGRepresentation(avatar, 1.0) ? : UIImagePNGRepresentation(avatar) ;
+    
+    NSString *path = [QY_JPROUrlFactor pathForUserAvatar:self.userId] ;
+    
+    [[QY_JPROHttpService shareInstance] uploadFileToPath:path FileData:imageData fileName:@"headpicture.jpg" mimeType:MIMETYPE Complection:^(BOOL success, NSError *error) {
+        if ( success ) {
+            [[QY_CacheService shareInstance] cacheAvatar:avatar forUserId:self.userId] ;
+            [[QY_Notify shareInstance] postAvatarNotify] ;
+            complection(true,nil) ;
         } else {
-            QYDebugLog(@"无头像或获取头像失败") ;
+            complection(false,error) ;
         }
     }] ;
+    
 }
 
 #pragma mark - getter && setter
@@ -437,6 +469,10 @@
 #warning 排序！
     
     return feeds ;
+}
+
+- (NSString *)displayName {
+    return self.nickname ? : self.userName ;
 }
 
 @end

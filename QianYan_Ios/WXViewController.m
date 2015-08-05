@@ -404,7 +404,9 @@ lineBreakMode:mode].height : 0.f;
     cell.replyBtn.appendIndexPath = indexPath ;
     [cell.replyBtn addTarget:self action:@selector(replyAction:) forControlEvents:UIControlEventTouchUpInside] ;
     cell.delegate = self ;
-    
+    QY_feed *feed = self.feeds[indexPath.row] ;
+
+    [feed.owner displayAvatarAtImageView:cell.avatarImageView] ;
     
     [cell setYMViewWith:[_tableDataSource objectAtIndex:indexPath.row]] ;
 

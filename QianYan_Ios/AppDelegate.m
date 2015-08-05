@@ -283,49 +283,31 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
 #pragma mark - QRCodeCard View Controller
 
 - (UIViewController *)QRCodeCardViewController {
-    if (!_QRCodeCardViewController) {
-        _QRCodeCardViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:QRCodeCardViewControllerStrorBoardID];
-    }
-    return _QRCodeCardViewController;
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:QRCodeCardViewControllerStrorBoardID] ;
 }
 
 #pragma mark - Contact Table View Controller
 
 - (UITableViewController *)ContactTableViewController {
-    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:ContactTableViewControllerStoryBoardID] ;    
-//    if (!_ContactTableViewController) {
-//        _ContactTableViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:ContactTableViewControllerStoryBoardID];
-//    }
-//    return _ContactTableViewController;
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:ContactTableViewControllerStoryBoardID] ;
 }
 
 #pragma mark - System Settings View Controller
 
 - (UITableViewController *)systemSettingsTableViewController {
-    if (!_systemSettingsTableViewController) {
-        _systemSettingsTableViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:SystemSettingsViewControllerStoryBoardID];
-    }
-    return _systemSettingsTableViewController;
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:SystemSettingsViewControllerStoryBoardID] ;
 }
 
 #pragma mark - Settings View Controller
 
 - (UIViewController *)settingsViewController {
-    if (!_settingsViewController) {
-        _settingsViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:SettingsViewControllerStoryBoardID];
-    }
-    return _settingsViewController;
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:SettingsViewControllerStoryBoardID] ;
 }
 
 #pragma mark - MyPhotoGraph View Controller
 
 - (UICollectionViewController *)myPhotoGraphCollectionViewController {
     return [self.drawersStoryboard instantiateViewControllerWithIdentifier:MyPhotoGraphCollectionViewControllerStoryBoardID] ;
-//    
-//    if (!_myPhotoGraphCollectionViewController) {
-//        _myPhotoGraphCollectionViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:MyPhotoGraphCollectionViewControllerStoryBoardID];
-//    }
-//    return _myPhotoGraphCollectionViewController;
 }
 
 #pragma mark - WifiSetting View Controller
@@ -336,28 +318,19 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
 }
 
 - (UIViewController *)WifiSettingViewController {
-    if (!_WifiSettingViewController) {
-        _WifiSettingViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:WifiSettingViewControllerStoryBoardID];
-    }
-    return _WifiSettingViewController;
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:WifiSettingViewControllerStoryBoardID] ;
 }
 
 #pragma mark -- Account Info View Controller
 
 - (UIViewController *)AccountInfoViewController {
-    if (!_AccountInfoViewController) {
-        _AccountInfoViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:AccountInfoViewControllerStoryBoardID];
-    }
-    return _AccountInfoViewController;
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:AccountInfoViewControllerStoryBoardID] ;
 }
 
 #pragma mark -- Camera Setting Collection View Controller
 
 - (UICollectionViewController *)CameraSettingCollectionViewController {
-    if (!_CameraSettingCollectionViewController) {
-        _CameraSettingCollectionViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:CameraSettingCollectionViewControllerStoryBoardID];
-    }
-    return _CameraSettingCollectionViewController;
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:CameraSettingCollectionViewControllerStoryBoardID] ;
 }
 
 #pragma mark -- Racent Table View Controller

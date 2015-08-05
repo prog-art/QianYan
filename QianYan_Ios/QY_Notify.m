@@ -12,6 +12,7 @@
 
 #define kNOTIFICATION_FEED_UPDATED   @"NOTIFICATION_FEED_UPDATED"
 #define kNOTIFICATION_FRIEND_UPDATED @"NOTIFICATION_FEED_UPDATED"
+#define kNOTIFICATION_AVATAR_UPDATED @"NOTIFICATION_AVATAR_UPDATED"
 
 @interface QY_Notify ()
 
@@ -64,6 +65,20 @@
 
 - (void)postFriendNotify {
     [_center postNotificationName:kNOTIFICATION_FRIEND_UPDATED object:nil] ;
+}
+
+#pragma mark - Avatar
+
+- (void)addAvatarObserver:(id)target selector:(SEL)selector {
+    [_center addObserver:target selector:selector name:kNOTIFICATION_AVATAR_UPDATED object:nil] ;
+}
+
+- (void)removeAvatarObserver:(id)target {
+    [_center removeObserver:target name:kNOTIFICATION_AVATAR_UPDATED object:nil] ;
+}
+
+- (void)postAvatarNotify {
+    [_center postNotificationName:kNOTIFICATION_AVATAR_UPDATED object:nil] ;
 }
 
 @end

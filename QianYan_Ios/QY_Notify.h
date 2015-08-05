@@ -28,4 +28,12 @@
 
 - (void)postFriendNotify ;
 
+#pragma mark - Avatar 
+
+- (void)addAvatarObserver:(id)target selector:(SEL)selector ;
+
+- (void)removeAvatarObserver:(id)target ;
+
+- (void)postAvatarNotify ;
+
 @end

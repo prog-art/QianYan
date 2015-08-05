@@ -194,6 +194,7 @@
             UMTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"UMCell" forIndexPath:indexPath];
             
             if ( !cell ) {
+                QYDebugLog(@"日") ;
                 cell = [[UMTableViewCell alloc] init] ;
             }
             
