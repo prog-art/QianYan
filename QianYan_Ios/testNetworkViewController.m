@@ -328,14 +328,6 @@
         }
             
         case -309 : {
-            [self deleteFriendWithId:@"10000145" complection:^(BOOL success, NSError *error) {
-                if ( success ) {
-                    QYDebugLog(@"删除成功") ;
-                } else {
-                    QYDebugLog(@"删除失败error = %@",error) ;
-                    [QYUtils alertError:error] ;
-                }
-            }] ;
             break ;
         }
             

@@ -188,6 +188,8 @@
         }
     } ;
     
+#warning 非原子性操作。失败会污染数据源。
+    
     QY_user *friend = [QY_user insertUserById:friendId] ;
     QY_user *me = self ;
     
@@ -209,7 +211,6 @@
                                 if ( success ) {
                                     QYDebugLog(@"双向添加成功") ;
                                     [QY_appDataCenter saveObject:nil error:NULL] ;
-                                    [QYUtils alert:@"添加好友成功"] ;
                                     complection(true,nil) ;
                                 } else {
                                     [[QY_appDataCenter managedObjectContext] undo] ;
@@ -242,7 +243,56 @@
             complection(result,error) ;
         }
     } ;
-#warning 没写。
+    
+    NSString *selfId = self.userId ;
+    QY_user *friend = [QY_user insertUserById:friendId] ;
+#warning 非原子性操作可能会失败。。等待服务器重写。合并删除操作。
+    dispatch_group_t group = dispatch_group_create() ;
+    
+    __block NSError *tError ;
+    
+    dispatch_group_async(group, dispatch_get_global_queue(0, 0), ^{
+        NSString *selfPath = [QY_JPROUrlFactor pathForUserFriendList:friendId FriendId:selfId] ;
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0) ;
+        
+        [[QY_JPROHttpService shareInstance] clearDocumentOnPath:selfPath Complection:^(BOOL success, NSError *error) {
+            if ( success ) {
+            } else {
+                tError = error ;
+            }
+            
+            dispatch_semaphore_signal(sema) ;
+        }] ;
+        
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER) ;
+    }) ;
+    
+    dispatch_group_async(group, dispatch_get_global_queue(0, 0), ^{
+        NSString *friendPath = [QY_JPROUrlFactor pathForUserFriendList:selfId FriendId:friendId] ;
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0) ;
+        
+        [[QY_JPROHttpService shareInstance] clearDocumentOnPath:friendPath Complection:^(BOOL success, NSError *error) {
+            if ( success ) {
+            } else {
+                tError = error ;
+            }
+            dispatch_semaphore_signal(sema) ;
+        }] ;
+        
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER) ;
+    }) ;
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        if ( tError ) {
+            complection(false,tError) ;
+        } else {
+#warning 有实例方法删除吗？
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(owner.userId == %@ AND toFriend.userId == %@) OR (owner.userId == %@ AND toFriend.userId == %@)",self.userId,friend.userId,friend.userId,self.userId] ;
+            [QY_appDataCenter deleteObjectsWithClassName:NSStringFromClass([QY_friendSetting class]) predicate:predicate] ;
+            [QY_appDataCenter saveObject:nil error:NULL] ;
+            complection(true,nil) ;
+        }
+    }) ;
     
 }
 
@@ -262,7 +312,8 @@
             NSMutableArray *mSettings = [NSMutableArray array] ;
             [objects enumerateObjectsUsingBlock:^(NSString *fileName, NSUInteger idx, BOOL *stop) {
                 fileName = [fileName stringByDeletingPathExtension] ;
-                QY_user *friend = [QY_appDataCenter userWithId:fileName] ;
+                
+                QY_user *friend = [QY_user insertUserById:fileName] ;
                 
                 QY_friendSetting *setting = [QY_friendSetting settingFromOwner:self toFriend:friend] ;
                 [mSettings addObject:setting] ;

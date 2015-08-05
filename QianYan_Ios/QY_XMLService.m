@@ -270,11 +270,11 @@
 
 + (NSString *)QY_friendSettingXMLString:(QY_friendSetting *)setting {
     GDataXMLElement *userTag = [GDataXMLNode elementWithName:@"user"] ;
-    [userTag addAttribute:[GDataXMLNode attributeWithName:@"id" stringValue:setting.owner.userId]] ;
+    [userTag addAttribute:[GDataXMLNode attributeWithName:@"id" stringValue:setting.toFriend.userId]] ;
     
 #warning nickname界面没有，暂时用userName代替。
     NSArray *childs = @[@{@"username":setting.owner.userName},
-                        @{@"nickname":setting.owner.userName},
+                        @{@"nickname":setting.owner.nickname},
                         @{@"remarkname":setting.remarkName?:setting.owner.userName},
                         @{@"follow":[setting.follow stringValue]},
                         @{@"fans":[setting.fans stringValue]},

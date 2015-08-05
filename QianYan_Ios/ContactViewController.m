@@ -242,45 +242,42 @@
 
 #pragma mark - SWTableViewDelegate
 
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state {
-    switch (state) {
-        case 0:
-            NSLog(@"utility buttons closed");
-            break;
-        case 1:
-            NSLog(@"left utility buttons open");
-            break;
-        case 2:
-            NSLog(@"right utility buttons open");
-            break;
-        default:
-            break;
-    }
-}
+//- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state {
+//    switch (state) {
+//        case 0:
+//            NSLog(@"utility buttons closed");
+//            break;
+//        case 1:
+//            NSLog(@"left utility buttons open");
+//            break;
+//        case 2:
+//            NSLog(@"right utility buttons open");
+//            break;
+//        default:
+//            break;
+//    }
+//}
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     switch (index) {
         case 0 : {
             // Delete button was pressed
-            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
             
-            [QYUtils alert:@"删除好友正在做～"] ;
-
+            QY_friendSetting *friendSetting = [self.myFriends allValues][indexPath.row] ;
             
-//            [_testArray[cellIndexPath.section-2] removeObjectAtIndex:cellIndexPath.row];
-//            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
-//            
-//            //删除section
-//            if([_testArray [cellIndexPath.section-2] count] == 0) {
-//                [_sections removeObjectAtIndex:cellIndexPath.section -2];
-//                [_testArray removeObjectAtIndex:cellIndexPath.section-2];
-//                [_indexTitle removeObjectAtIndex:cellIndexPath.section];
-//                NSLog(@"%ld", cellIndexPath.section-2);
-//                
-//                [self.tableView reloadSectionIndexTitles];
-//                [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:cellIndexPath.section] withRowAnimation:UITableViewRowAnimationLeft];
-//            }
-            
+            [SVProgressHUD show] ;
+            [[QYUser currentUser].coreUser deleteFriendById:friendSetting.toFriend.userId complection:^(BOOL success, NSError *error) {
+                [SVProgressHUD dismiss] ;
+                if ( success ) {
+                    [QYUtils alert:@"删除好友成功"] ;
+#warning 改成删除单个
+                    [self refreshFriends:self.refreshControl] ;
+                } else {
+                    QYDebugLog(@"删除好友失败 error = %@",error) ;
+                    [QYUtils alertError:error] ;
+                }
+            }] ;            
             break;
         }
     

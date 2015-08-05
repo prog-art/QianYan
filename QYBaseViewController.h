@@ -16,6 +16,4 @@
  */
 @interface QYBaseViewController : UIViewController<QY_QRCodeScanerDelegate>
 
-- (void)deleteFriendWithId:(NSString *)friendId complection:(QYResultBlock)complection ;
-
 @end

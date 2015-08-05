@@ -82,8 +82,7 @@ NSString *const kNotificationNameReceiveCamerasState = @"kNotificationNameReceiv
 }
 
 - (NSString *)device_id {
-#warning test
-    return @"10000133" ;
+    return [QYUser currentUser].coreUser.userId ;
 }
 
 - (NSData *)JMSLoginData {

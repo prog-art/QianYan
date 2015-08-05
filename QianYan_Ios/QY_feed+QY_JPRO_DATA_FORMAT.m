@@ -67,7 +67,11 @@
 #pragma mark - operation
 
 + (void)fetchFeedWithId:(NSString *)feedId complection:(QYObjectBlock)complection {
-    assert(feedId) ;
+    if ( !feedId) {
+        NSError *error = [NSError QYErrorWithCode:ALL_FIX_ERROR description:@"参数为空"] ;
+        complection(nil,error) ;
+        return ;
+    }
     assert(complection) ;
     
     [[QY_JPROHttpService shareInstance] getFeedById:feedId Complection:^(NSDictionary *feedDic, NSError *error) {
