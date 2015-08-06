@@ -145,6 +145,10 @@
         if ( complection ) {
             complection(object,error) ;
         }
+        
+        if ( error ) {
+            [QY_appDataCenter undo] ;
+        }
     } ;
     
     if ( !self.jpro ) {
@@ -168,7 +172,15 @@
     [[QY_JPROHttpService shareInstance] uploadFileToPath:path FileData:xmlData fileName:@"profile.xml" mimeType:MIMETYPE Complection:^(BOOL success, NSError *error) {
         if ( success ) {
             QYDebugLog(@"上传成功") ;
-            complection(self,nil) ;
+            
+            NSError *saveError ;
+            [QY_appDataCenter saveObject:nil error:&saveError] ;
+            
+            if ( saveError ) {
+                complection(nil,saveError) ;
+            } else {
+                complection(self,nil) ;
+            }
         } else {
             QYDebugLog(@"上传失败 error = %@",error) ;
             error = [NSError QYErrorWithCode:JPRO_UPLOAD_PROFILE_ERROR description:@"上传PROFILE的时候出错"] ;

@@ -73,6 +73,7 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVLeftDrawerCellReuseId
     [self setUpUIControls] ;
     
     [[QY_Notify shareInstance] addAvatarObserver:self selector:@selector(reloadAvatar)] ;
+    [[QY_Notify shareInstance] addUserInfoObserver:self selector:@selector(reloadUserInfo)] ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -86,8 +87,13 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVLeftDrawerCellReuseId
     [[QYUser currentUser].coreUser displayCycleAvatarAtImageView:self.avatarImageView] ;
 }
 
+- (void)reloadUserInfo {
+    self.nameLabel.text = [[QYUser currentUser].coreUser displayName] ;
+}
+
 - (void)dealloc {
     [[QY_Notify shareInstance] removeAvatarObserver:self] ;
+    [[QY_Notify shareInstance] removeUserInfoObserver:self] ;
 }
 
 #pragma mark - Table View Data Source

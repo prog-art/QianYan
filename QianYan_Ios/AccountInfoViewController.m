@@ -39,7 +39,8 @@
     
     [self.currentUser displayAvatarAtImageView:self.avatarImageView] ;
     
-    [[QY_Notify shareInstance] addAvatarObserver:self selector:@selector(readLoadAvatar)] ;
+    [[QY_Notify shareInstance] addAvatarObserver:self selector:@selector(reloadAvatar)] ;
+    [[QY_Notify shareInstance] addUserInfoObserver:self selector:@selector(reloadUserInfo)] ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -53,12 +54,17 @@
     [self.tabBarController.tabBar setHidden:NO] ;
 }
 
-- (void)readLoadAvatar {
+- (void)reloadAvatar {
     [self.currentUser displayAvatarAtImageView:self.avatarImageView] ;
+}
+
+- (void)reloadUserInfo {
+    [self.tableView reloadData] ;
 }
 
 - (void)dealloc {
     [[QY_Notify shareInstance] removeAvatarObserver:self] ;
+    [[QY_Notify shareInstance] removeUserInfoObserver:self] ;
 }
 
 #pragma mark -- Table View Datasource

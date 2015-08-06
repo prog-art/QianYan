@@ -31,4 +31,6 @@
 
 + (BOOL)deleteobject:(NSManagedObject *)object ;
 
++ (void)undo ;
+
 @end

@@ -38,11 +38,13 @@
 - (IBAction)doneBtnClicked:(id)sender {
     [QYUser currentUser].coreUser.signature = self.signTextView.text ;
     
+    [SVProgressHUD show] ;
     [[QYUser currentUser].coreUser saveUserInfoComplection:^(id object, NSError *error) {
+        [SVProgressHUD dismiss] ;
         if ( object && !error ) {
             QYDebugLog(@"设置签名成功") ;
             [QYUtils alert:@"设置签名成功"] ;
-            [QY_appDataCenter saveObject:nil error:NULL] ;
+            [[QY_Notify shareInstance] postUserInfoNotify] ;
             [self.navigationController popViewControllerAnimated:YES] ;
         } else {
             QYDebugLog(@"设置签名失败") ;

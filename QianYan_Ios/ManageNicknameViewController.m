@@ -37,11 +37,13 @@
     
     user.nickname = self.changeNameTextfield.text ;
     
+    [SVProgressHUD show] ;
     [user saveUserInfoComplection:^(id object, NSError *error) {
+        [SVProgressHUD dismiss] ;
         if ( object && !error ) {
             QYDebugLog(@"设置昵称成功") ;
             [QYUtils alert:@"设置昵称成功"] ;
-            [QY_appDataCenter saveObject:nil error:NULL] ;
+            [[QY_Notify shareInstance] postUserInfoNotify] ;
             [self.navigationController popViewControllerAnimated:YES] ;
         } else {
             QYDebugLog(@"设置昵称失败") ;

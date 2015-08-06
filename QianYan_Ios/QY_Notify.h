@@ -36,4 +36,12 @@
 
 - (void)postAvatarNotify ;
 
+#pragma mark - UserInfo
+
+- (void)addUserInfoObserver:(id)target selector:(SEL)selector ;
+
+- (void)removeUserInfoObserver:(id)target ;
+
+- (void)postUserInfoNotify ;
+
 @end

@@ -150,4 +150,8 @@
     return objects ;
 }
 
++ (void)undo {
+    [[self managedObjectContext] undo] ;
+}
+
 @end
