@@ -19,10 +19,17 @@
 
 + (instancetype)shareInstance ;
 
+/**
+ *  退出登录清理cookie
+ */
++ (void)logoff ;
+
 @property (nonatomic,readonly) NSString *jpro_ip ;
 @property (nonatomic,readonly) NSString *jpro_port ;
 
 - (void)configIp:(NSString *)jpro_ip Port:(NSString *)jpro_port ;
+
+
 
 /**
  *  上传用户头像

@@ -42,6 +42,13 @@ NSString * const kUserDefaultsCookie = @"UserCookie" ;
     return sharedInstance ;
 }
 
++ (void)logoff {
+    [[self shareInstance] clearCookies] ;
+#warning 不访问会怎么样？只清空本地cookie和缓存的cookie
+//    [[self shareInstance] jproLogoutComplection:^(BOOL success, NSError *error) {
+//    }] ;
+}
+
 - (instancetype)init {
     if ( self = [super init] ) {
         [self setUp] ;
@@ -133,6 +140,12 @@ QYResultBlock packComplection(QYResultBlock complection) {
  *  @return 是否清除成功
  */
 - (BOOL)clearCookies {
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage] ;
+    NSArray *tCookies = [NSArray arrayWithArray:[cookieStorage cookies]] ;
+    for (id obj in tCookies) {
+        [cookieStorage deleteCookie:obj] ;
+    }
+    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserDefaultsCookie] ;
     return [[NSUserDefaults standardUserDefaults] synchronize] ;
 }

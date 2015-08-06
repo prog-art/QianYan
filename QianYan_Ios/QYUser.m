@@ -158,13 +158,15 @@ static QYUser *_currentUser = nil ;
 #pragma mark - 注销
 
 + (void)logOffComplection:(QYResultBlock)complection {
-#warning 改
     complection = ^(BOOL result , NSError *error) {
         if ( complection ) {
             complection(result,error) ;
         }
     } ;
     _currentUser = nil ;
+    [QY_SocketAgent logoff] ;
+    [QY_JPROHttpService logoff] ;
+    
     complection(TRUE,nil) ;
 }
 

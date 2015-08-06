@@ -33,6 +33,11 @@ typedef NS_ENUM(NSInteger, APP_State) {
  */
 + (instancetype)shareInstance ;
 
+/**
+ *  退出登录的时候清理纪录
+ */
++ (void)logoff ;
+
 #pragma mark -
 
 /**

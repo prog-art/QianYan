@@ -53,6 +53,12 @@
     return sharedInstance ;
 }
 
++ (void)logoff {
+    QY_SocketAgent *agent = [QY_SocketAgent shareInstance] ;
+    agent.userName = nil ;
+    agent.userPassword = nil ;
+}
+
 - (instancetype)init {
     if ( self = [super init] ) {
         [self setUp] ;

@@ -311,4 +311,22 @@
     [picker dismissViewControllerAnimated:YES completion:nil] ;
 }
 
+#pragma mark - IBActions
+
+- (IBAction)logoutBtnClicked:(id)sender {
+    [SVProgressHUD show] ;
+    [QYUser logOffComplection:^(BOOL success, NSError *error) {
+        [SVProgressHUD dismiss] ;
+        
+        [QYUtils toLogin] ;
+        
+        [self.navigationController popToRootViewControllerAnimated:NO] ;
+        
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            
+//        });
+
+    }] ;
+}
+
 @end

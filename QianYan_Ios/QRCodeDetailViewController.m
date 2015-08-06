@@ -14,6 +14,8 @@
 @interface QRCodeDetailViewController ()
 
 @property (strong, nonatomic) IBOutlet UIImageView *QRCodeImageView;
+@property (weak, nonatomic) IBOutlet UILabel *SSIDLabel;
+@property (weak, nonatomic) IBOutlet UILabel *PASSWORDLabel;
 
 @property (nonatomic) NSString *SSID ;
 @property (nonatomic) NSString *password ;
@@ -32,6 +34,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad] ;
+    self.SSIDLabel.text = @"" ;
+    self.PASSWORDLabel.text = @"" ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -40,6 +44,8 @@
     if ( self.SSID && self.password && [QYUser currentUser].userId ) {
         UIImage *wifiInfoQRImg = [QY_QRCodeUtils QY_generateQRImageOfWifiWithESSID:self.SSID Password:self.password UserId:[QYUser currentUser].userId] ;
         [self.QRCodeImageView setImage:wifiInfoQRImg] ;
+        self.SSIDLabel.text = self.SSID ;
+        self.PASSWORDLabel.text = self.password ;
     }
 }
 

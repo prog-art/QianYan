@@ -32,9 +32,13 @@
 
 @property (weak) QY_JPROHttpService *jproService ;
 
+@property (strong,nonatomic) UIRefreshControl *refreshControl ;
+
 @end
 
 @implementation CameraViewController
+
+#pragma mark - getter && setter
 
 - (NSArray *)publicArray {
     return @[@[@"公众号", @"NanJing@qycam.com", @"HuaLi@qycam.com"]] ;
@@ -49,18 +53,31 @@
     return _contents;
 }
 
+- (UIRefreshControl *)refreshControl {
+    if ( !_refreshControl ) {
+        _refreshControl = [[UIRefreshControl alloc] init] ;
+        [_refreshControl addTarget:self action:@selector(refreshCameras) forControlEvents:UIControlEventValueChanged] ;
+    }
+    return _refreshControl ;
+}
+
 #pragma mark - Life Cycle
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil] ;
-    if (self) {
+- (void)refresh:(UIRefreshControl *)refreshControl {
+    if ( refreshControl ) {
+        [refreshControl beginRefreshing] ;
     }
-    return self ;
+    
+    [self refreshCameras] ;
+    
 }
 
 - (void)refreshCameras {
     NSString *userId = [QYUser currentUser].userId ;
     NSString *path = [NSString stringWithFormat:@"user/%@/cameralist",userId] ;
+    
+    
+    self.cameras = [NSMutableDictionary dictionary] ;
     
     [self.jproService getDocumentListForPath:path Complection:^(NSArray *objects, NSError *error) {
         if ( !error ) {
@@ -146,6 +163,8 @@
 #warning 补丁
     if ( cameras && [cameras count] != 0 ) {
         [[QY_JMSService shareInstance] getCamerasStateByIds:[NSSet setWithArray:self.cameras.allKeys]] ;
+    } else {
+        [self.refreshControl endRefreshing] ;
     }
 }
 
@@ -164,6 +183,7 @@
     
     [QY_appDataCenter saveObject:nil error:NULL] ;
     
+    [self.refreshControl endRefreshing] ;
     [self.tableView reloadData] ;
 }
 
@@ -181,8 +201,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self removeObserver] ;
     [self addObserver] ;
     
     self.cameras = [NSMutableDictionary dictionary] ;
@@ -191,6 +209,7 @@
     
     self.tableView.SKSTableViewDelegate = self ;
     self.tableView.tableFooterView = [[UIView alloc] init] ;//关键语句
+    [self.tableView addSubview:self.refreshControl] ;
     
     [self refreshCameras] ;
 }
