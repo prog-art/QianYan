@@ -6,14 +6,14 @@
 //  Copyright (c) 2014年 tigerwf. All rights reserved.
 //
 
-#import "YMTextData.h"
+#import "QYSocialModel.h"
 #import "ContantHead.h"
 #import "ILRegularExpressionManager.h"
 #import "NSString+NSString_ILExtension.h"
 
-#import "WFTextView.h"
+#import "QYSocialTextView.h"
 
-@implementation YMTextData{
+@implementation QYSocialModel{
     BOOL isReplyView ;
     int tempInt ;
 }
@@ -52,7 +52,7 @@
         
         [self matchString:newString fromView:isReplyView] ;
         
-        WFTextView *_ilcoreText = [[WFTextView alloc] initWithFrame:CGRectMake(offSet_X,10, sizeWidth - offSet_X * 2, 0)] ;
+        QYSocialTextView *_ilcoreText = [[QYSocialTextView alloc] initWithFrame:CGRectMake(offSet_X,10, sizeWidth - offSet_X * 2, 0)] ;
         
         _ilcoreText.isDraw = NO ;
         
@@ -150,7 +150,7 @@
     
     isReplyView = NO ;
     
-    NSString *matchString =  _showShuoShuo ;
+    NSString *matchString =  _content ;
     
     NSArray *itemIndexs = [ILRegularExpressionManager itemIndexesWithPattern:EmotionItemPattern inString:matchString] ;
     
@@ -161,11 +161,11 @@
     
     [self matchString:newString fromView:isReplyView] ;
     
-    WFTextView *_wfcoreText = [[WFTextView alloc] initWithFrame:CGRectMake(20,10, sizeWidth - 2*20, 0)] ;
+    QYSocialTextView *_wfcoreText = [[QYSocialTextView alloc] initWithFrame:CGRectMake(20,10, sizeWidth - 2*20, 0)] ;
     
     _wfcoreText.isDraw = NO ;
     
-    [_wfcoreText setOldString:_showShuoShuo andNewString:newString] ;
+    [_wfcoreText setOldString:_content andNewString:newString] ;
     
     if ([_wfcoreText getTextLines] <= limitline) {
         self.islessLimit = YES ;

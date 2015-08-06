@@ -96,16 +96,16 @@
 		2E198AB0F8530161A1BAD09F /* libPods-QianYan_Ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11F773AF3A6D9E59DFFC3C35 /* libPods-QianYan_Ios.a */; };
 		6E18D1001B281C2800802C49 /* PasswordManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E18D0FF1B281C2800802C49 /* PasswordManageViewController.m */; };
 		6E1A9B901B50A4410046B8AB /* YMReplyInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B851B50A4410046B8AB /* YMReplyInputView.m */; };
-		6E1A9B911B50A4410046B8AB /* YMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B871B50A4410046B8AB /* YMTableViewCell.m */; };
-		6E1A9B921B50A4410046B8AB /* WFTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B891B50A4410046B8AB /* WFTextView.m */; };
+		6E1A9B911B50A4410046B8AB /* QYSocialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B871B50A4410046B8AB /* QYSocialTableViewCell.m */; };
+		6E1A9B921B50A4410046B8AB /* QYSocialTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B891B50A4410046B8AB /* QYSocialTextView.m */; };
 		6E1A9B931B50A4410046B8AB /* YMTapGestureRecongnizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B8B1B50A4410046B8AB /* YMTapGestureRecongnizer.m */; };
-		6E1A9B941B50A4410046B8AB /* YMShowImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B8D1B50A4410046B8AB /* YMShowImageView.m */; };
-		6E1A9B951B50A4410046B8AB /* YMButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B8F1B50A4410046B8AB /* YMButton.m */; };
-		6E1A9B981B50A44F0046B8AB /* WXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B971B50A44F0046B8AB /* WXViewController.m */; };
+		6E1A9B941B50A4410046B8AB /* QYShowImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B8D1B50A4410046B8AB /* QYShowImageView.m */; };
+		6E1A9B951B50A4410046B8AB /* QYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B8F1B50A4410046B8AB /* QYButton.m */; };
+		6E1A9B981B50A44F0046B8AB /* QYSocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B971B50A44F0046B8AB /* QYSocialViewController.m */; };
 		6E1A9BA31B50A4CB0046B8AB /* ILRegularExpressionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B9C1B50A4CB0046B8AB /* ILRegularExpressionManager.m */; };
 		6E1A9BA41B50A4CB0046B8AB /* NSArray+NSArray_ILExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9B9E1B50A4CB0046B8AB /* NSArray+NSArray_ILExtension.m */; };
 		6E1A9BA51B50A4CB0046B8AB /* NSString+NSString_ILExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9BA01B50A4CB0046B8AB /* NSString+NSString_ILExtension.m */; };
-		6E1A9BA61B50A4CB0046B8AB /* YMTextData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9BA21B50A4CB0046B8AB /* YMTextData.m */; };
+		6E1A9BA61B50A4CB0046B8AB /* QYSocialModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A9BA21B50A4CB0046B8AB /* QYSocialModel.m */; };
 		6E1EC9BD1B50F69B003E346F /* SystemSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1EC9B81B50F69B003E346F /* SystemSettingsTableViewController.m */; };
 		6E1EC9BE1B50F69B003E346F /* SystemSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1EC9BA1B50F69B003E346F /* SystemSettingsTableViewCell.m */; };
 		6E1EC9BF1B50F69B003E346F /* SystemSettingsImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1EC9BC1B50F69B003E346F /* SystemSettingsImageTableViewCell.m */; };
@@ -383,18 +383,18 @@
 		6E18D0FF1B281C2800802C49 /* PasswordManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordManageViewController.m; sourceTree = "<group>"; };
 		6E1A9B841B50A4410046B8AB /* YMReplyInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMReplyInputView.h; sourceTree = "<group>"; };
 		6E1A9B851B50A4410046B8AB /* YMReplyInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMReplyInputView.m; sourceTree = "<group>"; };
-		6E1A9B861B50A4410046B8AB /* YMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMTableViewCell.h; sourceTree = "<group>"; };
-		6E1A9B871B50A4410046B8AB /* YMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMTableViewCell.m; sourceTree = "<group>"; };
-		6E1A9B881B50A4410046B8AB /* WFTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFTextView.h; sourceTree = "<group>"; };
-		6E1A9B891B50A4410046B8AB /* WFTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFTextView.m; sourceTree = "<group>"; };
+		6E1A9B861B50A4410046B8AB /* QYSocialTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSocialTableViewCell.h; sourceTree = "<group>"; };
+		6E1A9B871B50A4410046B8AB /* QYSocialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYSocialTableViewCell.m; sourceTree = "<group>"; };
+		6E1A9B881B50A4410046B8AB /* QYSocialTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSocialTextView.h; sourceTree = "<group>"; };
+		6E1A9B891B50A4410046B8AB /* QYSocialTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYSocialTextView.m; sourceTree = "<group>"; };
 		6E1A9B8A1B50A4410046B8AB /* YMTapGestureRecongnizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMTapGestureRecongnizer.h; sourceTree = "<group>"; };
 		6E1A9B8B1B50A4410046B8AB /* YMTapGestureRecongnizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMTapGestureRecongnizer.m; sourceTree = "<group>"; };
-		6E1A9B8C1B50A4410046B8AB /* YMShowImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMShowImageView.h; sourceTree = "<group>"; };
-		6E1A9B8D1B50A4410046B8AB /* YMShowImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMShowImageView.m; sourceTree = "<group>"; };
-		6E1A9B8E1B50A4410046B8AB /* YMButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMButton.h; sourceTree = "<group>"; };
-		6E1A9B8F1B50A4410046B8AB /* YMButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMButton.m; sourceTree = "<group>"; };
-		6E1A9B961B50A44F0046B8AB /* WXViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXViewController.h; sourceTree = "<group>"; };
-		6E1A9B971B50A44F0046B8AB /* WXViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXViewController.m; sourceTree = "<group>"; };
+		6E1A9B8C1B50A4410046B8AB /* QYShowImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYShowImageView.h; sourceTree = "<group>"; };
+		6E1A9B8D1B50A4410046B8AB /* QYShowImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYShowImageView.m; sourceTree = "<group>"; };
+		6E1A9B8E1B50A4410046B8AB /* QYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYButton.h; sourceTree = "<group>"; };
+		6E1A9B8F1B50A4410046B8AB /* QYButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYButton.m; sourceTree = "<group>"; };
+		6E1A9B961B50A44F0046B8AB /* QYSocialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSocialViewController.h; sourceTree = "<group>"; };
+		6E1A9B971B50A44F0046B8AB /* QYSocialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYSocialViewController.m; sourceTree = "<group>"; };
 		6E1A9B991B50A49E0046B8AB /* ContantHead.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContantHead.h; sourceTree = "<group>"; };
 		6E1A9B9B1B50A4CB0046B8AB /* ILRegularExpressionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILRegularExpressionManager.h; sourceTree = "<group>"; };
 		6E1A9B9C1B50A4CB0046B8AB /* ILRegularExpressionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILRegularExpressionManager.m; sourceTree = "<group>"; };
@@ -402,8 +402,8 @@
 		6E1A9B9E1B50A4CB0046B8AB /* NSArray+NSArray_ILExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+NSArray_ILExtension.m"; sourceTree = "<group>"; };
 		6E1A9B9F1B50A4CB0046B8AB /* NSString+NSString_ILExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NSString_ILExtension.h"; sourceTree = "<group>"; };
 		6E1A9BA01B50A4CB0046B8AB /* NSString+NSString_ILExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NSString_ILExtension.m"; sourceTree = "<group>"; };
-		6E1A9BA11B50A4CB0046B8AB /* YMTextData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMTextData.h; sourceTree = "<group>"; };
-		6E1A9BA21B50A4CB0046B8AB /* YMTextData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMTextData.m; sourceTree = "<group>"; };
+		6E1A9BA11B50A4CB0046B8AB /* QYSocialModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSocialModel.h; sourceTree = "<group>"; };
+		6E1A9BA21B50A4CB0046B8AB /* QYSocialModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYSocialModel.m; sourceTree = "<group>"; };
 		6E1EC9B71B50F69B003E346F /* SystemSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSettingsTableViewController.h; sourceTree = "<group>"; };
 		6E1EC9B81B50F69B003E346F /* SystemSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSettingsTableViewController.m; sourceTree = "<group>"; };
 		6E1EC9B91B50F69B003E346F /* SystemSettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSettingsTableViewCell.h; sourceTree = "<group>"; };
@@ -702,6 +702,38 @@
 				1938CCBA1B24BCEA009C4AE5 /* JRMDataFormatUtils.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		19575C161B73D4A200290E09 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6E1A9BA11B50A4CB0046B8AB /* QYSocialModel.h */,
+				6E1A9BA21B50A4CB0046B8AB /* QYSocialModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		19575C171B73D4DD00290E09 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				19575C181B73D4E500290E09 /* subview */,
+				6E1A9B861B50A4410046B8AB /* QYSocialTableViewCell.h */,
+				6E1A9B871B50A4410046B8AB /* QYSocialTableViewCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		19575C181B73D4E500290E09 /* subview */ = {
+			isa = PBXGroup;
+			children = (
+				6E1A9B8C1B50A4410046B8AB /* QYShowImageView.h */,
+				6E1A9B8D1B50A4410046B8AB /* QYShowImageView.m */,
+				6E1A9B8E1B50A4410046B8AB /* QYButton.h */,
+				6E1A9B8F1B50A4410046B8AB /* QYButton.m */,
+				6E1A9B881B50A4410046B8AB /* QYSocialTextView.h */,
+				6E1A9B891B50A4410046B8AB /* QYSocialTextView.m */,
+			);
+			name = subview;
 			sourceTree = "<group>";
 		};
 		19589C1B1B566A8D005246BC /* Category */ = {
@@ -1537,13 +1569,13 @@
 		6E1A9B811B50A1DB0046B8AB /* tab-社交 */ = {
 			isa = PBXGroup;
 			children = (
-				19C3DE701B71CF82006253E5 /* 资料设置 */,
-				19C3DE651B71CD16006253E5 /* 设置备注名 */,
 				6E1EC9C91B510269003E346F /* 添加 */,
 				196900ED1B6E6E5A0059E737 /* 文字分享 */,
 				6E1A9B9A1B50A4BE0046B8AB /* Manager */,
-				6E1A9B831B50A4300046B8AB /* ViewController */,
 				6E1A9B821B50A3F80046B8AB /* View */,
+				19575C161B73D4A200290E09 /* Model */,
+				19575C171B73D4DD00290E09 /* cell */,
+				6E1A9B831B50A4300046B8AB /* ViewController */,
 			);
 			name = "tab-社交";
 			sourceTree = "<group>";
@@ -1554,16 +1586,8 @@
 				6E1A9B991B50A49E0046B8AB /* ContantHead.h */,
 				6E1A9B841B50A4410046B8AB /* YMReplyInputView.h */,
 				6E1A9B851B50A4410046B8AB /* YMReplyInputView.m */,
-				6E1A9B861B50A4410046B8AB /* YMTableViewCell.h */,
-				6E1A9B871B50A4410046B8AB /* YMTableViewCell.m */,
-				6E1A9B881B50A4410046B8AB /* WFTextView.h */,
-				6E1A9B891B50A4410046B8AB /* WFTextView.m */,
 				6E1A9B8A1B50A4410046B8AB /* YMTapGestureRecongnizer.h */,
 				6E1A9B8B1B50A4410046B8AB /* YMTapGestureRecongnizer.m */,
-				6E1A9B8C1B50A4410046B8AB /* YMShowImageView.h */,
-				6E1A9B8D1B50A4410046B8AB /* YMShowImageView.m */,
-				6E1A9B8E1B50A4410046B8AB /* YMButton.h */,
-				6E1A9B8F1B50A4410046B8AB /* YMButton.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1571,8 +1595,8 @@
 		6E1A9B831B50A4300046B8AB /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6E1A9B961B50A44F0046B8AB /* WXViewController.h */,
-				6E1A9B971B50A44F0046B8AB /* WXViewController.m */,
+				6E1A9B961B50A44F0046B8AB /* QYSocialViewController.h */,
+				6E1A9B971B50A44F0046B8AB /* QYSocialViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1586,8 +1610,6 @@
 				6E1A9B9E1B50A4CB0046B8AB /* NSArray+NSArray_ILExtension.m */,
 				6E1A9B9F1B50A4CB0046B8AB /* NSString+NSString_ILExtension.h */,
 				6E1A9BA01B50A4CB0046B8AB /* NSString+NSString_ILExtension.m */,
-				6E1A9BA11B50A4CB0046B8AB /* YMTextData.h */,
-				6E1A9BA21B50A4CB0046B8AB /* YMTextData.m */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -1986,6 +2008,8 @@
 				6EDF09AA1B2930DE00413348 /* 二维码名片 */,
 				6EFEFE331B0CC03C001E425B /* 左侧栏 */,
 				6EFEFE341B0CC043001E425B /* 右侧栏 */,
+				19C3DE651B71CD16006253E5 /* 设置备注名 */,
+				19C3DE701B71CF82006253E5 /* 资料设置 */,
 				6EFEFE371B0CC11E001E425B /* tab-摄像机 */,
 				6E7C075A1B3BE3D700AC8EC3 /* tab-通知 */,
 				6E1A9B811B50A1DB0046B8AB /* tab-社交 */,
@@ -2301,8 +2325,8 @@
 				195C16201B3EA5C800A316FE /* QY_SocketAgent.m in Sources */,
 				198530471B28B9AF00EB96F7 /* QY_XMLPhraser.m in Sources */,
 				6E1A9BA41B50A4CB0046B8AB /* NSArray+NSArray_ILExtension.m in Sources */,
-				6E1A9B921B50A4410046B8AB /* WFTextView.m in Sources */,
-				6E1A9B951B50A4410046B8AB /* YMButton.m in Sources */,
+				6E1A9B921B50A4410046B8AB /* QYSocialTextView.m in Sources */,
+				6E1A9B951B50A4410046B8AB /* QYButton.m in Sources */,
 				198530351B272C3300EB96F7 /* QYUser.m in Sources */,
 				196900EC1B6E6B250059E737 /* FeedbackViewController.m in Sources */,
 				19ED2EED1AECF84F00E9DBEA /* ViewController.m in Sources */,
@@ -2331,7 +2355,7 @@
 				6E9BA9551B0CB8FB009D87BE /* SKSTableView.m in Sources */,
 				6E7C07601B3BE42600AC8EC3 /* AlertNotificationTableViewCell.m in Sources */,
 				1938CCB41B24ACB4009C4AE5 /* JRMvalue.m in Sources */,
-				6E1A9B981B50A44F0046B8AB /* WXViewController.m in Sources */,
+				6E1A9B981B50A44F0046B8AB /* QYSocialViewController.m in Sources */,
 				19A140171B5117F100A7746C /* QY_UserReloginDescriptor.m in Sources */,
 				195C15DD1B3AEF3A00A316FE /* QY_JRMGCDSocketDelegater.m in Sources */,
 				6E9BA9571B0CB8FB009D87BE /* SKSTableViewCellIndicator.m in Sources */,
@@ -2348,7 +2372,7 @@
 				1979071A1B52674C0079452C /* QYBaseViewController.m in Sources */,
 				19C4E1371B6FB93E0003C67A /* QRCodeDetailViewController.m in Sources */,
 				196900DF1B6E60360059E737 /* PhoneNumberIdentifyViewController.m in Sources */,
-				6E1A9BA61B50A4CB0046B8AB /* YMTextData.m in Sources */,
+				6E1A9BA61B50A4CB0046B8AB /* QYSocialModel.m in Sources */,
 				195C16191B3E8E0A00A316FE /* QY_JRMResponse.m in Sources */,
 				198BADF91AF0B51700B4E2E6 /* QRCodeGenerator.m in Sources */,
 				6E1EC9D41B5105D5003E346F /* CameraSettingCollectionViewController.m in Sources */,
@@ -2370,9 +2394,9 @@
 				6E75AC9E1B281E8300A0C919 /* UMTableViewCell.m in Sources */,
 				19C3DE731B71CFC0006253E5 /* InfoSettingViewController.m in Sources */,
 				6EE8E65E1B11F737007C54E0 /* ButtonTableViewCell.m in Sources */,
-				6E1A9B941B50A4410046B8AB /* YMShowImageView.m in Sources */,
+				6E1A9B941B50A4410046B8AB /* QYShowImageView.m in Sources */,
 				1908F1A21B64CB7000E8E81C /* QianYan_Ios.xcdatamodeld in Sources */,
-				6E1A9B911B50A4410046B8AB /* YMTableViewCell.m in Sources */,
+				6E1A9B911B50A4410046B8AB /* QYSocialTableViewCell.m in Sources */,
 				6EE8E6641B11F737007C54E0 /* SwitchTableViewCell.m in Sources */,
 				195C16231B3EA5FD00A316FE /* QY_SocketService.m in Sources */,
 				19589C1E1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.m in Sources */,

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 tigerwf. All rights reserved.
 //
 
-#import "WFTextView.h"
+#import "QYSocialTextView.h"
 #import "ContantHead.h"
 #import <CoreText/CoreText.h>
 #import "ILRegularExpressionManager.h"
@@ -22,7 +22,7 @@
 
 
 
-@implementation WFTextView {
+@implementation QYSocialTextView {
     NSString *_oldString;
     NSString *_newString;
     

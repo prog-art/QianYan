@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface YMTextData : NSObject
+@interface QYSocialModel : NSObject
 
 @property (nonatomic,strong) NSMutableArray *replyDataSource;//回复内容数据源（未处理）
 @property (nonatomic,assign) float           replyHeight;//回复高度
 
-@property (nonatomic,strong) NSString       *showShuoShuo;//说说部分
+@property (nonatomic,strong) NSString       *content;//说说部分
 @property (nonatomic,assign) float           shuoshuoHeight;//折叠说说高度
 @property (nonatomic,assign) float           unFoldShuoHeight;//展开说说高度
 
@@ -37,7 +37,7 @@
  *
  *  @return 返回高度
  */
-- (float)calculateReplyHeightWithWidth:(float)sizeWidth;
+- (float)calculateReplyHeightWithWidth:(float)sizeWidth ;
 
 /**
  *  计算折叠还是展开的说说的高度
@@ -47,6 +47,6 @@
  *
  *  @return 高度
  */
-- (float)calculateShuoshuoHeightWithWidth:(float)sizeWidth withUnFoldState:(BOOL)isUnfold;
+- (float)calculateShuoshuoHeightWithWidth:(float)sizeWidth withUnFoldState:(BOOL)isUnfold ;
 
 @end

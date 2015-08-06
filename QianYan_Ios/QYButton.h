@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YMButton : UIButton
+@interface QYButton : UIButton
 
 @property (nonatomic,strong) NSIndexPath * appendIndexPath;
 

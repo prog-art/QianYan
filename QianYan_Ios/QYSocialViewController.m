@@ -6,11 +6,11 @@
 //  Copyright (c) 2014年 tigerwf. All rights reserved.
 //
 
-#import "WXViewController.h"
-#import "YMTableViewCell.h"
+#import "QYSocialViewController.h"
+#import "QYSocialTableViewCell.h"
 #import "ContantHead.h"
-#import "YMShowImageView.h"
-#import "YMTextData.h"
+#import "QYShowImageView.h"
+#import "QYSocialModel.h"
 #import "YMReplyInputView.h"
 
 #import "QY_Common.h"
@@ -37,7 +37,7 @@ lineBreakMode:mode].height : 0.f;
 
 #define kSocial2WordSharingSegueId @"Social2WordSharingSegueId"
 
-@interface WXViewController ()<UITableViewDataSource,UITableViewDelegate,QY_socialCellDelegate,QY_commentDelegate> {
+@interface QYSocialViewController ()<UITableViewDataSource,UITableViewDelegate,QYSocialCellDelegate,QY_commentDelegate> {
 //    NSMutableArray *_imageDataSource;
     
 //    NSMutableArray *_contentDataSource;//模拟接口给的数据
@@ -60,7 +60,7 @@ lineBreakMode:mode].height : 0.f;
 
 @end
 
-@implementation WXViewController
+@implementation QYSocialViewController
 
 #pragma mark - init 
 
@@ -187,7 +187,7 @@ lineBreakMode:mode].height : 0.f;
     }] mutableCopy];
     
     [self.feeds enumerateObjectsUsingBlock:^(QY_feed *feed , NSUInteger idx, BOOL *stop) {
-        YMTextData *ymData = [[YMTextData alloc] init] ;
+        QYSocialModel *ymData = [[QYSocialModel alloc] init] ;
         
 //        NSInteger commentCount = [feed.commentCount integerValue] ;
         NSMutableArray *comments = [NSMutableArray array] ;
@@ -215,7 +215,7 @@ lineBreakMode:mode].height : 0.f;
             [comments addObject:commentStr] ;
         }] ;
         
-        ymData.showShuoShuo = feed.content ;
+        ymData.content = feed.content ;
         ymData.foldOrNot = YES ;//?
 //        ymData.showImageArray = ;//
         ymData.defineAttrData = userDefineAttriArray ;
@@ -361,7 +361,7 @@ lineBreakMode:mode].height : 0.f;
 #warning 补丁
     _tableDataSource = [NSMutableArray array] ;
     
-    for (YMTextData *ymData in dataArray) {        
+    for (QYSocialModel *ymData in dataArray) {        
         ymData.shuoshuoHeight = [ymData calculateShuoshuoHeightWithWidth:self.view.frame.size.width withUnFoldState:NO];//折叠
         
         ymData.unFoldShuoHeight = [ymData calculateShuoshuoHeightWithWidth:self.view.frame.size.width withUnFoldState:YES];//展开
@@ -386,7 +386,7 @@ lineBreakMode:mode].height : 0.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    YMTextData *ym = [_tableDataSource objectAtIndex:indexPath.row] ;
+    QYSocialModel *ym = [_tableDataSource objectAtIndex:indexPath.row] ;
     BOOL unfold = ym.foldOrNot ;
     return TableHeader + kLocationToBottom + ym.replyHeight + ym.showImageHeight  + kDistance + (ym.islessLimit?0:30) + (unfold?ym.shuoshuoHeight:ym.unFoldShuoHeight) + kReplyBtnDistance - 25.0 ;
 }
@@ -395,9 +395,9 @@ lineBreakMode:mode].height : 0.f;
 
     static NSString *CellIdentifier = @"ILTableViewCell";
     
-    YMTableViewCell *cell = (YMTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier] ;
+    QYSocialTableViewCell *cell = (QYSocialTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier] ;
     if (cell == nil) {
-        cell = [[YMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[QYSocialTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.stamp = indexPath.row ;
     cell.replyBtn.tag = indexPath.row ;
@@ -408,7 +408,7 @@ lineBreakMode:mode].height : 0.f;
 
     [feed.owner displayAvatarAtImageView:cell.avatarImageView] ;
     
-    [cell setYMViewWith:[_tableDataSource objectAtIndex:indexPath.row]] ;
+    [cell setUpWithModel:[_tableDataSource objectAtIndex:indexPath.row]] ;
 
     return cell;
 }
@@ -417,7 +417,7 @@ lineBreakMode:mode].height : 0.f;
 
 #pragma mark - 评论
 
-- (void)replyAction:(YMButton *)sender{
+- (void)replyAction:(QYButton *)sender{
     CGRect rectInTableView = [mainTable rectForRowAtIndexPath:sender.appendIndexPath];
     float origin_Y = rectInTableView.origin.y + sender.frame.origin.y;
   
@@ -472,7 +472,7 @@ lineBreakMode:mode].height : 0.f;
 
 
 #pragma mark -cellDelegate
-- (void)changeFoldState:(YMTextData *)ymD onCellRow:(NSInteger)cellStamp {
+- (void)changeFoldState:(QYSocialModel *)ymD onCellRow:(NSInteger)cellStamp {
     [_tableDataSource replaceObjectAtIndex:cellStamp withObject:ymD];
     [mainTable reloadData];
 
@@ -485,7 +485,7 @@ lineBreakMode:mode].height : 0.f;
     maskview.backgroundColor = [UIColor blackColor];
     [self.view addSubview:maskview];
     
-    YMShowImageView *ymImageV = [[YMShowImageView alloc] initWithFrame:self.view.bounds byClick:clickTag appendArray:imageViews];
+    QYShowImageView *ymImageV = [[QYShowImageView alloc] initWithFrame:self.view.bounds byClick:clickTag appendArray:imageViews];
     [ymImageV show:maskview didFinish:^(){
         
         [UIView animateWithDuration:0.5f animations:^{

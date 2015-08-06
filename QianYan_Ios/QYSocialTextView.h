@@ -14,7 +14,7 @@
 
 @protocol WFCoretextDelegate ;
 
-@interface WFTextView : UIView
+@interface QYSocialTextView : UIView
 
 @property (nonatomic,strong) NSAttributedString *attrEmotionString;
 @property (nonatomic,strong) NSArray *emotionNames;
@@ -38,8 +38,8 @@
 
 - (void)clickWFCoretext:(NSString *)clickString;
 
-- (void)textView:(WFTextView *)view didClickWFCoretext:(NSString *)clickedString ;
+- (void)textView:(QYSocialTextView *)view didClickWFCoretext:(NSString *)clickedString ;
 
-- (void)textViewDidClickAllText:(WFTextView *)view ;
+- (void)textViewDidClickAllText:(QYSocialTextView *)view ;
 
 @end

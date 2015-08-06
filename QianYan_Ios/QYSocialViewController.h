@@ -10,7 +10,7 @@
 #import "SlidingViewManager.h"
 
 
-@interface WXViewController : UIViewController
+@interface QYSocialViewController : UIViewController
 
 - (IBAction)showSharingControlBtnClicked:(id)sender;
 @property (strong) UIView *maskView;

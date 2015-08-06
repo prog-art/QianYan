@@ -6,18 +6,15 @@
 //  Copyright (c) 2014年 tigerwf. All rights reserved.
 //
 
-#import "YMShowImageView.h"
+#import "QYShowImageView.h"
 
-@implementation YMShowImageView{
-
+@implementation QYShowImageView{
     UIScrollView *_scrollView;
     CGRect self_Frame;
     NSInteger page;
     BOOL doubleClick;
 
 }
-
-
 
 - (id)initWithFrame:(CGRect)frame byClick:(NSInteger)clickTag appendArray:(NSArray *)appendArray{
 
