@@ -10,6 +10,6 @@
 
 @interface QYButton : UIButton
 
-@property (nonatomic,strong) NSIndexPath * appendIndexPath;
+@property (nonatomic,strong) NSIndexPath *appendIndexPath ;
 
 @end

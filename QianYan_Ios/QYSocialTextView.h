@@ -16,13 +16,14 @@
 
 @interface QYSocialTextView : UIView
 
-@property (nonatomic,strong) NSAttributedString *attrEmotionString;
-@property (nonatomic,strong) NSArray *emotionNames;
-@property (nonatomic,assign) BOOL isDraw;
-@property (nonatomic,assign) BOOL isFold;//是否折叠
-@property (nonatomic,strong) NSMutableArray *attributedData;
-@property (nonatomic,assign) int textLine;
-@property (nonatomic,assign) id<WFCoretextDelegate>delegate;
+@property (weak) id<WFCoretextDelegate>delegate ;
+
+@property (nonatomic,strong) NSAttributedString *attrEmotionString ;
+@property (nonatomic,strong) NSArray *emotionNames ;
+@property (nonatomic,assign) BOOL isDraw ;
+@property (nonatomic,assign) BOOL isFold ;//是否折叠
+@property (nonatomic,strong) NSMutableArray *attributedData ;
+@property (nonatomic,assign) int textLine ;
 @property (nonatomic,assign) CFIndex limitCharIndex;//限制行的最后一个char的index
 
 

@@ -23,6 +23,7 @@
 @property (nonatomic,strong) UILabel *nameLabel ;
 @property (nonatomic,strong) UIImageView *avatarImageView ;
 @property (nonatomic,strong) NSMutableArray * imageViews ;//显示带图片的说说
+@property (nonatomic,strong) UIButton *deleteBtn ;//删除状态的按钮
 
 #pragma mark - Data
 
@@ -41,7 +42,11 @@
 
 @protocol QYSocialCellDelegate <NSObject>
 
-- (void)changeFoldState:(QYSocialModel *)ymD onCellRow:(NSInteger) cellStamp;
-- (void)showImageViewWithImageViews:(NSArray *)imageViews byClickWhich:(NSInteger)clickTag;
+@optional
+
+- (void)changeFoldState:(QYSocialModel *)ymD onCellRow:(NSInteger) cellStamp ;
+- (void)showImageViewWithImageViews:(NSArray *)imageViews byClickWhich:(NSInteger)clickTag ;
+
+- (void)cell:(QYSocialTableViewCell *)cell didClickDeleteBtn:(UIButton *)sender ;
 
 @end

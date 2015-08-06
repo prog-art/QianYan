@@ -14,141 +14,29 @@
 #import "QYSocialTextView.h"
 
 @implementation QYSocialModel{
-    BOOL isReplyView ;
+    BOOL isCommentView ;
     int tempInt ;
 }
 
-- (id)init {
+- (instancetype)init {
     if ( self = [super init] ) {
-        self.completionReplySource = [NSMutableArray array] ;
+        self.completionComments = [NSMutableArray array] ;
         self.attributedData = [NSMutableArray array] ;
         self.attributedDataWF = [NSMutableArray array] ;
         self.showImageArray = [NSMutableArray array] ;
-        _foldOrNot = YES ;
-        _islessLimit = NO ;
+        self.foldOrNot = YES ;
+        self.islessLimit = NO ;
+        self.isSelfTheOwner = NO ;
     }
     return self;
 }
 
-//计算replyview高度
-- (float)calculateReplyHeightWithWidth:(float)sizeWidth {
-
-    isReplyView = YES ;
-    float height = .0f ;
-    
-    for (int i = 0; i < self.replyDataSource.count ; i ++ ) {
-        
-        tempInt = i ;
-        
-        NSString *matchString = self.replyDataSource[i] ;
-        
-        NSArray *itemIndexs = [ILRegularExpressionManager itemIndexesWithPattern:EmotionItemPattern inString:matchString] ;
-        
-        NSString *newString = [matchString replaceCharactersAtIndexes:itemIndexs
-                                                           withString:PlaceHolder] ;
-        //存新的
-        [self.completionReplySource addObject:newString] ;
-        
-        
-        [self matchString:newString fromView:isReplyView] ;
-        
-        QYSocialTextView *_ilcoreText = [[QYSocialTextView alloc] initWithFrame:CGRectMake(offSet_X,10, sizeWidth - offSet_X * 2, 0)] ;
-        
-        _ilcoreText.isDraw = NO ;
-        
-        [_ilcoreText setOldString:self.replyDataSource[i] andNewString:newString] ;
-        
-        height =  height + [_ilcoreText getTextHeight] + 5;
-        
-    }
-    
-    [self calculateShowImageHeight] ;
-    
-    return height;
-    
-}
-
-//图片高度
-- (void)calculateShowImageHeight {
-    
-    if (self.showImageArray.count == 0 ) {
-        self.showImageHeight = 0 ;
-    }else{
-        self.showImageHeight = (ShowImage_H + 10) * ( (self.showImageArray.count - 1)/3 + 1) ;
-    }
-    
-}
-
-- (void)matchString:(NSString *)dataSourceString fromView:(BOOL)isYMOrNot {
-    
-    if (isYMOrNot == YES) {
-        
-        NSMutableArray *totalArr = [NSMutableArray arrayWithCapacity:0] ;
-        
-        //**********号码******
-        
-        NSMutableArray *mobileLink = [ILRegularExpressionManager matchMobileLink:dataSourceString];
-        for (int i = 0; i < mobileLink.count; i ++) {
-            [totalArr addObject:mobileLink[i]] ;
-        }
-        
-        //*************************
-        
-        
-        //***********匹配网址*********
-        
-        NSMutableArray *webLink = [ILRegularExpressionManager matchWebLink:dataSourceString];
-        for (int i = 0; i < webLink.count; i ++) {
-            
-            [totalArr addObject:[webLink objectAtIndex:i]];
-        }
-        
-        //******自行添加**********
-        
-        if (_defineAttrData.count != 0) {
-            NSArray *tArr = _defineAttrData[tempInt] ;
-            for (int i = 0; i < tArr.count ; i ++) {
-                NSString *string = [dataSourceString substringWithRange:NSRangeFromString(tArr[i])] ;
-                [totalArr addObject:[NSDictionary dictionaryWithObject:string forKey:NSStringFromRange(NSRangeFromString(tArr[i]))]] ;
-            }
-            
-        }
-       
-        
-        //***********************
-        [self.attributedData addObject:totalArr];
-        
-        
-    }else{
-        
-        //**********号码******
-        
-        NSMutableArray *mobileLink = [ILRegularExpressionManager matchMobileLink:dataSourceString] ;
-        for (int i = 0; i < mobileLink.count; i ++) {
-            [self.attributedDataWF addObject:mobileLink[i]] ;
-        }
-        
-        //*************************
-        
-        
-        //***********匹配网址*********
-        
-        NSMutableArray *webLink = [ILRegularExpressionManager matchWebLink:dataSourceString] ;
-        for (int i = 0; i < webLink.count; i ++) {
-            [self.attributedDataWF addObject:[webLink objectAtIndex:i]] ;
-        }
-        
-        //******自行添加**********
-        //        NSString *string = [dataSourceString substringWithRange:NSMakeRange(0, 3)];
-        //        [self.attributedDataWF addObject:[NSDictionary dictionaryWithObject:string forKey:NSStringFromRange(NSMakeRange(0, 3))]];
-        //**********************
-    }
-}
+#pragma mark - public api
 
 //说说高度
 - (float)calculateContentHeightForContainerWidth:(float)sizeWidth withUnFoldState:(BOOL)isUnfold {
     
-    isReplyView = NO ;
+    isCommentView = NO ;
     
     NSString *matchString =  _content ;
     
@@ -159,7 +47,7 @@
     //存新的
     self.completionContent = newString ;
     
-    [self matchString:newString fromView:isReplyView] ;
+    [self matchString:newString isForCommentView:isCommentView] ;
     
     QYSocialTextView *_wfcoreText = [[QYSocialTextView alloc] initWithFrame:CGRectMake(20,10, sizeWidth - 2*20, 0)] ;
     
@@ -179,6 +67,117 @@
         _wfcoreText.isFold = NO ;
     }
     return [_wfcoreText getTextHeight] ;
+}
+
+//计算评论高度
+- (float)calculateCommentsHeightWithWidth:(float)sizeWidth {
+
+    isCommentView = YES ;
+    float height = 0.0f ;
+    
+    for (int i = 0; i < self.comments.count ; i ++ ) {
+        
+        tempInt = i ;
+        
+        //查找emoji并替换成空格，不支持emoji
+        NSString *matchString = self.comments[i] ;
+        
+        NSArray *itemIndexs = [ILRegularExpressionManager itemIndexesWithPattern:EmotionItemPattern inString:matchString] ;
+        
+        NSString *newString = [matchString replaceCharactersAtIndexes:itemIndexs
+                                                           withString:PlaceHolder] ;
+        
+        //存新的
+        [self.completionComments addObject:newString] ;
+        
+        
+        [self matchString:newString isForCommentView:isCommentView] ;
+        
+        //仅用于计算高度
+        QYSocialTextView *textView = [[QYSocialTextView alloc] initWithFrame:CGRectMake(offSet_X,10, sizeWidth - offSet_X * 2, 0)] ;
+        
+        textView.isDraw = NO ;
+        
+        [textView setOldString:self.comments[i] andNewString:newString] ;
+        
+        height =  height + [textView getTextHeight] + 5;
+        
+    }
+    
+    [self calculateAttachImagesHeight] ;
+    
+    return height;
+    
+}
+
+//图片高度
+- (void)calculateAttachImagesHeight {
+    self.showImageHeight = self.showImageArray.count == 0 ? 0 : (ShowImage_H + 10) * ( (self.showImageArray.count - 1) / 3 + 1) ;
+}
+
+- (void)matchString:(NSString *)originString isForCommentView:(BOOL)isCommentViewOrNot {
+    
+    if (isCommentViewOrNot == YES) {
+        //是评论
+        NSMutableArray *totalArr = [NSMutableArray arrayWithCapacity:0] ;
+        
+        //**********号码******
+        
+        NSMutableArray *mobileLink = [ILRegularExpressionManager matchMobileLink:originString];
+        for (int i = 0; i < mobileLink.count; i ++) {
+            [totalArr addObject:mobileLink[i]] ;
+        }
+        
+        //*************************
+        
+        
+        //***********匹配网址*********
+        
+        NSMutableArray *webLink = [ILRegularExpressionManager matchWebLink:originString] ;
+        for (int i = 0; i < webLink.count; i ++) {
+            [totalArr addObject:[webLink objectAtIndex:i]] ;
+        }
+        
+        //******自行添加**********
+        
+        if (_defineAttrData.count != 0) {
+            NSArray *tArr = _defineAttrData[tempInt] ;
+            for (int i = 0; i < tArr.count ; i ++) {
+                NSString *string = [originString substringWithRange:NSRangeFromString(tArr[i])] ;
+                [totalArr addObject:[NSDictionary dictionaryWithObject:string forKey:NSStringFromRange(NSRangeFromString(tArr[i]))]] ;
+            }
+            
+        }
+       
+        
+        //***********************
+        [self.attributedData addObject:totalArr];
+        
+        
+    }else{
+        //不是评论
+        //**********号码******
+        
+        NSMutableArray *mobileLink = [ILRegularExpressionManager matchMobileLink:originString] ;
+        for (int i = 0; i < mobileLink.count; i ++) {
+            [self.attributedDataWF addObject:mobileLink[i]] ;
+        }
+        
+        //*************************
+        
+        
+        //***********匹配网址*********
+        
+        NSMutableArray *webLink = [ILRegularExpressionManager matchWebLink:originString] ;
+        for (int i = 0; i < webLink.count; i ++) {
+            [self.attributedDataWF addObject:[webLink objectAtIndex:i]] ;
+        }
+        
+        //******自行添加**********
+        //        NSString *string = [dataSourceString substringWithRange:NSMakeRange(0, 3)];
+        //        [self.attributedDataWF addObject:[NSDictionary dictionaryWithObject:string forKey:NSStringFromRange(NSMakeRange(0, 3))]];
+        //**********************
+    }
 }
 
 @end

@@ -64,40 +64,40 @@
     }
 }
 
+
 - (void)setOldString:(NSString *)oldString andNewString:(NSString *)newString {
     
     _oldString = oldString;
     _newString = newString;
     [self cookEmotionString];
-    
 }
 
 
-#pragma mark - Cook the emotion string
+#pragma mark - Create the emotion string
 - (void)cookEmotionString {
     
     // 使用正则表达式查找特殊字符的位置
     NSArray *itemIndexes = [ILRegularExpressionManager itemIndexesWithPattern:
                             EmotionItemPattern inString:_oldString];
     
-    NSArray *names = nil;
+    NSArray *names = nil ;
     
-    NSArray *newRanges = nil;
+    NSArray *newRanges = nil ;
     
-    names = [_oldString itemsForPattern:EmotionItemPattern captureGroupIndex:1];
+    names = [_oldString itemsForPattern:EmotionItemPattern captureGroupIndex:1] ;
     
-    newRanges = [itemIndexes offsetRangesInArrayBy:[PlaceHolder length]];
-    _emotionNames = names;
+    newRanges = [itemIndexes offsetRangesInArrayBy:[PlaceHolder length]] ;
+    _emotionNames = names ;
     _attrEmotionString = [self createAttributedEmotionStringWithRanges:newRanges
-                                                             forString:_newString];
+                                                             forString:_newString] ;
     typesetter = CTTypesetterCreateWithAttributedString((CFAttributedStringRef)
-                                                        (_attrEmotionString));
+                                                        (_attrEmotionString)) ;
     
     if (_isDraw == NO) {
        // CFRelease(typesetter);
         return;
     }
-    [self setNeedsDisplay];
+    [self setNeedsDisplay] ;
     
 }
 

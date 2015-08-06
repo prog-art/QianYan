@@ -35,11 +35,11 @@
 
 #pragma mark - 回复
 
-@property (nonatomic,strong) NSMutableArray *completionReplySource;//回复内容数据源（处理）
+@property (nonatomic,strong) NSMutableArray *completionComments;//回复内容数据源（处理）
 @property (nonatomic,strong) NSMutableArray *attributedData;//YMTextView附带的点击区域数组
 @property (nonatomic,strong) NSMutableArray *attributedDataWF;//WFTextView附带的点击区域数组
-@property (nonatomic,strong) NSMutableArray *replyDataSource;//回复内容数据源（未处理）
-@property (nonatomic,assign) float           replyHeight;//回复高度
+@property (nonatomic,strong) NSMutableArray *comments;//回复内容数据源（未处理）
+@property (nonatomic,assign) float           commentsHeight;//回复高度
 @property (nonatomic,strong) NSMutableArray *defineAttrData;//自行添加 元素为每条回复中的自行添加的range组成的数组 如：第一条回复有（0，2）和（5，2） 第二条为（0，2）。。。。
 
 /**
@@ -49,11 +49,15 @@
  *
  *  @return 返回高度
  */
-- (float)calculateReplyHeightWithWidth:(float)sizeWidth ;
+- (float)calculateCommentsHeightWithWidth:(float)sizeWidth ;
 
 #pragma mark - 图片
 
 @property (nonatomic,strong) NSMutableArray *showImageArray;//图片数组
 @property (nonatomic,assign) float           showImageHeight;//展示图片的高度
+
+#pragma mark - 删除按钮
+
+@property (nonatomic,assign) BOOL            isSelfTheOwner ;//是否是自己的说说，决定是否能删除。
 
 @end

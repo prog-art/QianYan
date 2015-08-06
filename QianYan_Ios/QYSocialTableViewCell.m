@@ -68,6 +68,17 @@
     return _foldBtn ;
 }
 
+- (UIButton *)deleteBtn {
+    if ( !_deleteBtn ) {
+        _deleteBtn = [UIButton buttonWithType:UIButtonTypeSystem] ;
+        [_deleteBtn setTitle:@"删除" forState:UIControlStateNormal] ;
+        _deleteBtn.titleLabel.font = [UIFont systemFontOfSize:15.0] ;
+        [_deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal] ;
+        [_deleteBtn addTarget:self action:@selector(deleteBtnClicked:) forControlEvents:UIControlEventTouchUpInside] ;
+    }
+    return _deleteBtn ;
+}
+
 #pragma mark -
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -103,6 +114,8 @@
         _replyBtn = [QYButton buttonWithType:0] ;
         [_replyBtn setImage:[UIImage imageNamed:@"社交-评论按钮.png"] forState:0] ;
         [self.contentView addSubview:_replyBtn] ;
+        
+        [self.contentView addSubview:self.deleteBtn] ;
         
 //        if (textFieldArray.count == 0) {
 //            textFieldArray = [NSMutableArray array];
@@ -214,7 +227,7 @@
     float backView_H = 0;
     
     //评论
-    for (int i = 0; i < ymData.replyDataSource.count ; i ++ ) {  //评论部分
+    for (int i = 0; i < ymData.comments.count ; i ++ ) {  //评论部分
 
         QYSocialTextView *commentTextView = [[QYSocialTextView alloc] initWithFrame:CGRectMake(offSet_X,TableHeader + 10 + ShowImage_H + (ShowImage_H + 10)*(scale_Y/3) + origin_Y + hhhh + kDistance + (ymData.islessLimit ? 0 : 30 ) + balanceHeight + kReplyBtnDistance, 260, 0)];
         
@@ -226,7 +239,7 @@
         commentTextView.attributedData = ymData.attributedData[i] ;
         
         
-        [commentTextView setOldString:[ymData.replyDataSource objectAtIndex:i] andNewString:[ymData.completionReplySource objectAtIndex:i]];
+        [commentTextView setOldString:[ymData.comments objectAtIndex:i] andNewString:[ymData.completionComments objectAtIndex:i]];
         
         commentTextView.frame = CGRectMake(offSet_X,TableHeader + 10 + ShowImage_H + (ShowImage_H + 10)*(scale_Y/3) + origin_Y + hhhh + kDistance + (ymData.islessLimit?0:30) + balanceHeight + kReplyBtnDistance - 25, 260, [commentTextView getTextHeight]);
         commentTextView.tag = i ;
@@ -271,11 +284,11 @@
 //
 //    backView_H += 100;
     
-    backView_H += (ymData.replyDataSource.count - 1) * 5 ;
+    backView_H += (ymData.comments.count - 1) * 5 ;
     
 //replyImageView -- 评论背景
     
-    if (ymData.replyDataSource.count == 0) {//没回复的时候
+    if (ymData.comments.count == 0) {//没回复的时候
         
         commentBackgroundImageView.frame = CGRectMake(offSet_X, backView_Y - 10 + balanceHeight + 5 + kReplyBtnDistance - 25, 0, 0);
         
@@ -288,6 +301,16 @@
         
         _replyBtn.frame = CGRectMake(271, commentBackgroundImageView.frame.origin.y - 26, 38, 18) ;
         
+    }
+    
+    //最后是删除按钮
+    
+    if ( ymData.isSelfTheOwner ) {
+        //是自己的说说
+        self.deleteBtn.frame = CGRectMake(8, 45, 40, 18) ;
+        self.deleteBtn.hidden = FALSE ;
+    } else {
+        self.deleteBtn.hidden = YES ;
     }
 }
 
@@ -308,13 +331,12 @@
 
 - (void)textViewDidClickAllText:(QYSocialTextView *)view {
     NSInteger index = view.tag ;
+#warning 判断是否是自己
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UI正在施工中，删除等待UI接口设计完善～～" message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
         [alert show];
-        
     });
     
 }
@@ -322,7 +344,9 @@
 #pragma mark - 点击事件 && IBActions
 
 - (void)tapImageView:(YMTapGestureRecongnizer *)tapGes{
-    [_delegate showImageViewWithImageViews:tapGes.appendArray byClickWhich:tapGes.view.tag] ;
+    if ( [self.delegate respondsToSelector:@selector(showImageViewWithImageViews:byClickWhich:)]) {
+        [self.delegate showImageViewWithImageViews:tapGes.appendArray byClickWhich:tapGes.view.tag] ;
+    }
 }
 
 - (void)foldText {
@@ -334,7 +358,15 @@
         [self.foldBtn setTitle:@"展开" forState:0];
     }
     
-    [_delegate changeFoldState:tempData onCellRow:self.stamp] ;
+    if ( [self.delegate respondsToSelector:@selector(changeFoldState:onCellRow:)]) {
+        [self.delegate changeFoldState:tempData onCellRow:self.stamp] ;
+    }
+}
+
+- (void)deleteBtnClicked:(UIButton *)sender {
+    if ( [self.delegate respondsToSelector:@selector(cell:didClickDeleteBtn:)]) {
+        [self.delegate cell:self didClickDeleteBtn:sender] ;
+    }
 }
 
 @end

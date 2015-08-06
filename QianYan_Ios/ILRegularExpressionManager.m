@@ -49,16 +49,15 @@
 
 + (NSMutableArray *)matchMobileLink:(NSString *)pattern {
 
-    NSMutableArray *linkArr = [NSMutableArray arrayWithCapacity:0];
-    NSRegularExpression*regular=[[NSRegularExpression alloc]initWithPattern:@"(\\(86\\))?(13[0-9]|15[0-35-9]|18[0125-9])\\d{8}" options:NSRegularExpressionDotMatchesLineSeparators|NSRegularExpressionCaseInsensitive error:nil];
+    NSMutableArray *linkArr = [NSMutableArray arrayWithCapacity:0] ;
+    NSRegularExpression *regular = [[NSRegularExpression alloc] initWithPattern:@"(\\(86\\))?(13[0-9]|15[0-35-9]|18[0125-9])\\d{8}" options:NSRegularExpressionDotMatchesLineSeparators|NSRegularExpressionCaseInsensitive error:nil] ;
     
-    NSArray* array=[regular matchesInString:pattern options:0 range:NSMakeRange(0, [pattern length])];
+    NSArray* array = [regular matchesInString:pattern options:0 range:NSMakeRange(0, [pattern length])] ;
     
     for( NSTextCheckingResult * result in array){
-    
-        NSString * string=[pattern substringWithRange:result.range];
-        NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:string,NSStringFromRange(result.range), nil];
-        [linkArr addObject:dic];
+        NSString * string = [pattern substringWithRange:result.range] ;
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:string,NSStringFromRange(result.range), nil];
+        [linkArr addObject:dic] ;
     }
 
     return linkArr;

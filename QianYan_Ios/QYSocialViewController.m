@@ -37,7 +37,7 @@ lineBreakMode:mode].height : 0.f;
 
 #define kSocial2WordSharingSegueId @"Social2WordSharingSegueId"
 
-@interface QYSocialViewController ()<UITableViewDataSource,UITableViewDelegate,QYSocialCellDelegate,QY_commentDelegate> {
+@interface QYSocialViewController ()<UITableViewDataSource,UITableViewDelegate,QYSocialCellDelegate,QY_commentDelegate,UIAlertViewDelegate,UIActionSheetDelegate> {
 //    NSMutableArray *_imageDataSource;
     
 //    NSMutableArray *_contentDataSource;//模拟接口给的数据
@@ -219,11 +219,11 @@ lineBreakMode:mode].height : 0.f;
         ymData.foldOrNot = YES ;//?
 //        ymData.showImageArray = ;//
         ymData.defineAttrData = userDefineAttriArray ;
-        ymData.replyDataSource = comments;//回复？
+        ymData.comments = comments;//回复？
         
-//#warning 测试
-//        ymData.name = feed.feedId ;
         ymData.name = feed.owner.nickname ? : feed.owner.userName ;
+        
+        ymData.isSelfTheOwner = [feed.owner.userId isEqualToString:[QYUser currentUser].coreUser.userId] ;
         
         [ymDataArray addObject:ymData] ;
     }] ;
@@ -366,7 +366,7 @@ lineBreakMode:mode].height : 0.f;
         
         ymData.unFoldedContentHeight = [ymData calculateContentHeightForContainerWidth:self.view.frame.size.width withUnFoldState:YES];//展开
         
-        ymData.replyHeight = [ymData calculateReplyHeightWithWidth:self.view.frame.size.width];
+        ymData.commentsHeight = [ymData calculateCommentsHeightWithWidth:self.view.frame.size.width];
         [_tableDataSource addObject:ymData];
     }
     
@@ -388,7 +388,7 @@ lineBreakMode:mode].height : 0.f;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     QYSocialModel *ym = [_tableDataSource objectAtIndex:indexPath.row] ;
     BOOL unfold = ym.foldOrNot ;
-    return TableHeader + kLocationToBottom + ym.replyHeight + ym.showImageHeight  + kDistance + (ym.islessLimit?0:30) + (unfold?ym.foldedContentHeight:ym.unFoldedContentHeight) + kReplyBtnDistance - 25.0 ;
+    return TableHeader + kLocationToBottom + ym.commentsHeight + ym.showImageHeight  + kDistance + (ym.islessLimit?0:30) + (unfold?ym.foldedContentHeight:ym.unFoldedContentHeight) + kReplyBtnDistance - 25.0 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -503,6 +503,14 @@ lineBreakMode:mode].height : 0.f;
 
 }
 
+- (void)cell:(QYSocialTableViewCell *)cell didClickDeleteBtn:(UIButton *)sender {
+    [QYUtils alert:@"- -删除耶"] ;
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"是否删除这条状态？" delegate:self cancelButtonTitle:@"手滑了" otherButtonTitles:@"是的", nil] ;
+    [alertView show] ;
+    
+}
+
 #pragma mark - 评论说说回调
 - (void)YMReplyInputWithReply:(NSString *)replyText appendTag:(NSInteger)inputTag {
     QY_feed *feed = self.feeds[inputTag] ;
@@ -523,6 +531,22 @@ lineBreakMode:mode].height : 0.f;
 - (void)destorySelf {
     [replyView removeFromSuperview] ;
     replyView = nil ;
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if ( buttonIndex != alertView.cancelButtonIndex ) {
+#warning 删除的逻辑
+    }
+}
+
+#pragma mark -  UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if ( buttonIndex != actionSheet.cancelButtonIndex ) {
+#warning 删除逻辑
+    }
 }
 
 @end

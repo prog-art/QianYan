@@ -12,6 +12,9 @@
 
 + (NSArray *)itemIndexesWithPattern:(NSString *)pattern inString:(NSString *)findingString ;
 
+/**
+ *  匹配电话号码
+ */
 + (NSMutableArray *)matchMobileLink:(NSString *)pattern ;
 
 + (NSMutableArray *)matchWebLink:(NSString *)pattern ;
