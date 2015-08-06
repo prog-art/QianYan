@@ -26,6 +26,6 @@
 #define kSelf_SelectedColor [UIColor colorWithWhite:0 alpha:0.4] //点击背景  颜色
 #define kUserName_SelectedColor [UIColor colorWithWhite:0 alpha:0.25]//点击姓名颜色
 
-
+#define TimeHeight 30
 
 #endif

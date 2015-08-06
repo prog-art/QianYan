@@ -14,6 +14,10 @@
 
 @property (nonatomic,strong) NSString *      name ;//名字
 
+#pragma mark - 时间
+
+@property (nonatomic,strong) NSDate *        pubDate ;//发布时间
+
 #pragma mark - 内容
 
 @property (nonatomic,strong) NSString       *content;//内容部分

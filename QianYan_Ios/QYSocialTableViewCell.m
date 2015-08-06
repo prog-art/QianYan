@@ -79,6 +79,16 @@
     return _deleteBtn ;
 }
 
+- (UILabel *)pubDataLabel {
+    if ( !_pubDataLabel ) {
+        _pubDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(245 , 3 , 75, 18) ] ;
+        _pubDataLabel.font = [UIFont systemFontOfSize:15.0] ;
+        _pubDataLabel.textColor = [UIColor blueColor] ;
+        _pubDataLabel.text = @"" ;
+    }
+    return _pubDataLabel ;
+}
+
 #pragma mark -
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -116,6 +126,8 @@
         [self.contentView addSubview:_replyBtn] ;
         
         [self.contentView addSubview:self.deleteBtn] ;
+        
+        [self.contentView addSubview:self.pubDataLabel] ;
         
 //        if (textFieldArray.count == 0) {
 //            textFieldArray = [NSMutableArray array];
@@ -312,6 +324,42 @@
     } else {
         self.deleteBtn.hidden = YES ;
     }
+    
+    //时间
+#warning 回头决定显示策略
+    NSDate *pubDate = ymData.pubDate ;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    [formatter setDateFormat:@"HH:mm"] ;
+    NSString *time = [formatter stringFromDate:pubDate] ;
+    NSCalendar *calendar = [NSCalendar currentCalendar];//日历
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:pubDate toDate:[NSDate date] options:0];
+    long year = [components year];
+    long month = [components month];
+    long day = [components day];
+    //三天以内更改显示格式
+    NSString *title = @"" ;
+    if (year == 0 && month == 0 && day < 3) {
+        switch ( day ) {
+            case 0 : {
+                title = NSLocalizedString(@"今天 ",nil);
+                break ;
+            }
+            
+            case 1 : {
+                title = NSLocalizedString(@"昨天 ",nil);
+                break ;
+            }
+                
+            case 2 : {
+                title = NSLocalizedString(@"前天 ",nil);
+            }
+                
+            default :
+                break ;
+        }
+    }
+    
+    self.pubDataLabel.text = [title stringByAppendingString:time] ;
 }
 
 #pragma mark - WFCoretextDelegate

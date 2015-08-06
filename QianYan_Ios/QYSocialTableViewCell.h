@@ -24,6 +24,7 @@
 @property (nonatomic,strong) UIImageView *avatarImageView ;
 @property (nonatomic,strong) NSMutableArray * imageViews ;//显示带图片的说说
 @property (nonatomic,strong) UIButton *deleteBtn ;//删除状态的按钮
+@property (nonatomic,strong) UILabel *pubDataLabel ;//发表的时间
 
 #pragma mark - Data
 

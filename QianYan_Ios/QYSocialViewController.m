@@ -225,6 +225,8 @@ lineBreakMode:mode].height : 0.f;
         
         ymData.isSelfTheOwner = [feed.owner.userId isEqualToString:[QYUser currentUser].coreUser.userId] ;
         
+        ymData.pubDate = feed.pubDate ;
+        
         [ymDataArray addObject:ymData] ;
     }] ;
 
@@ -388,7 +390,7 @@ lineBreakMode:mode].height : 0.f;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     QYSocialModel *ym = [_tableDataSource objectAtIndex:indexPath.row] ;
     BOOL unfold = ym.foldOrNot ;
-    return TableHeader + kLocationToBottom + ym.commentsHeight + ym.showImageHeight  + kDistance + (ym.islessLimit?0:30) + (unfold?ym.foldedContentHeight:ym.unFoldedContentHeight) + kReplyBtnDistance - 25.0 ;
+    return TableHeader + kLocationToBottom + ym.commentsHeight + ym.showImageHeight  + kDistance + (ym.islessLimit?0:30) + (unfold?ym.foldedContentHeight:ym.unFoldedContentHeight) + kReplyBtnDistance - 25.0 + TimeHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -504,8 +506,6 @@ lineBreakMode:mode].height : 0.f;
 }
 
 - (void)cell:(QYSocialTableViewCell *)cell didClickDeleteBtn:(UIButton *)sender {
-    [QYUtils alert:@"- -删除耶"] ;
-    
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"是否删除这条状态？" delegate:self cancelButtonTitle:@"手滑了" otherButtonTitles:@"是的", nil] ;
     [alertView show] ;
     
