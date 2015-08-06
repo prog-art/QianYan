@@ -44,4 +44,12 @@
 
 - (void)postUserInfoNotify ;
 
+#pragma mark - Logout
+
+- (void)addLogoutObserver:(id)target selector:(SEL)selector ;
+
+- (void)removeLogoutObserver:(id)target ;
+
+- (void)postLogoutNotify ;
+
 @end

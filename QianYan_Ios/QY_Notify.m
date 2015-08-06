@@ -14,6 +14,7 @@
 #define kNOTIFICATION_FRIEND_UPDATED @"NOTIFICATION_FEED_UPDATED"
 #define kNOTIFICATION_AVATAR_UPDATED @"NOTIFICATION_AVATAR_UPDATED"
 #define kNOTIFICATION_USERINFO_UPDATED @"NOTIFICATION_USERINFO_UPDATED"
+#define kNOTIFICATION_LOGOUT_UPDATED @"NOTIFICATION_LOGOUT_UPDATED"
 
 @interface QY_Notify ()
 
@@ -94,6 +95,20 @@
 
 - (void)postUserInfoNotify {
     [_center postNotificationName:kNOTIFICATION_USERINFO_UPDATED object:nil] ;
+}
+
+#pragma mark - Logout
+
+- (void)addLogoutObserver:(id)target selector:(SEL)selector {
+    [_center addObserver:target selector:selector name:kNOTIFICATION_LOGOUT_UPDATED object:nil] ;
+}
+
+- (void)removeLogoutObserver:(id)target {
+    [_center removeObserver:target name:kNOTIFICATION_LOGOUT_UPDATED object:nil] ;
+}
+
+- (void)postLogoutNotify {
+    [_center postNotificationName:kNOTIFICATION_LOGOUT_UPDATED object:nil] ;
 }
 
 @end

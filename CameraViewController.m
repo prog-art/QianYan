@@ -28,7 +28,7 @@
 @property (nonatomic, weak) IBOutlet QY_SKSTableView *tableView ;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segment;
 
-@property (atomic) NSMutableDictionary *cameras ;
+@property (nonatomic) NSMutableDictionary *cameras ;
 
 @property (weak) QY_JPROHttpService *jproService ;
 
@@ -61,7 +61,15 @@
     return _refreshControl ;
 }
 
-#pragma mark - Life Cycle
+- (NSMutableDictionary *)cameras {
+    if ( !_cameras ) {
+        _cameras = [NSMutableDictionary dictionary] ;
+    }
+    return _cameras ;
+}
+
+#pragma mark - refresh
+
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
     if ( refreshControl ) {
@@ -76,8 +84,7 @@
     NSString *userId = [QYUser currentUser].userId ;
     NSString *path = [NSString stringWithFormat:@"user/%@/cameralist",userId] ;
     
-    
-    self.cameras = [NSMutableDictionary dictionary] ;
+    self.cameras = nil ;
     
     [self.jproService getDocumentListForPath:path Complection:^(NSArray *objects, NSError *error) {
         if ( !error ) {
@@ -162,8 +169,10 @@
     NSSet *cameras = [NSSet setWithArray:self.cameras.allKeys] ;
 #warning 补丁
     if ( cameras && [cameras count] != 0 ) {
+        QYDebugLog(@"cameras = %@",cameras) ;
         [[QY_JMSService shareInstance] getCamerasStateByIds:[NSSet setWithArray:self.cameras.allKeys]] ;
     } else {
+        QYDebugLog(@"cameras = %@",cameras) ;
         [self.refreshControl endRefreshing] ;
     }
 }
@@ -187,23 +196,22 @@
     [self.tableView reloadData] ;
 }
 
-- (void)removeObserver {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationNameReceiveCamerasState object:nil] ;
+
+#pragma mark - Life Cycle
+
+- (void)userDidLogout {
+    self.cameras = nil ;
+    [self didReceiveCameraData] ;
 }
 
 - (void)addObserver {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveCamerasState:) name:kNotificationNameReceiveCamerasState object:nil] ;
 }
 
-- (void)dealloc {
-    [self removeObserver] ;
-}
-
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad] ;
     [self addObserver] ;
-    
-    self.cameras = [NSMutableDictionary dictionary] ;
+
     self.jproService = [QY_JPROHttpService shareInstance] ;
     //[_segment addTarget:self action:@selector(segmentChangedValue:) forControlEvents:UIControlEventValueChanged];
     
@@ -211,12 +219,23 @@
     self.tableView.tableFooterView = [[UIView alloc] init] ;//关键语句
     [self.tableView addSubview:self.refreshControl] ;
     
+    [[QY_Notify shareInstance] addLogoutObserver:self selector:@selector(userDidLogout)] ;
+    
     [self refreshCameras] ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.tabBarController.tabBar setHidden:NO];
+    [super viewWillAppear:animated] ;
+    [self.tabBarController.tabBar setHidden:NO] ;
+}
+
+- (void)removeObserver {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNotificationNameReceiveCamerasState object:nil] ;
+}
+
+- (void)dealloc {
+    [self removeObserver] ;
+    [[QY_Notify shareInstance] removeLogoutObserver:self] ;
 }
 
 #pragma mark -- Segment Action
