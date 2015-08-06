@@ -136,11 +136,11 @@
     textView.attributedData = ymData.attributedDataWF;
     textView.isFold = ymData.foldOrNot;
     textView.isDraw = YES;
-    [textView setOldString:ymData.content andNewString:ymData.completionShuoshuo];
+    [textView setOldString:ymData.content andNewString:ymData.completionContent];
     [self.contentView addSubview:textView];
     
     BOOL foldOrnot = ymData.foldOrNot;
-    float hhhh = foldOrnot ? ymData.shuoshuoHeight : ymData.unFoldShuoHeight ;
+    float hhhh = foldOrnot ? ymData.foldedContentHeight : ymData.unFoldedContentHeight ;
     
     textView.frame = CGRectMake(offSet_X, 15 + TableHeader - 25, 260, hhhh);
     

@@ -146,7 +146,7 @@
 }
 
 //说说高度
-- (float)calculateShuoshuoHeightWithWidth:(float)sizeWidth withUnFoldState:(BOOL)isUnfold {
+- (float)calculateContentHeightForContainerWidth:(float)sizeWidth withUnFoldState:(BOOL)isUnfold {
     
     isReplyView = NO ;
     
@@ -157,7 +157,7 @@
     NSString *newString = [matchString replaceCharactersAtIndexes:itemIndexs
                                                        withString:PlaceHolder] ;
     //存新的
-    self.completionShuoshuo = newString ;
+    self.completionContent = newString ;
     
     [self matchString:newString fromView:isReplyView] ;
     

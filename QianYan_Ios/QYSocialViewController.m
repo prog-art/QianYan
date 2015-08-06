@@ -362,9 +362,9 @@ lineBreakMode:mode].height : 0.f;
     _tableDataSource = [NSMutableArray array] ;
     
     for (QYSocialModel *ymData in dataArray) {        
-        ymData.shuoshuoHeight = [ymData calculateShuoshuoHeightWithWidth:self.view.frame.size.width withUnFoldState:NO];//折叠
+        ymData.foldedContentHeight = [ymData calculateContentHeightForContainerWidth:self.view.frame.size.width withUnFoldState:NO];//折叠
         
-        ymData.unFoldShuoHeight = [ymData calculateShuoshuoHeightWithWidth:self.view.frame.size.width withUnFoldState:YES];//展开
+        ymData.unFoldedContentHeight = [ymData calculateContentHeightForContainerWidth:self.view.frame.size.width withUnFoldState:YES];//展开
         
         ymData.replyHeight = [ymData calculateReplyHeightWithWidth:self.view.frame.size.width];
         [_tableDataSource addObject:ymData];
@@ -388,7 +388,7 @@ lineBreakMode:mode].height : 0.f;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     QYSocialModel *ym = [_tableDataSource objectAtIndex:indexPath.row] ;
     BOOL unfold = ym.foldOrNot ;
-    return TableHeader + kLocationToBottom + ym.replyHeight + ym.showImageHeight  + kDistance + (ym.islessLimit?0:30) + (unfold?ym.shuoshuoHeight:ym.unFoldShuoHeight) + kReplyBtnDistance - 25.0 ;
+    return TableHeader + kLocationToBottom + ym.replyHeight + ym.showImageHeight  + kDistance + (ym.islessLimit?0:30) + (unfold?ym.foldedContentHeight:ym.unFoldedContentHeight) + kReplyBtnDistance - 25.0 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
