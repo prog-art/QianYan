@@ -13,6 +13,7 @@
 #import "QYSocialModel.h"
 #import "YMReplyInputView.h"
 #import "QYSocialActionSheet.h"
+#import "QYSocialAlertView.h"
 
 #import "QY_Common.h"
 
@@ -472,7 +473,9 @@ lineBreakMode:mode].height : 0.f;
 }
 
 - (void)cell:(QYSocialTableViewCell *)cell didClickDeleteBtn:(UIButton *)sender {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"是否删除这条状态？" delegate:self cancelButtonTitle:@"手滑了" otherButtonTitles:@"是的", nil] ;
+    QYSocialAlertView *alertView = [[QYSocialAlertView alloc] initWithTitle:nil message:@"是否删除这条状态？" delegate:self cancelButtonTitle:@"手滑了" otherButtonTitles:@"是的", nil] ;
+    alertView.feedId = cell.feedId ;
+    
     [alertView show] ;
     
 }
@@ -513,10 +516,9 @@ lineBreakMode:mode].height : 0.f;
 
 #pragma mark - UIAlertViewDelegate
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)alertView:(QYSocialAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if ( buttonIndex != alertView.cancelButtonIndex ) {
-        [QYUtils alert:@"删除说说"] ;
-#warning 删除的逻辑
+        [self deleteFeedById:alertView.feedId] ;
     }
 }
 
@@ -530,6 +532,19 @@ lineBreakMode:mode].height : 0.f;
 }
 
 #pragma mark - 调用删除的代码
+
+- (void)deleteFeedById:(NSString *)feedId {
+    [SVProgressHUD show] ;
+    [[QYUser currentUser].coreUser deleteFeedById:feedId Complection:^(BOOL success, NSError *error) {
+        [SVProgressHUD dismiss] ;
+        if ( success ) {
+            QYDebugLog(@"删除说说成功") ;
+            [self refreshWithOutNetwork] ;
+        } else {
+            QYDebugLog(@"")
+        }
+    }] ;
+}
 
 - (void)deleteCommentById:(NSString *)commentId {
     [SVProgressHUD show] ;

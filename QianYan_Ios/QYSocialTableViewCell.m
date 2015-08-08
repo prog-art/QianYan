@@ -145,6 +145,7 @@
 - (void)setUpWithModel:(QYSocialModel *)ymData {
     tempData = ymData ;
     
+    self.feedId = ymData.aFeed.aUUId ;
     
     self.nameLabel.text = ymData.name ;
     

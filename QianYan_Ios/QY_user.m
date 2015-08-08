@@ -395,6 +395,18 @@
             complection(success,error) ;
         }
     }] ;
+    
+
+}
+
+- (void)deleteFeedById:(NSString *)feedId Complection:(QYResultBlock)complection {
+    [[QY_JPROHttpService shareInstance] deleteFeedById:feedId Complection:^(BOOL success, NSError *error) {
+        if ( success ) [QY_appDataCenter deleteobject:[QY_feed findFeedById:feedId]] ;
+        
+        if ( complection ) {
+            complection(success,error) ;
+        }
+    }] ;
 }
 
 #pragma mark - phone

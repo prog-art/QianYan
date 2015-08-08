@@ -12,6 +12,8 @@
 
 @interface QY_feed (QY_JPRO_DATA_FORMAT)
 
++ (QY_feed *)findFeedById:(NSString *)feedId ;
+
 + (QY_feed *)feedWithId:(NSString *)feedId ;
 
 - (void)initWithFeedDic:(NSDictionary *)feedDic ;

@@ -73,6 +73,8 @@
 
 - (void)deleteCommentById:(NSString *)commentId complection:(QYResultBlock)complection ;
 
+- (void)deleteFeedById:(NSString *)feedId Complection:(QYResultBlock)complection ;
+
 #pragma mark - jrm[phone,jpro]
 
 - (void)fetchJproServerInfoComplection:(QYResultBlock)complection ;

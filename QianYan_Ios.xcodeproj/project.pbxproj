@@ -16,6 +16,7 @@
 		194E391A1B00832F00BA4473 /* NSString+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */; };
 		194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */; };
 		19575C1C1B75FE1800290E09 /* QYSocialActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 19575C1B1B75FE1800290E09 /* QYSocialActionSheet.m */; };
+		19575C1F1B7615F800290E09 /* QYSocialAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19575C1E1B7615F800290E09 /* QYSocialAlertView.m */; };
 		19589C1E1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.m in Sources */ = {isa = PBXBuildFile; fileRef = 19589C1D1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.m */; };
 		19589C221B566BCA005246BC /* QY_feed+QY_JPRO_DATA_FORMAT.m in Sources */ = {isa = PBXBuildFile; fileRef = 19589C211B566BCA005246BC /* QY_feed+QY_JPRO_DATA_FORMAT.m */; };
 		19589C281B566C89005246BC /* QY_attache+QY_JPRO_DATA_FORMAT.m in Sources */ = {isa = PBXBuildFile; fileRef = 19589C271B566C89005246BC /* QY_attache+QY_JPRO_DATA_FORMAT.m */; };
@@ -209,6 +210,8 @@
 		19575C191B75DD8900290E09 /* QYSocialDataModelInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYSocialDataModelInterface.h; sourceTree = "<group>"; };
 		19575C1A1B75FE1800290E09 /* QYSocialActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSocialActionSheet.h; sourceTree = "<group>"; };
 		19575C1B1B75FE1800290E09 /* QYSocialActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYSocialActionSheet.m; sourceTree = "<group>"; };
+		19575C1D1B7615F800290E09 /* QYSocialAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSocialAlertView.h; sourceTree = "<group>"; };
+		19575C1E1B7615F800290E09 /* QYSocialAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYSocialAlertView.m; sourceTree = "<group>"; };
 		19589C1C1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QY_comment+QY_JPRO_DATA_FORMAT.h"; sourceTree = "<group>"; };
 		19589C1D1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QY_comment+QY_JPRO_DATA_FORMAT.m"; sourceTree = "<group>"; };
 		19589C1F1B566B93005246BC /* CoreDataCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataCategory.h; sourceTree = "<group>"; };
@@ -1595,6 +1598,8 @@
 				6E1A9B8B1B50A4410046B8AB /* YMTapGestureRecongnizer.m */,
 				19575C1A1B75FE1800290E09 /* QYSocialActionSheet.h */,
 				19575C1B1B75FE1800290E09 /* QYSocialActionSheet.m */,
+				19575C1D1B7615F800290E09 /* QYSocialAlertView.h */,
+				19575C1E1B7615F800290E09 /* QYSocialAlertView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2342,6 +2347,7 @@
 				19575C1C1B75FE1800290E09 /* QYSocialActionSheet.m in Sources */,
 				6E4BB92F1B51528E00070F6F /* QY_SKSTableView.m in Sources */,
 				6E62A0F31B44173F0001E3A2 /* WifiSettingViewController.m in Sources */,
+				19575C1F1B7615F800290E09 /* QYSocialAlertView.m in Sources */,
 				19F91CFC1B0F2D8000264AC0 /* QY_contactUtils.m in Sources */,
 				6EDF09B41B29317E00413348 /* QRCodeCardTableViewCell.m in Sources */,
 				6E1EC9D61B5105D5003E346F /* CameraSettingCollectionReusableView.m in Sources */,

@@ -37,6 +37,8 @@
 
 - (void)setUpWithModel:(QYSocialModel *)ymData ;
 
+@property (nonatomic) NSString *feedId ;
+
 @end
 
 
