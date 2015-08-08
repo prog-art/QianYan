@@ -20,6 +20,10 @@
 
 + (BOOL)saveObject:(NSManagedObject *)object error:(NSError **)error ;
 
+#warning 回头加上一体化插入
+
++ (NSManagedObject *)insertObjectForName:(NSString *)className ;
+
 //查唯一！
 + (NSManagedObject *)findObjectWithClassName:(NSString *)className predicate:(NSPredicate *)predicate ;
 

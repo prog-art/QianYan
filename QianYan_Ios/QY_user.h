@@ -69,6 +69,10 @@
 
 - (void)fetchCamerasComplection:(QYArrayBlock)complection ;
 
+#pragma mark - jpro_报警信息
+
+- (void)fetchAlertMessagesComplection:(QYArrayBlock)complection ;
+
 #pragma mark - jpro_朋友圈
 
 - (void)deleteCommentById:(NSString *)commentId complection:(QYResultBlock)complection ;
@@ -100,6 +104,8 @@
 - (void)setJpro:(NSString *)jpro ;
 
 - (NSSet *)friends ;
+
+- (NSArray *)visualableAlertMessages ;
 
 - (NSArray *)visualableFeedItems ;
 

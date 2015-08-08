@@ -385,6 +385,24 @@
     }) ;
 }
 
+#pragma mark - jpro_报警信息
+
+- (void)fetchAlertMessagesComplection:(QYArrayBlock)complection {
+    
+    [[QY_JPROHttpService shareInstance] getAlertMessageListPage:1 NumPerPage:10 Type:NSNotFound UserId:nil cameraId:nil StartId:nil EndId:nil Check:nil Complection:^(NSArray *alertMsgDics, NSError *error) {
+        NSArray *objects ;
+        if (!error) {
+            NSSet *alertMsgs = [QY_alertMessage messageWithDicArray:alertMsgDics] ;
+            objects = [alertMsgs allObjects] ;
+            [QY_appDataCenter saveObject:nil error:NULL] ;
+        }
+        if (complection) {
+            complection(objects,error) ;
+        }
+        
+    }] ;
+}
+
 #pragma mark - jpro_朋友圈
 
 - (void)deleteCommentById:(NSString *)commentId complection:(QYResultBlock)complection {
@@ -541,6 +559,15 @@
 - (NSString *)profilePath {
     if ( self.userId ) return [QY_JPROUrlFactor pathForUserProfile:self.userId] ;
     return nil ;
+}
+
+- (NSArray *)visualableAlertMessages {
+    NSArray* alertMessages = [NSMutableArray array] ;
+#warning 如何查到别人的。
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userId = %@",self.userId] ;
+    alertMessages = [QY_appDataCenter findObjectsWithClassName:NSStringFromClass([QY_alertMessage class]) predicate:predicate] ;
+    
+    return alertMessages ;
 }
 
 - (NSArray *)visualableFeedItems {

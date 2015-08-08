@@ -16,8 +16,7 @@
 #import "QY_JPROHttpService.h"
 
 
-@interface AlertNotificationTableViewController ()
-{
+@interface AlertNotificationTableViewController () {
     NSArray *_localMovies ;
     NSArray *_remoteMovies ;
     UIRefreshControl *_refreshControl ;
@@ -26,6 +25,8 @@
 @property (strong, nonatomic) UITableView *tableView ;
 
 @property (nonatomic) NSMutableArray *alertMessages ;
+
+@property (nonatomic) NSMutableArray *dataSource ;
 
 @property (nonatomic,strong) UIRefreshControl *refreshControl ;
 
@@ -51,19 +52,42 @@
     return _refreshControl ;
 }
 
+- (NSMutableArray *)dataSource {
+    if ( !_dataSource ) {
+        _dataSource = [NSMutableArray array] ;
+    }
+    return _dataSource ;
+}
+
 - (void)refreshMessage:(UIRefreshControl *)refreshControl {
     QYDebugLog(@"Refresh～") ;
-    [[QY_JPROHttpService shareInstance] getAlertMessageListPage:1 NumPerPage:10 Type:140 UserId:nil cameraId:nil StartId:nil EndId:nil Check:nil Complection:^(NSArray *objects, NSError *error) {
-        if ( refreshControl ) {
+    
+    [[QYUser currentUser].coreUser fetchAlertMessagesComplection:^(NSArray *objects, NSError *error) {
+        if ( [refreshControl isRefreshing] ) {
             [refreshControl endRefreshing] ;
         }
         
-        if ( objects ) {
-            QYDebugLog(@"%@",objects) ;
+        if ( !error ) {
+            QYDebugLog(@"获取报警信息列表成功 alertMsgs = %@",objects) ;
+            [self beforeReloadData] ;
+            
         } else {
-            QYDebugLog(@"error = %@",error) ;
+            QYDebugLog(@"获取报警信息列表失败 error = %@",error) ;
+            [QYUtils alertError:error] ;
         }
+        
     }] ;
+}
+
+/**
+ *  处理alertMessages。分组。
+ */
+- (void)beforeReloadData {
+    self.dataSource = nil ;
+    self.alertMessages = [[[QYUser currentUser].coreUser visualableAlertMessages] mutableCopy] ;
+#warning 把alertMessages按日期分组后放到dataSource里。tableView的数据改为dataSource里的，现在为alertmessages的。
+
+    [self.tableView reloadData] ;
 }
 
 #pragma mark - Life Cycle
@@ -75,11 +99,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] init];
-    [self.tableView addSubview:self.refreshControl] ;    
+    [self.tableView addSubview:self.refreshControl] ;
     
-    self.alertMessages = [[QY_appDataCenter findObjectWithClassName:NSStringFromClass([QY_alertMessage class]) predicate:nil] mutableCopy] ;
-    
-    [self refreshMessage] ;
+    self.alertMessages = [[[QYUser currentUser].coreUser visualableAlertMessages] mutableCopy] ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -95,18 +117,18 @@
 #pragma mark - Table view data source
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return @"2015-06-26";
-            break;
-            
-        case 1:
-            return @"2015-06-27";
-            break;
-            
-        default:
-            break;
-    }
+//    switch (section) {
+//        case 0:
+//            return @"2015-06-26";
+//            break;
+//            
+//        case 1:
+//            return @"2015-06-27";
+//            break;
+//            
+//        default:
+//            break;
+//    }
     return nil;
 }
 
@@ -119,13 +141,13 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
-//    return self.alertMessages.count ;
+//    return 2 ;
+    return 1 ;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return 2;
-    return 1 ;
+//    return 1 ;
+    return self.alertMessages.count ;
 }
 
 
@@ -133,16 +155,14 @@
     AlertNotificationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlertCell"
                                                                            forIndexPath:indexPath];
     
-//    QY_alertMessage *msg = self.alertMessages[indexPath.row] ;
+    QY_alertMessage *msg = self.alertMessages[indexPath.row] ;
     
 #warning 这个图片哪里来的？
     cell.image = [UIImage imageNamed:@"报警通知-视频截图1.png"] ;
     //都是两段视频，一段5秒
     cell.totalTime = @"0:10" ;
     
-    NSDate *date ;//= msg.pubDate ;
-    
-    date = [NSDate date] ;
+    NSDate *date = msg.pubDate ;
     
     NSDateFormatter *formater = [[NSDateFormatter alloc] init] ;
     [formater setDateFormat:@"HH:mm"] ;
@@ -151,73 +171,23 @@
     cell.location = @"" ;
     cell.eventType = @"移动侦测事件" ;
     cell.isRead = NO ;
-    
-//    switch (indexPath.section) {
-//        case 0:
-//            switch (indexPath.row) {
-//                case 0:
-//                    cell.image = [UIImage imageNamed:@"报警通知-视频截图1.png"];
-//                    cell.totalTime = @"0:42";
-//                    cell.time = @"17:50";
-//                    cell.location = @"家里客居";
-//                    cell.eventType = @"移动侦测事件";
-//                    cell.isRead = NO;
-//                    break;
-//                    
-//                case 1:
-//                    cell.image = [UIImage imageNamed:@"报警通知-视频截图2.png"];
-//                    cell.totalTime = @"0:16";
-//                    cell.time = @"17:30";
-//                    cell.location = @"孩子房间";
-//                    cell.eventType = @"人体感应事件";
-//                    cell.isRead = NO;
-//                    break;
-//                    
-//                default:
-//                    break;
-//            }
-//            break;
-//            
-//        case 1:
-//            switch (indexPath.row) {
-//                case 0:
-//                    cell.image = [UIImage imageNamed:@"报警通知-视频截图3.png"];
-//                    cell.totalTime = @"1:26";
-//                    cell.time = @"10:06";
-//                    cell.location = @"商店";
-//                    cell.eventType = @"声音感应事件";
-//                    cell.isRead = NO;
-//                    break;
-//                    
-//                case 1:
-//                    cell.image = [UIImage imageNamed:@"报警通知-视频截图4.png"];
-//                    cell.totalTime = @"0:10";
-//                    cell.time = @"10:19";
-//                    cell.location = @"商店2";
-//                    cell.eventType = @"遮挡感应事件";
-//                    cell.isRead = NO;
-//                    break;
-//                    
-//                default:
-//                    break;
-//            }
-//            break;
-//            
-//        default:
-//            break;
-//    }
-    
+
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    AlertNotificationTableViewCell *cell = (AlertNotificationTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    AlertNotificationTableViewCell *cell = (AlertNotificationTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] ;
     cell.isRead = YES;
     
-    NSString *path ;
+    QY_alertMessage *msg = self.alertMessages[indexPath.row] ;
     
-    path = @"http://www.qeebu.com/newe/Public/Attachment/99/52958fdb45565.mp4";
+    
+#warning 路径怎么加
+    NSString *path = msg.content;
+//    path = @"http://www.qeebu.com/newe/Public/Attachment/99/52958fdb45565.mp4";
+//    path = @"http://jdas.qycam.com:50280/10000133/t00000000000193/motion/20150718/ 10 134234_20150718134229_2_5.avi" ;
+    
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     

@@ -10,7 +10,6 @@
 
 @interface QY_alertMessage (QY_JPRO_DATA_FORMAT)
 
-- (instancetype)initWithDictionary:(NSDictionary *)alertMsgDic ;
-+ (NSSet *)messageWithDicArray:(NSArray *)dicArray ;
++ (NSSet *)messageWithDicArray:(NSArray *)alertMessageDics ;
 
 @end

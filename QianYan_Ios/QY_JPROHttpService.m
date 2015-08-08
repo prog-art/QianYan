@@ -251,9 +251,9 @@ QYResultBlock packComplection(QYResultBlock complection) {
     manager.requestSerializer = [AFHTTPRequestSerializer serializer] ;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary] ;
     {
-        if ( page ) [parameters setObject:@(page) forKey:QY_key_page] ;
-        if ( num ) [parameters setObject:@(num) forKey:QY_key_num] ;
-        if ( type ) [parameters setObject:@(type) forKey:QY_key_type] ;
+        if ( page != NSNotFound ) [parameters setObject:@(page) forKey:QY_key_page] ;
+        if ( num != NSNotFound ) [parameters setObject:@(num) forKey:QY_key_num] ;
+        if ( type != NSNotFound ) [parameters setObject:@(type) forKey:QY_key_type] ;
         if ( userId ) [parameters setObject:userId forKey:QY_key_user_id] ;
         if ( cameraId ) [parameters setObject:cameraId forKey:QY_key_jipnc_id] ;
         if ( startId ) [parameters setObject:startId forKey:QY_key_start] ;
@@ -262,16 +262,9 @@ QYResultBlock packComplection(QYResultBlock complection) {
     }
     manager.responseSerializer = [AFJSONResponseSerializer serializer] ;
     
-    [manager GET:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, NSArray *alertMsgs) {
-        QYDebugLog(@"获取报警信息列表成功！alertMsgs = %@",alertMsgs) ;
-        NSMutableArray *alertMessages = [NSMutableArray array] ;
-        [alertMsgs enumerateObjectsUsingBlock:^(NSDictionary *messageDic, NSUInteger idx, BOOL *stop) {
-            QY_alertMessage *alertMessage = [[QY_alertMessage alloc] initWithDictionary:messageDic] ;
-            [alertMessages addObject:alertMessage] ;
-        }] ;
-        complection(alertMessages,nil) ;
+    [manager GET:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, NSArray *alertMsgDics) {
+        complection(alertMsgDics,nil) ;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        QYDebugLog(@"获取报警信息类表失败！error = %@",error) ;
         complection(nil,error) ;
     }] ;
     
@@ -307,7 +300,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
         QYDebugLog(@"删除msg成功 response = %@",deletedMsgIds) ;
         complection(deletedMsgIds,nil) ;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        QYDebugLog(@"添加msg失败 error = %@",error) ;
+        QYDebugLog(@"删除msg失败 error = %@",error) ;
         complection(nil,error) ;
     }] ;
 }
@@ -331,8 +324,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
     
     [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *alertMsgDic) {
         QYDebugLog(@"获取某个msg成功 response = %@",alertMsgDic) ;
-        QY_alertMessage *alertMessage = [[QY_alertMessage alloc] initWithDictionary:alertMsgDic] ;
-        complection(alertMessage,nil) ;
+        complection(alertMsgDic,nil) ;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         QYDebugLog(@"添加msg失败 error = %@",error) ;
         complection(nil,error) ;

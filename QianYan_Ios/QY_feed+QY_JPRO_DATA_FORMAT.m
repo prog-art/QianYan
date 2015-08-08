@@ -30,7 +30,7 @@
 }
 
 + (QY_feed *)feedWithId:(NSString *)feedId {
-    assert(feedId) ;
+    if ( !feedId ) return nil ;
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"feedId = %@",feedId] ;
     QY_feed *feed = (id)[QY_appDataCenter findObjectWithClassName:NSStringFromClass(self) predicate:predicate] ;

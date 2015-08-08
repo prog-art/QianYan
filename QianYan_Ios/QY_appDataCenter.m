@@ -113,6 +113,11 @@
     return TRUE ;    
 }
 
++ (NSManagedObject *)insertObjectForName:(NSString *)className {
+    if ( !className ) return nil ;
+    return [NSEntityDescription insertNewObjectForEntityForName:className inManagedObjectContext:[self managedObjectContext]] ;
+}
+
 #pragma mark - Core Data 查
 
 + (NSManagedObject *)findObjectWithClassName:(NSString *)className predicate:(NSPredicate *)predicate {
@@ -146,6 +151,7 @@
     [fetchRequest setEntity:Entity] ;
     [fetchRequest setPredicate:predicate] ;
     
+#warning 有时候这里会崩溃
     NSArray *objects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:error] ;
     return objects ;
 }
