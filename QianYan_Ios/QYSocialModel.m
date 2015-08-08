@@ -27,8 +27,9 @@
         self.foldOrNot = YES ;
         self.islessLimit = NO ;
         self.isSelfTheOwner = NO ;
+        self.AComments = [NSMutableArray array] ;
     }
-    return self;
+    return self ;
 }
 
 #pragma mark - public api

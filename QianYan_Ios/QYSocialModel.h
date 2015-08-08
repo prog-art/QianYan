@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "QYSocialDataModelInterface.h"
+
 @interface QYSocialModel : NSObject
 
 #pragma mark - Other
@@ -38,6 +40,10 @@
 - (float)calculateContentHeightForContainerWidth:(float)sizeWidth withUnFoldState:(BOOL)isUnfold ;
 
 #pragma mark - 回复
+
+#warning 先新增特性，后删除旧的特
+@property (nonatomic,strong) NSMutableArray *AComments ;
+//内部是id<AComment>
 
 @property (nonatomic,strong) NSMutableArray *completionComments;//回复内容数据源（处理）
 @property (nonatomic,strong) NSMutableArray *attributedData;//YMTextView附带的点击区域数组

@@ -111,15 +111,15 @@
     </entity>
     <fetchRequest name="FetchRequest" entity="QY_feed" predicateString="feedId CONTAINS &quot;&quot;"/>
     <elements>
-        <element name="QY_alertMessage" positionX="0" positionY="0" width="128" height="165"/>
-        <element name="QY_attach" positionX="0" positionY="0" width="128" height="150"/>
-        <element name="QY_camera" positionX="0" positionY="0" width="128" height="225"/>
-        <element name="QY_cameraGroup" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="QY_cameraSetting" positionX="0" positionY="0" width="128" height="90"/>
-        <element name="QY_comment" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="QY_feed" positionX="0" positionY="0" width="128" height="255"/>
-        <element name="QY_friendGroup" positionX="0" positionY="0" width="128" height="135"/>
-        <element name="QY_friendSetting" positionX="0" positionY="0" width="128" height="150"/>
-        <element name="QY_user" positionX="0" positionY="0" width="128" height="375"/>
+        <element name="QY_alertMessage" positionX="-369" positionY="-3" width="128" height="165"/>
+        <element name="QY_attach" positionX="-119" positionY="3" width="128" height="150"/>
+        <element name="QY_camera" positionX="-459" positionY="-225" width="128" height="225"/>
+        <element name="QY_cameraGroup" positionX="-488" positionY="207" width="128" height="120"/>
+        <element name="QY_cameraSetting" positionX="-225" positionY="-162" width="128" height="90"/>
+        <element name="QY_comment" positionX="-2" positionY="-210" width="128" height="120"/>
+        <element name="QY_feed" positionX="358" positionY="-108" width="128" height="253"/>
+        <element name="QY_friendGroup" positionX="-63" positionY="261" width="128" height="135"/>
+        <element name="QY_friendSetting" positionX="-261" positionY="327" width="128" height="150"/>
+        <element name="QY_user" positionX="531" positionY="171" width="128" height="375"/>
     </elements>
 </model>

@@ -33,6 +33,8 @@
 
 - (float)getTextHeight;
 
+@property (nonatomic) NSString *commentId ;
+
 @end
 
 @protocol WFCoretextDelegate <NSObject>

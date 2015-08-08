@@ -378,13 +378,13 @@
 }
 
 - (void)textViewDidClickAllText:(QYSocialTextView *)view {
-    NSInteger index = view.tag ;
-#warning 判断是否是自己
+    if ( !view.commentId ) return ;
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UI正在施工中，删除等待UI接口设计完善～～" message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-        [alert show];
+        if ( [self.delegate respondsToSelector:@selector(cell:didClickCommentIdis:)]) {
+            [self.delegate cell:self didClickCommentIdis:view.commentId] ;
+        }
     });
     
 }

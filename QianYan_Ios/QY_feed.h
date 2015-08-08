@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "QYSocialDataModelInterface.h"
+
 @class QY_AlertMessage, QY_attach, QY_comment, QY_user;
 
-@interface QY_feed : NSManagedObject
+@interface QY_feed : NSManagedObject<AFeed>
 
 @property (nonatomic, retain) NSNumber * type;//1视频,2图片,3文字
 @property (nonatomic, retain) NSNumber * attachCount;

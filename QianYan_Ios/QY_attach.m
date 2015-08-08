@@ -20,4 +20,34 @@
 @dynamic pubDate;
 @dynamic belong2Feed;
 
+#pragma mark - AAttach
+
+/**
+ *  日期[排序key]
+ */
+- (NSDate *)aPubDate {
+    return self.pubDate ;
+}
+
+/**
+ *  唯一标识
+ */
+- (NSString *)aUUID {
+    return self.attachId ;
+}
+
+/**
+ *  类型
+ */
+- (NSString *)aType {
+    return self.type ;
+}
+
+/**
+ *  地址
+ */
+- (NSURL *)aSource {
+    return [NSURL URLWithString:self.src] ;
+}
+
 @end

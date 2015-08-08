@@ -538,4 +538,25 @@
     return self.nickname ? : self.userName ;
 }
 
+#pragma mark - AUser 
+
+
+/**
+ *  用户名
+ */
+- (NSString *)aName {
+    return self.displayName ;
+}
+
+/**
+ *  用户Id
+ */
+- (NSString *)aUserId {
+    return self.userId ;
+}
+
+- (void)aDisplayUserAvatarAtImageView:(UIImageView *)avatarImgView {
+    [self displayCycleAvatarAtImageView:avatarImgView] ;
+}
+
 @end

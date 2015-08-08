@@ -10,13 +10,14 @@
 #import <CoreData/CoreData.h>
 
 #import "QY_Block_Define.h"
+#import "QYSocialDataModelInterface.h"
 
 @class UIImageView ;
 @class UIImage ;
 
 @class QY_camera, QY_cameraGroup, QY_cameraSetting, QY_feed, QY_friendGroup, QY_friendSetting;
 
-@interface QY_user : NSManagedObject
+@interface QY_user : NSManagedObject<AUser>
 
 @property (nonatomic, retain) NSString * avatarUrl;
 @property (nonatomic, retain) NSDate * birthday;

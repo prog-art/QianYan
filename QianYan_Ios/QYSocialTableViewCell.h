@@ -31,7 +31,7 @@
 
 @property (nonatomic,strong) NSMutableArray * ymTextArray ;
 @property (nonatomic,strong) NSMutableArray * ymShuoshuoArray ;
-@property (nonatomic,assign) NSInteger stamp;
+@property (nonatomic,assign) NSInteger stamp;//标识在哪个位置
 
 #pragma mark - Init API
 
@@ -48,6 +48,10 @@
 - (void)changeFoldState:(QYSocialModel *)ymD onCellRow:(NSInteger) cellStamp ;
 - (void)showImageViewWithImageViews:(NSArray *)imageViews byClickWhich:(NSInteger)clickTag ;
 
+//new
+
 - (void)cell:(QYSocialTableViewCell *)cell didClickDeleteBtn:(UIButton *)sender ;
+
+- (void)cell:(QYSocialTableViewCell *)cell didClickCommentIdis:(NSString *)commentId ;
 
 @end

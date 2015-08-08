@@ -205,6 +205,7 @@
 		194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QY_dataFormat.m"; sourceTree = "<group>"; };
 		194E391B1B00DAB600BA4473 /* NSData+QY_dataFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+QY_dataFormat.h"; sourceTree = "<group>"; };
 		194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+QY_dataFormat.m"; sourceTree = "<group>"; };
+		19575C191B75DD8900290E09 /* QYSocialDataModelInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYSocialDataModelInterface.h; sourceTree = "<group>"; };
 		19589C1C1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QY_comment+QY_JPRO_DATA_FORMAT.h"; sourceTree = "<group>"; };
 		19589C1D1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QY_comment+QY_JPRO_DATA_FORMAT.m"; sourceTree = "<group>"; };
 		19589C1F1B566B93005246BC /* CoreDataCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataCategory.h; sourceTree = "<group>"; };
@@ -709,6 +710,7 @@
 			children = (
 				6E1A9BA11B50A4CB0046B8AB /* QYSocialModel.h */,
 				6E1A9BA21B50A4CB0046B8AB /* QYSocialModel.m */,
+				19575C191B75DD8900290E09 /* QYSocialDataModelInterface.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";

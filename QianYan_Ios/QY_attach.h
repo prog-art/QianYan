@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "QYSocialDataModelInterface.h"
+
 @class QY_feed;
 
-@interface QY_attach : NSManagedObject
+@interface QY_attach : NSManagedObject<AAttach>
 
 @property (nonatomic, retain) NSString * attachId;
 @property (nonatomic, retain) NSString * small;

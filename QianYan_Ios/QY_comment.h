@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "QYSocialDataModelInterface.h"
+
 @class QY_feed;
 
-@interface QY_comment : NSManagedObject
+@interface QY_comment : NSManagedObject<AComment>
 
 @property (nonatomic, retain) NSString * commentId;
 @property (nonatomic, retain) NSString * content;

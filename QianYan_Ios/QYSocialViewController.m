@@ -178,7 +178,7 @@ lineBreakMode:mode].height : 0.f;
 - (void)maunallyReloadData {
     
 #warning 性能低！后来注意优化！
-    NSMutableArray *ymDataArray = [NSMutableArray array] ;
+    NSMutableArray *statusArray = [NSMutableArray array] ;
     
     //排序
     self.feeds =
@@ -187,9 +187,16 @@ lineBreakMode:mode].height : 0.f;
     }] mutableCopy];
     
     [self.feeds enumerateObjectsUsingBlock:^(QY_feed *feed , NSUInteger idx, BOOL *stop) {
-        QYSocialModel *ymData = [[QYSocialModel alloc] init] ;
+        QYSocialModel *socialModel = [[QYSocialModel alloc] init] ;
         
-//        NSInteger commentCount = [feed.commentCount integerValue] ;
+        socialModel.name = feed.owner.nickname ? : feed.owner.userName ;
+        socialModel.isSelfTheOwner = [feed.owner.userId isEqualToString:[QYUser currentUser].coreUser.userId] ;
+        socialModel.content = feed.content ;
+        socialModel.foldOrNot = YES ;//?
+        socialModel.pubDate = feed.pubDate ;
+        
+        
+        
         NSMutableArray *comments = [NSMutableArray array] ;
         
         NSMutableArray *userDefineAttriArray = [NSMutableArray array] ;
@@ -213,73 +220,24 @@ lineBreakMode:mode].height : 0.f;
             NSString *commentStr = [NSString stringWithFormat:@"%@:%@",user.nickname?:user.userName,comment.content] ;
             
             [comments addObject:commentStr] ;
+            [socialModel.AComments addObject:comment] ;
         }] ;
+        socialModel.comments = comments;//回复？
+;
         
-        ymData.content = feed.content ;
-        ymData.foldOrNot = YES ;//?
+        socialModel.defineAttrData = userDefineAttriArray ;
+        
+        
+        
+
 //        ymData.showImageArray = ;//
-        ymData.defineAttrData = userDefineAttriArray ;
-        ymData.comments = comments;//回复？
         
-        ymData.name = feed.owner.nickname ? : feed.owner.userName ;
-        
-        ymData.isSelfTheOwner = [feed.owner.userId isEqualToString:[QYUser currentUser].coreUser.userId] ;
-        
-        ymData.pubDate = feed.pubDate ;
-        
-        [ymDataArray addObject:ymData] ;
+        [statusArray addObject:socialModel] ;
     }] ;
 
     
-    [self calculateHeight:ymDataArray] ;
+    [self calculateHeight:statusArray] ;
 }
-//
-//- (void)loadTextData{
-//    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        
-//        NSMutableArray * ymDataArray = [NSMutableArray array] ;
-//       
-//        for (int i = 0 ; i < dataCount ; i ++) {
-//            
-//            //模拟数据 随机3组回复 以及图片
-//            NSMutableArray * array = [NSMutableArray array] ;
-//            NSMutableArray * userDefineAttriArray = [NSMutableArray array] ;
-//            int randomReplyCount = arc4random() % 6 + 1;
-//            for (int k = 0; k < randomReplyCount ; k ++) {
-//                [array addObject:[_contentDataSource objectAtIndex:arc4random() % 6]];
-//                NSMutableArray *tempDefineArr = [NSMutableArray array] ;
-//                NSString *range = NSStringFromRange(NSMakeRange(0, 2)) ;
-//                
-//                [tempDefineArr addObject:range] ;
-//                [userDefineAttriArray addObject:tempDefineArr] ;
-//            }
-//            
-//            
-//            NSMutableArray * imageArray = [NSMutableArray array] ;
-//            int randomImageCount = arc4random() % 9 + 1 ;
-//            
-//            for (int j = 0; j < randomImageCount; j ++) {
-//                [imageArray addObject:[_imageDataSource objectAtIndex:arc4random() % 9]] ;
-//            }
-//
-//            
-//            //图片上面说说部分
-//            NSString *aboveString = [_shuoshuoDatasSource objectAtIndex:arc4random() % 6] ;
-//            
-//            YMTextData *ymData = [[YMTextData alloc] init] ;
-//            ymData.showImageArray = imageArray ;
-//            ymData.foldOrNot = YES ;
-//            ymData.showShuoShuo = aboveString ;
-//            ymData.defineAttrData = userDefineAttriArray ;
-//            ymData.replyDataSource = array ;
-//            [ymDataArray addObject:ymData] ;
-//            
-//        }
-//        [self calculateHeight:ymDataArray] ;
-//        
-//    });
-//}
 
 - (void)refreshNotify:(NSNotification *)notification {
     NSString *feedId = notification.object ;
@@ -509,6 +467,12 @@ lineBreakMode:mode].height : 0.f;
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"是否删除这条状态？" delegate:self cancelButtonTitle:@"手滑了" otherButtonTitles:@"是的", nil] ;
     [alertView show] ;
     
+}
+
+- (void)cell:(QYSocialTableViewCell *)cell didClickCommentIdis:(NSString *)commentId {
+    QY_feed *feed = self.feeds[cell.stamp] ;
+    QYDebugLog(@"commentId = %@",commentId) ;
+
 }
 
 #pragma mark - 评论说说回调
