@@ -56,6 +56,21 @@
  */
 - (NSInteger)aType ;
 
+/**
+ *  是否被当前用户点赞了
+ */
+- (BOOL)aDiggedByCurrentUser ;
+
+/**
+ *  被点赞次数
+ */
+- (NSInteger)aDiggCount ;
+
+/**
+ *  评论id<AComment>
+ */
+- (NSArray *)aComments ;
+
 @end
 
 #pragma mark - Comment[评论]
@@ -65,7 +80,7 @@
 /**
  *  评论内容
  */
-- (NSString *)acontent ;
+- (NSString *)aContent ;
 
 @optional
 
@@ -75,6 +90,7 @@
 - (id<AUser>)reply2User ;
 
 @end
+
 
 #pragma mark - User[用户]
 

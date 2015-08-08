@@ -376,11 +376,10 @@ void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint
 
 - (BOOL)judgeIndexInSelectedRange:(CFIndex) index withWorkLine:(CTLineRef)workctLine {
     
-    for (int i = 0; i < _attributedData.count; i ++) {
-        
-        NSString *key = [[[_attributedData objectAtIndex:i] allKeys] objectAtIndex:0];
+    for (int i = 0; i < _attributedData.count ; i ++) {
+        NSString *key = [_attributedData[i] allKeys][0] ;
        // NSLog(@"key == %@",key);
-        NSRange keyRange = NSRangeFromString(key);
+        NSRange keyRange = NSRangeFromString(key) ;
         if (index>=keyRange.location && index<= keyRange.location + keyRange.length) {
             if (_isFold) {
                 if ((_limitCharIndex > keyRange.location) && (_limitCharIndex < keyRange.location + keyRange.length)) {
@@ -391,14 +390,18 @@ void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint
              //Do nothing
             }
             
-            NSMutableArray *arr = [self getSelectedCGRectWithClickRange:keyRange];
-            [self drawViewFromRects:arr withDictValue:[[_attributedData objectAtIndex:i] valueForKey:key]];
+            NSMutableArray *arr = [self getSelectedCGRectWithClickRange:keyRange] ;
             
-            NSString *feedString = [[_attributedData objectAtIndex:i] valueForKey:key];
-            [_delegate textView:self didClickWFCoretext:feedString] ;
+            [self drawViewFromRects:arr withDictValue:_attributedData[i][key]];
+
+            NSString *feedString = _attributedData[i][key] ;
+            
+            if ( [self.delegate respondsToSelector:@selector(textView:didClickWFCoretext:)]) {
+                [self.delegate textView:self didClickWFCoretext:feedString] ;
+            }
+            
             return YES;
         }
-        
         
     }
     
@@ -406,71 +409,81 @@ void Draw_Emoji_For_Line(CGContextRef context, CTLineRef line, id owner, CGPoint
         
 }
 
+/**
+ *  通过点击的Range获取选中的CGRects[]
+ */
 - (NSMutableArray *)getSelectedCGRectWithClickRange:(NSRange)tempRange {
     
-    NSMutableArray *clickRects = [[NSMutableArray alloc] init];
-    CGFloat w = CGRectGetWidth(self.frame);
-    CGFloat y = 0;
-    CFIndex start = 0;
-    NSInteger length = [_attrEmotionString length];
+    NSMutableArray *clickRects = [NSMutableArray array] ;
+    CGFloat w = CGRectGetWidth(self.frame) ;
+    CGFloat y = 0 ;
+    CFIndex start = 0 ;
+    NSInteger length = _attrEmotionString.length ;
     
-    while (start < length)
-    {
+    while (start < length) {
         
-        CFIndex count = CTTypesetterSuggestClusterBreak(typesetter, start, w);
-        CTLineRef line = CTTypesetterCreateLine(typesetter, CFRangeMake(start, count));
-        start += count;
+        //获取一行
+        CFIndex count = CTTypesetterSuggestClusterBreak(typesetter, start, w) ;
+        CTLineRef line = CTTypesetterCreateLine(typesetter, CFRangeMake(start, count)) ;
+        start += count ;
         
-        CFRange lineRange = CTLineGetStringRange(line);
-        NSRange range = NSMakeRange(lineRange.location==kCFNotFound ? NSNotFound : lineRange.location, lineRange.length);
-        NSRange intersection = [self rangeIntersection:range withSecond:tempRange];
-        if (intersection.length > 0)
-        {
-            CGFloat xStart = CTLineGetOffsetForStringIndex(line, intersection.location, NULL);//获取整段文字中charIndex位置的字符相对line的原点的x值
-            CGFloat xEnd = CTLineGetOffsetForStringIndex(line, intersection.location + intersection.length, NULL);
+        //linkeRange和CFRangeMake(start, count)应该是一样的？或者差不多
+        CFRange lineRange = CTLineGetStringRange(line) ;
+        NSRange range = NSMakeRange(lineRange.location == kCFNotFound ? NSNotFound : lineRange.location, lineRange.length) ;
+        NSRange intersection = [self rangeIntersection:range withSecond:tempRange] ;
+        if (intersection.length > 0 ) {
+            //获取整段文字中charIndex位置的字符相对line的原点的x值
+            CGFloat xStart = CTLineGetOffsetForStringIndex(line, intersection.location, NULL) ;
+            CGFloat xEnd = CTLineGetOffsetForStringIndex(line, intersection.location + intersection.length, NULL) ;
             
-            CGFloat ascent, descent;
-            CTLineGetTypographicBounds(line, &ascent, &descent, NULL);
-            CGRect selectionRect = CGRectMake(xStart, -y, xEnd -  xStart , ascent + descent);//所画选择之后背景的 大小 和起始坐标
-            [clickRects addObject:NSStringFromCGRect(selectionRect)];
-            
+            CGFloat ascent, descent ;
+            CTLineGetTypographicBounds(line, &ascent, &descent, NULL) ;
+            //所画选择之后背景的 大小 和起始坐标
+            CGRect selectionRect = CGRectMake(xStart, -y, xEnd -  xStart , ascent + descent) ;
+            [clickRects addObject:NSStringFromCGRect(selectionRect)] ;
         }
         
-        y -= FontSize + LineSpacing;
-        CFRelease(line);
+        y -= FontSize + LineSpacing ;
+        CFRelease(line) ;
         
     }
-    return clickRects;
+    return clickRects ;
     
 }
 
-//超出1行 处理
+/**
+ *  超出一行，处理
+ *
+ *  @param first  <#first description#>
+ *  @param second <#second description#>
+ *
+ *  @return <#return value description#>
+ */
 - (NSRange)rangeIntersection:(NSRange)first withSecond:(NSRange)second {
-    NSRange result = NSMakeRange(NSNotFound, 0);
-    if (first.location > second.location)
-    {
-        NSRange tmp = first;
-        first = second;
-        second = tmp;
+    NSRange result = NSMakeRange(NSNotFound, 0) ;
+    if (first.location > second.location) {
+        NSRange tmp = first ;
+        first = second ;
+        second = tmp ;
     }
-    if (second.location < first.location + first.length)
-    {
-        result.location = second.location;
-        NSUInteger end = MIN(first.location + first.length, second.location + second.length);
-        result.length = end - result.location;
+    
+    if (second.location < first.location + first.length) {
+        result.location = second.location ;
+        NSUInteger end = MIN(first.location + first.length, second.location + second.length) ;
+        result.length = end - result.location ;
     }
-    return result;
+    return result ;
 }
+
 
 
 - (void)drawViewFromRects:(NSArray *)array withDictValue:(NSString *)value {
     //用户名可能超过1行的内容 所以记录在数组里，有多少元素 就有多少view
     // selectedViewLinesF = array.count;
     
-    for (int i = 0; i < [array count]; i++) {
-        
-        UIView *selectedView = [[UIView alloc] init];
-        selectedView.frame = CGRectFromString([array objectAtIndex:i]);
+    for (int i = 0; i < array.count ; i++) {
+        UIView *selectedView = [[UIView alloc] init] ;
+        selectedView.frame = CGRectFromString([array objectAtIndex:i]) ;
         selectedView.backgroundColor = kUserName_SelectedColor;
         
         [self addSubview:selectedView];

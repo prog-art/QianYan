@@ -9,6 +9,9 @@
 #import "QY_comment.h"
 #import "QY_feed.h"
 
+#import "QY_user.h"
+
+#import "QY_appDataCenter.h"
 
 @implementation QY_comment
 
@@ -17,6 +20,13 @@
 @dynamic pubDate;
 @dynamic userId;
 @dynamic belong2Feed;
+
++ (QY_comment *)findCommentById:(NSString *)commentId {
+    if ( !commentId ) return nil ;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"commentId = %@",commentId] ;
+    QY_comment *comment = (id)[QY_appDataCenter findObjectWithClassName:NSStringFromClass(self) predicate:predicate] ;
+    return comment ;
+}
 
 #pragma mark - AComment
 
@@ -32,7 +42,7 @@
  */
 - (id<AUser>)aOwner {
 #warning 记得改
-    return nil ;
+    return [QY_user insertUserById:self.userId] ;
 }
 
 /**
@@ -45,7 +55,7 @@
 /**
  *  评论内容
  */
-- (NSString *)acontent {
+- (NSString *)aContent {
     return self.content ;
 }
 

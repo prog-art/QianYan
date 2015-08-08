@@ -12,6 +12,7 @@
 #import "QYShowImageView.h"
 #import "QYSocialModel.h"
 #import "YMReplyInputView.h"
+#import "QYSocialActionSheet.h"
 
 #import "QY_Common.h"
 
@@ -155,7 +156,7 @@ lineBreakMode:mode].height : 0.f;
 - (void)phraseFeedsData:(NSArray *)feeds {
     
     NSMutableSet *set = [NSMutableSet setWithArray:self.feeds] ;
-    
+
     [feeds enumerateObjectsUsingBlock:^(NSDictionary *feedDic, NSUInteger idx, BOOL *stop) {
         NSString *feedId = [feedDic[QY_key_id] stringValue] ;
         
@@ -182,76 +183,100 @@ lineBreakMode:mode].height : 0.f;
     
     //排序
     self.feeds =
-    [[self.feeds sortedArrayUsingComparator:^NSComparisonResult(QY_feed * obj1, QY_feed *obj2) {
-        return [obj2.pubDate compare:obj1.pubDate] ;
-    }] mutableCopy];
+    [[self.feeds sortedArrayUsingComparator:^NSComparisonResult(id<AFeed>obj1, id<AFeed>obj2) {
+        return [obj2.aPubDate compare:obj1.aPubDate] ;
+        
+    }] mutableCopy] ;
     
-    [self.feeds enumerateObjectsUsingBlock:^(QY_feed *feed , NSUInteger idx, BOOL *stop) {
+    [self.feeds enumerateObjectsUsingBlock:^(id<AFeed> feed , NSUInteger idx, BOOL *stop) {
         QYSocialModel *socialModel = [[QYSocialModel alloc] init] ;
         
-        socialModel.name = feed.owner.nickname ? : feed.owner.userName ;
-        socialModel.isSelfTheOwner = [feed.owner.userId isEqualToString:[QYUser currentUser].coreUser.userId] ;
-        socialModel.content = feed.content ;
-        socialModel.foldOrNot = YES ;//?
-        socialModel.pubDate = feed.pubDate ;
+        socialModel.aFeed = feed ;
         
+        socialModel.isSelfTheOwner = [feed.aOwner.aUserId isEqualToString:[QYUser currentUser].coreUser.userId] ;
+
+        socialModel.foldOrNot = YES ;//?
         
         
         NSMutableArray *comments = [NSMutableArray array] ;
-        
         NSMutableArray *userDefineAttriArray = [NSMutableArray array] ;
-    
+
         //排序
         NSMutableArray *QY_comments =
-        [[[feed.comments allObjects] sortedArrayUsingComparator:^NSComparisonResult(QY_comment *obj1,QY_comment *obj2) {
-            return [obj1.pubDate compare:obj2.pubDate] ;
-        }] mutableCopy];
-    
-        [QY_comments enumerateObjectsUsingBlock:^(QY_comment *comment, NSUInteger idx, BOOL *stop) {
+        [[feed.aComments sortedArrayUsingComparator:^NSComparisonResult(id<AComment> obj1,id<AComment> obj2) {
+            return [obj1.aPubDate compare:obj2.aPubDate] ;
+        }] mutableCopy] ;
+
+        
+        [QY_comments enumerateObjectsUsingBlock:^(id<AComment> comment, NSUInteger idx, BOOL *stop) {
             NSMutableArray *tempDefineArr = [NSMutableArray array] ;
-            
-            QY_user *user = [QY_user insertUserById:comment.userId] ;
-            NSString *range = NSStringFromRange(NSMakeRange(0, user.nickname.length)) ;
+
+            id<AUser> user = comment.aOwner ;
+            NSString *range = NSStringFromRange(NSMakeRange(0, user.aName.length)) ;
             
             [tempDefineArr addObject:range] ;
             
             [userDefineAttriArray addObject:tempDefineArr] ;
             
-            NSString *commentStr = [NSString stringWithFormat:@"%@:%@",user.nickname?:user.userName,comment.content] ;
+            NSString *commentStr = [NSString stringWithFormat:@"%@:%@",user.aName,comment.aContent] ;
             
             [comments addObject:commentStr] ;
-            [socialModel.AComments addObject:comment] ;
+            [socialModel.aComments addObject:comment] ;
         }] ;
-        socialModel.comments = comments;//回复？
-;
+//        socialModel.comments = comments;//回复
         
         socialModel.defineAttrData = userDefineAttriArray ;
-        
-        
-        
 
 //        ymData.showImageArray = ;//
         
         [statusArray addObject:socialModel] ;
     }] ;
 
-    
     [self calculateHeight:statusArray] ;
+}
+
+#pragma mark - 计算高度
+- (void)calculateHeight:(NSMutableArray *)dataArray{
+    
+#warning 补丁
+    _tableDataSource = [NSMutableArray array] ;
+    
+    for (QYSocialModel *ymData in dataArray) {
+        ymData.foldedContentHeight = [ymData calculateContentHeightForContainerWidth:self.view.frame.size.width withUnFoldState:NO] ;//折叠
+        
+        ymData.unFoldedContentHeight = [ymData calculateContentHeightForContainerWidth:self.view.frame.size.width withUnFoldState:YES] ;//展开
+        
+        ymData.commentsHeight = [ymData calculateCommentsHeightWithWidth:self.view.frame.size.width] ;
+        [_tableDataSource addObject:ymData] ;
+    }
+    
+    [QYUtils runInMainQueue:^{
+        [mainTable reloadData] ;
+    }] ;
 }
 
 - (void)refreshNotify:(NSNotification *)notification {
     NSString *feedId = notification.object ;
     QYDebugLog(@"refersh locall feedId = %@",feedId) ;
     
-#warning 这一步必须，因为很多属性是在服务器生成。。必须fetch。
-    [QY_feed fetchFeedWithId:feedId complection:^(QY_feed *feed, NSError *error) {
-        if ( feed && !error ) {
-            self.feeds = [[QYUser currentUser].coreUser visualableFeedItems] ;
-            [self maunallyReloadData] ;
-        } else {
-            [QYUtils alert:@"获取最新朋友圈状态失败，请检查网络"] ;
-        }
-    }] ;
+    if ( feedId ) {
+        #warning 这一步必须，因为很多属性是在服务器生成。。必须fetch。
+        [QY_feed fetchFeedWithId:feedId complection:^(QY_feed *feed, NSError *error) {
+            if ( feed && !error ) {
+                [self refreshWithOutNetwork] ;
+            } else {
+                [QYUtils alert:@"获取最新朋友圈状态失败，请检查网络"] ;
+            }
+        }] ;
+    }
+}
+
+/**
+ *  本地刷新
+ */
+- (void)refreshWithOutNetwork {
+    self.feeds = [[QYUser currentUser].coreUser visualableFeedItems] ;
+    [self maunallyReloadData] ;
 }
 
 #pragma mark - life Cycle
@@ -260,14 +285,16 @@ lineBreakMode:mode].height : 0.f;
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor] ;
-    self.feeds = [[QYUser currentUser].coreUser visualableFeedItems] ;
+
     _tableDataSource = [NSMutableArray array] ;
     
     [[QY_Notify shareInstance] addFeedObserver:self selector:@selector(refreshNotify:)] ;
     
     [self initTableview] ;
     
-    [self maunallyReloadData] ;
+    [self refreshWithOutNetwork] ;
+//    self.feeds = [[QYUser currentUser].coreUser visualableFeedItems] ;
+//    [self maunallyReloadData] ;
     
     [self setUpSocialSharingControl] ;
 }
@@ -315,26 +342,6 @@ lineBreakMode:mode].height : 0.f;
     }
 }
 
-#pragma mark - 计算高度
-- (void)calculateHeight:(NSMutableArray *)dataArray{
-    
-#warning 补丁
-    _tableDataSource = [NSMutableArray array] ;
-    
-    for (QYSocialModel *ymData in dataArray) {        
-        ymData.foldedContentHeight = [ymData calculateContentHeightForContainerWidth:self.view.frame.size.width withUnFoldState:NO];//折叠
-        
-        ymData.unFoldedContentHeight = [ymData calculateContentHeightForContainerWidth:self.view.frame.size.width withUnFoldState:YES];//展开
-        
-        ymData.commentsHeight = [ymData calculateCommentsHeightWithWidth:self.view.frame.size.width];
-        [_tableDataSource addObject:ymData];
-    }
-    
-    [QYUtils runInMainQueue:^{
-        [mainTable reloadData] ;
-    }] ;
-}
-
 - (void)backToPre {
     [self dismissViewControllerAnimated:YES completion:NULL] ;
 }
@@ -364,9 +371,10 @@ lineBreakMode:mode].height : 0.f;
     cell.replyBtn.appendIndexPath = indexPath ;
     [cell.replyBtn addTarget:self action:@selector(replyAction:) forControlEvents:UIControlEventTouchUpInside] ;
     cell.delegate = self ;
-    QY_feed *feed = self.feeds[indexPath.row] ;
 
-    [feed.owner displayAvatarAtImageView:cell.avatarImageView] ;
+    id<AFeed> feed = self.feeds[indexPath.row] ;
+    
+    [feed.aOwner aDisplayUserAvatarAtImageView:cell.avatarImageView] ;
     
     [cell setUpWithModel:[_tableDataSource objectAtIndex:indexPath.row]] ;
 
@@ -401,10 +409,10 @@ lineBreakMode:mode].height : 0.f;
         [replyBtn addTarget:self action:@selector(replyMessage:) forControlEvents:UIControlEventTouchUpInside] ;
         
         [UIView animateWithDuration:0.25f animations:^{
-            replyBtn.frame = CGRectMake(sender.frame.origin.x - 60, origin_Y  - 5 , 60, 28);
+            replyBtn.frame = CGRectMake(sender.frame.origin.x - 60, origin_Y  - 5 , 60, 28) ;
         } completion:^(BOOL finished) {
-            [replyBtn setTitle:@"评论" forState:0];
-        }];
+            [replyBtn setTitle:@"评论" forState:0] ;
+        }] ;
     }
 }
 
@@ -425,16 +433,16 @@ lineBreakMode:mode].height : 0.f;
 #pragma mark -移除评论按钮
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (replyBtn) {
-        [replyBtn removeFromSuperview];
-        replyBtn = nil;
+        [replyBtn removeFromSuperview] ;
+        replyBtn = nil ;
     }
 }
 
 
 #pragma mark -cellDelegate
 - (void)changeFoldState:(QYSocialModel *)ymD onCellRow:(NSInteger)cellStamp {
-    [_tableDataSource replaceObjectAtIndex:cellStamp withObject:ymD];
-    [mainTable reloadData];
+    [_tableDataSource replaceObjectAtIndex:cellStamp withObject:ymD] ;
+    [mainTable reloadData] ;
 
 }
 
@@ -470,9 +478,15 @@ lineBreakMode:mode].height : 0.f;
 }
 
 - (void)cell:(QYSocialTableViewCell *)cell didClickCommentIdis:(NSString *)commentId {
-    QY_feed *feed = self.feeds[cell.stamp] ;
     QYDebugLog(@"commentId = %@",commentId) ;
-
+    QY_comment *comment = [QY_comment findCommentById:commentId] ;
+    
+    if ( [comment.userId isEqualToString:[QYUser currentUser].userId]) {
+        QYSocialActionSheet *actionSheet = [[QYSocialActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"删除", nil] ;
+        actionSheet.commentId = commentId ;
+        
+        [actionSheet showInView:self.view] ;
+    }
 }
 
 #pragma mark - 评论说说回调
@@ -501,16 +515,33 @@ lineBreakMode:mode].height : 0.f;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if ( buttonIndex != alertView.cancelButtonIndex ) {
+        [QYUtils alert:@"删除说说"] ;
 #warning 删除的逻辑
     }
 }
 
 #pragma mark -  UIActionSheetDelegate
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)actionSheet:(QYSocialActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if ( buttonIndex != actionSheet.cancelButtonIndex ) {
-#warning 删除逻辑
+        [QYUtils alert:@"删除评论"] ;
+        [self deleteCommentById:actionSheet.commentId] ;
     }
+}
+
+#pragma mark - 调用删除的代码
+
+- (void)deleteCommentById:(NSString *)commentId {
+    [SVProgressHUD show] ;
+    [[QYUser currentUser].coreUser deleteCommentById:commentId complection:^(BOOL success, NSError *error) {
+        [SVProgressHUD dismiss] ;
+        if ( success ) {
+            QYDebugLog(@"删除评论成功") ;
+            [self refreshWithOutNetwork] ;            
+        } else {
+            QYDebugLog(@"删除评论失败 error = %@",error) ;
+        }
+    }] ;
 }
 
 @end

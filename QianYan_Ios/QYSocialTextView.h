@@ -39,8 +39,6 @@
 
 @protocol WFCoretextDelegate <NSObject>
 
-- (void)clickWFCoretext:(NSString *)clickString;
-
 - (void)textView:(QYSocialTextView *)view didClickWFCoretext:(NSString *)clickedString ;
 
 - (void)textViewDidClickAllText:(QYSocialTextView *)view ;

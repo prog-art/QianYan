@@ -21,4 +21,6 @@
 @property (nonatomic, retain) NSString * userId;
 @property (nonatomic, retain) QY_feed *belong2Feed;
 
++ (QY_comment *)findCommentById:(NSString *)commentId ;
+
 @end

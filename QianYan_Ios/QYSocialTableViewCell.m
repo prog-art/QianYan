@@ -111,8 +111,8 @@
 //        [self.contentView addSubview:introLbl] ;
         
         _imageViews = [NSMutableArray array] ;
-        _ymTextArray = [NSMutableArray array] ;
-        _ymShuoshuoArray = [NSMutableArray array] ;
+        _commentTextViews = [NSMutableArray array] ;
+        _feedContentViews = [NSMutableArray array] ;
         
         //折叠button
         [self.contentView addSubview:self.foldBtn] ;
@@ -140,28 +140,31 @@
     [super setSelected:selected animated:animated] ;
 }
 
+#pragma mark - 初始化入口
 
 - (void)setUpWithModel:(QYSocialModel *)ymData {
     tempData = ymData ;
     
-    [self.nameLabel setText:ymData.name] ;
     
-    for ( int i = 0; i < _ymShuoshuoArray.count; i ++) {
-        QYSocialTextView * imageV = (QYSocialTextView *)[_ymShuoshuoArray objectAtIndex:i];
-        if (imageV.superview) {
-            [imageV removeFromSuperview];
-            
+    self.nameLabel.text = ymData.name ;
+    
+    {
+        for ( int i = 0; i < _feedContentViews.count ; i++) {
+            QYSocialTextView * imageV = (QYSocialTextView *)_feedContentViews[i] ;
+            if ( imageV.superview) {
+                [imageV removeFromSuperview] ;
+            }
         }
+        [_feedContentViews removeAllObjects] ;
     }
-    
-    [_ymShuoshuoArray removeAllObjects];
+
     
     QYSocialTextView *textView = [[QYSocialTextView alloc] initWithFrame:CGRectMake(offSet_X, 15 + TableHeader, 260, 0)];
-    textView.delegate = self;
-    textView.attributedData = ymData.attributedDataWF;
-    textView.isFold = ymData.foldOrNot;
-    textView.isDraw = YES;
-    [textView setOldString:ymData.content andNewString:ymData.completionContent];
+    textView.delegate = self ;
+    textView.attributedData = ymData.attributedDataWF ;
+    textView.isFold = ymData.foldOrNot ;
+    textView.isDraw = YES ;
+    [textView setOldString:ymData.content andNewString:ymData.completionContent] ;
     [self.contentView addSubview:textView];
     
     BOOL foldOrnot = ymData.foldOrNot;
@@ -169,7 +172,7 @@
     
     textView.frame = CGRectMake(offSet_X, 15 + TableHeader - 25, 260, hhhh);
     
-    [_ymShuoshuoArray addObject:textView];
+    [_feedContentViews addObject:textView] ;
     
     //按钮
     self.foldBtn.frame = CGRectMake(offSet_X - 10 , 15 + TableHeader + hhhh + 10 - 25 , 50 , 20) ;
@@ -217,18 +220,18 @@
 
     
     //最下方回复部分-先移除
-    for (int i = 0; i < _ymTextArray.count ; i++) {
+    for (int i = 0; i < _commentTextViews.count ; i++) {
         
-        QYSocialTextView * ymTextView = (QYSocialTextView *)_ymTextArray[i] ;
+        QYSocialTextView * ymTextView = (QYSocialTextView *)_commentTextViews[i] ;
         if ( ymTextView.superview) {
             [ymTextView removeFromSuperview];
             
         }
     }
-    [_ymTextArray removeAllObjects] ;
+    [_commentTextViews removeAllObjects] ;
     
     float origin_Y = 10 ;
-    NSUInteger scale_Y = ymData.showImageArray.count - 1;
+    NSUInteger scale_Y = ymData.showImageArray.count - 1 ;
     float balanceHeight = 0; //纯粹为了解决没图片高度的问题
     if (ymData.showImageArray.count == 0) {
         scale_Y = 0;
@@ -239,22 +242,26 @@
     float backView_H = 0;
     
     //评论
-    for (int i = 0; i < ymData.comments.count ; i ++ ) {  //评论部分
+    for (int i = 0; i < ymData.aComments.count ; i ++ ) {  //评论部分
+        
+        id<AComment> comment = ymData.aComments[i] ;
 
         QYSocialTextView *commentTextView = [[QYSocialTextView alloc] initWithFrame:CGRectMake(offSet_X,TableHeader + 10 + ShowImage_H + (ShowImage_H + 10)*(scale_Y/3) + origin_Y + hhhh + kDistance + (ymData.islessLimit ? 0 : 30 ) + balanceHeight + kReplyBtnDistance, 260, 0)];
         
-        if (i == 0) {
+        if ( i == 0 ) {
             backView_Y = TableHeader + 10 + ShowImage_H + (ShowImage_H + 10)*(scale_Y/3) + origin_Y + hhhh + kDistance + (ymData.islessLimit ? 0 : 30 ) ;
         }
         
         commentTextView.delegate = self ;
         commentTextView.attributedData = ymData.attributedData[i] ;
         
-        
-        [commentTextView setOldString:[ymData.comments objectAtIndex:i] andNewString:[ymData.completionComments objectAtIndex:i]];
+        [commentTextView setOldString:comment.aContent andNewString:ymData.completionComments[i]];
         
         commentTextView.frame = CGRectMake(offSet_X,TableHeader + 10 + ShowImage_H + (ShowImage_H + 10)*(scale_Y/3) + origin_Y + hhhh + kDistance + (ymData.islessLimit?0:30) + balanceHeight + kReplyBtnDistance - 25, 260, [commentTextView getTextHeight]);
         commentTextView.tag = i ;
+        
+        commentTextView.commentId = comment.aUUId ;
+        
         [self.contentView addSubview:commentTextView] ;
 //        UITextField *commentTextField = [[UITextField alloc] init];
 //        commentTextField.backgroundColor = [UIColor greenColor];
@@ -289,18 +296,18 @@
         
         backView_H += commentTextView.frame.size.height ;
         
-        [_ymTextArray addObject:commentTextView];
+        [_commentTextViews addObject:commentTextView] ;
     }
     
     
 //
 //    backView_H += 100;
     
-    backView_H += (ymData.comments.count - 1) * 5 ;
+    backView_H += (ymData.aComments.count - 1) * 5 ;
     
 //replyImageView -- 评论背景
     
-    if (ymData.comments.count == 0) {//没回复的时候
+    if (ymData.aComments.count == 0) {//没回复的时候
         
         commentBackgroundImageView.frame = CGRectMake(offSet_X, backView_Y - 10 + balanceHeight + 5 + kReplyBtnDistance - 25, 0, 0);
         
@@ -367,13 +374,13 @@
 - (void)textView:(QYSocialTextView *)view didClickWFCoretext:(NSString *)clickedString {
     NSInteger index = view.tag ;
 
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:clickedString message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-        [alert show];
-        
-    });
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:clickedString message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+//        [alert show];
+//        
+//    });
     
 }
 

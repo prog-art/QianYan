@@ -69,6 +69,10 @@
 
 - (void)fetchCamerasComplection:(QYArrayBlock)complection ;
 
+#pragma mark - jpro_朋友圈
+
+- (void)deleteCommentById:(NSString *)commentId complection:(QYResultBlock)complection ;
+
 #pragma mark - jrm[phone,jpro]
 
 - (void)fetchJproServerInfoComplection:(QYResultBlock)complection ;

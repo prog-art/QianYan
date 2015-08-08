@@ -15,6 +15,7 @@
 		1938CCBB1B24BCEA009C4AE5 /* JRMDataFormatUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCBA1B24BCEA009C4AE5 /* JRMDataFormatUtils.m */; };
 		194E391A1B00832F00BA4473 /* NSString+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */; };
 		194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */; };
+		19575C1C1B75FE1800290E09 /* QYSocialActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 19575C1B1B75FE1800290E09 /* QYSocialActionSheet.m */; };
 		19589C1E1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.m in Sources */ = {isa = PBXBuildFile; fileRef = 19589C1D1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.m */; };
 		19589C221B566BCA005246BC /* QY_feed+QY_JPRO_DATA_FORMAT.m in Sources */ = {isa = PBXBuildFile; fileRef = 19589C211B566BCA005246BC /* QY_feed+QY_JPRO_DATA_FORMAT.m */; };
 		19589C281B566C89005246BC /* QY_attache+QY_JPRO_DATA_FORMAT.m in Sources */ = {isa = PBXBuildFile; fileRef = 19589C271B566C89005246BC /* QY_attache+QY_JPRO_DATA_FORMAT.m */; };
@@ -206,6 +207,8 @@
 		194E391B1B00DAB600BA4473 /* NSData+QY_dataFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+QY_dataFormat.h"; sourceTree = "<group>"; };
 		194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+QY_dataFormat.m"; sourceTree = "<group>"; };
 		19575C191B75DD8900290E09 /* QYSocialDataModelInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYSocialDataModelInterface.h; sourceTree = "<group>"; };
+		19575C1A1B75FE1800290E09 /* QYSocialActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSocialActionSheet.h; sourceTree = "<group>"; };
+		19575C1B1B75FE1800290E09 /* QYSocialActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYSocialActionSheet.m; sourceTree = "<group>"; };
 		19589C1C1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QY_comment+QY_JPRO_DATA_FORMAT.h"; sourceTree = "<group>"; };
 		19589C1D1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QY_comment+QY_JPRO_DATA_FORMAT.m"; sourceTree = "<group>"; };
 		19589C1F1B566B93005246BC /* CoreDataCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataCategory.h; sourceTree = "<group>"; };
@@ -1590,6 +1593,8 @@
 				6E1A9B851B50A4410046B8AB /* YMReplyInputView.m */,
 				6E1A9B8A1B50A4410046B8AB /* YMTapGestureRecongnizer.h */,
 				6E1A9B8B1B50A4410046B8AB /* YMTapGestureRecongnizer.m */,
+				19575C1A1B75FE1800290E09 /* QYSocialActionSheet.h */,
+				19575C1B1B75FE1800290E09 /* QYSocialActionSheet.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2334,6 +2339,7 @@
 				19ED2EED1AECF84F00E9DBEA /* ViewController.m in Sources */,
 				196900E71B6E67DD0059E737 /* ManageSignatureViewController.m in Sources */,
 				6E1A9BA51B50A4CB0046B8AB /* NSString+NSString_ILExtension.m in Sources */,
+				19575C1C1B75FE1800290E09 /* QYSocialActionSheet.m in Sources */,
 				6E4BB92F1B51528E00070F6F /* QY_SKSTableView.m in Sources */,
 				6E62A0F31B44173F0001E3A2 /* WifiSettingViewController.m in Sources */,
 				19F91CFC1B0F2D8000264AC0 /* QY_contactUtils.m in Sources */,

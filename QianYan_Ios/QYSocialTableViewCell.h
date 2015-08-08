@@ -29,8 +29,8 @@
 #pragma mark - Data
 
 
-@property (nonatomic,strong) NSMutableArray * ymTextArray ;
-@property (nonatomic,strong) NSMutableArray * ymShuoshuoArray ;
+@property (nonatomic,strong) NSMutableArray * commentTextViews ;
+@property (nonatomic,strong) NSMutableArray * feedContentViews ;
 @property (nonatomic,assign) NSInteger stamp;//标识在哪个位置
 
 #pragma mark - Init API

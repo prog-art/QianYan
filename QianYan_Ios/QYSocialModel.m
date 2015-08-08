@@ -13,9 +13,9 @@
 
 #import "QYSocialTextView.h"
 
-@implementation QYSocialModel{
+@implementation QYSocialModel {
     BOOL isCommentView ;
-    int tempInt ;
+    int tempI ;
 }
 
 - (instancetype)init {
@@ -32,6 +32,20 @@
     return self ;
 }
 
+#pragma mark - getter 
+
+- (NSString *)name {
+    return self.aFeed.aOwner.aName ;
+}
+
+- (NSDate *)pubDate {
+    return self.aFeed.aPubDate ;
+}
+
+- (NSString *)content {
+    return self.aFeed.aContent ;
+}
+
 #pragma mark - public api
 
 //说说高度
@@ -39,7 +53,7 @@
     
     isCommentView = NO ;
     
-    NSString *matchString =  _content ;
+    NSString *matchString = self.content ;
     
     NSArray *itemIndexs = [ILRegularExpressionManager itemIndexesWithPattern:EmotionItemPattern inString:matchString] ;
     
@@ -54,7 +68,7 @@
     
     _wfcoreText.isDraw = NO ;
     
-    [_wfcoreText setOldString:_content andNewString:newString] ;
+    [_wfcoreText setOldString:self.content andNewString:newString] ;
     
     if ([_wfcoreText getTextLines] <= limitline) {
         self.islessLimit = YES ;
@@ -76,12 +90,17 @@
     isCommentView = YES ;
     float height = 0.0f ;
     
-    for (int i = 0; i < self.comments.count ; i ++ ) {
+    for (int i = 0; i < self.aComments.count ; i ++ ) {
         
-        tempInt = i ;
+        id<AComment> comment = self.aComments[i] ;
+
+        tempI = i ;
         
         //查找emoji并替换成空格，不支持emoji
-        NSString *matchString = self.comments[i] ;
+        
+        NSString *matchString = [NSString stringWithFormat:@"%@:%@",comment.aOwner.aName,comment.aContent] ;
+        
+//        NSString *matchString = comment.aContent ;
         
         NSArray *itemIndexs = [ILRegularExpressionManager itemIndexesWithPattern:EmotionItemPattern inString:matchString] ;
         
@@ -99,7 +118,7 @@
         
         textView.isDraw = NO ;
         
-        [textView setOldString:self.comments[i] andNewString:newString] ;
+        [textView setOldString:matchString andNewString:newString] ;
         
         height =  height + [textView getTextHeight] + 5;
         
@@ -142,7 +161,7 @@
         //******自行添加**********
         
         if (_defineAttrData.count != 0) {
-            NSArray *tArr = _defineAttrData[tempInt] ;
+            NSArray *tArr = _defineAttrData[tempI] ;
             for (int i = 0; i < tArr.count ; i ++) {
                 NSString *string = [originString substringWithRange:NSRangeFromString(tArr[i])] ;
                 [totalArr addObject:[NSDictionary dictionaryWithObject:string forKey:NSStringFromRange(NSRangeFromString(tArr[i]))]] ;

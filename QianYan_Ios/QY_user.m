@@ -57,7 +57,7 @@
 }
 
 + (QY_user *)findUserById:(NSString *)userId {
-    assert(userId) ;
+    if ( !userId ) return nil ;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userId = %@",userId] ;
     QY_user *user = (QY_user *)[QY_appDataCenter findObjectWithClassName:NSStringFromClass(self) predicate:predicate] ;
     return user ;
@@ -385,6 +385,18 @@
     }) ;
 }
 
+#pragma mark - jpro_朋友圈
+
+- (void)deleteCommentById:(NSString *)commentId complection:(QYResultBlock)complection {
+    [[QY_JPROHttpService shareInstance] deleteCommentById:commentId Complection:^(BOOL success, NSError *error) {
+        if ( success ) [QY_appDataCenter deleteobject:[QY_comment findCommentById:commentId]] ;
+        
+        if ( complection ) {
+            complection(success,error) ;
+        }
+    }] ;
+}
+
 #pragma mark - phone
 
 - (void)applyValidateCodeForTelephone:(NSString *)telephone validateCode:(NSString *)code complection:(QYResultBlock)complection {
@@ -545,6 +557,7 @@
  *  用户名
  */
 - (NSString *)aName {
+#warning bug，除了当前用户，其他用户应该显示昵称
     return self.displayName ;
 }
 

@@ -73,4 +73,25 @@
     return [self.type integerValue] ;
 }
 
+/**
+ *  是否被当前用户点赞了
+ */
+- (BOOL)aDiggedByCurrentUser {
+    return [self.diggedByUsers containsObject:self.owner] ;
+}
+
+/**
+ *  被点赞次数
+ */
+- (NSInteger)aDiggCount {
+    return [self.diggCount integerValue] ;
+}
+
+/**
+ *  评论
+ */
+- (NSArray *)aComments {
+    return [self.comments allObjects] ;
+}
+
 @end
