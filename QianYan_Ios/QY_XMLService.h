@@ -28,9 +28,9 @@
 
 #pragma mark - Core Data Model
 
-+ (QY_camera *)getCameraFromIdXML:(NSString *)xmlStr ;
++ (void)initCameraSetting:(QY_cameraSetting *)setting withCameraIdXMLStr:(NSString *)xmlStr error:(NSError **)error ;
 
-+ (QY_camera *)getCameraFromProfileXML:(NSString *)xmlStr ;
++ (void)initCamera:(QY_camera *)camera withProfileXMLStr:(NSString *)xmlStr error:(NSError **)error ;
 
 + (void)initFriendSetting:(QY_friendSetting *)setting withFriendIdXMLStr:(NSString *)xmlStr error:(NSError **)error ;
 

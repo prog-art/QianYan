@@ -28,6 +28,10 @@
     return [NSData QY_NSData2NSString:[data subdataWithRange:range]] ? : @"" ;
 }
 
++ (NSString *)getStringValue:(NSData *)data {
+    return [NSData QY_NSData2NSString:data] ? : @"" ;
+}
+
 + (NSNumber *)getNumberValue:(NSData *)data range:(NSRange)range {
     return @([self getIntegerValue:data range:range]) ;
 }

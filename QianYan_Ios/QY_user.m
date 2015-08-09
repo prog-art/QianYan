@@ -385,6 +385,69 @@
     }) ;
 }
 
+#pragma mark - jpro_camera
+
+- (void)fetchCamerasSettingsComplection:(QYArrayBlock)complection {
+    assert(complection) ;
+    
+    //
+    NSString *path = [QY_JPROUrlFactor pathForUserCameraList:self.userId] ;
+    
+    [[QY_JPROHttpService shareInstance] getDocumentListForPath:path Complection:^(NSArray *objects, NSError *error) {
+        if ( !error ) {
+            QYDebugLog(@"objects = %@",objects) ;
+            
+            NSMutableSet *settings = [NSMutableSet set] ;
+            
+            [objects enumerateObjectsUsingBlock:^(NSString *fileName, NSUInteger idx, BOOL *stop) {
+                NSString *cameraId = [fileName stringByDeletingPathExtension] ;
+                
+                QY_cameraSetting *setting = [QY_cameraSetting insertCameraSettingByOwnerId:self.userId cameraId:cameraId] ;
+                
+                [settings addObject:setting] ;
+            }] ;
+            
+            [self setCameraSettings:settings] ;
+            QYDebugLog(@"列表获取完成 %@",settings) ;
+            //拉取所有服务器资料
+            
+            dispatch_group_t group = dispatch_group_create() ;
+#warning 没有处理错误的能力！！！！！！
+            [self.cameraSettings enumerateObjectsUsingBlock:^(QY_cameraSetting *setting, BOOL *stop) {
+                
+                dispatch_group_async(group, dispatch_get_global_queue(0, 0), ^{
+                    
+                    dispatch_semaphore_t sema = dispatch_semaphore_create(0) ;
+                    
+                    [setting fetchCameraSettingComplection:^(id object, NSError *error) {
+                        if ( object && !error ) {
+                            
+                        } else {
+                            
+                        }
+                        
+                        dispatch_semaphore_signal(sema) ;
+                    }] ;
+                    
+                    dispatch_time_t timeout = dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC) ;
+                    dispatch_semaphore_wait(sema, timeout) ;
+                }) ;
+                
+            }] ;
+            
+            dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+                QYDebugLog(@"请求结束") ;
+                complection([self.cameraSettings allObjects],nil) ;
+            }) ;
+            
+            
+        } else {
+            complection(nil,error) ;
+        }
+    }] ;
+
+}
+
 #pragma mark - jpro_报警信息
 
 - (void)fetchAlertMessagesComplection:(QYArrayBlock)complection {

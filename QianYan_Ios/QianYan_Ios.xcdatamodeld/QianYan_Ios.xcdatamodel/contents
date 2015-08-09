@@ -30,7 +30,7 @@
         <attribute name="status" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <relationship name="inGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_cameraGroup" inverseName="containCameras" inverseEntity="QY_cameraGroup" syncable="YES"/>
         <relationship name="inSettings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_cameraSetting" inverseName="toCamera" inverseEntity="QY_cameraSetting" syncable="YES"/>
-        <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="QY_user" inverseName="cameras" inverseEntity="QY_user" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QY_user" inverseName="cameras" inverseEntity="QY_user" syncable="YES"/>
         <relationship name="shareUser" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_user" inverseName="sharedCameras" inverseEntity="QY_user" syncable="YES"/>
     </entity>
     <entity name="QY_cameraGroup" representedClassName="QY_cameraGroup" syncable="YES">

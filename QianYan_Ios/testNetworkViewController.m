@@ -345,19 +345,19 @@
         }
             
         case -201 : {
-            [[QY_JMSService shareInstance] getCameraStateById:testCameraId] ;
+//            [[QY_JMSService shareInstance] getCameraStateById:testCameraId] ;
             //<74303030 30303030 30303030 31313200 0000177a 00000000 00000006 00040000 053c>
             break ;
         }
             
         case -202 : {
-            [[QY_JMSService shareInstance] getCamerasStateByIds:[NSSet setWithArray:@[testCameraId,testCameraId2,testCameraId3]]] ;
+//            [[QY_JMSService shareInstance] getCamerasStateByIds:[NSSet setWithArray:@[testCameraId,testCameraId2,testCameraId3]]] ;
             //<74303030 30303030 30303030 31313200 0000177d 00000000 0000000f 74303030 30303030 30303030 313132>
             break ;
         }
             
         case -203 : {
-            [[QY_JMSService shareInstance] getCameraThumbnailById:testCameraId2] ;
+//            [[QY_JMSService shareInstance] getCameraThumbnailById:testCameraId2] ;
             break ;
         }
             

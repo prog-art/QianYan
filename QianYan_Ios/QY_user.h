@@ -67,7 +67,9 @@
 
 #pragma mark - jpro_camera
 
-- (void)fetchCamerasComplection:(QYArrayBlock)complection ;
+#warning 用户只能通过setting获取到他所能看到的所有相机。
+- (void)fetchCamerasSettingsComplection:(QYArrayBlock)complection ;
+
 
 #pragma mark - jpro_报警信息
 

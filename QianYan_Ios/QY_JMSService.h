@@ -10,8 +10,6 @@
 
 #import "QY_Block_Define.h"
 
-extern NSString *const kNotificationNameReceiveCamerasState ;
-
 @interface QY_JMSService : NSObject
 
 + (instancetype)shareInstance ;
@@ -27,14 +25,28 @@ extern NSString *const kNotificationNameReceiveCamerasState ;
 
 #pragma mark - JMS 请求
 
+/**
+ *  获取相机状态
+ *
+ *  @param cameraIds   相机的Id
+ *  @param complection 回调返回相机的状态
+ */
+- (void)getCamerasStateByIds:(NSSet *)cameraIds complection:(QYArrayBlock)complection ;
 
+/**
+ *  获取相机实时的缩略图
+ *
+ *  @param cameraId    相机的Id
+ *  @param complection 回调返回相机缩略图的NSData。
+ */
+- (void)getCameraThumbnailById:(NSString *)cameraId complection:(QYObjectBlock)complection ;
 
 #pragma mark - test
 
-- (void)getCameraStateById:(NSString *)cameraId ;
-
-- (void)getCamerasStateByIds:(NSSet *)cameraIds ;
-
-- (void)getCameraThumbnailById:(NSString *)cameraId ;
+//- (void)getCameraStateById:(NSString *)cameraId ;
+//
+//- (void)getCamerasStateByIds:(NSSet *)cameraIds ;
+//
+//- (void)getCameraThumbnailById:(NSString *)cameraId ;
 
 @end

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "QY_Block_Define.h"
+
 @class QY_cameraGroup, QY_cameraSetting, QY_user;
 
 @interface QY_camera : NSManagedObject
@@ -29,6 +31,12 @@
 + (instancetype)camera ;
 
 + (QY_camera *)findCameraById:(NSString *)cameraId ;
+
++ (QY_camera *)insertCameraById:(NSString *)cameraId ;
+
+#pragma mark - 远端服务器
+
+- (void)fetchCameraInfoComplection:(QYObjectBlock)complection ;
 
 @end
 

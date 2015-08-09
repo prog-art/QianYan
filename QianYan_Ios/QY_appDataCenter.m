@@ -26,6 +26,7 @@
     return sharedInstance ;
 }
 
+#warning 重构到User中
 + (QY_user *)userWithId:(NSString *)userId {
     //先查
     QY_user *user = [self findUserById:userId] ;

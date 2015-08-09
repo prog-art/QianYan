@@ -44,6 +44,8 @@
  */
 + (NSString *)getStringValue:(NSData *)data range:(NSRange)range ;
 
++ (NSString *)getStringValue:(NSData *)data ;
+
 /**
  *  获取range 部分的 NSNumber数据(无视前0)
  *

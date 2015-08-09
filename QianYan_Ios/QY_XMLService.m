@@ -209,11 +209,46 @@
     }
 }
 
-+ (QY_camera *)getCameraFromProfileXML:(NSString *)xmlStr {
-#warning 没写
-    return nil ;
++ (void)initCameraSetting:(QY_cameraSetting *)setting withCameraIdXMLStr:(NSString *)xmlStr error:(NSError **)error {
+    GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:error] ;
+    
+    if ( *error ) {
+        [QYUtils alertError:*error] ;
+    } else {
+        GDataXMLElement *root = [xmlDoc rootElement] ;
+        
+        //相机本体
+        NSString *cameraId = [[root attributeForName:@"id"] stringValue] ;
+        QY_camera *camera = [QY_camera insertCameraById:cameraId] ;
+        camera.jpro = [self getStringValueForElement:root name:@"jpro"] ;
+        setting.toCamera = camera ;
+        //拥有者
+        NSString *ownerId = [self getStringValueForElement:root name:@"owner"] ;
+        camera.owner = [QY_user insertUserById:ownerId] ;
+
+        //昵称
+        NSString *nickname = [self getStringValueForElement:root name:@"nickname"] ;
+        if ( nickname ) {
+            setting.nickName = nickname ;
+        }
+    }
 }
 
++ (void)initCamera:(QY_camera *)camera withProfileXMLStr:(NSString *)xmlStr error:(NSError **)error {
+    GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:error] ;
+    
+    if ( *error ) {
+        [QYUtils alertError:*error] ;
+    } else {
+        GDataXMLElement *root = [xmlDoc rootElement] ;
+        
+        NSString *cameraId = [[root attributeForName:@"id"] stringValue] ;
+        camera.cameraId = cameraId ;
+        
+        NSString *ownerId = [self getStringValueForElement:root name:@"owner"] ;
+        camera.owner = [QY_user insertUserById:ownerId] ;        
+    }
+}
 
 + (void)initFriendSetting:(QY_friendSetting *)setting withFriendIdXMLStr:(NSString *)xmlStr error:(NSError **)error {
     GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:error] ;
