@@ -408,7 +408,7 @@
             }] ;
             
             [self setCameraSettings:settings] ;
-            QYDebugLog(@"列表获取完成 %@",settings) ;
+            QYDebugLog(@"相机列表列表获取完成") ;
             //拉取所有服务器资料
             
             dispatch_group_t group = dispatch_group_create() ;
@@ -436,7 +436,7 @@
             }] ;
             
             dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-                QYDebugLog(@"请求结束") ;
+                QYDebugLog(@"相机资料拉取完成") ;
                 complection([self.cameraSettings allObjects],nil) ;
             }) ;
             
@@ -560,7 +560,7 @@
                     [avatarIamgeView setImage:image] ;
                 }] ;
             } else {
-                QYDebugLog(@"无头像或获取头像失败") ;
+                QYDebugLog(@"无头像或获取头像失败 error = %@",error) ;
             }
         }] ;
     } else {

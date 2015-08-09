@@ -20,4 +20,10 @@
 
 - (UIImage *)getAvatarByUserId:(NSString *)userId ;
 
+#pragma makr - 相机缩略图
+
+- (void)cacheImage:(UIImage *)image forCameraId:(NSString *)cameraId ;
+
+- (UIImage *)getImageByCameraId:(NSString *)cameraId ;
+
 @end

@@ -17,6 +17,7 @@
 }
 
 @property (nonatomic,strong) NSMutableDictionary *avatarCache ;
+@property (nonatomic,strong) NSMutableDictionary *cameraThumbnail ;
 
 @end
 
@@ -36,11 +37,12 @@
 - (instancetype)init {
     if ( self = [super init] ) {
         _avatarCache = [NSMutableDictionary dictionary] ;
+        _cameraThumbnail = [NSMutableDictionary dictionary] ;
     }
     return self ;
 }
 
-#pragma mark -
+#pragma mark - 头像
 
 - (void)cacheAvatar:(UIImage *)avatar forUserId:(NSString *)userId {
     if ( avatar && userId ) {
@@ -59,6 +61,28 @@
         return memoryImage ;
     }
 
+    return nil ;
+}
+
+#pragma makr - 相机缩略图
+
+- (void)cacheImage:(UIImage *)image forCameraId:(NSString *)cameraId {
+    if ( image && cameraId) {
+        [self.cameraThumbnail setObject:image forKey:cameraId] ;
+        [QY_FileService saveCameraThumbnail:image forCameraId:cameraId] ;
+    }
+}
+
+- (UIImage *)getImageByCameraId:(NSString *)cameraId {
+    if ( !cameraId ) return nil ;
+    UIImage *cachedImage = self.cameraThumbnail[cameraId] ;
+    if ( cachedImage ) return cachedImage ;
+    
+    UIImage *memoryImage = [QY_FileService getCameraThumbnailByCameraId:cameraId] ;
+    if ( memoryImage ) {
+        [self cacheImage:memoryImage forCameraId:cameraId] ;
+        return memoryImage ;
+    }
     return nil ;
 }
 

@@ -17,6 +17,7 @@
 
 #import "QY_jms_parameter_key_marco.h"
 #import "QY_jms_marco.h"
+#import "QYGCDAsyncSocket.h"
 
 typedef NS_ENUM(NSInteger, JMS_DATA_READ_OPERATION ) {
     JMS_DATA_READ_OPERATION_JMS_DATA = 10 ,//JMS服务器的部分。
@@ -31,11 +32,7 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
 
 @interface QY_JMSService ()<GCDAsyncSocketDelegate>
 
-@property (nonatomic) GCDAsyncSocket *jms_tcp_socket ;
-
-@property (copy) QYResultBlock connectComplection ;
-
-@property (copy) QYObjectBlock complection ;
+@property (atomic) NSMutableArray *sockets ;
 
 - (NSData *)JMSLoginData ;
 
@@ -60,7 +57,7 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
 }
 
 - (void)setUp {
-    
+    self.sockets = [NSMutableArray array] ;
 }
 
 #pragma mark - getter & setter
@@ -85,11 +82,9 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     _jms_port = port ;
 }
 
-- (GCDAsyncSocket *)jms_tcp_socket {
-    if ( !_jms_tcp_socket ) {
-        _jms_tcp_socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()] ;
-    }
-    return _jms_tcp_socket ;
+- (QYGCDAsyncSocket *)getASocket {
+    QYGCDAsyncSocket *socket = [[QYGCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()] ;
+    return socket ;
 }
 
 - (NSString *)device_id {
@@ -123,17 +118,20 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
  *  @param complection 回调返回相机的状态
  */
 - (void)getCamerasStateByIds:(NSSet *)cameraIds complection:(QYArrayBlock)complection {
+    QYDebugLog(@"获取相机[%@]的状态",cameraIds) ;
     static NSUInteger type = 6013 ;
     
-    self.complection = ^(id object,NSError *error) {
+    QYGCDAsyncSocket *socket = [self getASocket] ;
+    
+    socket.complection = ^(id object,NSError *error) {
         if ( complection ) {
             complection(object,error) ;
         }
     } ;
     
     if (!cameraIds || cameraIds.count == 0 ) {
-        self.complection(@[],nil) ;
-        self.complection = nil ;
+        socket.complection(@[],nil) ;
+        socket.complection = nil ;
         return ;
     }
 
@@ -161,8 +159,8 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
         [packageData appendData:data] ;
     }] ;
     
-    [self startWorkWithData:packageData Tag:JMS_SERVICE_OPERATION_GET_CAMERAS_STATES] ;
-    
+    [self.sockets addObject:socket] ;
+    [self startWorkWithData:packageData socket:socket operation:JMS_SERVICE_OPERATION_GET_CAMERAS_STATES] ;
 }
 
 /**
@@ -172,17 +170,21 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
  *  @param complection 回调返回相机缩略图的NSData。
  */
 - (void)getCameraThumbnailById:(NSString *)cameraId complection:(QYObjectBlock)complection {
+    QYDebugLog(@"获取相机[%@]缩略图",cameraId) ;
     static NSUInteger type = 6030 ;
     static NSUInteger cmd = 1360 ;
     
-    self.complection = ^(id obj,NSError *error) {
+    QYGCDAsyncSocket *socket = [self getASocket] ;
+    
+    socket.complection = ^(id obj,NSError *error) {
         if ( complection ) {
             complection(obj,error) ;
         }
     } ;
     
     if ( !cameraId ) {
-        self.complection(nil,nil) ;
+        socket.complection(nil,nil) ;
+        socket.complection = nil ;
         return ;
     }
     
@@ -218,86 +220,82 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     [dataArr enumerateObjectsUsingBlock:^(NSData *data, NSUInteger idx, BOOL *stop) {
         [packageData appendData:data] ;
     }] ;
-    
-    [self startWorkWithData:packageData Tag:JMS_SERVICE_OPERATION_GET_CAMERA_THUMBNAIL] ;
 
+    [self.sockets addObject:socket] ;
+    [self startWorkWithData:packageData socket:socket operation:JMS_SERVICE_OPERATION_GET_CAMERA_THUMBNAIL] ;
 }
-
-#pragma mark - Test
-
-#warning 未重写。
-- (void)getCameraStateById:(NSString *)cameraId {
-    //基本没用这个接口，用的下面那个。
-    static NSUInteger type = 6010 ;
-    static NSUInteger cmd = 1340 ;
-    
-    NSData *cameraIdData = [JRMDataFormatUtils formatStringValueData:cameraId
-                                                               toLen:JMS_DATA_LEN_OF_KEY_CAMID] ;
-    NSData *typeData = [JRMDataFormatUtils formatIntegerValueData:type
-                                                            toLen:JMS_DATA_LEN_OF_KEY_TYPE] ;
-    NSData *timeData = [JRMDataFormatUtils formatIntegerValueData:0
-                                                            toLen:JMS_DATA_LEN_OF_KEY_TIME] ;
-    
-    NSData *lengthData = [JRMDataFormatUtils formatIntegerValueData:(JMS_DATA_LEN_OF_KEY_CMD_LENGTH + JMS_DATA_LEN_OF_KEY_CMD)
-                                                              toLen:JMS_DATA_LEN_OF_KEY_LENGTH] ;
-    
-    NSData *cmdLengthData = [JRMDataFormatUtils formatIntegerValueData:JMS_DATA_LEN_OF_KEY_CMD
-                                                                 toLen:JMS_DATA_LEN_OF_KEY_CMD_LENGTH] ;
-    NSData *cmdData = [JRMDataFormatUtils formatIntegerValueData:cmd
-                                                           toLen:JMS_DATA_LEN_OF_KEY_CMD] ;
-    
-    //组装
-    NSArray *dataArr = @[cameraIdData,typeData,timeData,lengthData,cmdLengthData,cmdData] ;
-    
-    NSMutableData *packageData = [NSMutableData data] ;
-    
-    [dataArr enumerateObjectsUsingBlock:^(NSData *data , NSUInteger idx, BOOL *stop) {
-        [packageData appendData:data] ;
-    }] ;
-    
-    //发送
-    [self startWorkWithData:packageData Tag:JMS_SERVICE_OPERATION_GET_CAMERA_STATE] ;
-}
+//
+//#pragma mark - Test
+//
+//#warning 未重写。
+//- (void)getCameraStateById:(NSString *)cameraId {
+//    //基本没用这个接口，用的下面那个。
+//    static NSUInteger type = 6010 ;
+//    static NSUInteger cmd = 1340 ;
+//    
+//    NSData *cameraIdData = [JRMDataFormatUtils formatStringValueData:cameraId
+//                                                               toLen:JMS_DATA_LEN_OF_KEY_CAMID] ;
+//    NSData *typeData = [JRMDataFormatUtils formatIntegerValueData:type
+//                                                            toLen:JMS_DATA_LEN_OF_KEY_TYPE] ;
+//    NSData *timeData = [JRMDataFormatUtils formatIntegerValueData:0
+//                                                            toLen:JMS_DATA_LEN_OF_KEY_TIME] ;
+//    
+//    NSData *lengthData = [JRMDataFormatUtils formatIntegerValueData:(JMS_DATA_LEN_OF_KEY_CMD_LENGTH + JMS_DATA_LEN_OF_KEY_CMD)
+//                                                              toLen:JMS_DATA_LEN_OF_KEY_LENGTH] ;
+//    
+//    NSData *cmdLengthData = [JRMDataFormatUtils formatIntegerValueData:JMS_DATA_LEN_OF_KEY_CMD
+//                                                                 toLen:JMS_DATA_LEN_OF_KEY_CMD_LENGTH] ;
+//    NSData *cmdData = [JRMDataFormatUtils formatIntegerValueData:cmd
+//                                                           toLen:JMS_DATA_LEN_OF_KEY_CMD] ;
+//    
+//    //组装
+//    NSArray *dataArr = @[cameraIdData,typeData,timeData,lengthData,cmdLengthData,cmdData] ;
+//    
+//    NSMutableData *packageData = [NSMutableData data] ;
+//    
+//    [dataArr enumerateObjectsUsingBlock:^(NSData *data , NSUInteger idx, BOOL *stop) {
+//        [packageData appendData:data] ;
+//    }] ;
+//    
+//    //发送
+//    [self startWorkWithData:packageData Tag:JMS_SERVICE_OPERATION_GET_CAMERA_STATE] ;
+//}
 
 #pragma mark - d(^_^o)
 
-- (void)startWorkWithData:(NSData *)data Tag:(JMS_SERVICE_OPERATION)operation {
-    QYDebugLog(@"") ;
-    
-    if ( [self.jms_tcp_socket isConnected] ) {
-        QYDebugLog(@"data = %@",data) ;
-        [self.jms_tcp_socket writeData:data withTimeout:10 tag:operation] ;
-    } else {
-        QYDebugLog(@"JMS未连接") ;
-        
-        QYDebugLog(@"开始重新连接") ;
-        [self connectToJMSHost:self.jms_ip Port:self.jms_port Complection:^(BOOL success, NSError *error) {
+- (void)startWorkWithData:(NSData *)data socket:(QYGCDAsyncSocket *)socket operation:(JMS_SERVICE_OPERATION)operation {
+    QYDebugLog(@"d(^_^o)") ;
+
+    if ( ![socket isConnected] ) {
+        QYDebugLog(@"JMS未连接，开始重新连接") ;
+        [self makeSocket:socket connectToJMSHost:self.jms_ip Port:self.jms_port Complection:^(BOOL success, NSError *error) {
             if ( success ) {
                 QYDebugLog(@"JMS连接成功") ;
-                [self startWorkWithData:data Tag:operation] ;
+                [self startWorkWithData:data socket:socket operation:operation] ;
             } else {
-                QYDebugLog(@"JMS链接失败 error = %@",error) ;
-                self.complection(nil,error) ;
-                self.complection = nil ;
+                QYDebugLog(@"JMS连接失败 error = %@",error) ;
+                socket.complection(nil,error) ;
+                socket.complection = nil ;
             }
         }] ;
+        return ;
     }
     
+    QYDebugLog(@"发送data[%@]",data) ;
+    [socket writeData:data withTimeout:10 tag:operation] ;
 }
 
-- (void)connectToJMSHost:(NSString *)jms_ip Port:(NSString *)jms_port Complection:(QYResultBlock)complection {
-    QYDebugLog(@"目标JMS服务器:%@:%@",jms_ip,jms_port) ;
-    self.connectComplection = complection ;
+- (void)makeSocket:(QYGCDAsyncSocket *)socket connectToJMSHost:(NSString *)jms_ip Port:(NSString *)jms_port Complection:(QYResultBlock)complection {
+    socket.connectComplection = complection ;
     
     NSError *error ;
-    [self.jms_tcp_socket connectToHost:jms_ip onPort:[jms_port integerValue] error:&error] ;
+    [socket connectToHost:jms_ip onPort:[jms_port integerValue] error:&error] ;
+#warning 没处理错误
 }
-
 
 #pragma mark - GCDAsyncSocketDelegate
 
-
-- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
+- (void)socket:(QYGCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     QYDebugLog(@"连接到jms服务器 %@:%hu",host,port) ;
     
     //发送登录JMS信息
@@ -308,65 +306,68 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
 }
 
 
-- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+- (void)socket:(QYGCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     
     JMS_DATA_READ_OPERATION readOperation = ( tag / 10 ) * 10 ;
 
     switch (readOperation) {
         case JMS_DATA_READ_OPERATION_JMS_DATA : {
-            NSString *sender_id = [JRMDataParseUtils getStringValue:data range:NSMakeRange(0, 16)] ;
-            NSInteger type = [JRMDataParseUtils getIntegerValue:data range:NSMakeRange(16, 4)] ;
-            NSInteger time = [JRMDataParseUtils getIntegerValue:data range:NSMakeRange(20, 4)] ;
-            NSInteger Datalen = [JRMDataParseUtils getIntegerValue:data range:NSMakeRange(24, 4)] ;
+            sock.senderId =[JRMDataParseUtils getStringValue:data range:NSMakeRange(0, 16)] ;
+            sock.type = [JRMDataParseUtils getIntegerValue:data range:NSMakeRange(16, 4)] ;
+            sock.time = [JRMDataParseUtils getIntegerValue:data range:NSMakeRange(20, 4)] ;
+            sock.dataLen = [JRMDataParseUtils getIntegerValue:data range:NSMakeRange(24, 4)] ;
             
-            [sock readDataToLength:Datalen withTimeout:10.0f tag:( tag % 10 )+ JMS_DATA_READ_OPERATION_CAM_DATA ] ;
+            
+            [sock readDataToLength:sock.dataLen withTimeout:10.0f tag:( tag % 10 )+ JMS_DATA_READ_OPERATION_CAM_DATA ] ;
             
             break ;
         }
 
         case JMS_DATA_READ_OPERATION_CAM_DATA : {
             NSData *camData = data ;
-            NSLog(@"CamData = %@",camData) ;
+            QYDebugLog(@"CamData = %@",camData) ;
             
             JMS_SERVICE_OPERATION JMSOperation = tag % 10 ;
-            
-            id Obj ;
             
             switch (JMSOperation) {
                 case 1 : {
                     NSString *state = [JRMDataParseUtils getStringValue:camData range:NSMakeRange(6, 2)] ;
         
-                    NSLog(@"state = %@",[state integerValue] == 0 ?@"离线":@"在线") ;
+                    QYDebugLog(@"state = %@",[state integerValue] == 0 ?@"离线":@"在线") ;
 //#warning 这里没有调用，就不返回的！注意！
                     [NSException raise:@"Unuserd method" format:@"检查这里，删除就ok"] ;
                     
-                    Obj = [state integerValue] == 0 ? @"离线" : @"在线" ;
+                    sock.Obj = [state integerValue] == 0 ? @"离线" : @"在线" ;
                     
                     break ;
                 }
                     
                 case 2 : {
-                    NSString *lastString = [JRMDataParseUtils getStringValue:camData] ;
+//                    NSString *lastString = [JRMDataParseUtils getStringValue:camData] ;
                     NSArray *stateArr = [NSJSONSerialization JSONObjectWithData:camData options:kNilOptions error:NULL] ;
-                    Obj = stateArr ;
+                    sock.Obj = stateArr ;
                     break ;
                 }
                     
                 case 3 : {
                     QYDebugLog(@"camData = %@",camData) ;
-                    Obj = camData ;
+                    if ( camData.length == 8 ) {
+                        camData = nil ;
+                    } else {
+                        camData = [camData subdataWithRange:NSMakeRange(10, camData.length - 10)] ;
+                    }
                     
+                    
+                    
+                    sock.Obj = camData ;
                     break ;
                 }
                     
                 default:
                     break;
             }
-            
-            if ( self.complection ) {
-                self.complection(Obj,nil) ;
-                self.complection = nil ;
-            }
+
+            [sock disconnect] ;
             
             break ;
         }
@@ -376,27 +377,29 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     }
 }
 
-- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
+- (void)socket:(QYGCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
     if ( tag == -1 ) {
         QYDebugLog(@"jms login data 已经发送到了jms服务器") ;
-        if ( self.connectComplection ) {
-            self.connectComplection(true,nil) ;
-            self.connectComplection = nil ;
+        
+        if ( sock.connectComplection ) {
+            sock.connectComplection(true,nil) ;
+            sock.connectComplection = nil ;
         }
+        
     } else {
         QYDebugLog(@"data已经发送到了jms服务器") ;
         [sock readDataToLength:28 withTimeout:10.0f tag:JMS_DATA_READ_OPERATION_JMS_DATA+tag] ;
     }
 }
 
-- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    QYDebugLog(@"JMS连接断开 error = %@",err) ;
-    
-    if ( self.complection ) {
-        self.complection(nil,err) ;
-        self.complection = nil ;
+- (void)socketDidDisconnect:(QYGCDAsyncSocket *)sock withError:(NSError *)err {
+    QYDebugLog(@"JMS连接断开 error = %@ , sock = %@",err,sock) ;
+    if ( sock.complection ) {
+        sock.complection(sock.Obj,err) ;
+        sock.complection = nil ;
     }
     
+    [self.sockets removeObject:sock] ;
 }
 
 

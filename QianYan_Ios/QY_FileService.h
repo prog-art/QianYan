@@ -17,6 +17,10 @@
 
 + (UIImage *)getAvatarByUserId:(NSString *)userId ;
 
++ (BOOL)saveCameraThumbnail:(UIImage *)image forCameraId:(NSString *)cameraId ;
+
++ (UIImage *)getCameraThumbnailByCameraId:(NSString *)cameraId ;
+
 #pragma mark - old
 
 /**

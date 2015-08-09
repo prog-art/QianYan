@@ -31,7 +31,7 @@
 }
 
 + (UIImage *)getAvatarByUserId:(NSString *)userId {
-    assert(userId) ;
+    if ( !userId ) return nil ;
     return [self getImageDataAtPath:[self getAvatarPathByUserId:userId]] ;
 }
 
@@ -39,19 +39,54 @@
     assert(userId) ;
     NSString *avatarDirPath = [self getAvatarPath] ;
     if ( !avatarDirPath ) return nil ;
-    return [[self getAvatarPath] stringByAppendingPathComponent:userId] ;
+    return [avatarDirPath stringByAppendingPathComponent:userId] ;
 }
 
 + (NSString *)getAvatarPath {
     NSString *avatarPath = [[self getDocPath] stringByAppendingPathComponent:@"avatar"] ;
-    if ( [self validateFolderForAvatar:avatarPath] ) return avatarPath ;
+    if ( [self validateFolderForPath:avatarPath] ) return avatarPath ;
     return nil ;
 }
+
++ (BOOL)saveCameraThumbnail:(UIImage *)image forCameraId:(NSString *)cameraId {
+    BOOL result = FALSE ;
+    if ( !image || !cameraId ) return result ;
+    
+    NSString *path = [self getCameraThumbnailPathByCameraId:cameraId] ;
+    
+    NSData *cameraImgData = UIImageJPEGRepresentation(image, 1.0f) ;
+    if ( !cameraImgData ) {
+        cameraImgData = UIImagePNGRepresentation(image) ;
+    }
+    
+    result = [self saveFileAtPath:path Data:cameraImgData] ;
+    
+    return result ;
+}
+
++ (UIImage *)getCameraThumbnailByCameraId:(NSString *)cameraId {
+    if ( ( !cameraId )) return nil ;
+    return [self getImageDataAtPath:[self getCameraThumbnailPathByCameraId:cameraId]] ;
+}
+
++ (NSString *)getCameraThumbnailPathByCameraId:(NSString *)cameraId {
+    assert(cameraId) ;
+    NSString *imageDirPath = [self getCameraThumbnailPath] ;
+    if ( !imageDirPath ) return nil ;
+    return [imageDirPath stringByAppendingPathComponent:cameraId] ;
+}
+
++ (NSString *)getCameraThumbnailPath {
+    NSString *cameraThumbnailPath = [[self getDocPath] stringByAppendingPathComponent:@"cameraThumbnail"] ;
+    if ( [self validateFolderForPath:cameraThumbnailPath] ) return cameraThumbnailPath ;
+    return nil ;
+}
+
 
 /**
  *  检查头像文件夹是否存在，不存在就建一个。
  */
-+ (BOOL)validateFolderForAvatar:(NSString *)avatarPath {
++ (BOOL)validateFolderForPath:(NSString *)avatarPath {
     assert(avatarPath) ;
     static BOOL result = FALSE ;
     

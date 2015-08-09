@@ -14,6 +14,8 @@
 #import "QY_appDataCenter.h"
 #import "QY_Common.h"
 #import "QY_XMLService.h"
+#import "QY_JMS.h"
+#import <UIKit/UIKit.h>
 
 @implementation QY_camera
 
@@ -74,6 +76,31 @@
             complection(nil,error) ;
         }
     }] ;
+}
+
+- (void)displayCameraThumbnailAtImageView:(UIImageView *)imageView useCache:(BOOL)useCache {
+    if ( !imageView ) return ;
+
+    UIImage *cachedImage = [[QY_CacheService shareInstance] getImageByCameraId:self.cameraId] ;
+    
+    UIImage *placeHoderImage = cachedImage ? :[UIImage imageNamed:@"相机分组-子图片1.png"] ;
+    [imageView setImage:placeHoderImage] ;
+    if ( !useCache ) {
+        //不用缓存
+        QYDebugLog(@"不用缓存，去请求") ;
+        [[QY_JMSService shareInstance] getCameraThumbnailById:self.cameraId complection:^(NSData *imageData , NSError *error) {
+            if ( imageData ) {
+                UIImage *image = [UIImage imageWithData:imageData] ;
+                [[QY_CacheService shareInstance] cacheImage:image forCameraId:self.cameraId] ;
+                [QYUtils runInMainQueue:^{
+                    [imageView setImage:image] ;
+                }] ;
+            } else {
+                QYDebugLog(@"无缩略图或获取缩略图失败 error = %@",error) ;
+            }
+        }] ;
+        return ;
+    }
 }
 
 @end

@@ -46,7 +46,7 @@
 - (NSArray *)contents {
     if (!_contents) {
         _contents = @[[self publicArray],
-                      @[@[@"全部摄像机",@"testCamera1",@"testCamera2",@"testCamera3"]]];
+                      @[@[@"全部摄像机"]]];
     }
     return _contents;
 }
@@ -54,7 +54,7 @@
 - (UIRefreshControl *)refreshControl {
     if ( !_refreshControl ) {
         _refreshControl = [[UIRefreshControl alloc] init] ;
-        [_refreshControl addTarget:self action:@selector(refreshCameras) forControlEvents:UIControlEventValueChanged] ;
+        [_refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged] ;
     }
     return _refreshControl ;
 }
@@ -73,12 +73,7 @@
     if ( refreshControl ) {
         [refreshControl beginRefreshing] ;
     }
-    
-    [self refreshCameras] ;
-    
-}
 
-- (void)refreshCameras {
     self.cameraSettings = nil ;
     
     [[QYUser currentUser].coreUser fetchCamerasSettingsComplection:^(NSArray *settings, NSError *error) {
@@ -88,84 +83,58 @@
             [settings enumerateObjectsUsingBlock:^(QY_cameraSetting *setting, NSUInteger idx, BOOL *stop) {
                 [self.cameraSettings setObject:setting forKey:setting.toCamera.cameraId] ;
             }] ;
-
-            [self didReceiveCameraData] ;
+            
+            QYDebugLog(@"请求相机状态") ;
+            //通过notificaiton接受通知
+            
+            NSSet *cameraIds = [NSSet setWithArray:self.cameraSettings.allKeys] ;
+            if ( cameraIds && cameraIds.count != 0 ) {
+                QYDebugLog(@"cameraIds = %@",cameraIds) ;
+                
+                [[QY_JMSService shareInstance] getCamerasStateByIds:cameraIds complection:^(NSArray *stateArr, NSError *error) {
+                    [self.refreshControl endRefreshing] ;
+                    
+                    if ( stateArr ) {
+                        [stateArr enumerateObjectsUsingBlock:^(NSDictionary *info, NSUInteger idx, BOOL *stop) {
+                            NSString *cameraId = info[QY_key_jipnc_id] ;
+                            NSNumber *stateNum = info[QY_key_jipnc_status] ;
+                            
+                            QY_cameraSetting *setting = self.cameraSettings[cameraId] ;
+                            QY_camera *camera = setting.toCamera ;
+                            camera.status = stateNum ;
+                        }] ;
+                        
+                        [self beforeReloadData] ;
+                    } else {
+                        QYDebugLog(@"获取相机状态出错,error = %@",error) ;
+                        [QYUtils alertError:error] ;
+                    }
+                }] ;
+            } else {
+                QYDebugLog(@"cameraIds = %@",cameraIds) ;
+                [self.refreshControl endRefreshing] ;
+            }
+            
+            
             
         } else {
+            [self.refreshControl endRefreshing] ;
             QYDebugLog(@"error = %@",error) ;
         }
     }] ;
     
-//    NSString *userId = [QYUser currentUser].userId ;
-//    NSString *path = [NSString stringWithFormat:@"user/%@/cameralist",userId] ;
-//    [self.jproService getDocumentListForPath:path Complection:^(NSArray *objects, NSError *error) {
-//        if ( !error ) {
-//            QYDebugLog(@"objects = %@",objects) ;
-//            
-//            //拿到列表后check ;
-//            NSMutableArray *noDataCameraFileNames = [NSMutableArray array] ;
-//            [objects enumerateObjectsUsingBlock:^(NSString *fileName, NSUInteger idx, BOOL *stop) {
-//                NSString *tempFileName = [fileName stringByDeletingPathExtension] ;
-//                QY_camera *localCamera = [QY_camera findCameraById:tempFileName] ;
-//                if ( localCamera ) {
-//                    [self.cameras setObject:localCamera forKey:tempFileName] ;
-//                } else {
-//                    [noDataCameraFileNames addObject:fileName] ;
-//                }
-//            }] ;
-//            
-//            //没有数据的去服务器拿
-//            
-//            dispatch_group_t group = dispatch_group_create() ;
-//            [noDataCameraFileNames enumerateObjectsUsingBlock:^(NSString *fileName, NSUInteger idx, BOOL *stop) {
-//                
-//                dispatch_group_async(group, dispatch_get_global_queue(0, 0), ^{
-//                    NSString *path = [NSString stringWithFormat:@"user/%@/cameralist/%@",userId,fileName] ;
-//                    
-//                    dispatch_semaphore_t sema = dispatch_semaphore_create(0) ;
-//                    
-//                    [self.jproService downloadFileFromPath:path complection:^(NSString *xmlStr, NSError *error) {
-//                        if ( xmlStr ) {
-//                            QYDebugLog(@"file = %@,content = %@",fileName,xmlStr) ;
-//                            QY_camera *camera = [QY_XMLService getCameraFromIdXML:xmlStr] ;
-//                            QYDebugLog(@"camera = %@",camera) ;
-//                            [self.cameras setObject:camera forKey:[fileName stringByDeletingPathExtension]] ;
-//                        } else {
-//                            QYDebugLog(@"error = %@",error) ;
-//                        }
-//                        dispatch_semaphore_signal(sema) ;
-//                    }] ;
-//                    dispatch_time_t timeout = dispatch_time(DISPATCH_TIME_NOW, 10*NSEC_PER_SEC) ;
-//                    dispatch_semaphore_wait(sema, timeout) ;
-//                    QYDebugLog(@"group %lu ok",(unsigned long)idx) ;
-//                }) ;
-//            }] ;
-//            
-//            dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-//                QYDebugLog(@"请求结束！") ;
-//                [self didReceiveCameraData] ;
-//            }) ;
-//            
-//        } else {
-//            QYDebugLog(@"error = %@",error);
-//        }
-//    }] ;
 }
 
-- (void)didReceiveCameraData {
+- (void)beforeReloadData {
     //处理tableView需要的数据格式
     NSMutableArray *tcontents = [NSMutableArray array] ;
     
     [tcontents addObject:[self publicArray]] ;
     
-//    NSMutableArray *tcameras = [NSMutableArray array] ;
     NSMutableArray *tCameraSettings = [NSMutableArray array] ;
     [tCameraSettings addObject:@"全部摄像机"] ;
-//    [tcameras addObject:@"全部摄像机"] ;
 
     [self.cameraSettings enumerateKeysAndObjectsUsingBlock:^(NSString *key, QY_cameraSetting *setting, BOOL *stop) {
-//        QY_camera *camera = setting.toCamera ;
-//        [tcameras addObject:camera] ;
         [tCameraSettings addObject:setting] ;
     }] ;
     
@@ -173,78 +142,48 @@
     
     self.contents = tcontents ;
     [self.tableView reloadData] ;
-    
-    [self refreshCamerasState] ;
 }
-
-
-- (void)refreshCamerasState {
-    QYDebugLog(@"请求相机状态") ;
-    //通过notificaiton接受通知
-    
-    NSSet *cameras = [NSSet setWithArray:self.cameraSettings.allKeys] ;
-    if ( cameras && [cameras count] != 0 ) {
-        QYDebugLog(@"cameras = %@",cameras) ;
-        
-        [[QY_JMSService shareInstance] getCamerasStateByIds:[NSSet setWithArray:self.cameraSettings.allKeys] complection:^(NSArray *stateArr, NSError *error) {
-            [self.refreshControl endRefreshing] ;
-            
-            if ( !error ) {
-                [self didReceiveCamerasState:stateArr] ;
-            } else {
-                QYDebugLog(@"获取相机状态出错,error = %@",error) ;
-                [QYUtils alertError:error] ;
-            }
-        }] ;
-    } else {
-        QYDebugLog(@"cameras = %@",cameras) ;
-        [self.refreshControl endRefreshing] ;
-    }
-}
-
-- (void)didReceiveCamerasState:(NSArray *)stateArr {
-    QYDebugLog(@"states = %@",stateArr) ;
-
-    [stateArr enumerateObjectsUsingBlock:^(NSDictionary *info, NSUInteger idx, BOOL *stop) {
-        NSString *cameraId = info[QY_key_jipnc_id] ;
-        NSNumber *stateNum = info[QY_key_jipnc_status] ;
-        
-        QY_cameraSetting *setting = self.cameraSettings[cameraId] ;
-        QY_camera *camera = setting.toCamera ;
-        camera.status = stateNum ;
-    }] ;
-    
-    [QY_appDataCenter saveObject:nil error:NULL] ;
-    [self.tableView reloadData] ;
-}
-
-- (void)refreshCameraWithOutNetwork {
-//    NSMutableSet *cameras = [NSMutableSet setWithSet:]
-//    NSSet *cameras = [NSSet]
-}
-
 
 #pragma mark - Life Cycle
 
 - (void)userDidLogout {
     self.cameraSettings = nil ;
-    [self didReceiveCameraData] ;
+    [self beforeReloadData] ;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad] ;
 
     self.jproService = [QY_JPROHttpService shareInstance] ;
-    //[_segment addTarget:self action:@selector(segmentChangedValue:) forControlEvents:UIControlEventValueChanged];
     
     self.tableView.SKSTableViewDelegate = self ;
     self.tableView.tableFooterView = [[UIView alloc] init] ;//关键语句
     [self.tableView addSubview:self.refreshControl] ;
+
+    self.cameraSettings = nil ;
+    {    //处理tableView需要的数据格式
+        [[[QYUser currentUser].coreUser cameraSettings] enumerateObjectsUsingBlock:^(QY_cameraSetting *setting, BOOL *stop) {
+            [self.cameraSettings setObject:setting forKey:setting.toCamera.cameraId] ;
+        }] ;
+        
+        NSMutableArray *tcontents = [NSMutableArray array] ;
+        
+        [tcontents addObject:[self publicArray]] ;
+        
+        NSMutableArray *tCameraSettings = [NSMutableArray array] ;
+        [tCameraSettings addObject:@"全部摄像机"] ;
+        
+        [self.cameraSettings enumerateKeysAndObjectsUsingBlock:^(NSString *key, QY_cameraSetting *setting, BOOL *stop) {
+            setting.toCamera.status = @0 ;
+            [tCameraSettings addObject:setting] ;
+        }] ;
+        
+        [tcontents addObject:@[tCameraSettings]] ;
+        
+        self.contents = tcontents ;
+    }
     
     [[QY_Notify shareInstance] addLogoutObserver:self selector:@selector(userDidLogout)] ;
-    
-    [self refreshCameras] ;
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -255,26 +194,6 @@
 - (void)dealloc {
     [[QY_Notify shareInstance] removeLogoutObserver:self] ;
 }
-
-#pragma mark -- Segment Action
-
-//- (void)segmentChangedValue:(id)sender {
-//    switch([(UISegmentedControl *)sender selectedSegmentIndex])
-//    {
-//        case 0:
-//            [self.tableView removeFromSuperview];
-//            [self.view addSubview:viewAllController_.view];
-//            break;
-//            
-//        case 1:
-//            [viewAllController_.view removeFromSuperview];
-//            [self.view addSubview:self.tableView];
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//}
 
 #pragma mark - UITableViewDataSource
 
@@ -313,7 +232,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath {
     
     switch (indexPath.section) {
-        case 0: {
+        case 0 : {
             static NSString *PublicCellIdentifier = @"SKSTableViewCell";
         
             SKSTableViewCell *publicCell = [tableView dequeueReusableCellWithIdentifier:PublicCellIdentifier];
@@ -343,9 +262,17 @@
             QY_cameraSetting *setting = self.contents[indexPath.section][indexPath.row][indexPath.subRow] ;
             QY_camera *camera = setting.toCamera ;
 
+
             cell.image = [UIImage imageNamed:@"相机分组-子图片1.png"] ;
             cell.locationText = camera.cameraId ;
             cell.state = [camera.status boolValue] ;
+            
+#warning bug! 每次都会去获取！！                       
+            if ( cell.state ) {
+                [camera displayCameraThumbnailAtImageView:cell.imageView useCache:NO] ;
+            } else {
+                [camera displayCameraThumbnailAtImageView:cell.imageView useCache:YES] ;
+            }
             
             return cell ;
             break ;
@@ -411,7 +338,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ( indexPath.section == 1 &&  indexPath.row > 0 ) {
-        QY_camera *camera = self.contents[indexPath.section][0][indexPath.row] ;
+        QY_cameraSetting *setting = self.contents[indexPath.section][0][indexPath.row] ;
+        QY_camera *camera = setting.toCamera ;
         
         if ( !camera.jssId ) {
             [self fetchCameraJssInfo:camera] ;

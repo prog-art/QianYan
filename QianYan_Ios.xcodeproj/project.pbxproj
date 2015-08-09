@@ -13,6 +13,7 @@
 		1938CCB41B24ACB4009C4AE5 /* JRMvalue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCB31B24ACB4009C4AE5 /* JRMvalue.m */; };
 		1938CCB81B24BC2B009C4AE5 /* JRMDataParseUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCB71B24BC2B009C4AE5 /* JRMDataParseUtils.m */; };
 		1938CCBB1B24BCEA009C4AE5 /* JRMDataFormatUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCBA1B24BCEA009C4AE5 /* JRMDataFormatUtils.m */; };
+		194D0C4D1B77997300AABF35 /* QYGCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 194D0C4C1B77997200AABF35 /* QYGCDAsyncSocket.m */; };
 		194E391A1B00832F00BA4473 /* NSString+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */; };
 		194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */; };
 		19575C1C1B75FE1800290E09 /* QYSocialActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 19575C1B1B75FE1800290E09 /* QYSocialActionSheet.m */; };
@@ -203,6 +204,8 @@
 		1938CCB71B24BC2B009C4AE5 /* JRMDataParseUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRMDataParseUtils.m; sourceTree = "<group>"; };
 		1938CCB91B24BCEA009C4AE5 /* JRMDataFormatUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRMDataFormatUtils.h; sourceTree = "<group>"; };
 		1938CCBA1B24BCEA009C4AE5 /* JRMDataFormatUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRMDataFormatUtils.m; sourceTree = "<group>"; };
+		194D0C4B1B77997200AABF35 /* QYGCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYGCDAsyncSocket.h; sourceTree = "<group>"; };
+		194D0C4C1B77997200AABF35 /* QYGCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYGCDAsyncSocket.m; sourceTree = "<group>"; };
 		194E39181B00832F00BA4473 /* NSString+QY_dataFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+QY_dataFormat.h"; sourceTree = "<group>"; };
 		194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QY_dataFormat.m"; sourceTree = "<group>"; };
 		194E391B1B00DAB600BA4473 /* NSData+QY_dataFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+QY_dataFormat.h"; sourceTree = "<group>"; };
@@ -1217,6 +1220,8 @@
 			children = (
 				198B32E41B5F6CED000F207C /* QY_JMSService.h */,
 				198B32E51B5F6CED000F207C /* QY_JMSService.m */,
+				194D0C4B1B77997200AABF35 /* QYGCDAsyncSocket.h */,
+				194D0C4C1B77997200AABF35 /* QYGCDAsyncSocket.m */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -2307,6 +2312,7 @@
 				19602FCF1B64FF010064BC87 /* QY_alertMessage+QY_JPRO_DATA_FORMAT.m in Sources */,
 				6E1A9B901B50A4410046B8AB /* YMReplyInputView.m in Sources */,
 				6EDF09B91B299DCD00413348 /* MyPhotoGraphCollectionViewController.m in Sources */,
+				194D0C4D1B77997300AABF35 /* QYGCDAsyncSocket.m in Sources */,
 				19ED2EE71AECF84F00E9DBEA /* AppDelegate.m in Sources */,
 				6E1EC9C71B50FFD4003E346F /* AccountInfoTableViewCell.m in Sources */,
 				1988CDB81B6FB35200B5B059 /* WifiListTableViewCell.m in Sources */,

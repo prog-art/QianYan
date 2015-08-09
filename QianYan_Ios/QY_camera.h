@@ -11,7 +11,10 @@
 
 #import "QY_Block_Define.h"
 
+
+
 @class QY_cameraGroup, QY_cameraSetting, QY_user;
+@class UIImageView ;
 
 @interface QY_camera : NSManagedObject
 
@@ -37,6 +40,8 @@
 #pragma mark - 远端服务器
 
 - (void)fetchCameraInfoComplection:(QYObjectBlock)complection ;
+
+- (void)displayCameraThumbnailAtImageView:(UIImageView *)imageView useCache:(BOOL)useCache ;
 
 @end
 

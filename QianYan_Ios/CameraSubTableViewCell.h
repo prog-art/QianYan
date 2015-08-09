@@ -14,6 +14,8 @@
 
 @property (strong) UIImage *image;
 
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+
 /**
  *  离线或在线
  */

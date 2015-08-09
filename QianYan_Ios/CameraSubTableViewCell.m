@@ -10,8 +10,6 @@
 
 @interface CameraSubTableViewCell ()
 
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
-
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *tempStateLabel;
@@ -39,6 +37,7 @@
 }
 
 - (void)setState:(BOOL)state {
+    _state = state ;
     self.tempStateLabel.text = state ? @"在线" : @"离线" ;
 }
 

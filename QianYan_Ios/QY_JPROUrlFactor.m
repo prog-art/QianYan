@@ -110,7 +110,7 @@
 + (NSString *)pathForUserAvatar:(NSString *)userId {
     NSString *path = PATH_USER ;
     path = [path stringByAppendingPathComponent:userId] ;
-    path = [path stringByAppendingString:@"headpicture.jpg"] ;
+    path = [path stringByAppendingPathComponent:@"headpicture.jpg"] ;    
     return path ;
 }
 
