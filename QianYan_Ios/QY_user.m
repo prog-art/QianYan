@@ -543,30 +543,27 @@
     avatarImageView.layer.masksToBounds = YES ;
 }
 
-- (void)displayAvatarAtImageView:(UIImageView *)avatarIamgeView {
-    if (!avatarIamgeView) return ;
-    
+- (void)displayAvatarAtImageView:(UIImageView *)avatarImageView {
+    if (!avatarImageView) return ;
     UIImage *placeHolder = [UIImage imageNamed:@"二维码名片-头像"] ;
-    [avatarIamgeView setImage:placeHolder] ;
     
     NSString *path = [QY_JPROUrlFactor pathForUserAvatar:self.userId] ;
-
+    
     UIImage *cachedImage = [[QY_CacheService shareInstance] getAvatarByUserId:self.userId] ;
     if ( !cachedImage ) {
+        avatarImageView.image = placeHolder ;
         [[QY_JPROHttpService shareInstance] downloadImageFromPath:path complection:^(UIImage *image, NSError *error) {
             if ( image ) {
                 [[QY_CacheService shareInstance] cacheAvatar:image forUserId:self.userId] ;
                 [QYUtils runInMainQueue:^{
-                    [avatarIamgeView setImage:image] ;
+                    avatarImageView.image = image ;
                 }] ;
             } else {
                 QYDebugLog(@"无头像或获取头像失败 error = %@",error) ;
             }
         }] ;
     } else {
-        [QYUtils runInMainQueue:^{
-            [avatarIamgeView setImage:cachedImage] ;
-        }] ;
+        avatarImageView.image = cachedImage ;
     }
 }
 

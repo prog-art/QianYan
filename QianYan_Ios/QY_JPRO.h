@@ -11,6 +11,7 @@
 
 #import "QY_JPROUrlFactor.h"
 #import "QY_JPROHttpService.h"
+#import "QY_JPROFTPService.h"
 
 #define MIMETYPE @"multipart/form-data"
 

@@ -14,6 +14,9 @@
 		1938CCB81B24BC2B009C4AE5 /* JRMDataParseUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCB71B24BC2B009C4AE5 /* JRMDataParseUtils.m */; };
 		1938CCBB1B24BCEA009C4AE5 /* JRMDataFormatUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCBA1B24BCEA009C4AE5 /* JRMDataFormatUtils.m */; };
 		194D0C4D1B77997300AABF35 /* QYGCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 194D0C4C1B77997200AABF35 /* QYGCDAsyncSocket.m */; };
+		194D0C511B78E9C800AABF35 /* QY_JPROFTPService.m in Sources */ = {isa = PBXBuildFile; fileRef = 194D0C501B78E9C800AABF35 /* QY_JPROFTPService.m */; };
+		194D0C531B78EF7200AABF35 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194D0C521B78EF7200AABF35 /* CFNetwork.framework */; };
+		194D0C561B78FF0200AABF35 /* FTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 194D0C551B78FF0200AABF35 /* FTPManager.m */; };
 		194E391A1B00832F00BA4473 /* NSString+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */; };
 		194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */; };
 		19575C1C1B75FE1800290E09 /* QYSocialActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 19575C1B1B75FE1800290E09 /* QYSocialActionSheet.m */; };
@@ -206,6 +209,11 @@
 		1938CCBA1B24BCEA009C4AE5 /* JRMDataFormatUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRMDataFormatUtils.m; sourceTree = "<group>"; };
 		194D0C4B1B77997200AABF35 /* QYGCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYGCDAsyncSocket.h; sourceTree = "<group>"; };
 		194D0C4C1B77997200AABF35 /* QYGCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYGCDAsyncSocket.m; sourceTree = "<group>"; };
+		194D0C4F1B78E9C800AABF35 /* QY_JPROFTPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JPROFTPService.h; sourceTree = "<group>"; };
+		194D0C501B78E9C800AABF35 /* QY_JPROFTPService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JPROFTPService.m; sourceTree = "<group>"; };
+		194D0C521B78EF7200AABF35 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		194D0C541B78FF0200AABF35 /* FTPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPManager.h; sourceTree = "<group>"; };
+		194D0C551B78FF0200AABF35 /* FTPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPManager.m; sourceTree = "<group>"; };
 		194E39181B00832F00BA4473 /* NSString+QY_dataFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+QY_dataFormat.h"; sourceTree = "<group>"; };
 		194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QY_dataFormat.m"; sourceTree = "<group>"; };
 		194E391B1B00DAB600BA4473 /* NSData+QY_dataFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+QY_dataFormat.h"; sourceTree = "<group>"; };
@@ -634,6 +642,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				194D0C531B78EF7200AABF35 /* CFNetwork.framework in Frameworks */,
 				6E32DA0A1B516AA8002A6301 /* libavformat.a in Frameworks */,
 				6E32DA021B51672A002A6301 /* libswresample.a in Frameworks */,
 				19F91D001B0F591000264AC0 /* MessageUI.framework in Frameworks */,
@@ -686,7 +695,7 @@
 			isa = PBXGroup;
 			children = (
 				198B32DE1B5F6453000F207C /* JMS_TCP&UDP */,
-				198530361B2806F300EB96F7 /* JPRO_HTTP */,
+				198530361B2806F300EB96F7 /* JPRO_HTTP&FTP */,
 				197C683B1B391DB200907CFC /* JRM_TCP */,
 			);
 			name = "网络";
@@ -1045,11 +1054,15 @@
 		197170D21B3294D500B34AB1 /* main */ = {
 			isa = PBXGroup;
 			children = (
+				194D0C4F1B78E9C800AABF35 /* QY_JPROFTPService.h */,
+				194D0C501B78E9C800AABF35 /* QY_JPROFTPService.m */,
 				1935450A1B486F8800ACE915 /* QY_JPROHttpService.h */,
 				1935450B1B486F8800ACE915 /* QY_JPROHttpService.m */,
 				198B32DD1B5F63F7000F207C /* QY_jpro_parameter_key_marco.h */,
 				19A1400F1B506D0400A7746C /* QY_jpro_http_protocol.h */,
 				198530511B2B666500EB96F7 /* URL工具 */,
+				194D0C541B78FF0200AABF35 /* FTPManager.h */,
+				194D0C551B78FF0200AABF35 /* FTPManager.m */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -1120,13 +1133,13 @@
 			name = workModels;
 			sourceTree = "<group>";
 		};
-		198530361B2806F300EB96F7 /* JPRO_HTTP */ = {
+		198530361B2806F300EB96F7 /* JPRO_HTTP&FTP */ = {
 			isa = PBXGroup;
 			children = (
 				197170D11B3294CF00B34AB1 /* header */,
 				197170D21B3294D500B34AB1 /* main */,
 			);
-			name = JPRO_HTTP;
+			name = "JPRO_HTTP&FTP";
 			sourceTree = "<group>";
 		};
 		1985303A1B2887AF00EB96F7 /* QYFileSystem */ = {
@@ -1529,6 +1542,7 @@
 		3652C3BCAEB78CC4CE09D590 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				194D0C521B78EF7200AABF35 /* CFNetwork.framework */,
 				19F91CFF1B0F591000264AC0 /* MessageUI.framework */,
 				19F91CEC1B0E2A1800264AC0 /* AddressBook.framework */,
 				19F91CED1B0E2A1800264AC0 /* AddressBookUI.framework */,
@@ -2344,6 +2358,7 @@
 				198530471B28B9AF00EB96F7 /* QY_XMLPhraser.m in Sources */,
 				6E1A9BA41B50A4CB0046B8AB /* NSArray+NSArray_ILExtension.m in Sources */,
 				6E1A9B921B50A4410046B8AB /* QYSocialTextView.m in Sources */,
+				194D0C561B78FF0200AABF35 /* FTPManager.m in Sources */,
 				6E1A9B951B50A4410046B8AB /* QYButton.m in Sources */,
 				198530351B272C3300EB96F7 /* QYUser.m in Sources */,
 				196900EC1B6E6B250059E737 /* FeedbackViewController.m in Sources */,
@@ -2391,6 +2406,7 @@
 				1985304A1B28B9BC00EB96F7 /* QY_XMLFormatter.m in Sources */,
 				1979071A1B52674C0079452C /* QYBaseViewController.m in Sources */,
 				19C4E1371B6FB93E0003C67A /* QRCodeDetailViewController.m in Sources */,
+				194D0C511B78E9C800AABF35 /* QY_JPROFTPService.m in Sources */,
 				196900DF1B6E60360059E737 /* PhoneNumberIdentifyViewController.m in Sources */,
 				6E1A9BA61B50A4CB0046B8AB /* QYSocialModel.m in Sources */,
 				195C16191B3E8E0A00A316FE /* QY_JRMResponse.m in Sources */,

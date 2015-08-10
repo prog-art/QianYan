@@ -19,22 +19,30 @@
 @implementation ManageNicknameViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad] ;
+    QY_user *user = [QYUser currentUser].coreUser ;
+    self.changeNameTextfield.text = user.nickname ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.tabBarController.tabBar setHidden:YES];
+    [super viewWillAppear:animated] ;
+    [self.tabBarController.tabBar setHidden:YES] ;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.tabBarController.tabBar setHidden:NO];
+    [super viewWillDisappear:animated] ;
+    [self.tabBarController.tabBar setHidden:NO] ;
 }
 
 - (IBAction)doneBtnClicked:(id)sender {
     QY_user *user = [QYUser currentUser].coreUser ;
     
+    if ( [user.nickname isEqualToString:self.changeNameTextfield.text]) {
+        [self.navigationController popViewControllerAnimated:YES] ;
+        return ;
+    }
+    
+    //不一样
     user.nickname = self.changeNameTextfield.text ;
     
     [SVProgressHUD show] ;

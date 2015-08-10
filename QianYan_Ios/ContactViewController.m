@@ -119,8 +119,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.tabBarController.tabBar setHidden:NO];
+    [super viewWillAppear:animated] ;
+    [self.tabBarController.tabBar setHidden:NO] ;
 }
 
 - (void)refresh {
@@ -206,7 +206,7 @@
             
             cell.label.text = friendSetting.displayName ;
             
-            [friendSetting.toFriend displayCycleAvatarAtImageView:cell.imageView] ;
+            [friendSetting.toFriend displayCycleAvatarAtImageView:cell.image] ;
             
             return cell;
             break ;

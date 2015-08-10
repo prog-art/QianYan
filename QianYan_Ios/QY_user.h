@@ -67,9 +67,8 @@
 
 #pragma mark - jpro_camera
 
-#warning 用户只能通过setting获取到他所能看到的所有相机。
+//用户只能通过setting获取到他所能看到的所有相机。
 - (void)fetchCamerasSettingsComplection:(QYArrayBlock)complection ;
-
 
 #pragma mark - jpro_报警信息
 
@@ -95,7 +94,7 @@
 
 - (void)displayCycleAvatarAtImageView:(UIImageView *)avatarImageView ;
 
-- (void)displayAvatarAtImageView:(UIImageView *)avatarIamgeView ;
+- (void)displayAvatarAtImageView:(UIImageView *)avatarImageView ;
 
 - (void)saveAvatar:(UIImage *)avatar complection:(QYResultBlock)complection ;
 

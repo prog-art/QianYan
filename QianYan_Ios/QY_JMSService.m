@@ -30,11 +30,14 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     JMS_SERVICE_OPERATION_GET_CAMERA_THUMBNAIL = 3 ,//去读单个相机的缩略图
 } ;
 
-@interface QY_JMSService ()<GCDAsyncSocketDelegate>
+@interface QY_JMSService ()<GCDAsyncSocketDelegate,GCDAsyncUdpSocketDelegate>
 
 @property (atomic) NSMutableArray *sockets ;
 
 - (NSData *)JMSLoginData ;
+
+@property (strong,nonatomic) GCDAsyncUdpSocket *udpSocket ;
+@property (strong,nonatomic) NSTimer *HBTimer ;
 
 @end
 
@@ -109,7 +112,7 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     return loginData ;
 }
 
-#pragma mark - JMS 请求
+#pragma mark - JMS tcp请求
 
 /**
  *  获取相机状态
@@ -225,8 +228,6 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     [self startWorkWithData:packageData socket:socket operation:JMS_SERVICE_OPERATION_GET_CAMERA_THUMBNAIL] ;
 }
 //
-//#pragma mark - Test
-//
 //#warning 未重写。
 //- (void)getCameraStateById:(NSString *)cameraId {
 //    //基本没用这个接口，用的下面那个。
@@ -261,11 +262,149 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
 //    [self startWorkWithData:packageData Tag:JMS_SERVICE_OPERATION_GET_CAMERA_STATE] ;
 //}
 
+#pragma mark - JMS UDP请求
+
+- (GCDAsyncUdpSocket *)udpSocket {
+    if ( !_udpSocket ) {
+        _udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue() socketQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)] ;
+    }
+    return _udpSocket ;
+}
+
+- (BOOL)isSendingHeartBeatMessage {
+    return self.HBTimer ;
+}
+
+- (void)startSendHeartBeatMessage {
+    if ( self.HBTimer ) {
+        QYDebugLog(@"已经在发送了") ;
+        return ;
+    }
+    QYDebugLog(@"开始发送心跳包,先连接") ;
+    
+    if ( ![self.udpSocket isConnected]) {
+        [self.udpSocket connectToHost:self.jms_ip
+                               onPort:[self.jms_port integerValue]
+                                error:NULL] ;
+    }
+}
+
+/**
+ *  停止发送［离线］
+ */
+- (void)stopSendHeartBeatMessage {
+    if ( [self.HBTimer isValid]) {
+        [self.HBTimer invalidate] ;
+        self.HBTimer = nil ;
+    }
+    
+    if ( ![self.udpSocket isClosed]) {
+        [self.udpSocket close] ;
+    }
+}
+
+- (void)sendMessage {
+    QYDebugLog(@"发送心跳包") ;
+    NSString *deviceId = self.device_id ;
+    NSString *messageType = @"30" ;//IOS TYPE
+    NSData *deviceIdData = [JRMDataFormatUtils formatStringValueData:deviceId toLen:16] ;
+    NSData *messageTypeData = [JRMDataFormatUtils formatStringValueData:messageType toLen:4] ;
+    NSMutableData *HBData = [NSMutableData data] ;
+    [HBData appendData:deviceIdData] ;
+    [HBData appendData:messageTypeData] ;
+    
+    [self.udpSocket sendData:HBData withTimeout:5.0f tag:0] ;
+}
+
+#pragma mark - GCDAsyncUdpSocketDelegate
+
+/**
+ * By design, UDP is a connectionless protocol, and connecting is not needed.
+ * However, you may optionally choose to connect to a particular host for reasons
+ * outlined in the documentation for the various connect methods listed above.
+ *
+ * This method is called if one of the connect methods are invoked, and the connection is successful.
+ **/
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock didConnectToAddress:(NSData *)address {
+    QYDebugLog(@"udp连接jms成功") ;
+    //连接后开始监听
+    [sock beginReceiving:NULL] ;
+    //连接后开始发送
+    [self sendMessage] ;
+    self.HBTimer = [NSTimer scheduledTimerWithTimeInterval:7.0f target:self selector:@selector(sendMessage) userInfo:nil repeats:YES] ;
+}
+
+/**
+ * By design, UDP is a connectionless protocol, and connecting is not needed.
+ * However, you may optionally choose to connect to a particular host for reasons
+ * outlined in the documentation for the various connect methods listed above.
+ *
+ * This method is called if one of the connect methods are invoked, and the connection fails.
+ * This may happen, for example, if a domain name is given for the host and the domain name is unable to be resolved.
+ **/
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotConnect:(NSError *)error {
+    QYDebugLog(@"udp连接jms失败 error = %@",error) ;
+}
+
+/**
+ * Called when the datagram with the given tag has been sent.
+ **/
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag {
+//    QYDebugLog(@"3 tag = %ld",tag) ;
+}
+
+/**
+ * Called if an error occurs while trying to send a datagram.
+ * This could be due to a timeout, or something more serious such as the data being too large to fit in a sigle packet.
+ **/
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error {
+    QYDebugLog(@"4 tag = %ld error = %@",tag,error) ;
+}
+
+/**
+ * Called when the socket has received the requested datagram.
+ **/
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data fromAddress:(NSData *)address withFilterContext:(id)filterContext {
+    NSString *cmd = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] ;
+    QYDebugLog(@"5 cmd = %@ ,data = %@",cmd,data) ;
+    if ( [cmd isEqualToString:@"HB"] ) {
+        //7秒后在次发送
+    } else
+    if ([cmd isEqualToString:@"LOGIN"]) {
+        //发送登录jms的data
+        
+    } else
+    if ([cmd isEqualToString:@"LOGOUT"]) {
+        //退出登录！
+        //停止！
+        [self.HBTimer invalidate] ;
+        [sock close] ;
+#warning 别处登录
+        [QYUtils alert:@"别处登录！需要退出登录！正在施工。"] ;
+    }
+    
+}
+
+/**
+ * Called when the socket is closed.
+ **/
+- (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError *)error {
+    QYDebugLog(@"6 error = %@",error) ;
+    //置空
+    if ( self.HBTimer && [self.HBTimer isValid]) {
+        [self.HBTimer invalidate] ;
+        self.HBTimer = nil ;
+    }
+    self.udpSocket = nil ;
+}
+
+
+
 #pragma mark - d(^_^o)
 
 - (void)startWorkWithData:(NSData *)data socket:(QYGCDAsyncSocket *)socket operation:(JMS_SERVICE_OPERATION)operation {
     QYDebugLog(@"d(^_^o)") ;
-
+    
     if ( ![socket isConnected] ) {
         QYDebugLog(@"JMS未连接，开始重新连接") ;
         [self makeSocket:socket connectToJMSHost:self.jms_ip Port:self.jms_port Complection:^(BOOL success, NSError *error) {
@@ -309,7 +448,7 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
 - (void)socket:(QYGCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     
     JMS_DATA_READ_OPERATION readOperation = ( tag / 10 ) * 10 ;
-
+    
     switch (readOperation) {
         case JMS_DATA_READ_OPERATION_JMS_DATA : {
             sock.senderId =[JRMDataParseUtils getStringValue:data range:NSMakeRange(0, 16)] ;
@@ -322,7 +461,7 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
             
             break ;
         }
-
+            
         case JMS_DATA_READ_OPERATION_CAM_DATA : {
             NSData *camData = data ;
             QYDebugLog(@"CamData = %@",camData) ;
@@ -332,9 +471,9 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
             switch (JMSOperation) {
                 case 1 : {
                     NSString *state = [JRMDataParseUtils getStringValue:camData range:NSMakeRange(6, 2)] ;
-        
+                    
                     QYDebugLog(@"state = %@",[state integerValue] == 0 ?@"离线":@"在线") ;
-//#warning 这里没有调用，就不返回的！注意！
+                    //#warning 这里没有调用，就不返回的！注意！
                     [NSException raise:@"Unuserd method" format:@"检查这里，删除就ok"] ;
                     
                     sock.Obj = [state integerValue] == 0 ? @"离线" : @"在线" ;
@@ -343,7 +482,7 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
                 }
                     
                 case 2 : {
-//                    NSString *lastString = [JRMDataParseUtils getStringValue:camData] ;
+                    //                    NSString *lastString = [JRMDataParseUtils getStringValue:camData] ;
                     NSArray *stateArr = [NSJSONSerialization JSONObjectWithData:camData options:kNilOptions error:NULL] ;
                     sock.Obj = stateArr ;
                     break ;
@@ -357,8 +496,6 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
                         camData = [camData subdataWithRange:NSMakeRange(10, camData.length - 10)] ;
                     }
                     
-                    
-                    
                     sock.Obj = camData ;
                     break ;
                 }
@@ -366,7 +503,7 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
                 default:
                     break;
             }
-
+            
             [sock disconnect] ;
             
             break ;
@@ -401,6 +538,7 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     
     [self.sockets removeObject:sock] ;
 }
+
 
 
 @end

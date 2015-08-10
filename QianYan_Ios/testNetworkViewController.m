@@ -104,7 +104,8 @@
     
     jmsCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-201 获取单个摄像机的状态" cmd:@(-201)],
                 [NSDictionary dictionaryWithDesc:@"[ok]-202 获取多个摄像机的状态" cmd:@(-202)],
-                [NSDictionary dictionaryWithDesc:@"-203 获取摄像机的缩略图" cmd:@(-203)]] ;
+                [NSDictionary dictionaryWithDesc:@"-203 获取摄像机的缩略图" cmd:@(-203)],
+                [NSDictionary dictionaryWithDesc:@"-204 发送心跳包" cmd:@(-204)]] ;
     
     jproCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-90 测试下载文件到内存" cmd:@(-90)],
                  [NSDictionary dictionaryWithDesc:@"[ok]-91 测试下载图片到内存" cmd:@(-91)],
@@ -130,7 +131,7 @@
                  [NSDictionary dictionaryWithDesc:@"[ok]-119[2] 下载文件" cmd:@(-1192)],
                  [NSDictionary dictionaryWithDesc:@"[ok]-119[3] 下载图片" cmd:@(-1193)],
                  [NSDictionary dictionaryWithDesc:@"[ok]-8 上传profile.xml" cmd:@(-8)],
-                 [NSDictionary dictionaryWithDesc:@"-7 core data" cmd:@(-7)]] ;
+                 [NSDictionary dictionaryWithDesc:@"-10 ftp下载视频" cmd:@(-10)]] ;
 
     jrmCmds = @[[NSDictionary dictionaryWithDesc:@"[ok] 212 获取jms服务器信息" cmd:@212],
                 [NSDictionary dictionaryWithDesc:@"[ok] 251 用户注册" cmd:@251],
@@ -361,6 +362,11 @@
             break ;
         }
             
+        case -204 : {
+            [[QY_JMSService shareInstance] startSendHeartBeatMessage] ;
+            break ;
+        }
+            
             
         case -90 : {
             [[QY_JPROHttpService shareInstance] testDownload] ;
@@ -509,6 +515,11 @@
             
         case -8 : {
             [[QY_JPROHttpService shareInstance] testUpload] ;            
+            break ;
+        }
+            
+        case -10 : {
+            [[QY_JPROFTPService shareInstance] testDownload:nil] ;
             break ;
         }
             

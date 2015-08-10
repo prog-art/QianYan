@@ -82,6 +82,16 @@
     return nil ;
 }
 
++ (NSString *)getAlertMessageVideoDirPath {
+    NSString *path = [[self getDocPath] stringByAppendingPathComponent:@"alertMessageVideo"] ;
+    if ( [self validateFolderForPath:path] ) return path ;
+    return nil ;
+}
+
++ (NSURL *)getAlertMessageVideoDirUrl {
+    NSString *path = [self getAlertMessageVideoDirPath] ;
+    return path ? [NSURL URLWithString:path] : nil ;
+}
 
 /**
  *  检查头像文件夹是否存在，不存在就建一个。

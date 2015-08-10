@@ -149,6 +149,7 @@
 - (void)userDidLogout {
     self.cameraSettings = nil ;
     [self beforeReloadData] ;
+    [[QY_JMSService shareInstance] stopSendHeartBeatMessage] ;
 }
 
 - (void)viewDidLoad {
@@ -184,6 +185,9 @@
     }
     
     [[QY_Notify shareInstance] addLogoutObserver:self selector:@selector(userDidLogout)] ;
+    
+#warning 退出登录的时候需要stop
+    [[QY_JMSService shareInstance] startSendHeartBeatMessage] ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

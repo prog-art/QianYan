@@ -37,7 +37,7 @@
     [self.avatarImageView addGestureRecognizer:singleTap] ;
     self.avatarImageView.userInteractionEnabled = YES ;
     
-    [self.currentUser displayAvatarAtImageView:self.avatarImageView] ;
+    [self.currentUser displayCycleAvatarAtImageView:self.avatarImageView] ;
     
     [[QY_Notify shareInstance] addAvatarObserver:self selector:@selector(reloadAvatar)] ;
     [[QY_Notify shareInstance] addUserInfoObserver:self selector:@selector(reloadUserInfo)] ;

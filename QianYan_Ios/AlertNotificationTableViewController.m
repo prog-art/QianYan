@@ -87,6 +87,95 @@
     self.alertMessages = [[[QYUser currentUser].coreUser visualableAlertMessages] mutableCopy] ;
 #warning 把alertMessages按日期分组后放到dataSource里。tableView的数据改为dataSource里的，现在为alertmessages的。
 
+    NSDateFormatter *dateFormatterWithMonthAndDay = [[NSDateFormatter alloc] init];
+    
+    [dateFormatterWithMonthAndDay setDateFormat:@"MMdd"];
+    
+    NSDateFormatter *dateFormatterWithMDHMS = [[NSDateFormatter alloc] init];
+    
+    [dateFormatterWithMDHMS setDateFormat:@"MMddhhmmss"];
+    
+    NSComparator cmptrByDay = ^(id obj1, id obj2) {
+        
+        QY_alertMessage *alertMessage1 = (QY_alertMessage *)obj1;
+        
+        NSDate *date1 = alertMessage1.pubDate;
+        
+        NSLog(@"date1: %@", date1);
+        
+        QY_alertMessage *alertMessage2 = (QY_alertMessage *)obj2;
+        
+        NSDate *date2 = alertMessage2.pubDate;
+        
+        NSLog(@"date2: %@", date2);
+        
+        NSInteger date1Integer = [[dateFormatterWithMDHMS stringFromDate:date1] intValue];
+        
+        NSInteger date2Integer = [[dateFormatterWithMDHMS stringFromDate:date2] intValue];
+        
+        NSString *a = [dateFormatterWithMDHMS stringFromDate:date1];
+        
+        NSLog(@"%@", a);
+        
+        if (date1Integer < date2Integer) {
+            
+            return (NSComparisonResult)NSOrderedDescending;
+            
+        }
+        if (date1Integer > date2Integer) {
+            
+            return (NSComparisonResult)NSOrderedAscending;
+            
+        }
+        
+        return (NSComparisonResult)NSOrderedSame;
+    };
+    
+    NSArray *sortedArray = [self.alertMessages sortedArrayUsingComparator:cmptrByDay];
+    
+    NSMutableArray *tmpArray = [NSMutableArray array];
+    
+    for (int i=0; i<[sortedArray count]; i++) {
+        
+        if (i == 0) {
+            
+            [tmpArray addObject:[sortedArray objectAtIndex:i]];
+            
+        }else {
+            
+            QY_alertMessage *alertMessage1 = [sortedArray objectAtIndex:i];
+            NSDate *date1 = alertMessage1.pubDate;
+            NSString *date1String = [dateFormatterWithMonthAndDay stringFromDate:date1];
+            
+            QY_alertMessage *alertMessage2 = [sortedArray objectAtIndex:i-1];
+            NSDate *date2 = alertMessage2.pubDate;
+            NSString *date2String = [dateFormatterWithMonthAndDay stringFromDate:date2];
+            
+            
+            if ([date1String isEqualToString:date2String]) {
+                
+                [tmpArray addObject:[sortedArray objectAtIndex:i]];
+                
+            } else {
+                
+                [self.dataSource addObject:[tmpArray copy]];
+                
+                [tmpArray removeAllObjects];
+                
+                [tmpArray addObject:[sortedArray objectAtIndex:i]];
+                
+            }
+        }
+    }
+    
+    if ([tmpArray count] != 0) {
+        
+        [self.dataSource addObject:[tmpArray copy]];
+        
+        [tmpArray removeAllObjects];
+        
+    }
+    
     [self.tableView reloadData] ;
 }
 
@@ -97,11 +186,11 @@
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    self.tableView.tableFooterView = [[UIView alloc] init];
+    [super viewDidLoad] ;
+    self.tableView.tableFooterView = [[UIView alloc] init] ;
     [self.tableView addSubview:self.refreshControl] ;
     
-    self.alertMessages = [[[QYUser currentUser].coreUser visualableAlertMessages] mutableCopy] ;
+    [self beforeReloadData] ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -110,26 +199,20 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+    [super viewWillDisappear:animated] ;
     
 }
 
 #pragma mark - Table view data source
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    switch (section) {
-//        case 0:
-//            return @"2015-06-26";
-//            break;
-//            
-//        case 1:
-//            return @"2015-06-27";
-//            break;
-//            
-//        default:
-//            break;
-//    }
-    return nil;
+    //@"2015-06-27"
+    NSArray *alertMessages = self.dataSource[section] ;
+    QY_alertMessage *alertMessage = [alertMessages firstObject] ;
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    [formatter setDateFormat:@"YYYY-MM-dd"] ;
+    return [formatter stringFromDate:alertMessage.pubDate] ;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -141,13 +224,11 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return 2 ;
-    return 1 ;
+    return self.dataSource.count ;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return 1 ;
-    return self.alertMessages.count ;
+    return [self.dataSource[section] count] ;
 }
 
 
@@ -155,7 +236,7 @@
     AlertNotificationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlertCell"
                                                                            forIndexPath:indexPath];
     
-    QY_alertMessage *msg = self.alertMessages[indexPath.row] ;
+    QY_alertMessage *msg = self.dataSource[indexPath.section][indexPath.row] ;
     
 #warning 这个图片哪里来的？
     cell.image = [UIImage imageNamed:@"报警通知-视频截图1.png"] ;
@@ -170,7 +251,8 @@
     cell.time = [formater stringFromDate:date] ;
     cell.location = @"" ;
     cell.eventType = @"移动侦测事件" ;
-    cell.isRead = NO ;
+    
+    cell.isRead = [msg.isRead boolValue] ;
 
     return cell;
 }
@@ -178,16 +260,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     AlertNotificationTableViewCell *cell = (AlertNotificationTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] ;
-    cell.isRead = YES;
+    QY_alertMessage *msg = self.dataSource[indexPath.section][indexPath.row] ;
+    if ( ![msg.isRead boolValue] ) {
+        msg.isRead = [NSNumber numberWithBool:YES] ;
+        cell.isRead = [msg.isRead boolValue] ;
+    }
     
-    QY_alertMessage *msg = self.alertMessages[indexPath.row] ;
-    
-    
-#warning 路径怎么加
-    NSString *path = msg.content;
+#warning 问题很大。。
+    NSString *path = msg.content ;
+    QYDebugLog(@"path = %@",path) ;
 //    path = @"http://www.qeebu.com/newe/Public/Attachment/99/52958fdb45565.mp4";
 //    path = @"http://jdas.qycam.com:50280/10000133/t00000000000193/motion/20150718/ 10 134234_20150718134229_2_5.avi" ;
-    
+#warning test
+    path = @"ftp://download:123456@jdas.qycam.com:50280/10000133/t00000000000193/motion/20150718/134234_20150718134229_2_5.avi" ;
+    QYDebugLog(@"path = %@",path) ;
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     

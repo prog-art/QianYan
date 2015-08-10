@@ -21,6 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    QY_user *user = [QYUser currentUser].coreUser ;
+    self.signTextView.text = user.signature ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -36,8 +39,16 @@
 #pragma mark -- Actions
 
 - (IBAction)doneBtnClicked:(id)sender {
-    [QYUser currentUser].coreUser.signature = self.signTextView.text ;
     
+    QY_user *user = [QYUser currentUser].coreUser ;
+    
+    if ( [user.signature isEqualToString:self.signTextView.text]) {
+        [self.navigationController popViewControllerAnimated:YES] ;
+        return ;
+    }
+    //不一致
+   user.signature = self.signTextView.text ;
+
     [SVProgressHUD show] ;
     [[QYUser currentUser].coreUser saveUserInfoComplection:^(id object, NSError *error) {
         [SVProgressHUD dismiss] ;

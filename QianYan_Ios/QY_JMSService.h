@@ -41,12 +41,21 @@
  */
 - (void)getCameraThumbnailById:(NSString *)cameraId complection:(QYObjectBlock)complection ;
 
-#pragma mark - test
+#pragma mark - JMS UDP
 
-//- (void)getCameraStateById:(NSString *)cameraId ;
-//
-//- (void)getCamerasStateByIds:(NSSet *)cameraIds ;
-//
-//- (void)getCameraThumbnailById:(NSString *)cameraId ;
+/**
+ *  开始无限7秒发送心跳包
+ */
+- (void)startSendHeartBeatMessage ;
+
+/**
+ *  停止发送［离线］
+ */
+- (void)stopSendHeartBeatMessage ;
+
+/**
+ *  是否正在发送心跳包
+ */
+- (BOOL)isSendingHeartBeatMessage ;
 
 @end

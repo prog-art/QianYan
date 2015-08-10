@@ -82,9 +82,8 @@
     SystemSettingsImageTableViewCell *imageCell = [tableView dequeueReusableCellWithIdentifier:@"ImageCell"];
     SystemSettingsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
-    if (indexPath.section == 0) {
-//        imageCell.image = [UIImage imageNamed:@"portrait"];
-        [[QYUser currentUser].coreUser displayAvatarAtImageView:imageCell.imageView] ;
+    if (indexPath.section == 0) {        
+        [[QYUser currentUser].coreUser displayCycleAvatarAtImageView:imageCell.imageView] ;
         return imageCell;
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {

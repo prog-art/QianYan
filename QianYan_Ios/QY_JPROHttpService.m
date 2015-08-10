@@ -718,9 +718,8 @@ QYResultBlock packComplection(QYResultBlock complection) {
     };
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager] ;
     NSString *urlString = [NSString stringWithFormat:@"%@/feeds/%@/",self.baseUrl,feedId] ;
-    
-    
-    [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    [manager DELETE:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         QYDebugLog(@"删除某个状态feed 成功") ;
         complection(TRUE,nil) ;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -976,7 +975,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
     
     NSString *urlString = [NSString stringWithFormat:@"%@/archives/%@",self.baseUrl,path] ;
     NSURL *url = [NSURL URLWithString:urlString] ;
-    NSURLRequest *request = [NSURLRequest requestWithURL:url] ;
+    NSURLRequest *request = [NSURLRequest requestWithURL:url] ;    
     
     NSURLSessionDownloadTask *task = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         //指定下载文件保存的路径

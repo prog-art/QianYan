@@ -21,6 +21,10 @@
 
 + (UIImage *)getCameraThumbnailByCameraId:(NSString *)cameraId ;
 
++ (NSString *)getAlertMessageVideoDirPath ;
+
++ (NSURL *)getAlertMessageVideoDirUrl;
+
 #pragma mark - old
 
 /**

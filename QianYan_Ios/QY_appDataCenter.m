@@ -153,8 +153,16 @@
     [fetchRequest setPredicate:predicate] ;
     
 #warning 有时候这里会崩溃
-    NSArray *objects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:error] ;
-    return objects ;
+    NSArray *objects ;
+    @try {
+        objects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:error] ;
+    }
+    @catch (NSException *exception) {
+        QYDebugLog(@"%@",exception) ;
+    }
+    @finally {
+        return objects ;
+    }
 }
 
 + (void)undo {
