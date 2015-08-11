@@ -28,13 +28,13 @@
     [self.addButton setImage:[UIImage imageNamed:@"添加按钮（选中）.png"] forState:UIControlStateHighlighted];
 }
 
--(void)addBtnClicked:(UIButton *)sender{
+- (void)addBtnClicked:(UIButton *)sender {
     if ( [self.delegate respondsToSelector:@selector(didClickedAddBtn:atIndex:)]) {
         [self.delegate didClickedAddBtn:self atIndex:self.tag] ;
     }
 }
 
--(void)inviteBtnClicked:(UIButton *)sender{
+- (void)inviteBtnClicked:(UIButton *)sender {
     if ( [self.delegate respondsToSelector:@selector(didClickedInviteBtn:atIndex:)]) {
         [self.delegate didClickedInviteBtn:self atIndex:self.tag] ;
     }

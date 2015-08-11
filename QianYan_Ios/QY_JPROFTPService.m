@@ -8,11 +8,12 @@
 
 #import "QY_JPROFTPService.h"
 
-#import "FTPManager.h"
 #import "QY_Common.h"
 #import "QY_FileService.h"
 
-@interface QY_JPROFTPService () <FTPManagerDelegate>
+#import <AFNetworking/AFNetworking.h>
+
+@interface QY_JPROFTPService ()
 
 @end
 
@@ -32,32 +33,28 @@
 
 
 - (void)testDownload:(NSString *)url {
-    QYDebugLog(@"url = %@",url) ;
-    NSString *path ;
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration] ;
+
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:config] ;
     
-//                                 jdas.qycam.com:50280/10000133/t00000000000193/motion/20150718/134234_20150718134229_2_5.avi
-//                                 jdas.qycam.com:50280/10000133/t00000000000193/motion/20150718/133858_20150718133853_2_5.avi
-    path = @"ftp://download:123456@jdas.qycam.com:50280/10000133/t00000000000193/motion/20150718/133858_20150718133853_2_5.avi" ;
-    FTPManager *manager = [[FTPManager alloc] init] ;
+    NSString *path = @"ftp://admin:123456@jdas.qycam.com:50280/av_server.752.wifi" ;
+    path = @"ftp://download:123456@jdas.qycam.com:50280/10000129/t00000000000207/motion/20150804/154226_20150804154221_2_5.avi" ;
     
-    manager.delegate = self ;
+    NSURLRequest *request= [NSURLRequest requestWithURL:[NSURL URLWithString:path]] ;
     
-    FMServer *server = [FMServer serverWithDestination:@"jdas.qycam.com:50280/10000133/t00000000000193/motion/20150718" username:@"download" password:@"123456"] ;
-    server.port = 50280 ;
+    NSURLSessionDownloadTask *task = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSLog(@"targetPath = %@",targetPath) ;
+        NSURL *dirUrl = [QY_FileService getAlertMessageVideoDirUrl] ;
+        dirUrl = [dirUrl URLByAppendingPathComponent:[path lastPathComponent]] ;
+        return dirUrl ;
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        QYDebugLog(@"\n\nresponse = %@\n",response) ;
+        QYDebugLog(@"\n\nfilePath = %@\n",[filePath path]) ;
+        QYDebugLog(@"\n\nerror = %@\n",error) ;
+    }] ;
     
-    NSURL *dirUrl = [QY_FileService getAlertMessageVideoDirUrl] ;
+    [task resume] ;
     
-    BOOL result = [manager downloadFile:[path lastPathComponent] toDirectory:dirUrl fromServer:server] ;
-    QYDebugLog(@"%@",result?@"成功":@"失败") ;
 }
-
-#pragma mark - FTPManagerDelegate
-
-// Returns information about the current download.
-// See "Process Info Dictionary Constants" below for detailed info.
-- (void)ftpManagerDownloadProgressDidChange:(NSDictionary *)processInfo {
-    QYDebugLog(@"%@",processInfo) ;
-}
-
 
 @end

@@ -32,12 +32,6 @@
     [super tearDown];
 }
 
-- (void)testPath {
-    NSString *userId = @"10000133" ;
-    NSString *path = [[QY_FileService getUserPathByUserId:userId] stringByAppendingPathComponent:@"profile.xml"] ;
-    QYDebugLog(@"path = %@",path) ;
-}
-
 - (void)testStringFromSelector {
     NSString *str = NSStringFromSelector(@selector(testPath)) ;
     
@@ -69,12 +63,6 @@
 //    
 //    NSString *path = [docPath stringByAppendingString:@"profile.xml"] ;
 //    
-//}
-//
-//- (void)testFileService {
-//    NSLog(@"\n doc path = %@ \n",[QY_FileService getDocPath]) ;
-//    
-//    NSLog(@"\n userId path = %@ \n",[QY_FileService getUserPathByUserId:@"testUserId"]) ;
 //}
 
 //- (void)testInt2NSData {

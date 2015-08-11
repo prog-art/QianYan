@@ -993,10 +993,6 @@ QYResultBlock packComplection(QYResultBlock complection) {
             QYDebugLog(@"response = %@",response) ;
             
             QYDebugLog(@"filePath = %@\n error = %@",filePath,error) ;
-            
-            QYDebugLog(@"fileExists? = %@",[[QY_FileService fileManager] fileExistsAtPath:[filePath path]] ? @"存在" : @"不存在") ;
-            
-            QYDebugLog(@"file content = %@",[QY_FileService getTextContentAtPath:[filePath path]]) ;
         }
         
         if ( complection ) {
@@ -1148,6 +1144,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
 
 #pragma mark - Other Method
 
+#warning 重构到QY_fileService里去。
 /**
  *  检查FileUrl的正确性
  *
@@ -1155,7 +1152,7 @@ QYResultBlock packComplection(QYResultBlock complection) {
  */
 BOOL isFileUrlCorrect(NSURL *fileUrl) {
     BOOL isDir = FALSE ;
-    if ( [fileUrl isFileURL] && [[QY_FileService fileManager] fileExistsAtPath:fileUrl.path isDirectory:&isDir]) {
+    if ( [fileUrl isFileURL] && [[NSFileManager defaultManager] fileExistsAtPath:fileUrl.path isDirectory:&isDir]) {
         QYDebugLog(@"文件存在 path = %@",fileUrl) ;
         return TRUE ;
     }

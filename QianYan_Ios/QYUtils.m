@@ -144,4 +144,24 @@
     return iAge ;
 }
 
+#pragma mark - UUID
+
+/**
+ *  生成一个UUID
+ *
+ *  @return 24位的UUID
+ */
++ (NSString*)uuid {
+    NSString *chars = @"abcdefghijklmnopgrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" ;
+    assert(chars.length == 62) ;
+    int len = (int)chars.length ;
+    NSMutableString* result = [[NSMutableString alloc] init] ;
+    for(int i = 0 ; i < 24 ; i++ ){
+        int p = arc4random_uniform(len) ;
+        NSRange range = NSMakeRange(p, 1) ;
+        [result appendString:[chars substringWithRange:range]] ;
+    }
+    return result ;
+}
+
 @end

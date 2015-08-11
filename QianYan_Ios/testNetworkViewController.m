@@ -179,16 +179,20 @@
                 
                 ] ;
 
-    cmds = @[coreDataCmds,
-             appCmds,
-             jmsCmds,
+    cmds = @[
+             //coreDataCmds,
+             //appCmds,
+             //jmsCmds,
              jproCmds,
-             jrmCmds] ;
-    cmdTitles = @[@"core data 命令测试",
-                  @"app流程 命令测试",
-                  @"jms 命令测试",
+             //jrmCmds
+             ] ;
+    cmdTitles = @[
+                  //@"core data 命令测试",
+                  //@"app流程 命令测试",
+                  //@"jms 命令测试",
                   @"jpro 命令测试",
-                  @"jrm 命令测试"] ;
+                  //@"jrm 命令测试"
+                  ] ;
     
     self.socketAgent_v2 = [QY_SocketAgent shareInstance] ;
 }
@@ -514,12 +518,13 @@
         }
             
         case -8 : {
-            [[QY_JPROHttpService shareInstance] testUpload] ;            
+//            [[QY_JPROHttpService shareInstance] testUpload] ;            
             break ;
         }
             
         case -10 : {
             [[QY_JPROFTPService shareInstance] testDownload:nil] ;
+//            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"ftp://jdas.qycam.com:50280/av_server.752.wifi/av_server.752.wifi"]] ;            
             break ;
         }
             

@@ -14,32 +14,31 @@
 
 @implementation MyPhotoGraphCollectionViewController
 
-static NSString * const reuseIdentifier = @"Cell";
-
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad] ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.tabBarController.tabBar setHidden:YES];
-    self.navigationItem.leftBarButtonItem.title = @"返回";
+    [super viewWillAppear:animated] ;
+    [self.tabBarController.tabBar setHidden:YES] ;
+    self.navigationItem.leftBarButtonItem.title = @"返回" ;
+    self.navigationItem.title = @"相册" ;
 }
 
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return 1 ;
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return 10 ;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    return cell;
+    static NSString * const reuseIdentifier = @"Cell" ;
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath] ;
+    return cell ;
 }
 
 #pragma mark - back

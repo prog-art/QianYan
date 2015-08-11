@@ -15,8 +15,6 @@
 		1938CCBB1B24BCEA009C4AE5 /* JRMDataFormatUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1938CCBA1B24BCEA009C4AE5 /* JRMDataFormatUtils.m */; };
 		194D0C4D1B77997300AABF35 /* QYGCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 194D0C4C1B77997200AABF35 /* QYGCDAsyncSocket.m */; };
 		194D0C511B78E9C800AABF35 /* QY_JPROFTPService.m in Sources */ = {isa = PBXBuildFile; fileRef = 194D0C501B78E9C800AABF35 /* QY_JPROFTPService.m */; };
-		194D0C531B78EF7200AABF35 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194D0C521B78EF7200AABF35 /* CFNetwork.framework */; };
-		194D0C561B78FF0200AABF35 /* FTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 194D0C551B78FF0200AABF35 /* FTPManager.m */; };
 		194E391A1B00832F00BA4473 /* NSString+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */; };
 		194E391D1B00DAB600BA4473 /* NSData+QY_dataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 194E391C1B00DAB600BA4473 /* NSData+QY_dataFormat.m */; };
 		19575C1C1B75FE1800290E09 /* QYSocialActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 19575C1B1B75FE1800290E09 /* QYSocialActionSheet.m */; };
@@ -43,7 +41,6 @@
 		19602FDE1B665D2D0064BC87 /* QY_camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FDD1B665D2D0064BC87 /* QY_camera.m */; };
 		19602FE11B665D600064BC87 /* QY_friendSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 19602FE01B665D600064BC87 /* QY_friendSetting.m */; };
 		1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1964569D1B058D4000EA4E14 /* QY_QRCodeUtils.m */; };
-		196456A01B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1964569F1B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m */; };
 		196456A41B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456A31B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m */; };
 		196456AB1B0617A700EA4E14 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 196456A91B0617A700EA4E14 /* pinyin.c */; };
 		196456AE1B0617D000EA4E14 /* ChineseString.m in Sources */ = {isa = PBXBuildFile; fileRef = 196456AD1B0617D000EA4E14 /* ChineseString.m */; };
@@ -64,7 +61,6 @@
 		198530471B28B9AF00EB96F7 /* QY_XMLPhraser.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530461B28B9AF00EB96F7 /* QY_XMLPhraser.m */; };
 		1985304A1B28B9BC00EB96F7 /* QY_XMLFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530491B28B9BC00EB96F7 /* QY_XMLFormatter.m */; };
 		1985304E1B29D5EA00EB96F7 /* NSError+QYError.m in Sources */ = {isa = PBXBuildFile; fileRef = 1985304D1B29D5EA00EB96F7 /* NSError+QYError.m */; };
-		198530501B2A619900EB96F7 /* fileManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1985304F1B2A619900EB96F7 /* fileManagerTest.m */; };
 		198530541B2B669900EB96F7 /* QY_JPROUrlFactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 198530531B2B669900EB96F7 /* QY_JPROUrlFactor.m */; };
 		1988CDB81B6FB35200B5B059 /* WifiListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1988CDB51B6FB35200B5B059 /* WifiListTableViewCell.m */; };
 		1988CDB91B6FB35200B5B059 /* WifiListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1988CDB71B6FB35200B5B059 /* WifiListTableViewController.m */; };
@@ -76,6 +72,8 @@
 		19909B4E1AEEA04900CCB721 /* QYUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 19909B4D1AEEA04900CCB721 /* QYUtils.m */; };
 		19A140121B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A140111B50EA9D00A7746C /* QY_JDASGCDSocketDelegater.m */; };
 		19A140171B5117F100A7746C /* QY_UserReloginDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A140161B5117F100A7746C /* QY_UserReloginDescriptor.m */; };
+		19A978641B7A2B50005E65F3 /* ImageSelectCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A978611B7A2B50005E65F3 /* ImageSelectCollectionViewCell.m */; };
+		19A978651B7A2B50005E65F3 /* ImageSelectCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A978631B7A2B50005E65F3 /* ImageSelectCollectionViewController.m */; };
 		19B1884A1B71112300F12EFB /* QY_Notify.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B188491B71112300F12EFB /* QY_Notify.m */; };
 		19C3DE681B71CD36006253E5 /* SetRemarkNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3DE671B71CD36006253E5 /* SetRemarkNameViewController.m */; };
 		19C3DE6E1B71CE41006253E5 /* CameraAllocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3DE6B1B71CE41006253E5 /* CameraAllocationTableViewCell.m */; };
@@ -212,8 +210,6 @@
 		194D0C4F1B78E9C800AABF35 /* QY_JPROFTPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JPROFTPService.h; sourceTree = "<group>"; };
 		194D0C501B78E9C800AABF35 /* QY_JPROFTPService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JPROFTPService.m; sourceTree = "<group>"; };
 		194D0C521B78EF7200AABF35 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		194D0C541B78FF0200AABF35 /* FTPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPManager.h; sourceTree = "<group>"; };
-		194D0C551B78FF0200AABF35 /* FTPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPManager.m; sourceTree = "<group>"; };
 		194E39181B00832F00BA4473 /* NSString+QY_dataFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+QY_dataFormat.h"; sourceTree = "<group>"; };
 		194E39191B00832F00BA4473 /* NSString+QY_dataFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QY_dataFormat.m"; sourceTree = "<group>"; };
 		194E391B1B00DAB600BA4473 /* NSData+QY_dataFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+QY_dataFormat.h"; sourceTree = "<group>"; };
@@ -273,7 +269,6 @@
 		196456971B0582B000EA4E14 /* QY_QRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_QRCode.h; sourceTree = "<group>"; };
 		1964569C1B058D4000EA4E14 /* QY_QRCodeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_QRCodeUtils.h; sourceTree = "<group>"; };
 		1964569D1B058D4000EA4E14 /* QY_QRCodeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_QRCodeUtils.m; sourceTree = "<group>"; };
-		1964569F1B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QianYan_QRCodeUtilsTests.m; sourceTree = "<group>"; };
 		196456A11B05BF5A00EA4E14 /* QY_QRCodeScanerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_QRCodeScanerDelegate.h; sourceTree = "<group>"; };
 		196456A21B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_QRCodeReaderDelegater.h; sourceTree = "<group>"; };
 		196456A31B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_QRCodeReaderDelegater.m; sourceTree = "<group>"; };
@@ -316,7 +311,6 @@
 		198530491B28B9BC00EB96F7 /* QY_XMLFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_XMLFormatter.m; sourceTree = "<group>"; };
 		1985304C1B29D5EA00EB96F7 /* NSError+QYError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+QYError.h"; sourceTree = "<group>"; };
 		1985304D1B29D5EA00EB96F7 /* NSError+QYError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+QYError.m"; sourceTree = "<group>"; };
-		1985304F1B2A619900EB96F7 /* fileManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fileManagerTest.m; sourceTree = "<group>"; };
 		198530521B2B669900EB96F7 /* QY_JPROUrlFactor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_JPROUrlFactor.h; sourceTree = "<group>"; };
 		198530531B2B669900EB96F7 /* QY_JPROUrlFactor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_JPROUrlFactor.m; sourceTree = "<group>"; };
 		1988CDB41B6FB35200B5B059 /* WifiListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiListTableViewCell.h; sourceTree = "<group>"; };
@@ -350,6 +344,10 @@
 		19A140141B510DFB00A7746C /* QY_SocketServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_SocketServiceDelegate.h; sourceTree = "<group>"; };
 		19A140151B5117F100A7746C /* QY_UserReloginDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_UserReloginDescriptor.h; sourceTree = "<group>"; };
 		19A140161B5117F100A7746C /* QY_UserReloginDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_UserReloginDescriptor.m; sourceTree = "<group>"; };
+		19A978601B7A2B50005E65F3 /* ImageSelectCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSelectCollectionViewCell.h; sourceTree = "<group>"; };
+		19A978611B7A2B50005E65F3 /* ImageSelectCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSelectCollectionViewCell.m; sourceTree = "<group>"; };
+		19A978621B7A2B50005E65F3 /* ImageSelectCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSelectCollectionViewController.h; sourceTree = "<group>"; };
+		19A978631B7A2B50005E65F3 /* ImageSelectCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSelectCollectionViewController.m; sourceTree = "<group>"; };
 		19B188481B71112300F12EFB /* QY_Notify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_Notify.h; sourceTree = "<group>"; };
 		19B188491B71112300F12EFB /* QY_Notify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_Notify.m; sourceTree = "<group>"; };
 		19C3DE661B71CD36006253E5 /* SetRemarkNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetRemarkNameViewController.h; sourceTree = "<group>"; };
@@ -642,7 +640,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				194D0C531B78EF7200AABF35 /* CFNetwork.framework in Frameworks */,
 				6E32DA0A1B516AA8002A6301 /* libavformat.a in Frameworks */,
 				6E32DA021B51672A002A6301 /* libswresample.a in Frameworks */,
 				19F91D001B0F591000264AC0 /* MessageUI.framework in Frameworks */,
@@ -1061,8 +1058,6 @@
 				198B32DD1B5F63F7000F207C /* QY_jpro_parameter_key_marco.h */,
 				19A1400F1B506D0400A7746C /* QY_jpro_http_protocol.h */,
 				198530511B2B666500EB96F7 /* URL工具 */,
-				194D0C541B78FF0200AABF35 /* FTPManager.h */,
-				194D0C551B78FF0200AABF35 /* FTPManager.m */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -1344,6 +1339,17 @@
 			name = ViewControllers;
 			sourceTree = "<group>";
 		};
+		19A9785F1B7A2ABD005E65F3 /* 图片选择 */ = {
+			isa = PBXGroup;
+			children = (
+				19A978601B7A2B50005E65F3 /* ImageSelectCollectionViewCell.h */,
+				19A978611B7A2B50005E65F3 /* ImageSelectCollectionViewCell.m */,
+				19A978621B7A2B50005E65F3 /* ImageSelectCollectionViewController.h */,
+				19A978631B7A2B50005E65F3 /* ImageSelectCollectionViewController.m */,
+			);
+			name = "图片选择";
+			sourceTree = "<group>";
+		};
 		19B188471B71110400F12EFB /* 通知中心 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1476,9 +1482,7 @@
 			children = (
 				19ED2F001AECF84F00E9DBEA /* QianYan_IosTests.m */,
 				19ED2EFE1AECF84F00E9DBEA /* Supporting Files */,
-				1964569F1B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m */,
 				196456B91B063A7F00EA4E14 /* QianYan_ChineseStringTests.m */,
-				1985304F1B2A619900EB96F7 /* fileManagerTest.m */,
 			);
 			path = QianYan_IosTests;
 			sourceTree = "<group>";
@@ -2031,6 +2035,7 @@
 		6EFEFE321B0CC036001E425B /* 主界面 */ = {
 			isa = PBXGroup;
 			children = (
+				19A9785F1B7A2ABD005E65F3 /* 图片选择 */,
 				196900E91B6E6AEE0059E737 /* 意见反馈 */,
 				6E1A9BA71B50A6650046B8AB /* 设置 */,
 				6E62A0F01B4417150001E3A2 /* 二维码配置wifi */,
@@ -2338,6 +2343,7 @@
 				6EDF09AD1B29311800413348 /* QRCodeCardViewController.m in Sources */,
 				19602FC31B64FBA90064BC87 /* QY_attach.m in Sources */,
 				6E7C075D1B3BE41200AC8EC3 /* AlertNotificationTableViewController.m in Sources */,
+				19A978651B7A2B50005E65F3 /* ImageSelectCollectionViewController.m in Sources */,
 				198BADF31AF0AB2600B4E2E6 /* QRCameraSwitchButton.m in Sources */,
 				6EE8E6681B11F768007C54E0 /* SettingsViewController.m in Sources */,
 				6E75ACA51B28268400A0C919 /* AddContactViewController.m in Sources */,
@@ -2358,7 +2364,6 @@
 				198530471B28B9AF00EB96F7 /* QY_XMLPhraser.m in Sources */,
 				6E1A9BA41B50A4CB0046B8AB /* NSArray+NSArray_ILExtension.m in Sources */,
 				6E1A9B921B50A4410046B8AB /* QYSocialTextView.m in Sources */,
-				194D0C561B78FF0200AABF35 /* FTPManager.m in Sources */,
 				6E1A9B951B50A4410046B8AB /* QYButton.m in Sources */,
 				198530351B272C3300EB96F7 /* QYUser.m in Sources */,
 				196900EC1B6E6B250059E737 /* FeedbackViewController.m in Sources */,
@@ -2426,6 +2431,7 @@
 				6E9BA9511B0CB8FB009D87BE /* JVLeftDrawerTableViewController.m in Sources */,
 				198B32E61B5F6CED000F207C /* QY_JMSService.m in Sources */,
 				6E1EC9BD1B50F69B003E346F /* SystemSettingsTableViewController.m in Sources */,
+				19A978641B7A2B50005E65F3 /* ImageSelectCollectionViewCell.m in Sources */,
 				195C15E11B3B044300A316FE /* QY_JRMAPIDescriptor.m in Sources */,
 				6E75AC9E1B281E8300A0C919 /* UMTableViewCell.m in Sources */,
 				19C3DE731B71CFC0006253E5 /* InfoSettingViewController.m in Sources */,
@@ -2446,8 +2452,6 @@
 			files = (
 				196456BA1B063A7F00EA4E14 /* QianYan_ChineseStringTests.m in Sources */,
 				19ED2F011AECF84F00E9DBEA /* QianYan_IosTests.m in Sources */,
-				196456A01B05BA5E00EA4E14 /* QianYan_QRCodeUtilsTests.m in Sources */,
-				198530501B2A619900EB96F7 /* fileManagerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

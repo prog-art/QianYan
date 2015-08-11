@@ -38,6 +38,7 @@ lineBreakMode:mode].height : 0.f;
 #define kAdmin [QYUser currentUser].coreUser.nickname
 
 #define kSocial2WordSharingSegueId @"Social2WordSharingSegueId"
+#define kSocial2PictureSharingSegueId @"Social2PictureSharingSegueId"
 
 @interface QYSocialViewController ()<UITableViewDataSource,UITableViewDelegate,QYSocialCellDelegate,QY_commentDelegate,UIAlertViewDelegate,UIActionSheetDelegate> {
 //    NSMutableArray *_imageDataSource;
@@ -316,7 +317,8 @@ lineBreakMode:mode].height : 0.f;
 }
 
 - (void)pictureShareButtonClicked:(id)sender {
-    [QYUtils alert:@"图片分享～正在施工"] ;
+    //[QYUtils alert:@"图片分享～正在施工"] ;
+    [self performSegueWithIdentifier:kSocial2PictureSharingSegueId sender:self] ;
     
     [_svm slideViewOut] ;
     _isShow = NO ;

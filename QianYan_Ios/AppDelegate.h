@@ -68,6 +68,7 @@
 @property (nonatomic, strong) UIViewController *SetRemarkNameViewController;
 @property (nonatomic, strong) UITableViewController *CameraAllocationTableViewController;
 @property (nonatomic, strong) UIViewController *InfoSettingViewController;
+@property (nonatomic, strong) UICollectionViewController *ImageSelectCollectionViewController;
 
 
 - (void)toggleLeftDrawer:(id)sender animated:(BOOL)animated;

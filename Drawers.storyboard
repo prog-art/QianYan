@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5Zc-oB-I65">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
@@ -654,6 +655,7 @@
                         <outlet property="addButtonItem" destination="ZUO-B7-tDt" id="uC8-qV-M4H"/>
                         <segue destination="MpV-VB-Cfx" kind="show" identifier="Social2WordSharingSegueId" id="NDu-5U-IwU"/>
                         <segue destination="w5b-5B-hyt" kind="show" id="bn0-AM-g3A"/>
+                        <segue destination="38t-m6-shj" kind="show" identifier="Social2PictureSharingSegueId" id="3ab-D2-F1R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Vn-aw-bFT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1869,6 +1871,64 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpX-gi-KfF" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="383" y="1245"/>
+        </scene>
+        <!--选择图片-->
+        <scene sceneID="jhC-eb-A0g">
+            <objects>
+                <collectionViewController storyboardIdentifier="ImageSelectCollectionViewControllerStoryBoardID" id="38t-m6-shj" customClass="ImageSelectCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="H6y-s3-zhw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="YaL-7u-58S">
+                            <size key="itemSize" width="100" height="80"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="Hm8-Qn-Q0Y" customClass="ImageSelectCollectionViewCell">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K1J-gq-4yz">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="80"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BbB-wR-pil">
+                                            <rect key="frame" x="72" y="52" width="20" height="20"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <outlet property="photoImageView" destination="K1J-gq-4yz" id="SW1-sb-roM"/>
+                                    <outlet property="selectImageView" destination="BbB-wR-pil" id="2Ql-7R-sj1"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="38t-m6-shj" id="sP6-ib-Tga"/>
+                            <outlet property="delegate" destination="38t-m6-shj" id="abm-GM-0He"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="选择图片" id="cm3-lK-gor">
+                        <barButtonItem key="rightBarButtonItem" title="取消" id="Nd0-AI-Ejt">
+                            <connections>
+                                <action selector="doneBtnClicked:" destination="38t-m6-shj" id="lvi-Ne-CPl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="barBtnItem" destination="Nd0-AI-Ejt" id="L3c-pZ-hBK"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a8B-lP-jii" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1988" y="1917"/>
         </scene>
     </scenes>
     <resources>

@@ -20,5 +20,6 @@
              decoder: (KxMovieDecoder *) decoder;
 
 - (void) render: (KxVideoFrame *) frame;
+- (UIImage *)snapshot;
 
 @end
