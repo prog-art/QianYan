@@ -17,20 +17,20 @@
 
 #import "QY_Common.h"
 
-#define AntiARCRetain(...) void *retainedThing = (__bridge_retained void *)__VA_ARGS__; retainedThing = retainedThing
-#define AntiARCRelease(...) void *retainedThing = (__bridge void *) __VA_ARGS__; id unretainedThing = (__bridge_transfer id)retainedThing; unretainedThing = nil
+#define AntiARCRetain(...) void *retainedThing = (__bridge_retained void *)__VA_ARGS__ ; retainedThing = retainedThing
+#define AntiARCRelease(...) void *retainedThing = (__bridge void *) __VA_ARGS__ ; id unretainedThing = (__bridge_transfer id)retainedThing ; unretainedThing = nil
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-#define AL_SINGLELINE_TEXT_HEIGHT(text, font) [text length] > 0 ? [text sizeWithAttributes:nil].height : 0.f;
+#define AL_SINGLELINE_TEXT_HEIGHT(text, font) [text length] > 0 ? [text sizeWithAttributes:nil].height : 0.f ;
 #define AL_MULTILINE_TEXT_HEIGHT(text, font, maxSize, mode) [text length] > 0 ? [text boundingRectWithSize:maxSize \
 options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) \
 attributes:nil \
-context:NULL].size.height : 0.f;
+context:NULL].size.height : 0.f ;
 #else
-#define AL_SINGLELINE_TEXT_HEIGHT(text, font) [text length] > 0 ? [text sizeWithFont:font].height : 0.f;
+#define AL_SINGLELINE_TEXT_HEIGHT(text, font) [text length] > 0 ? [text sizeWithFont:font].height : 0.f ;
 #define AL_MULTILINE_TEXT_HEIGHT(text, font, maxSize, mode) [text length] > 0 ? [text sizeWithFont:font \
 constrainedToSize:maxSize \
-lineBreakMode:mode].height : 0.f;
+lineBreakMode:mode].height : 0.f ;
 #endif
 
 #define dataCount 10
@@ -41,17 +41,17 @@ lineBreakMode:mode].height : 0.f;
 #define kSocial2PictureSharingSegueId @"Social2PictureSharingSegueId"
 
 @interface QYSocialViewController ()<UITableViewDataSource,UITableViewDelegate,QYSocialCellDelegate,QY_commentDelegate,UIAlertViewDelegate,UIActionSheetDelegate> {
-//    NSMutableArray *_imageDataSource;
+//    NSMutableArray *_imageDataSource ;
     
-//    NSMutableArray *_contentDataSource;//模拟接口给的数据
+//    NSMutableArray *_contentDataSource ;//模拟接口给的数据
     
-    NSMutableArray *_tableDataSource;//tableview数据源
+    NSMutableArray *_tableDataSource ;//tableview数据源
     
-    NSMutableArray *_shuoshuoDatasSource;//说说数据源
+    NSMutableArray *_shuoshuoDatasSource ;//说说数据源
     
-    UITableView *mainTable;
+    UITableView *mainTable ;
     
-    UIButton *replyBtn;
+    UIButton *replyBtn ;
     
     YMReplyInputView *replyView ;
     
@@ -73,54 +73,54 @@ lineBreakMode:mode].height : 0.f;
 - (void)setUpSocialSharingControl {
     //添加动画
     
-    _maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, 320, 504)];
-    _maskView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.25];
+    _maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, 320, 504)] ;
+    _maskView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.25] ;
     
-    _isShow = NO;
+    _isShow = NO ;
 
-    _notificationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 112)];
-    _notificationView.backgroundColor = [UIColor colorWithRed:250/255.0 green:247/255.0 blue:233/255.0 alpha:1];
+    _notificationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 112)] ;
+    _notificationView.backgroundColor = [UIColor colorWithRed:250/255.0 green:247/255.0 blue:233/255.0 alpha:1] ;
     
-    _svm = [[SlidingViewManager alloc] initWithInnerView:_notificationView containerView:self.view maskView:_maskView];
+    _svm = [[SlidingViewManager alloc] initWithInnerView:_notificationView containerView:self.view maskView:_maskView] ;
     
-    _wordShareButton = [[UIButton alloc] init];
-    [_wordShareButton addTarget:self action:@selector(wordShareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_wordShareButton setImage:[UIImage imageNamed:@"社交-文字按钮.png"] forState:UIControlStateNormal];
-    _wordShareButton.frame = CGRectMake(0, 0, 70, 70);
-    _wordShareButton.center = CGPointMake(60, 45);
-    [_notificationView addSubview:_wordShareButton];
+    _wordShareButton = [[UIButton alloc] init] ;
+    [_wordShareButton addTarget:self action:@selector(wordShareButtonClicked:) forControlEvents:UIControlEventTouchUpInside] ;
+    [_wordShareButton setImage:[UIImage imageNamed:@"社交-文字按钮.png"] forState:UIControlStateNormal] ;
+    _wordShareButton.frame = CGRectMake(0, 0, 70, 70) ;
+    _wordShareButton.center = CGPointMake(60, 45) ;
+    [_notificationView addSubview:_wordShareButton] ;
     
-    _wordShareLabel = [[UILabel alloc] initWithFrame:CGRectMake(42, 88, 36, 20)];
-    [_wordShareLabel setText:@"文字"];
-    [_notificationView addSubview:_wordShareLabel];
+    _wordShareLabel = [[UILabel alloc] initWithFrame:CGRectMake(42, 88, 36, 20)] ;
+    [_wordShareLabel setText:@"文字"] ;
+    [_notificationView addSubview:_wordShareLabel] ;
     
-    _pictureShareButton = [[UIButton alloc] init];
-    [_pictureShareButton addTarget:self action:@selector(pictureShareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_pictureShareButton setImage:[UIImage imageNamed:@"社交-相册按钮.png"] forState:UIControlStateNormal];
-    _pictureShareButton.frame = CGRectMake(0, 0, 70, 70);
-    _pictureShareButton.center = CGPointMake(160, 45);
-    [_notificationView addSubview:_pictureShareButton];
+    _pictureShareButton = [[UIButton alloc] init] ;
+    [_pictureShareButton addTarget:self action:@selector(pictureShareButtonClicked:) forControlEvents:UIControlEventTouchUpInside] ;
+    [_pictureShareButton setImage:[UIImage imageNamed:@"社交-相册按钮.png"] forState:UIControlStateNormal] ;
+    _pictureShareButton.frame = CGRectMake(0, 0, 70, 70) ;
+    _pictureShareButton.center = CGPointMake(160, 45) ;
+    [_notificationView addSubview:_pictureShareButton] ;
     
-    _pictureShareLabel = [[UILabel alloc] initWithFrame:CGRectMake(142, 88, 36, 20)];
-    [_pictureShareLabel setText:@"相册"];
-    [_notificationView addSubview:_pictureShareLabel];
+    _pictureShareLabel = [[UILabel alloc] initWithFrame:CGRectMake(142, 88, 36, 20)] ;
+    [_pictureShareLabel setText:@"相册"] ;
+    [_notificationView addSubview:_pictureShareLabel] ;
     
-    _videoShareButton = [[UIButton alloc] init];
-    [_videoShareButton addTarget:self action:@selector(videoShareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_videoShareButton setImage:[UIImage imageNamed:@"社交-录像按钮.png"] forState:UIControlStateNormal];
-    _videoShareButton.frame = CGRectMake(0, 0, 70, 70);
-    _videoShareButton.center = CGPointMake(260, 45);
-    [_notificationView addSubview:_videoShareButton];
+    _videoShareButton = [[UIButton alloc] init] ;
+    [_videoShareButton addTarget:self action:@selector(videoShareButtonClicked:) forControlEvents:UIControlEventTouchUpInside] ;
+    [_videoShareButton setImage:[UIImage imageNamed:@"社交-录像按钮.png"] forState:UIControlStateNormal] ;
+    _videoShareButton.frame = CGRectMake(0, 0, 70, 70) ;
+    _videoShareButton.center = CGPointMake(260, 45) ;
+    [_notificationView addSubview:_videoShareButton] ;
     
-    _videoShareLabel = [[UILabel alloc] initWithFrame:CGRectMake(242, 88, 36, 20)];
-    [_videoShareLabel setText:@"录像"];
-    [_notificationView addSubview:_videoShareLabel];
+    _videoShareLabel = [[UILabel alloc] initWithFrame:CGRectMake(242, 88, 36, 20)] ;
+    [_videoShareLabel setText:@"录像"] ;
+    [_notificationView addSubview:_videoShareLabel] ;
 }
 
 - (void)initTableview {
     mainTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] ;
     mainTable.backgroundColor = [UIColor clearColor] ;
-    // mainTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    // mainTable.separatorStyle = UITableViewCellSeparatorStyleNone ;
     mainTable.delegate = self ;
     mainTable.dataSource = self ;
     [self.view addSubview:mainTable] ;
@@ -199,16 +199,18 @@ lineBreakMode:mode].height : 0.f;
 
         socialModel.foldOrNot = YES ;//?
         
-        
+        //图片
+        socialModel.showImageArray = [[feed aAttaches] mutableCopy] ;
+        [socialModel calculateAttachImagesHeight] ;
+
+        //评论
         NSMutableArray *comments = [NSMutableArray array] ;
         NSMutableArray *userDefineAttriArray = [NSMutableArray array] ;
-
-        //排序
+        
         NSMutableArray *QY_comments =
         [[feed.aComments sortedArrayUsingComparator:^NSComparisonResult(id<AComment> obj1,id<AComment> obj2) {
             return [obj1.aPubDate compare:obj2.aPubDate] ;
         }] mutableCopy] ;
-
         
         [QY_comments enumerateObjectsUsingBlock:^(id<AComment> comment, NSUInteger idx, BOOL *stop) {
             NSMutableArray *tempDefineArr = [NSMutableArray array] ;
@@ -225,11 +227,8 @@ lineBreakMode:mode].height : 0.f;
             [comments addObject:commentStr] ;
             [socialModel.aComments addObject:comment] ;
         }] ;
-//        socialModel.comments = comments;//回复
-        
         socialModel.defineAttrData = userDefineAttriArray ;
-
-//        ymData.showImageArray = ;//
+        
         
         [statusArray addObject:socialModel] ;
     }] ;
@@ -284,7 +283,7 @@ lineBreakMode:mode].height : 0.f;
 #pragma mark - life Cycle
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad] ;
     
     self.view.backgroundColor = [UIColor whiteColor] ;
 
@@ -328,20 +327,20 @@ lineBreakMode:mode].height : 0.f;
 - (void)videoShareButtonClicked:(id)sender {
     [QYUtils alert:@"视频分享～正在施工"] ;
     
-    [_svm slideViewOut];
-    _isShow = NO;
-    _addButtonItem.image = [UIImage imageNamed:@"社交-添加.png"];
+    [_svm slideViewOut] ;
+    _isShow = NO ;
+    _addButtonItem.image = [UIImage imageNamed:@"社交-添加.png"] ;
 }
 
 - (IBAction)showSharingControlBtnClicked:(id)sender {
     if (_isShow) {
-        [_svm slideViewOut];
-        _addButtonItem.image = [UIImage imageNamed:@"社交-添加.png"];
-        _isShow = NO;
+        [_svm slideViewOut] ;
+        _addButtonItem.image = [UIImage imageNamed:@"社交-添加.png"] ;
+        _isShow = NO ;
     } else {
-        [_svm slideViewIn];
-        _addButtonItem.image = [UIImage imageNamed:@"社交-添加关闭.png"];
-        _isShow = YES;
+        [_svm slideViewIn] ;
+        _addButtonItem.image = [UIImage imageNamed:@"社交-添加关闭.png"] ;
+        _isShow = YES ;
     }
 }
 
@@ -358,16 +357,16 @@ lineBreakMode:mode].height : 0.f;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     QYSocialModel *ym = [_tableDataSource objectAtIndex:indexPath.row] ;
     BOOL unfold = ym.foldOrNot ;
-    return TableHeader + kLocationToBottom + ym.commentsHeight + ym.showImageHeight  + kDistance + (ym.islessLimit?0:30) + (unfold?ym.foldedContentHeight:ym.unFoldedContentHeight) + kReplyBtnDistance - 25.0 + TimeHeight;
+    return TableHeader + kLocationToBottom + ym.commentsHeight + ym.showImageHeight  + kDistance + (ym.islessLimit?0:30) + (unfold?ym.foldedContentHeight:ym.unFoldedContentHeight) + kReplyBtnDistance - 25.0 + TimeHeight ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    static NSString *CellIdentifier = @"ILTableViewCell";
+    static NSString *CellIdentifier = @"ILTableViewCell" ;
     
     QYSocialTableViewCell *cell = (QYSocialTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier] ;
     if (cell == nil) {
-        cell = [[QYSocialTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[QYSocialTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] ;
     }
     cell.stamp = indexPath.row ;
     cell.replyBtn.tag = indexPath.row ;
@@ -381,7 +380,7 @@ lineBreakMode:mode].height : 0.f;
     
     [cell setUpWithModel:[_tableDataSource objectAtIndex:indexPath.row]] ;
 
-    return cell;
+    return cell ;
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -389,8 +388,8 @@ lineBreakMode:mode].height : 0.f;
 #pragma mark - 评论
 
 - (void)replyAction:(QYButton *)sender{
-    CGRect rectInTableView = [mainTable rectForRowAtIndexPath:sender.appendIndexPath];
-    float origin_Y = rectInTableView.origin.y + sender.frame.origin.y;
+    CGRect rectInTableView = [mainTable rectForRowAtIndexPath:sender.appendIndexPath] ;
+    float origin_Y = rectInTableView.origin.y + sender.frame.origin.y ;
   
     if (replyBtn) {
         [UIView animateWithDuration:0.25f animations:^{
@@ -426,7 +425,7 @@ lineBreakMode:mode].height : 0.f;
         replyBtn = nil ;
     }
     
-    replyView = [[YMReplyInputView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 44, screenWidth,44) andAboveView:self.view];
+    replyView = [[YMReplyInputView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 44, screenWidth,44) andAboveView:self.view] ;
     replyView.delegate = self ;
     replyView.replyTag = sender.tag ;
     [self.view addSubview:replyView] ;
@@ -452,25 +451,25 @@ lineBreakMode:mode].height : 0.f;
 #pragma mark - 图片点击事件回调
 - (void)showImageViewWithImageViews:(NSArray *)imageViews byClickWhich:(NSInteger)clickTag {
 
-    UIView *maskview = [[UIView alloc] initWithFrame:self.view.bounds];
-    maskview.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:maskview];
+    UIView *maskview = [[UIView alloc] initWithFrame:self.view.bounds] ;
+    maskview.backgroundColor = [UIColor blackColor] ;
+    [self.view addSubview:maskview] ;
     
-    QYShowImageView *ymImageV = [[QYShowImageView alloc] initWithFrame:self.view.bounds byClick:clickTag appendArray:imageViews];
+    QYShowImageView *ymImageV = [[QYShowImageView alloc] initWithFrame:self.view.bounds byClick:clickTag appendArray:imageViews] ;
     [ymImageV show:maskview didFinish:^(){
         
         [UIView animateWithDuration:0.5f animations:^{
             
-            ymImageV.alpha = 0.0f;
-            maskview.alpha = 0.0f;
+            ymImageV.alpha = 0.0f ;
+            maskview.alpha = 0.0f ;
             
         } completion:^(BOOL finished) {
             
-            [ymImageV removeFromSuperview];
-            [maskview removeFromSuperview];
-        }];
+            [ymImageV removeFromSuperview] ;
+            [maskview removeFromSuperview] ;
+        }] ;
        
-    }];
+    }] ;
 
 }
 

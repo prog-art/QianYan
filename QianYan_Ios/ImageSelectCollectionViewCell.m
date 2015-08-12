@@ -10,9 +10,7 @@
 
 @interface ImageSelectCollectionViewCell ()
 
-@property (strong, nonatomic) IBOutlet UIImageView *selectImageView;
-
-@property (strong, nonatomic) IBOutlet UIImageView *photoImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *selectImageView ;
 
 @end
 
@@ -20,22 +18,22 @@
 
 - (void)setIsChosen:(BOOL)isChosen {
     if (isChosen) {
-        self.selectImageView.image = [UIImage imageNamed:@"图片选择-选中.png"];
+        self.selectImageView.image = [UIImage imageNamed:@"图片选择-选中.png"] ;
     } else {
-        self.selectImageView.image = nil;
+        self.selectImageView.image = nil ;
     }
 }
 
 - (BOOL)isChosen {
-    return self.isChosen;
+    return self.isChosen ;
 }
 
 - (void)setImage:(UIImage *)image {
-    self.photoImageView.image = image;
+    self.photoImageView.image = image ;
 }
 
 - (UIImage *)image {
-    return self.photoImageView.image;
+    return self.photoImageView.image ;
 }
 
 @end

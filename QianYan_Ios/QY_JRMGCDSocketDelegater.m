@@ -159,7 +159,7 @@ typedef NS_ENUM(NSInteger, JRM_Socket_Read_tag) {
         return ;
     }
     [sock readDataToLength:JRM_DATA_LEN_OF_KEY_LEN
-               withTimeout:-1
+               withTimeout:5.0f
                        tag:JRM_Socket_Read_tag_readDataLen] ;
 }
 

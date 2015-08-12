@@ -31,6 +31,14 @@
 
 #pragma makr - User
 
+#pragma mark - 截图
+
++ (BOOL)saveScreenShotImage:(UIImage *)image forUserId:(NSString *)userId ;
+
++ (NSDirectoryEnumerator *)test ;
+
++ (void)displayScreenShotImageFileName:(NSString *)fileName forUserId:(NSString *)userId atImageView:(UIImageView *)imageView ;
+
 #pragma mark - old
 
 /**

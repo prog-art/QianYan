@@ -10,6 +10,8 @@
 
 @interface ImageSelectCollectionViewCell : UICollectionViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *photoImageView ;
+
 @property (nonatomic) BOOL isChosen;
 
 @property (nonatomic, strong) UIImage *image;

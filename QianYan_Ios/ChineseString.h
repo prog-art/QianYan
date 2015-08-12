@@ -8,18 +8,36 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol ChineseString ;
+
 @interface ChineseString : NSObject
+
+@property (nonatomic) id<ChineseString> string ;
 
 /**
  *  源字符串
  */
-@property(nonatomic, copy)NSString *string;
+@property (nonatomic, copy)NSString *sourceStr ;
 
 /**
  *  转化的拼音字符串
  */
-@property(nonatomic, copy)NSString *pinYin;
+@property (nonatomic, copy)NSString *pinYin ;
 
-- (instancetype)initWithString:(NSString *)string ;
+
+//- (instancetype)initWithString:(NSString *)string ;
+
+- (instancetype)initWithString:(id<ChineseString>)string ;
+
+@end
+
+@protocol ChineseString <NSObject>
+
+@required
+
+/**
+ *  源字符串
+ */
+- (NSString *)sourceStr ;
 
 @end

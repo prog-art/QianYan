@@ -11,6 +11,7 @@
 #import "QY_Common.h"
 
 #define kUserDirPathComponent @"user"
+#define kUserDirScreenShotPathComponent @"screenShot"
 
 @implementation QY_FileService
 
@@ -19,16 +20,8 @@
 + (BOOL)saveAvatar:(UIImage *)avatar forUserId:(NSString *)userId {
     BOOL result = FALSE ;
     if ( !avatar || !userId ) return result ;
-    
     NSString *path = [self getAvatarPathByUserId:userId] ;
-    
-    NSData *avatarData = UIImageJPEGRepresentation(avatar, 1.0f) ;
-    if ( !avatarData ) {
-        avatarData = UIImagePNGRepresentation(avatar) ;
-    }
-    
-    result = [self saveFileAtPath:path Data:avatarData] ;
-    
+    result = [self saveImage:avatar atPath:path] ;
     return result ;
 }
 
@@ -126,6 +119,66 @@
     return nil ;
 }
 
+#pragma mark - 截图
+
++ (NSString *)getScreenShotPathForUserId:(NSString *)userId {
+    NSString *path = [[self getUserPathByUserId:userId] stringByAppendingPathComponent:kUserDirScreenShotPathComponent] ;
+    return path ;
+}
+
++ (BOOL)saveScreenShotImage:(UIImage *)image forUserId:(NSString *)userId {
+    BOOL result = FALSE ;
+    if ( !userId || !image ) return result ;
+    
+    NSString *dirPath = [self getScreenShotPathForUserId:userId] ;
+    
+    if ( ![self validateDirectoryAtPath:dirPath] ) {
+        return result ;
+    }
+    
+    NSString *fileName,*filePath ;
+    {
+        NSString *dateStr = [QYUtils date2timestampStr:[NSDate date]] ;
+        NSArray *tArr = @[userId,dateStr,@"screenShot"] ;
+        
+        fileName = [tArr componentsJoinedByString:@"_"] ;
+    }
+    filePath = [dirPath stringByAppendingPathComponent:fileName];
+    
+    QYDebugLog(@"filePath = %@",filePath) ;
+    result = [self saveImage:image atPath:filePath] ;
+    
+    return result ;
+}
+
++ (void)displayScreenShotImageFileName:(NSString *)fileName forUserId:(NSString *)userId atImageView:(UIImageView *)imageView {
+    assert(userId) ;
+    assert(fileName) ;
+    assert(imageView) ;
+    NSString *path = [self getScreenShotPathForUserId:userId] ;
+    path = [path stringByAppendingPathComponent:fileName] ;
+#warning 异步可能会导致加载慢出现问题？预留。未证实
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        UIImage *image = [UIImage imageWithContentsOfFile:path] ;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            imageView.image = image ;
+        }) ;
+    }) ;
+}
+
++ (NSDirectoryEnumerator *)test {
+    return [[NSFileManager defaultManager] enumeratorAtPath:[self getScreenShotPathForUserId:@"10000133"]] ;
+}
+
++ (void)test2 {
+    NSString *path = [self getAvatarPath] ;
+    NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtPath:path] ;
+    NSString *fileName ;
+    while ( fileName = [enumerator nextObject] ) {
+        NSLog(@"obj = %@",fileName) ;
+    }
+}
+
 
 #pragma mark - Read File Helper
 
@@ -171,6 +224,22 @@
 }
 
 #pragma mark - Helper
+
++ (BOOL)saveImage:(UIImage *)image atPath:(NSString *)path {
+    BOOL result = FALSE ;
+    if ( !image || !path ) return result ;
+    
+    NSData *imageData = UIImageJPEGRepresentation(image, 1.0f) ;
+    QYDebugLog(@"JPEG Data!") ;
+    if ( !imageData ) {
+        QYDebugLog(@"PNG Data!") ;
+        imageData = UIImagePNGRepresentation(image) ;
+    }
+    
+    result = [self saveFileAtPath:path Data:imageData] ;
+    
+    return result ;
+}
 
 /**
  *  在路径上存储文件数据

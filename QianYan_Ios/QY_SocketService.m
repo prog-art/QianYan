@@ -212,17 +212,32 @@ NSString *const kNotificationName_finishDataReceive = @"kNotificationName_finish
     
     QY_JRMAPIDescriptor *APIDesc = self.currentDescriptor ;
 
-
-    if ( APIDesc.request.keepConnecting ) {
-        //保持连接
-        self.currentDescriptor = nil ;
-        QY_JRMResponse *response = APIDesc.response ;
-        if ( self.apiComplection ) {
-            self.apiComplection(response,nil) ;
+    if ( APIDesc.apiNo != JRM_REQUEST_OPERATION_TYPE_USER_LOGIN ) {
+        //其他接口
+        if ( APIDesc.request.keepConnecting ) {
+            //保持连接
+            self.currentDescriptor = nil ;
+            QY_JRMResponse *response = APIDesc.response ;
+            if ( self.apiComplection ) {
+                self.apiComplection(response,nil) ;
+            }
+        } else {
+            //不保持连接
+            [self.jrmSocket disconnect] ;
         }
     } else {
-        //不保持连接
-        [self.jrmSocket disconnect] ;
+#warning api252失败后必须断开jrm连接。补丁。
+        if ( APIDesc.request.keepConnecting && APIDesc.response.success ) {
+            //成功才保持连接
+            self.currentDescriptor = nil ;
+            QY_JRMResponse *response = APIDesc.response ;
+            if ( self.apiComplection ) {
+                self.apiComplection(response,nil) ;
+            }
+        } else {
+            //失败，不保持连接
+            [self.jrmSocket disconnect] ;
+        }
     }
 }
 

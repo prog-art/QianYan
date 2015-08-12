@@ -81,6 +81,10 @@
     return self.response.attachmentData ;
 }
 
+- (JRM_REQUEST_OPERATION_TYPE)apiNo {
+    return self.request ? self.request.apiNo : 0 ;
+}
+
 #pragma mark - QY_JRMResponsePhraseRuleDataSource
 
 /**

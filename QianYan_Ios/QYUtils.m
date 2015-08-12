@@ -115,12 +115,20 @@
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[date timeIntervalSince1970]];
     return timeSp ;
 }
++ (NSTimeInterval)date2timestamp:(NSDate *)date {
+    assert(date) ;
+    return [date timeIntervalSince1970] ;
+}
 
 //时间戳转时间的方法
 + (NSDate *)timestampStr2date:(NSString *)timestamp {
     assert(timestamp) ;
     NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[timestamp longLongValue]] ;
     return confromTimesp ;
+}
++ (NSDate *)timestamp2date:(NSTimeInterval)timestamp {
+    assert(timestamp) ;
+    return [NSDate dateWithTimeIntervalSince1970:timestamp] ;
 }
 
 + (NSInteger)ageWithDateOfBirth:(NSDate *)date {

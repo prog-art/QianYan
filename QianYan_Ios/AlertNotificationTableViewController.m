@@ -176,6 +176,10 @@
         
     }
     
+    if (self.dataSource.count == 0 ) {
+        [QYUtils alert:@"近7日无报警信息通知［之后有空改成显示在背景里］"] ;
+    }
+    
     [self.tableView reloadData] ;
 }
 

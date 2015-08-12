@@ -80,6 +80,9 @@
 @property (nonatomic,strong) NSMutableArray *showImageArray;//图片数组
 @property (nonatomic,assign) float           showImageHeight;//展示图片的高度
 
+//图片高度
+- (float)calculateAttachImagesHeight ;
+
 #pragma mark - 删除按钮
 
 @property (nonatomic,assign) BOOL            isSelfTheOwner ;//是否是自己的说说，决定是否能删除。

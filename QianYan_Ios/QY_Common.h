@@ -33,5 +33,6 @@
 #import "QY_Notify.h"
 
 #import "QY_CacheService.h"
+#import "QY_FileService.h"
 
 #endif

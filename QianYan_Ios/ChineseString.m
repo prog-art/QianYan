@@ -15,24 +15,25 @@
 
 #pragma mark - Life Cycle
 
-- (id)init {
-    if (self = [super init]) {
+- (instancetype)init {
+    if (self = [super init] ) {
     }
     return self;
 }
 
-- (instancetype)initWithString:(NSString *)string {
-    if ( self = [self init]) {
-        [self setString:string] ;
+- (instancetype)initWithString:(id<ChineseString>)string {
+    if ( self = [self init] ) {
+        self.string = string ;
+        [self setSourceStr:[string sourceStr]] ;
     }
     return self ;
 }
 
 #pragma mark - Setter && Getter
 
-- (void)setString:(NSString *)string {
-    QYDebugLog(@"%@",string) ;
-    _string = string ;
+- (void)setSourceStr:(NSString *)sourceStr {
+    QYDebugLog(@"%@",sourceStr) ;
+    _sourceStr = sourceStr ;
     [self initPinYinByString] ;
 }
 
@@ -40,15 +41,15 @@
 
 - (void)initPinYinByString {
     QYDebugLog() ;
-    if ( !self.string )
-        self.string = @"" ;
+    if ( !self.sourceStr )
+        self.sourceStr = @"" ;
     
-    if ( ![self.string isEqualToString:@""] ) {
+    if ( ![self.sourceStr isEqualToString:@""] ) {
         //join the pinYin
         NSString *pinYinResult = [NSString string] ;
 
-        for ( int i = 0 ; i < self.string.length ; i ++ ) {
-            NSString *singlePinyinLetter = [[NSString stringWithFormat:@"%c",pinyinFirstLetter([self.string characterAtIndex:i])] uppercaseString] ;
+        for ( int i = 0 ; i < self.sourceStr.length ; i ++ ) {
+            NSString *singlePinyinLetter = [[NSString stringWithFormat:@"%c",pinyinFirstLetter([self.sourceStr characterAtIndex:i])] uppercaseString] ;
             pinYinResult = [pinYinResult stringByAppendingString:singlePinyinLetter] ;
         }
         
@@ -61,7 +62,7 @@
 #pragma mark - override
 
 - (NSString *)description {
-    NSString *description = [NSString stringWithFormat:@"{\n    string = %@\n    pinYin = %@\n}",_string,_pinYin] ;
+    NSString *description = [NSString stringWithFormat:@"{\n    string = %@\n    pinYin = %@\n}",_sourceStr,_pinYin] ;
     return description ;
 }
 

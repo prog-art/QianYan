@@ -152,6 +152,8 @@ static NSMutableDictionary * gHistory ;
 @property (readwrite) BOOL playing ;
 @property (readwrite) BOOL decoding ;
 @property (readwrite, strong) KxArtworkFrame *artworkFrame ;
+@property (nonatomic) UIImage *screenShotImage ;
+
 @end
 
 @implementation KxMovieViewController
@@ -696,13 +698,19 @@ _messageLabel.hidden = YES ;
 
 - (void)saveScreenShot2AlbumBtnClicked:(id)sender {
     if(self.playing) {
-#warning 保持截图。
-        
+        UIImage *image = self.screenShotImage ;
+        if ( image ) {
+            BOOL result = [QY_FileService saveScreenShotImage:image forUserId:[QYUser currentUser].userId] ;
+            if ( result ) {
+                [QYUtils alert:@"保存成功～"] ;
+            }
+        }
     }
 }
 
 - (void)settingsBtnClicked:(id)sender {
 #warning 到设置界面
+    [QYUtils alert:@"正在施工。"] ;
 }
 
 - (void)infoDidTouch:(id)sender {
@@ -816,10 +824,8 @@ _messageLabel.hidden = YES ;
     [_shareBtn setHidden:hidden] ;
     [_thumbnailImageView setHidden:hidden] ;
     if ( !hidden ) {
-#warning 截图在这里使用
-        UIImage *image = [[UIImage alloc] init] ;
-        image = [_glView snapshot] ;
-        //测试用
+        UIImage *image = [_glView snapshot] ;
+        self.screenShotImage = image ;
         _thumbnailImageView.image = image ;
     }
 }

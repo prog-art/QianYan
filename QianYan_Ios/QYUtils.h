@@ -61,9 +61,11 @@
 
 //时间转时间戳的方法:
 + (NSString *)date2timestampStr:(NSDate *)date ;
++ (NSTimeInterval)date2timestamp:(NSDate *)date ;
 
 //时间戳转时间的方法
 + (NSDate *)timestampStr2date:(NSString *)timestamp ;
++ (NSDate *)timestamp2date:(NSTimeInterval)timestamp ;
 
 //时间转年龄
 + (NSInteger)ageWithDateOfBirth:(NSDate *)date ;

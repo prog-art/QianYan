@@ -269,6 +269,7 @@
         }
 
         QYDebugLog(@"APINo = %ld response = %@",APINo,response) ;
+        
         if ( complection ) {
             complection(result,error) ;
         }

@@ -12,7 +12,7 @@
 /**
  *  获取 NSArray (ChineseString) , 转换并排序
  *
- *  @param arr 待转换的数组 NSArray (NSString)
+ *  @param arr 待转换的数组 NSArray (id<ChineseString>)
  *
  *  @return NSArray (ChineseString)
  */

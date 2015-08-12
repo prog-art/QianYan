@@ -27,6 +27,8 @@
 //@{friendId:QY_friendSetting} ;
 @property (nonatomic) NSMutableDictionary *myFriends ;
 
+@property (nonatomic) NSMutableArray *dataSource ;
+
 @end
 
 @implementation ContactViewController
@@ -36,8 +38,8 @@
 - (UIRefreshControl *)refreshControl {
     if ( !_refreshControl ) {
         _refreshControl = [[UIRefreshControl alloc] init] ;
-        [_refreshControl addTarget:self action:@selector(refreshFriends:) forControlEvents:UIControlEventValueChanged];
-        _refreshControl.tintColor = [UIColor blueColor];
+        [_refreshControl addTarget:self action:@selector(refreshFriends:) forControlEvents:UIControlEventValueChanged] ;
+        _refreshControl.tintColor = [UIColor blueColor] ;
     }
     return _refreshControl ;
 }
@@ -51,6 +53,10 @@
         }] ;
     }
     return _myFriends ;
+}
+
+- (NSMutableArray *)dataSource {
+    return _dataSource ? : ( _dataSource = [NSMutableArray array] ) ;
 }
 
 #pragma mark - UIRefreshControl Selector
@@ -68,8 +74,9 @@
         
         if ( friendSettings ) {
             //置空，refresh的时候会调用这个。lazy loading
-            _myFriends = nil ;
-            [self.tableView reloadData] ;
+            [QYUtils runInMainQueue:^{
+                [self beforeReloadData] ;
+            }] ;
             
 #warning 临时
             [QYUtils runInGlobalQueue:^{
@@ -96,6 +103,12 @@
     }] ;
 }
 
+//处理数据用
+- (void)beforeReloadData {
+    _myFriends = nil ;
+    [self.tableView reloadData] ;
+}
+
 #pragma mark - life Cycle
 
 - (void)viewDidLoad {
@@ -104,18 +117,20 @@
     NSArray *sectionIndex = @[@"🔍", @"", @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N",@"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", @"#"] ;
     _indexTitle = [sectionIndex mutableCopy] ;
     
-    //self.navigationItem.leftBarButtonItem = self.editButtonItem; //左侧选择按钮
-    self.tableView.rowHeight = 90;
+    //self.navigationItem.leftBarButtonItem = self.editButtonItem ; //左侧选择按钮
+    self.tableView.rowHeight = 90 ;
     [self.tableView addSubview:self.refreshControl] ;
     
     // If you set the seperator inset on iOS 6 you get a NSInvalidArgumentException...weird
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
-        self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0); // Makes the horizontal row seperator stretch the entire length of the table view
+        self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0) ; // Makes the horizontal row seperator stretch the entire length of the table view
     }
     
     _sections = [[[UILocalizedIndexedCollation currentCollation] sectionIndexTitles] mutableCopy] ;
     
     [[QY_Notify shareInstance] addFriendObserver:self selector:@selector(refresh)] ;
+    
+    [self beforeReloadData] ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -142,33 +157,33 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!tableView.isEditing) {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES] ;
     }
 }
 
 #warning 暂时取消
 //- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 //    if (section > 1) {
-//        return _sections[section-2];
+//        return _sections[section-2] ;
 //    } else {
-//        return nil;
+//        return nil ;
 //    }
 //}
 
 //- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-//    tableView.sectionIndexColor = [UIColor blackColor];
-//    tableView.sectionIndexBackgroundColor = [UIColor clearColor];
-//    return _indexTitle;
+//    tableView.sectionIndexColor = [UIColor blackColor] ;
+//    tableView.sectionIndexBackgroundColor = [UIColor clearColor] ;
+//    return _indexTitle ;
 //}
 
 // Show index titles
 
 //- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-//    return [[UILocalizedIndexedCollation currentCollation] sectionIndexTitles];
+//    return [[UILocalizedIndexedCollation currentCollation] sectionIndexTitles] ;
 //}
 //
 //- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-//    return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
+//    return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index] ;
 //}
 
 #pragma mark - UITableViewDelegate
@@ -178,20 +193,20 @@
     
     switch (section) {
         case 0 : {
-            UITableViewCell *searchCell = [self.tableView dequeueReusableCellWithIdentifier:@"SearchCell"];
+            UITableViewCell *searchCell = [self.tableView dequeueReusableCellWithIdentifier:@"SearchCell"] ;
             return searchCell ;
             break ;
         }
             
         case 1 : {
-            UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
-            return cell;
+            UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"] ;
+            return cell ;
             break ;
         }
             
         default : {
 #warning 写法可能有点问题？
-            UMTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"UMCell" forIndexPath:indexPath];
+            UMTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"UMCell" forIndexPath:indexPath] ;
             
             if ( !cell ) {
                 QYDebugLog(@"日") ;
@@ -199,8 +214,8 @@
             }
             
             // optionally specify a width that each set of utility buttons will share
-            [cell setRightUtilityButtons:[self rightButtons] WithButtonWidth:90.0f];
-            cell.delegate = self;
+            [cell setRightUtilityButtons:[self rightButtons] WithButtonWidth:90.0f] ;
+            cell.delegate = self ;
             
             QY_friendSetting *friendSetting = [self.myFriends allValues][indexPath.row] ;
             
@@ -208,7 +223,7 @@
             
             [friendSetting.toFriend displayCycleAvatarAtImageView:cell.image] ;
             
-            return cell;
+            return cell ;
             break ;
         }
             
@@ -221,23 +236,23 @@
     [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
                                                 title:@"删除"] ;
     
-    return rightUtilityButtons;
+    return rightUtilityButtons ;
 }
 
 // Set row height on an individual basis
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 44.;
+        return 44. ;
     } else {
-        return 75.;
+        return 75. ;
     }
 }
 
 
 //
 //- (CGFloat)rowHeightForIndexPath:(NSIndexPath *)indexPath {
-//    return ([indexPath row] * 10) + 60;
+//    return ([indexPath row] * 10) + 60 ;
 //}
 
 #pragma mark - SWTableViewDelegate
@@ -245,16 +260,16 @@
 //- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state {
 //    switch (state) {
 //        case 0:
-//            NSLog(@"utility buttons closed");
-//            break;
+//            NSLog(@"utility buttons closed") ;
+//            break ;
 //        case 1:
-//            NSLog(@"left utility buttons open");
-//            break;
+//            NSLog(@"left utility buttons open") ;
+//            break ;
 //        case 2:
-//            NSLog(@"right utility buttons open");
-//            break;
+//            NSLog(@"right utility buttons open") ;
+//            break ;
 //        default:
-//            break;
+//            break ;
 //    }
 //}
 
@@ -262,7 +277,7 @@
     switch (index) {
         case 0 : {
             // Delete button was pressed
-            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell] ;
             
             QY_friendSetting *friendSetting = [self.myFriends allValues][indexPath.row] ;
             
@@ -278,7 +293,7 @@
                     [QYUtils alertError:error] ;
                 }
             }] ;            
-            break;
+            break ;
         }
     
         default:
@@ -288,24 +303,24 @@
 
 - (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell {
     // allow just one cell's utility button to be open at once
-    return YES;
+    return YES ;
 }
 
 - (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state {
     switch (state) {
         case 1:
             // set to NO to disable all left utility buttons appearing
-            return YES;
-            break;
+            return YES ;
+            break ;
         case 2:
             // set to NO to disable all right utility buttons appearing
-            return YES;
-            break;
+            return YES ;
+            break ;
         default:
-            break;
+            break ;
     }
     
-    return YES;
+    return YES ;
 }
 
 

@@ -124,15 +124,16 @@
         
     }
     
-    [self calculateAttachImagesHeight] ;
+//    [self calculateAttachImagesHeight] ;
     
     return height;
     
 }
 
 //图片高度
-- (void)calculateAttachImagesHeight {
+- (float)calculateAttachImagesHeight {
     self.showImageHeight = self.showImageArray.count == 0 ? 0 : (ShowImage_H + 10) * ( (self.showImageArray.count - 1) / 3 + 1) ;
+    return self.showImageHeight ;
 }
 
 - (void)matchString:(NSString *)originString isForCommentView:(BOOL)isCommentViewOrNot {

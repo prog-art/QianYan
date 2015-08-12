@@ -75,6 +75,8 @@
 		19A978641B7A2B50005E65F3 /* ImageSelectCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A978611B7A2B50005E65F3 /* ImageSelectCollectionViewCell.m */; };
 		19A978651B7A2B50005E65F3 /* ImageSelectCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A978631B7A2B50005E65F3 /* ImageSelectCollectionViewController.m */; };
 		19B1884A1B71112300F12EFB /* QY_Notify.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B188491B71112300F12EFB /* QY_Notify.m */; };
+		19B4DC3F1B7B3A08002DCFE7 /* QY_user+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B4DC3E1B7B3A08002DCFE7 /* QY_user+Operations.m */; };
+		19B4DC431B7BA8DC002DCFE7 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B4DC421B7BA8DC002DCFE7 /* PhotoCollectionViewCell.m */; };
 		19C3DE681B71CD36006253E5 /* SetRemarkNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3DE671B71CD36006253E5 /* SetRemarkNameViewController.m */; };
 		19C3DE6E1B71CE41006253E5 /* CameraAllocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3DE6B1B71CE41006253E5 /* CameraAllocationTableViewCell.m */; };
 		19C3DE6F1B71CE41006253E5 /* CameraAllocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C3DE6D1B71CE41006253E5 /* CameraAllocationTableViewController.m */; };
@@ -350,6 +352,10 @@
 		19A978631B7A2B50005E65F3 /* ImageSelectCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSelectCollectionViewController.m; sourceTree = "<group>"; };
 		19B188481B71112300F12EFB /* QY_Notify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_Notify.h; sourceTree = "<group>"; };
 		19B188491B71112300F12EFB /* QY_Notify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_Notify.m; sourceTree = "<group>"; };
+		19B4DC3D1B7B3A08002DCFE7 /* QY_user+Operations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QY_user+Operations.h"; sourceTree = "<group>"; };
+		19B4DC3E1B7B3A08002DCFE7 /* QY_user+Operations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QY_user+Operations.m"; sourceTree = "<group>"; };
+		19B4DC411B7BA8DC002DCFE7 /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		19B4DC421B7BA8DC002DCFE7 /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		19C3DE661B71CD36006253E5 /* SetRemarkNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetRemarkNameViewController.h; sourceTree = "<group>"; };
 		19C3DE671B71CD36006253E5 /* SetRemarkNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetRemarkNameViewController.m; sourceTree = "<group>"; };
 		19C3DE6A1B71CE41006253E5 /* CameraAllocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraAllocationTableViewCell.h; sourceTree = "<group>"; };
@@ -773,14 +779,8 @@
 		19589C3C1B5671E2005246BC /* main */ = {
 			isa = PBXGroup;
 			children = (
-				19589C1C1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.h */,
-				19589C1D1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.m */,
-				19589C201B566BCA005246BC /* QY_feed+QY_JPRO_DATA_FORMAT.h */,
-				19589C211B566BCA005246BC /* QY_feed+QY_JPRO_DATA_FORMAT.m */,
-				19589C261B566C89005246BC /* QY_attache+QY_JPRO_DATA_FORMAT.h */,
-				19589C271B566C89005246BC /* QY_attache+QY_JPRO_DATA_FORMAT.m */,
-				19602FCD1B64FF010064BC87 /* QY_alertMessage+QY_JPRO_DATA_FORMAT.h */,
-				19602FCE1B64FF010064BC87 /* QY_alertMessage+QY_JPRO_DATA_FORMAT.m */,
+				19B4DC3C1B7B38DA002DCFE7 /* 用户 */,
+				19B4DC3B1B7B38C3002DCFE7 /* 朋友圈 */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -1339,15 +1339,14 @@
 			name = ViewControllers;
 			sourceTree = "<group>";
 		};
-		19A9785F1B7A2ABD005E65F3 /* 图片选择 */ = {
+		19A9785F1B7A2ABD005E65F3 /* 相册选择 */ = {
 			isa = PBXGroup;
 			children = (
-				19A978601B7A2B50005E65F3 /* ImageSelectCollectionViewCell.h */,
-				19A978611B7A2B50005E65F3 /* ImageSelectCollectionViewCell.m */,
+				19B4DC441B7BAC0A002DCFE7 /* cell */,
 				19A978621B7A2B50005E65F3 /* ImageSelectCollectionViewController.h */,
 				19A978631B7A2B50005E65F3 /* ImageSelectCollectionViewController.m */,
 			);
-			name = "图片选择";
+			name = "相册选择";
 			sourceTree = "<group>";
 		};
 		19B188471B71110400F12EFB /* 通知中心 */ = {
@@ -1357,6 +1356,57 @@
 				19B188491B71112300F12EFB /* QY_Notify.m */,
 			);
 			name = "通知中心";
+			sourceTree = "<group>";
+		};
+		19B4DC3B1B7B38C3002DCFE7 /* 朋友圈 */ = {
+			isa = PBXGroup;
+			children = (
+				19589C1C1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.h */,
+				19589C1D1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.m */,
+				19589C201B566BCA005246BC /* QY_feed+QY_JPRO_DATA_FORMAT.h */,
+				19589C211B566BCA005246BC /* QY_feed+QY_JPRO_DATA_FORMAT.m */,
+				19589C261B566C89005246BC /* QY_attache+QY_JPRO_DATA_FORMAT.h */,
+				19589C271B566C89005246BC /* QY_attache+QY_JPRO_DATA_FORMAT.m */,
+				19602FCD1B64FF010064BC87 /* QY_alertMessage+QY_JPRO_DATA_FORMAT.h */,
+				19602FCE1B64FF010064BC87 /* QY_alertMessage+QY_JPRO_DATA_FORMAT.m */,
+			);
+			name = "朋友圈";
+			sourceTree = "<group>";
+		};
+		19B4DC3C1B7B38DA002DCFE7 /* 用户 */ = {
+			isa = PBXGroup;
+			children = (
+				19B4DC3D1B7B3A08002DCFE7 /* QY_user+Operations.h */,
+				19B4DC3E1B7B3A08002DCFE7 /* QY_user+Operations.m */,
+			);
+			name = "用户";
+			sourceTree = "<group>";
+		};
+		19B4DC401B7BA8AC002DCFE7 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				19B4DC411B7BA8DC002DCFE7 /* PhotoCollectionViewCell.h */,
+				19B4DC421B7BA8DC002DCFE7 /* PhotoCollectionViewCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		19B4DC441B7BAC0A002DCFE7 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				19A978601B7A2B50005E65F3 /* ImageSelectCollectionViewCell.h */,
+				19A978611B7A2B50005E65F3 /* ImageSelectCollectionViewCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		19B4DC451B7BCA07002DCFE7 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				6E7C075E1B3BE42600AC8EC3 /* AlertNotificationTableViewCell.h */,
+				6E7C075F1B3BE42600AC8EC3 /* AlertNotificationTableViewCell.m */,
+			);
+			name = cell;
 			sourceTree = "<group>";
 		};
 		19C3DE651B71CD16006253E5 /* 设置备注名 */ = {
@@ -1600,9 +1650,10 @@
 		6E1A9B811B50A1DB0046B8AB /* tab-社交 */ = {
 			isa = PBXGroup;
 			children = (
+				19A9785F1B7A2ABD005E65F3 /* 相册选择 */,
 				6E1EC9C91B510269003E346F /* 添加 */,
 				196900ED1B6E6E5A0059E737 /* 文字分享 */,
-				6E1A9B9A1B50A4BE0046B8AB /* Manager */,
+				6E1A9B9A1B50A4BE0046B8AB /* Utils */,
 				6E1A9B821B50A3F80046B8AB /* View */,
 				19575C161B73D4A200290E09 /* Model */,
 				19575C171B73D4DD00290E09 /* cell */,
@@ -1636,7 +1687,7 @@
 			name = ViewController;
 			sourceTree = "<group>";
 		};
-		6E1A9B9A1B50A4BE0046B8AB /* Manager */ = {
+		6E1A9B9A1B50A4BE0046B8AB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				6E1A9B9B1B50A4CB0046B8AB /* ILRegularExpressionManager.h */,
@@ -1646,7 +1697,7 @@
 				6E1A9B9F1B50A4CB0046B8AB /* NSString+NSString_ILExtension.h */,
 				6E1A9BA01B50A4CB0046B8AB /* NSString+NSString_ILExtension.m */,
 			);
-			name = Manager;
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		6E1A9BA71B50A6650046B8AB /* 设置 */ = {
@@ -2005,8 +2056,7 @@
 		6E7C075A1B3BE3D700AC8EC3 /* tab-通知 */ = {
 			isa = PBXGroup;
 			children = (
-				6E7C075E1B3BE42600AC8EC3 /* AlertNotificationTableViewCell.h */,
-				6E7C075F1B3BE42600AC8EC3 /* AlertNotificationTableViewCell.m */,
+				19B4DC451B7BCA07002DCFE7 /* cell */,
 				6E7C075B1B3BE41200AC8EC3 /* AlertNotificationTableViewController.h */,
 				6E7C075C1B3BE41200AC8EC3 /* AlertNotificationTableViewController.m */,
 			);
@@ -2026,6 +2076,7 @@
 		6EDF09B61B299CD800413348 /* 我的相册 */ = {
 			isa = PBXGroup;
 			children = (
+				19B4DC401B7BA8AC002DCFE7 /* cell */,
 				6EDF09B71B299DCD00413348 /* MyPhotoGraphCollectionViewController.h */,
 				6EDF09B81B299DCD00413348 /* MyPhotoGraphCollectionViewController.m */,
 			);
@@ -2035,7 +2086,6 @@
 		6EFEFE321B0CC036001E425B /* 主界面 */ = {
 			isa = PBXGroup;
 			children = (
-				19A9785F1B7A2ABD005E65F3 /* 图片选择 */,
 				196900E91B6E6AEE0059E737 /* 意见反馈 */,
 				6E1A9BA71B50A6650046B8AB /* 设置 */,
 				6E62A0F01B4417150001E3A2 /* 二维码配置wifi */,
@@ -2338,6 +2388,7 @@
 				19909B4E1AEEA04900CCB721 /* QYUtils.m in Sources */,
 				6EE8E6621B11F737007C54E0 /* SliderTableViewCell.m in Sources */,
 				6E1A9BA31B50A4CB0046B8AB /* ILRegularExpressionManager.m in Sources */,
+				19B4DC431B7BA8DC002DCFE7 /* PhotoCollectionViewCell.m in Sources */,
 				1985303D1B2887CD00EB96F7 /* QY_FileService.m in Sources */,
 				196456A41B05C09B00EA4E14 /* QY_QRCodeReaderDelegater.m in Sources */,
 				6EDF09AD1B29311800413348 /* QRCodeCardViewController.m in Sources */,
@@ -2349,6 +2400,7 @@
 				6E75ACA51B28268400A0C919 /* AddContactViewController.m in Sources */,
 				19C3DE681B71CD36006253E5 /* SetRemarkNameViewController.m in Sources */,
 				196456AB1B0617A700EA4E14 /* pinyin.c in Sources */,
+				19B4DC3F1B7B3A08002DCFE7 /* QY_user+Operations.m in Sources */,
 				1964569E1B058D4000EA4E14 /* QY_QRCodeUtils.m in Sources */,
 				6E32DA071B51672A002A6301 /* KxMovieGLView.m in Sources */,
 				19C3DE771B725624006253E5 /* QY_CacheService.m in Sources */,

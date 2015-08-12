@@ -24,7 +24,9 @@ static NSMutableArray *_ChineseStringArr = nil ;
     NSMutableArray *chineseStrArr = [NSMutableArray array] ;
     
     for ( int i = 0 ; i < arr.count ; i++ ) {
-        ChineseString *chineseString = [[ChineseString alloc] initWithString:arr[i]];
+        id<ChineseString> string = arr[i] ;
+        
+        ChineseString *chineseString = [[ChineseString alloc] initWithString:string] ;
         
         [chineseStrArr addObject:chineseString] ;
     }
@@ -63,7 +65,7 @@ static NSMutableArray *_ChineseStringArr = nil ;
     BOOL checkValueAtIndex = NO ;
     NSMutableArray *TempArrForGrouping = [NSMutableArray array] ;
     for (NSInteger index = 0 ; index < [chineseStringsArray count] ; index++ ) {
-        ChineseString *chineseStr = (ChineseString *)chineseStringsArray[index] ;
+        ChineseString *chineseStr = chineseStringsArray[index] ;
         NSMutableString *strchar = [NSMutableString stringWithString:chineseStr.pinYin] ;
         NSString *sr = [strchar substringToIndex:1] ;
         QYDebugLog(@"%@",sr) ;

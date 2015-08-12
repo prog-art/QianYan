@@ -32,19 +32,6 @@
     [super tearDown];
 }
 
-- (void)testStringFromSelector {
-    NSString *str = NSStringFromSelector(@selector(testPath)) ;
-    
-    QYDebugLog(@"str = %@",str) ;
-    
-    str = NSStringFromSelector(@selector(testStr:)) ;
-    QYDebugLog(@"str = %@",str) ;
-}
-
-- (void)testStr:(NSString *)str {
-
-}
-
 //- (void)testFilePathAndFileExtension {
 //    NSString *urlStr = @"http://qycam.com:50551/files/upload/?path=user/10000001/profile.xml" ;
 //    

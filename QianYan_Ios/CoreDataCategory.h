@@ -11,6 +11,12 @@
 
 #import "QY_jpro_parameter_key_marco.h"
 
+#pragma makr - 用户
+
+#import "QY_user+Operations.h"
+
+#pragma mark - 朋友圈
+
 #import "QY_comment+QY_JPRO_DATA_FORMAT.h"
 #import "QY_feed+QY_JPRO_DATA_FORMAT.h"
 #import "QY_alertMessage+QY_JPRO_DATA_FORMAT.h"
