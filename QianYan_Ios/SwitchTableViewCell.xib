@@ -29,7 +29,7 @@
                 <outlet property="cellSwitch" destination="okP-Vs-epj" id="0vf-Be-2ya"/>
                 <outlet property="titleLabel" destination="JDx-EX-Gha" id="CmY-bA-3Vm"/>
             </connections>
-            <point key="canvasLocation" x="360" y="425"/>
+            <point key="canvasLocation" x="365" y="397"/>
         </tableViewCell>
     </objects>
 </document>

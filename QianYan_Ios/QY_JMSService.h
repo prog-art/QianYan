@@ -58,4 +58,6 @@
  */
 - (BOOL)isSendingHeartBeatMessage ;
 
+#pragma mark - JMS 相机
+
 @end

@@ -152,12 +152,13 @@
     [fetchRequest setEntity:Entity] ;
     [fetchRequest setPredicate:predicate] ;
     
-#warning 有时候这里会崩溃
+#warning 有时候这里会崩溃,重构这里。需要管理coreData的多线程安全问题。
     NSArray *objects ;
     @try {
         objects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:error] ;
     }
     @catch (NSException *exception) {
+        //Collection <__NSCFSet: 0x170c60380> was mutated while being enumerated.
         QYDebugLog(@"%@",exception) ;
     }
     @finally {

@@ -36,6 +36,8 @@
     self.tableView.SKSTableViewDelegate = self ;
     self.tableView.tableFooterView = [[UIView alloc] init] ;//关键语句
     
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -70,39 +72,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    SwitchTableViewCell *switchCell = [[SwitchTableViewCell alloc] init];
-    SliderTableViewCell *sliderCell = [[SliderTableViewCell alloc] init];
-    ButtonTableViewCell *buttonCell = [[ButtonTableViewCell alloc] init];
-    OnlyButtonTableViewCell *onlyButtonCell = [[OnlyButtonTableViewCell alloc] init];
-    
-    NSArray *switch_nib = [[NSBundle mainBundle]loadNibNamed:@"SwitchTableViewCell" owner:self options:nil];
-    NSArray *slider_nib = [[NSBundle mainBundle]loadNibNamed:@"SliderTableViewCell" owner:self options:nil];
-    NSArray *button_nib = [[NSBundle mainBundle]loadNibNamed:@"ButtonTableViewCell" owner:self options:nil];
-    NSArray *onlyButton_nib = [[NSBundle mainBundle]loadNibNamed:@"OnlyButtonTableViewCell" owner:self options:nil];
-    
-    SKSTableViewCell *cell = [[SKSTableViewCell alloc] init];
-    
+#warning !!!!
     switch (indexPath.row) {
-        case 0:
-            for(id oneObject in switch_nib){
-                if([oneObject isKindOfClass:[SwitchTableViewCell class]]) {
-                    switchCell = (SwitchTableViewCell *)oneObject;
-                    switchCell.title = @"报警通知";
-                }
-            }
+        case 0 : {
+            SwitchTableViewCell *switchCell = [[[NSBundle mainBundle]loadNibNamed:@"SwitchTableViewCell" owner:self options:nil] lastObject] ;
+            switchCell.title = @"报警通知" ;
             return switchCell;
-            break;
+            break ;
+        }
             
-        case 1:
-            for(id oneObject in switch_nib){
-                if([oneObject isKindOfClass:[SwitchTableViewCell class]]) {
-                    switchCell = (SwitchTableViewCell *)oneObject;
-                    switchCell.title = @"指示灯";
-                }
-            }
+        case 1 : {
+            SwitchTableViewCell *switchCell = [[[NSBundle mainBundle]loadNibNamed:@"SwitchTableViewCell" owner:self options:nil] lastObject] ;
+            switchCell.title = @"指示灯" ;
             return switchCell;
+            break ;
+        }
+
+        case 2 : {
+            SKSTableViewCell *cell = [[SKSTableViewCell alloc] init];
             
-        case 2:
             cell.textLabel.text = @"分辨率";
             if (indexPath.row == 2) {
                 cell.isExpandable = YES;
@@ -110,92 +98,92 @@
                 cell.isExpandable = NO;
             }
             return cell;
-        case 3:
-            for(id oneObject in slider_nib){
-                if([oneObject isKindOfClass:[SliderTableViewCell class]]) {
-                    sliderCell = (SliderTableViewCell *)oneObject;
-                    sliderCell.title = @"亮度";
-                    sliderCell.minImage = [UIImage imageNamed:@"最小亮度.png"];
-                    sliderCell.maxImage = [UIImage imageNamed:@"最大亮度.png"];
-                }
-            }
-            return sliderCell;
-        case 4:
-            for(id oneObject in slider_nib){
-                if([oneObject isKindOfClass:[SliderTableViewCell class]]) {
-                    sliderCell = (SliderTableViewCell *)oneObject;
-                    sliderCell.title = @"对比度";
-                    sliderCell.minImage = [UIImage imageNamed:@"最小对比度.png"];
-                    sliderCell.maxImage = [UIImage imageNamed:@"最大对比度.png"];
-                }
-            }
-            return sliderCell;
-        case 5:
-            for(id oneObject in slider_nib){
-                if([oneObject isKindOfClass:[SliderTableViewCell class]]) {
-                    sliderCell = (SliderTableViewCell *)oneObject;
-                    sliderCell.title = @"麦克风音量";
-                    sliderCell.minImage = [UIImage imageNamed:@"最小麦克风音量.png"];
-                    sliderCell.maxImage = [UIImage imageNamed:@"最大麦克风音量.png"];
-                }
-            }
-            return sliderCell;
-        case 6:
-            for(id oneObject in slider_nib){
-                if([oneObject isKindOfClass:[SliderTableViewCell class]]) {
-                    sliderCell = (SliderTableViewCell *)oneObject;
-                    sliderCell.title = @"扬声器音量";
-                    sliderCell.minImage = [UIImage imageNamed:@"最小扬声器音量.png"];
-                    sliderCell.maxImage = [UIImage imageNamed:@"最大扬声器音量.png"];
-                }
-            }
-            return sliderCell;
-        case 7:
+            break ;
+        }
+
+        case 3 : {
+            SliderTableViewCell *sliderCell = [[[NSBundle mainBundle]loadNibNamed:@"SliderTableViewCell" owner:self options:nil] lastObject];
+            sliderCell.title = @"亮度" ;
+            sliderCell.minImage = [UIImage imageNamed:@"最小亮度.png"];
+            sliderCell.maxImage = [UIImage imageNamed:@"最大亮度.png"];
+            return sliderCell ;
+            break ;
+        }
+
+        case 4 : {
+            SliderTableViewCell *sliderCell = [[[NSBundle mainBundle]loadNibNamed:@"SliderTableViewCell" owner:self options:nil] lastObject];
+            sliderCell.title = @"对比度";
+            sliderCell.minImage = [UIImage imageNamed:@"最小对比度.png"];
+            sliderCell.maxImage = [UIImage imageNamed:@"最大对比度.png"];
+            return sliderCell ;
+            break ;
+        }
+            
+        case 5 : {
+            SliderTableViewCell *sliderCell = [[[NSBundle mainBundle]loadNibNamed:@"SliderTableViewCell" owner:self options:nil] lastObject];
+            sliderCell.title = @"麦克风音量";
+            sliderCell.minImage = [UIImage imageNamed:@"最小麦克风音量.png"];
+            sliderCell.maxImage = [UIImage imageNamed:@"最大麦克风音量.png"];
+            return sliderCell ;
+            break ;
+        }
+
+        case 6 : {
+            SliderTableViewCell *sliderCell = [[[NSBundle mainBundle]loadNibNamed:@"SliderTableViewCell" owner:self options:nil] lastObject];
+            sliderCell.title = @"扬声器音量";
+            sliderCell.minImage = [UIImage imageNamed:@"最小扬声器音量.png"];
+            sliderCell.maxImage = [UIImage imageNamed:@"最大扬声器音量.png"];
+            return sliderCell ;
+            break ;
+        }
+    
+        case 7 : {
+            SKSTableViewCell *cell = [[SKSTableViewCell alloc] init] ;
             cell.textLabel.text = @"码率设置";
             if (indexPath.row == 7) {
                 cell.isExpandable = YES;
             }
             return cell;
-        case 8:
+            break ;
+        }
+
+        case 8 : {
+            SKSTableViewCell *cell = [[SKSTableViewCell alloc] init] ;
             cell.textLabel.text = @"摄像机WIFI列表";
             cell.isExpandable = NO;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return cell;
-        case 9:
-            for(id oneObject in button_nib){
-                if([oneObject isKindOfClass:[ButtonTableViewCell class]]) {
-                    buttonCell = (ButtonTableViewCell *)oneObject;
-                    buttonCell.title = @"重启";
-                    buttonCell.buttonImage = [UIImage imageNamed:@"重启.png"];
-                }
-            }
-            return buttonCell;
-        case 10:
-            for(id oneObject in button_nib){
-                if([oneObject isKindOfClass:[ButtonTableViewCell class]]) {
-                    buttonCell = (ButtonTableViewCell *)oneObject;
-                    buttonCell.title = @"恢复";
-                    buttonCell.buttonImage = [UIImage imageNamed:@"恢复.png"];
-                }
-            }
-            return buttonCell;
-        case 11:
-            for(id oneObject in onlyButton_nib){
-                if([oneObject isKindOfClass:[OnlyButtonTableViewCell class]]) {
-                    onlyButtonCell = (OnlyButtonTableViewCell *)oneObject;
-                }
-            }
-            return onlyButtonCell;
+            break ;
+        }
+
+        case 9 : {
+            ButtonTableViewCell *buttonCell = [[ButtonTableViewCell alloc] init] ;
+            buttonCell.title = @"重启";
+            buttonCell.buttonImage = [UIImage imageNamed:@"重启.png"];
+            return buttonCell ;
+            break ;
+        }
+
+        case 10 : {
+            ButtonTableViewCell *buttonCell = [[ButtonTableViewCell alloc] init] ;
+            buttonCell.title = @"恢复";
+            buttonCell.buttonImage = [UIImage imageNamed:@"恢复.png"];
+            return buttonCell ;
+            break ;
+        }
+
+        case 11 : {
+            
+            OnlyButtonTableViewCell *onlyButtonCell = [[[NSBundle mainBundle]loadNibNamed:@"OnlyButtonTableViewCell" owner:self options:nil] lastObject] ;
+            return onlyButtonCell ;
+            break ;
+        }
             
         default:
             break;
     }
-    
-    
-    
-    
-    
-    return cell;
+
+    return nil ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath {

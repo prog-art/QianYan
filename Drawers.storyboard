@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="38t-m6-shj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="p4a-7Y-9SH">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -1064,11 +1064,18 @@
                             <outlet property="delegate" destination="qYO-w9-AQX" id="9Ue-Ug-hZz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="群组管理" id="6GX-X7-VHm"/>
+                    <navigationItem key="navigationItem" title="群组管理" id="6GX-X7-VHm">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SOP-Pm-Yba">
+                            <connections>
+                                <segue destination="dcd-JH-MRm" kind="show" id="NFh-hX-Uir"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="EPr-Yu-cDB" id="zit-cs-h13"/>
+                        <segue destination="cdc-re-mrD" kind="show" id="iJx-Ix-6x0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7GI-24-OhQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1089,7 +1096,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2749" y="1226"/>
+            <point key="canvasLocation" x="2749" y="1245"/>
         </scene>
         <!--设置-->
         <scene sceneID="SNc-cY-c9n">
@@ -1932,6 +1939,98 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a8B-lP-jii" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1988" y="1917"/>
+        </scene>
+        <!--选择成员-->
+        <scene sceneID="3Bw-lD-eoZ">
+            <objects>
+                <tableViewController id="dcd-JH-MRm" customClass="ManageGroupTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Hpv-BE-vKP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" id="agO-QL-auz" customClass="ManageGroupSearchTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="agO-QL-auz" id="SS5-hK-PL3">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9oi-5J-xuw">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </searchBar>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="searchBar" destination="9oi-5J-xuw" id="0Sw-wr-MrB"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="66" id="edp-0K-35T" customClass="ManageGroupTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="edp-0K-35T" id="K5X-mx-8hh">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gC7-Jl-MIx">
+                                            <rect key="frame" x="15" y="8" width="50" height="50"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xz5-OK-Vuz">
+                                            <rect key="frame" x="279" y="20" width="26" height="26"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1E-xZ-h7g">
+                                            <rect key="frame" x="84" y="22" width="162" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="avatarImageView" destination="gC7-Jl-MIx" id="OUj-iw-mUE"/>
+                                    <outlet property="nameLabel" destination="F1E-xZ-h7g" id="qAW-JW-zoE"/>
+                                    <outlet property="selectImageView" destination="xz5-OK-Vuz" id="XXf-8H-38s"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="dcd-JH-MRm" id="PeY-1C-rep"/>
+                            <outlet property="delegate" destination="dcd-JH-MRm" id="ebZ-HB-Rmw"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="PLc-QS-71M"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="选择成员" id="0vW-fb-wU2">
+                        <barButtonItem key="rightBarButtonItem" title="确定" id="GdP-aH-ig7"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8AC-DZ-Sdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3133" y="1245"/>
+        </scene>
+        <!--群组信息-->
+        <scene sceneID="56X-bB-lGJ">
+            <objects>
+                <viewController storyboardIdentifier="GroupInfoViewControllerStoryBoardID" id="cdc-re-mrD" customClass="GroupInfoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MMk-qN-GmG"/>
+                        <viewControllerLayoutGuide type="bottom" id="p9S-3v-14f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0rJ-pS-RGL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="群组信息" id="fNz-YX-94A">
+                        <barButtonItem key="rightBarButtonItem" title="确定" id="lqI-ar-j7M">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vzW-Yn-m4J" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2749" y="1917"/>
         </scene>
     </scenes>
     <resources>

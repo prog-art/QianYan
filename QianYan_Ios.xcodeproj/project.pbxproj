@@ -93,6 +93,17 @@
 		19ED2EF01AECF84F00E9DBEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19ED2EEE1AECF84F00E9DBEA /* Main.storyboard */; };
 		19ED2EF51AECF84F00E9DBEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19ED2EF31AECF84F00E9DBEA /* LaunchScreen.xib */; };
 		19ED2F011AECF84F00E9DBEA /* QianYan_IosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2F001AECF84F00E9DBEA /* QianYan_IosTests.m */; };
+		19F091801B7CD8EC00568C83 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E6541B11F737007C54E0 /* ButtonTableViewCell.xib */; };
+		19F091811B7CD8EC00568C83 /* OnlyButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E6571B11F737007C54E0 /* OnlyButtonTableViewCell.xib */; };
+		19F091831B7CD8EC00568C83 /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E65D1B11F737007C54E0 /* SwitchTableViewCell.xib */; };
+		19F091841B7CD98A00568C83 /* SliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E65A1B11F737007C54E0 /* SliderTableViewCell.xib */; };
+		19F091871B7CE44B00568C83 /* QY_CamDataFactor.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F091861B7CE44B00568C83 /* QY_CamDataFactor.m */; };
+		19F091911B7D054F00568C83 /* ManageGroupSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F0918C1B7D054F00568C83 /* ManageGroupSearchTableViewCell.m */; };
+		19F091921B7D054F00568C83 /* ManageGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F0918E1B7D054F00568C83 /* ManageGroupTableViewCell.m */; };
+		19F091931B7D054F00568C83 /* ManageGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F091901B7D054F00568C83 /* ManageGroupTableViewController.m */; };
+		19F0919B1B7D074200568C83 /* GroupInfoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F091961B7D074200568C83 /* GroupInfoCollectionViewCell.m */; };
+		19F0919C1B7D074200568C83 /* GroupInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F091981B7D074200568C83 /* GroupInfoTableViewCell.m */; };
+		19F0919D1B7D074200568C83 /* GroupInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F0919A1B7D074200568C83 /* GroupInfoViewController.m */; };
 		19F91CEE1B0E2A1800264AC0 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F91CEC1B0E2A1800264AC0 /* AddressBook.framework */; };
 		19F91CEF1B0E2A1800264AC0 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F91CED1B0E2A1800264AC0 /* AddressBookUI.framework */; };
 		19F91CF21B0E2ADF00264AC0 /* testAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F91CF11B0E2ADF00264AC0 /* testAddressBookViewController.m */; };
@@ -172,13 +183,9 @@
 		6EDF09B51B29317E00413348 /* QRCodeCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDF09B31B29317E00413348 /* QRCodeCardTableViewCell.xib */; };
 		6EDF09B91B299DCD00413348 /* MyPhotoGraphCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDF09B81B299DCD00413348 /* MyPhotoGraphCollectionViewController.m */; };
 		6EE8E65E1B11F737007C54E0 /* ButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E6531B11F737007C54E0 /* ButtonTableViewCell.m */; };
-		6EE8E65F1B11F737007C54E0 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E6541B11F737007C54E0 /* ButtonTableViewCell.xib */; };
 		6EE8E6601B11F737007C54E0 /* OnlyButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E6561B11F737007C54E0 /* OnlyButtonTableViewCell.m */; };
-		6EE8E6611B11F737007C54E0 /* OnlyButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E6571B11F737007C54E0 /* OnlyButtonTableViewCell.xib */; };
 		6EE8E6621B11F737007C54E0 /* SliderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E6591B11F737007C54E0 /* SliderTableViewCell.m */; };
-		6EE8E6631B11F737007C54E0 /* SliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E65A1B11F737007C54E0 /* SliderTableViewCell.xib */; };
 		6EE8E6641B11F737007C54E0 /* SwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E65C1B11F737007C54E0 /* SwitchTableViewCell.m */; };
-		6EE8E6651B11F737007C54E0 /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E65D1B11F737007C54E0 /* SwitchTableViewCell.xib */; };
 		6EE8E6681B11F768007C54E0 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E6671B11F768007C54E0 /* SettingsViewController.m */; };
 		AA52CF7D27ECBDC70F67D76F /* libPods-QianYan_IosTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B56B755DAE30BD9D1F0F95C3 /* libPods-QianYan_IosTests.a */; };
 /* End PBXBuildFile section */
@@ -388,6 +395,21 @@
 		19ED2EFA1AECF84F00E9DBEA /* QianYan_IosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QianYan_IosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19ED2EFF1AECF84F00E9DBEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19ED2F001AECF84F00E9DBEA /* QianYan_IosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QianYan_IosTests.m; sourceTree = "<group>"; };
+		19F091851B7CE44B00568C83 /* QY_CamDataFactor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QY_CamDataFactor.h; sourceTree = "<group>"; };
+		19F091861B7CE44B00568C83 /* QY_CamDataFactor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QY_CamDataFactor.m; sourceTree = "<group>"; };
+		19F091891B7CEBAA00568C83 /* QY_Image_configure_cmd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QY_Image_configure_cmd.h; sourceTree = "<group>"; };
+		19F0918B1B7D054F00568C83 /* ManageGroupSearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageGroupSearchTableViewCell.h; sourceTree = "<group>"; };
+		19F0918C1B7D054F00568C83 /* ManageGroupSearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageGroupSearchTableViewCell.m; sourceTree = "<group>"; };
+		19F0918D1B7D054F00568C83 /* ManageGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageGroupTableViewCell.h; sourceTree = "<group>"; };
+		19F0918E1B7D054F00568C83 /* ManageGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageGroupTableViewCell.m; sourceTree = "<group>"; };
+		19F0918F1B7D054F00568C83 /* ManageGroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageGroupTableViewController.h; sourceTree = "<group>"; };
+		19F091901B7D054F00568C83 /* ManageGroupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageGroupTableViewController.m; sourceTree = "<group>"; };
+		19F091951B7D074200568C83 /* GroupInfoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupInfoCollectionViewCell.h; sourceTree = "<group>"; };
+		19F091961B7D074200568C83 /* GroupInfoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupInfoCollectionViewCell.m; sourceTree = "<group>"; };
+		19F091971B7D074200568C83 /* GroupInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupInfoTableViewCell.h; sourceTree = "<group>"; };
+		19F091981B7D074200568C83 /* GroupInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupInfoTableViewCell.m; sourceTree = "<group>"; };
+		19F091991B7D074200568C83 /* GroupInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupInfoViewController.h; sourceTree = "<group>"; };
+		19F0919A1B7D074200568C83 /* GroupInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupInfoViewController.m; sourceTree = "<group>"; };
 		19F91CEC1B0E2A1800264AC0 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		19F91CED1B0E2A1800264AC0 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		19F91CF01B0E2ADF00264AC0 /* testAddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testAddressBookViewController.h; sourceTree = "<group>"; };
@@ -1208,8 +1230,9 @@
 		198B32DE1B5F6453000F207C /* JMS_TCP&UDP */ = {
 			isa = PBXGroup;
 			children = (
-				198B32E31B5F6CA9000F207C /* setting */,
 				198B32DF1B5F645B000F207C /* header */,
+				198B32E31B5F6CA9000F207C /* setting */,
+				19F091881B7CE46000568C83 /* models */,
 				198B32E01B5F6460000F207C /* main */,
 			);
 			name = "JMS_TCP&UDP";
@@ -1228,8 +1251,8 @@
 			children = (
 				198B32E41B5F6CED000F207C /* QY_JMSService.h */,
 				198B32E51B5F6CED000F207C /* QY_JMSService.m */,
-				194D0C4B1B77997200AABF35 /* QYGCDAsyncSocket.h */,
-				194D0C4C1B77997200AABF35 /* QYGCDAsyncSocket.m */,
+				19F091851B7CE44B00568C83 /* QY_CamDataFactor.h */,
+				19F091861B7CE44B00568C83 /* QY_CamDataFactor.m */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -1239,6 +1262,7 @@
 			children = (
 				19A1400E1B50478A00A7746C /* QY_jms_parameter_key_marco.h */,
 				198B32E11B5F6492000F207C /* QY_jms_marco.h */,
+				19F091891B7CEBAA00568C83 /* QY_Image_configure_cmd.h */,
 			);
 			name = setting;
 			sourceTree = "<group>";
@@ -1545,6 +1569,68 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		19F0917F1B7CD33A00568C83 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				6EE8E6521B11F737007C54E0 /* ButtonTableViewCell.h */,
+				6EE8E6531B11F737007C54E0 /* ButtonTableViewCell.m */,
+				6EE8E6541B11F737007C54E0 /* ButtonTableViewCell.xib */,
+				6EE8E6551B11F737007C54E0 /* OnlyButtonTableViewCell.h */,
+				6EE8E6561B11F737007C54E0 /* OnlyButtonTableViewCell.m */,
+				6EE8E6571B11F737007C54E0 /* OnlyButtonTableViewCell.xib */,
+				6EE8E6581B11F737007C54E0 /* SliderTableViewCell.h */,
+				6EE8E6591B11F737007C54E0 /* SliderTableViewCell.m */,
+				6EE8E65A1B11F737007C54E0 /* SliderTableViewCell.xib */,
+				6EE8E65B1B11F737007C54E0 /* SwitchTableViewCell.h */,
+				6EE8E65C1B11F737007C54E0 /* SwitchTableViewCell.m */,
+				6EE8E65D1B11F737007C54E0 /* SwitchTableViewCell.xib */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		19F091881B7CE46000568C83 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				194D0C4B1B77997200AABF35 /* QYGCDAsyncSocket.h */,
+				194D0C4C1B77997200AABF35 /* QYGCDAsyncSocket.m */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		19F0918A1B7D04E800568C83 /* 群组管理-添加 */ = {
+			isa = PBXGroup;
+			children = (
+				19F0918B1B7D054F00568C83 /* ManageGroupSearchTableViewCell.h */,
+				19F0918C1B7D054F00568C83 /* ManageGroupSearchTableViewCell.m */,
+				19F0918D1B7D054F00568C83 /* ManageGroupTableViewCell.h */,
+				19F0918E1B7D054F00568C83 /* ManageGroupTableViewCell.m */,
+				19F0918F1B7D054F00568C83 /* ManageGroupTableViewController.h */,
+				19F091901B7D054F00568C83 /* ManageGroupTableViewController.m */,
+			);
+			name = "群组管理-添加";
+			sourceTree = "<group>";
+		};
+		19F091941B7D072500568C83 /* 群组管理-群组信息 */ = {
+			isa = PBXGroup;
+			children = (
+				19F091991B7D074200568C83 /* GroupInfoViewController.h */,
+				19F0919A1B7D074200568C83 /* GroupInfoViewController.m */,
+				19F0919E1B7D109A00568C83 /* cell */,
+			);
+			name = "群组管理-群组信息";
+			sourceTree = "<group>";
+		};
+		19F0919E1B7D109A00568C83 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				19F091951B7D074200568C83 /* GroupInfoCollectionViewCell.h */,
+				19F091961B7D074200568C83 /* GroupInfoCollectionViewCell.m */,
+				19F091971B7D074200568C83 /* GroupInfoTableViewCell.h */,
+				19F091981B7D074200568C83 /* GroupInfoTableViewCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
 		19F91CF31B0F19D200264AC0 /* 联系人 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1611,18 +1697,7 @@
 			children = (
 				6EE8E6661B11F768007C54E0 /* SettingsViewController.h */,
 				6EE8E6671B11F768007C54E0 /* SettingsViewController.m */,
-				6EE8E6521B11F737007C54E0 /* ButtonTableViewCell.h */,
-				6EE8E6531B11F737007C54E0 /* ButtonTableViewCell.m */,
-				6EE8E6541B11F737007C54E0 /* ButtonTableViewCell.xib */,
-				6EE8E6551B11F737007C54E0 /* OnlyButtonTableViewCell.h */,
-				6EE8E6561B11F737007C54E0 /* OnlyButtonTableViewCell.m */,
-				6EE8E6571B11F737007C54E0 /* OnlyButtonTableViewCell.xib */,
-				6EE8E6581B11F737007C54E0 /* SliderTableViewCell.h */,
-				6EE8E6591B11F737007C54E0 /* SliderTableViewCell.m */,
-				6EE8E65A1B11F737007C54E0 /* SliderTableViewCell.xib */,
-				6EE8E65B1B11F737007C54E0 /* SwitchTableViewCell.h */,
-				6EE8E65C1B11F737007C54E0 /* SwitchTableViewCell.m */,
-				6EE8E65D1B11F737007C54E0 /* SwitchTableViewCell.xib */,
+				19F0917F1B7CD33A00568C83 /* cell */,
 			);
 			name = "设置-摄像机参数设置";
 			sourceTree = "<group>";
@@ -1641,6 +1716,7 @@
 			children = (
 				19602FE51B66606F0064BC87 /* 二级界面 */,
 				6E75ACA21B28266000A0C919 /* tab-联系人-添加好友 */,
+				6E62A0F41B441DA70001E3A2 /* 群组管理 */,
 				6E75AC9C1B281E8300A0C919 /* ContactViewController.h */,
 				6E75AC9D1B281E8300A0C919 /* ContactViewController.m */,
 			);
@@ -2028,6 +2104,8 @@
 				6E62A0F61B441E320001E3A2 /* GroupManageTableViewCell.m */,
 				6E62A0F71B441E320001E3A2 /* GroupManageViewController.h */,
 				6E62A0F81B441E320001E3A2 /* GroupManageViewController.m */,
+				19F0918A1B7D04E800568C83 /* 群组管理-添加 */,
+				19F091941B7D072500568C83 /* 群组管理-群组信息 */,
 			);
 			name = "群组管理";
 			sourceTree = "<group>";
@@ -2089,7 +2167,6 @@
 				196900E91B6E6AEE0059E737 /* 意见反馈 */,
 				6E1A9BA71B50A6650046B8AB /* 设置 */,
 				6E62A0F01B4417150001E3A2 /* 二维码配置wifi */,
-				6E62A0F41B441DA70001E3A2 /* 群组管理 */,
 				6EDF09B61B299CD800413348 /* 我的相册 */,
 				6EDF09AA1B2930DE00413348 /* 二维码名片 */,
 				6EFEFE331B0CC03C001E425B /* 左侧栏 */,
@@ -2258,19 +2335,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19F091841B7CD98A00568C83 /* SliderTableViewCell.xib in Resources */,
+				19F091801B7CD8EC00568C83 /* ButtonTableViewCell.xib in Resources */,
+				19F091811B7CD8EC00568C83 /* OnlyButtonTableViewCell.xib in Resources */,
+				19F091831B7CD8EC00568C83 /* SwitchTableViewCell.xib in Resources */,
 				6E9BA9581B0CB8FB009D87BE /* Drawers.storyboard in Resources */,
 				6E62A0EF1B43B3620001E3A2 /* Images.xcassets in Resources */,
 				6EDF09B51B29317E00413348 /* QRCodeCardTableViewCell.xib in Resources */,
-				6EE8E65F1B11F737007C54E0 /* ButtonTableViewCell.xib in Resources */,
 				6E2761B91B08BF7000247CCC /* Register&Login.storyboard in Resources */,
 				19ED2EF01AECF84F00E9DBEA /* Main.storyboard in Resources */,
 				19ED2EF51AECF84F00E9DBEA /* LaunchScreen.xib in Resources */,
-				6EE8E6651B11F737007C54E0 /* SwitchTableViewCell.xib in Resources */,
 				19C4E13D1B6FC68F0003C67A /* SVProgressHUD.bundle in Resources */,
 				6E1EC9C81B50FFD4003E346F /* AccountInfoTableViewCell.xib in Resources */,
 				6E32DA051B51672A002A6301 /* kxmovie.bundle in Resources */,
-				6EE8E6631B11F737007C54E0 /* SliderTableViewCell.xib in Resources */,
-				6EE8E6611B11F737007C54E0 /* OnlyButtonTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2362,6 +2439,7 @@
 				19C3DE6F1B71CE41006253E5 /* CameraAllocationTableViewController.m in Sources */,
 				6E18D1001B281C2800802C49 /* PasswordManageViewController.m in Sources */,
 				196456B11B0617F800EA4E14 /* QY_ChineseStringUtils.m in Sources */,
+				19F0919B1B7D074200568C83 /* GroupInfoCollectionViewCell.m in Sources */,
 				1938CCB81B24BC2B009C4AE5 /* JRMDataParseUtils.m in Sources */,
 				1938CCBB1B24BCEA009C4AE5 /* JRMDataFormatUtils.m in Sources */,
 				19C3DE6E1B71CE41006253E5 /* CameraAllocationTableViewCell.m in Sources */,
@@ -2449,6 +2527,7 @@
 				1938CCB41B24ACB4009C4AE5 /* JRMvalue.m in Sources */,
 				6E1A9B981B50A44F0046B8AB /* QYSocialViewController.m in Sources */,
 				19A140171B5117F100A7746C /* QY_UserReloginDescriptor.m in Sources */,
+				19F091911B7D054F00568C83 /* ManageGroupSearchTableViewCell.m in Sources */,
 				195C15DD1B3AEF3A00A316FE /* QY_JRMGCDSocketDelegater.m in Sources */,
 				6E9BA9571B0CB8FB009D87BE /* SKSTableViewCellIndicator.m in Sources */,
 				6E32DA091B51672A002A6301 /* LandScapeKxMovieViewController.m in Sources */,
@@ -2458,6 +2537,7 @@
 				198530321B27215500EB96F7 /* testNetworkViewController.m in Sources */,
 				19C4E1331B6FB67C0003C67A /* SearchFriendTableViewController.m in Sources */,
 				19F91CF91B0F1B1000264AC0 /* QY_Contact.m in Sources */,
+				19F0919C1B7D074200568C83 /* GroupInfoTableViewCell.m in Sources */,
 				198BADF51AF0AB2600B4E2E6 /* QRCodeReaderViewController.m in Sources */,
 				1938CCB11B24AC32009C4AE5 /* JRMvalueDescription.m in Sources */,
 				1985304A1B28B9BC00EB96F7 /* QY_XMLFormatter.m in Sources */,
@@ -2471,6 +2551,8 @@
 				6E1EC9D41B5105D5003E346F /* CameraSettingCollectionViewController.m in Sources */,
 				19C4E1321B6FB67C0003C67A /* SearchFriendTableViewCell.m in Sources */,
 				19589C281B566C89005246BC /* QY_attache+QY_JPRO_DATA_FORMAT.m in Sources */,
+				19F091871B7CE44B00568C83 /* QY_CamDataFactor.m in Sources */,
+				19F0919D1B7D074200568C83 /* GroupInfoViewController.m in Sources */,
 				6E75ACA01B281E8300A0C919 /* SearchTableViewCell.m in Sources */,
 				196900F01B6E6E7E0059E737 /* TextShareViewController.m in Sources */,
 				19602FDB1B665CD10064BC87 /* QY_cameraSetting.m in Sources */,
@@ -2488,10 +2570,12 @@
 				6E75AC9E1B281E8300A0C919 /* UMTableViewCell.m in Sources */,
 				19C3DE731B71CFC0006253E5 /* InfoSettingViewController.m in Sources */,
 				6EE8E65E1B11F737007C54E0 /* ButtonTableViewCell.m in Sources */,
+				19F091921B7D054F00568C83 /* ManageGroupTableViewCell.m in Sources */,
 				6E1A9B941B50A4410046B8AB /* QYShowImageView.m in Sources */,
 				1908F1A21B64CB7000E8E81C /* QianYan_Ios.xcdatamodeld in Sources */,
 				6E1A9B911B50A4410046B8AB /* QYSocialTableViewCell.m in Sources */,
 				6EE8E6641B11F737007C54E0 /* SwitchTableViewCell.m in Sources */,
+				19F091931B7D054F00568C83 /* ManageGroupTableViewController.m in Sources */,
 				195C16231B3EA5FD00A316FE /* QY_SocketService.m in Sources */,
 				19589C1E1B566B13005246BC /* QY_comment+QY_JPRO_DATA_FORMAT.m in Sources */,
 				195C161D1B3EA11100A316FE /* QY_JRMAPIPhraseRule.m in Sources */,

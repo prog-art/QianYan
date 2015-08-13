@@ -19,6 +19,8 @@
 #import "QY_jms_marco.h"
 #import "QYGCDAsyncSocket.h"
 
+#import "QY_CamDataFactor.h"
+
 typedef NS_ENUM(NSInteger, JMS_DATA_READ_OPERATION ) {
     JMS_DATA_READ_OPERATION_JMS_DATA = 10 ,//JMS服务器的部分。
     JMS_DATA_READ_OPERATION_CAM_DATA = 20 ,//转发的相机部分。
@@ -63,6 +65,15 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     self.sockets = [NSMutableArray array] ;
 }
 
+- (void)configIp:(NSString *)ip Port:(NSString *)port {
+    if ( !ip && !port ) {
+        [NSException raise:@"ip port info config exception" format:@"空的ip和port传入"] ;
+        return ;
+    }
+    _jms_ip = ip ;
+    _jms_port = port ;
+}
+
 #pragma mark - getter & setter
 
 @synthesize jms_ip = _jms_ip ;
@@ -76,22 +87,32 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     return _jms_port ? : JMS_PORT ;
 }
 
-- (void)configIp:(NSString *)ip Port:(NSString *)port {
-    if ( !ip && !port ) {
-        [NSException raise:@"ip port info config exception" format:@"空的ip和port传入"] ;
-        return ;
-    }
-    _jms_ip = ip ;
-    _jms_port = port ;
+- (NSString *)device_id {
+    return [QYUser currentUser].coreUser.userId ;
+}
+
+#pragma mark - helper 
+
+- (NSData *)getJmsDataByCameraId:(NSString *)cameraId type:(NSUInteger)type time:(NSUInteger)time {
+    NSMutableData *jmsData = [NSMutableData data] ;
+    
+    NSData *cameraIdData = [JRMDataFormatUtils formatStringValueData:cameraId
+                                                               toLen:JMS_DATA_LEN_OF_KEY_CAMID] ;
+    NSData *typeData = [JRMDataFormatUtils formatIntegerValueData:type
+                                                            toLen:JMS_DATA_LEN_OF_KEY_TYPE] ;
+    NSData *timeData = [JRMDataFormatUtils formatIntegerValueData:0
+                                                            toLen:JMS_DATA_LEN_OF_KEY_TIME] ;
+    
+    [@[cameraIdData,typeData,timeData] enumerateObjectsUsingBlock:^(NSData *data, NSUInteger idx, BOOL *stop) {
+        [jmsData appendData:data] ;
+    }] ;
+    
+    return jmsData ;
 }
 
 - (QYGCDAsyncSocket *)getASocket {
     QYGCDAsyncSocket *socket = [[QYGCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()] ;
     return socket ;
-}
-
-- (NSString *)device_id {
-    return [QYUser currentUser].coreUser.userId ;
 }
 
 - (NSData *)JMSLoginData {
@@ -539,6 +560,20 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     [self.sockets removeObject:sock] ;
 }
 
+#pragma mark - JMS 相机
+#warning 测试阶段
+
+//配置
+- (void)getCameraConfigParameterById:(NSString *)cameraId complection:(QYInfoBlock)complection {
+    assert(complection) ;
+    NSUInteger type ;
+    NSUInteger time ;
+    NSData *jmsData = [self getJmsDataByCameraId:cameraId type:type time:time] ;
+}
+
+- (void)configImageQualityForCameraId:(NSString *)cameraId quality:(NSUInteger)quality complection:(QYInfoBlock)complection {
+    
+}
 
 
 @end
