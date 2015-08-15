@@ -105,7 +105,8 @@
     jmsCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-201 获取单个摄像机的状态" cmd:@(-201)],
                 [NSDictionary dictionaryWithDesc:@"[ok]-202 获取多个摄像机的状态" cmd:@(-202)],
                 [NSDictionary dictionaryWithDesc:@"-203 获取摄像机的缩略图" cmd:@(-203)],
-                [NSDictionary dictionaryWithDesc:@"-204 发送心跳包" cmd:@(-204)]] ;
+                [NSDictionary dictionaryWithDesc:@"-204 发送心跳包" cmd:@(-204)],
+                [NSDictionary dictionaryWithDesc:@"-210 获取相机配置" cmd:@(-210)]] ;
     
     jproCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-90 测试下载文件到内存" cmd:@(-90)],
                  [NSDictionary dictionaryWithDesc:@"[ok]-91 测试下载图片到内存" cmd:@(-91)],
@@ -182,15 +183,15 @@
     cmds = @[
              //coreDataCmds,
              //appCmds,
-             //jmsCmds,
-             jproCmds,
+             jmsCmds,
+//             jproCmds,
              //jrmCmds
              ] ;
     cmdTitles = @[
                   //@"core data 命令测试",
                   //@"app流程 命令测试",
-                  //@"jms 命令测试",
-                  @"jpro 命令测试",
+                  @"jms 命令测试",
+//                  @"jpro 命令测试",
                   //@"jrm 命令测试"
                   ] ;
     
@@ -356,7 +357,9 @@
         }
             
         case -202 : {
-//            [[QY_JMSService shareInstance] getCamerasStateByIds:[NSSet setWithArray:@[testCameraId,testCameraId2,testCameraId3]]] ;
+            [[QY_JMSService shareInstance] getCamerasStateByIds:[NSSet setWithArray:@[testCameraId,testCameraId2,testCameraId3]] complection:^(NSArray *objects, NSError *error) {
+                
+            }] ;
             //<74303030 30303030 30303030 31313200 0000177d 00000000 0000000f 74303030 30303030 30303030 313132>
             break ;
         }
@@ -371,6 +374,12 @@
             break ;
         }
             
+        case -210 : {
+            [[QY_JMSService shareInstance] getCameraConfigParameterById:testCameraId2 complection:^(NSDictionary *info, NSError *error) {
+                
+            }] ;
+            break ;
+        }
             
         case -90 : {
             [[QY_JPROHttpService shareInstance] testDownload] ;

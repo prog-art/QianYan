@@ -18,18 +18,21 @@
 #import "QY_jms_parameter_key_marco.h"
 #import "QY_jms_marco.h"
 #import "QYGCDAsyncSocket.h"
+#import "QY_Image_configure_cmd.h"
 
 #import "QY_CamDataFactor.h"
 
 typedef NS_ENUM(NSInteger, JMS_DATA_READ_OPERATION ) {
-    JMS_DATA_READ_OPERATION_JMS_DATA = 10 ,//JMS服务器的部分。
-    JMS_DATA_READ_OPERATION_CAM_DATA = 20 ,//转发的相机部分。
+    JMS_DATA_READ_OPERATION_JMS_DATA = 100 ,//JMS服务器的部分。
+    JMS_DATA_READ_OPERATION_CAM_DATA = 200 ,//转发的相机部分。
 } ;
 
 typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     JMS_SERVICE_OPERATION_GET_CAMERA_STATE = 1 ,//读取单个相机的状态
     JMS_SERVICE_OPERATION_GET_CAMERAS_STATES = 2 ,//读取多个相机的状态
     JMS_SERVICE_OPERATION_GET_CAMERA_THUMBNAIL = 3 ,//去读单个相机的缩略图
+    
+    JMS_SERVICE_OPERATION_GET_CAMERA_CONFIG = 10 ,//读取相机的设置。
 } ;
 
 @interface QY_JMSService ()<GCDAsyncSocketDelegate,GCDAsyncUdpSocketDelegate>
@@ -88,7 +91,9 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
 }
 
 - (NSString *)device_id {
-    return [QYUser currentUser].coreUser.userId ;
+#warning test ;
+    return @"10000133" ;
+//    return [QYUser currentUser].coreUser.userId ;
 }
 
 #pragma mark - helper 
@@ -100,7 +105,7 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
                                                                toLen:JMS_DATA_LEN_OF_KEY_CAMID] ;
     NSData *typeData = [JRMDataFormatUtils formatIntegerValueData:type
                                                             toLen:JMS_DATA_LEN_OF_KEY_TYPE] ;
-    NSData *timeData = [JRMDataFormatUtils formatIntegerValueData:0
+    NSData *timeData = [JRMDataFormatUtils formatIntegerValueData:time
                                                             toLen:JMS_DATA_LEN_OF_KEY_TIME] ;
     
     [@[cameraIdData,typeData,timeData] enumerateObjectsUsingBlock:^(NSData *data, NSUInteger idx, BOOL *stop) {
@@ -468,7 +473,8 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
 
 - (void)socket:(QYGCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     
-    JMS_DATA_READ_OPERATION readOperation = ( tag / 10 ) * 10 ;
+    JMS_DATA_READ_OPERATION readOperation = ( tag / 100 ) * 100 ;
+    QYDebugLog(@"readOperation = %ld data = %@",readOperation,data) ;
     
     switch (readOperation) {
         case JMS_DATA_READ_OPERATION_JMS_DATA : {
@@ -477,7 +483,7 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
             sock.time = [JRMDataParseUtils getIntegerValue:data range:NSMakeRange(20, 4)] ;
             sock.dataLen = [JRMDataParseUtils getIntegerValue:data range:NSMakeRange(24, 4)] ;
             
-            
+            QYDebugLog(@"接下来去读camData ,长度 = %ld",(long)sock.dataLen) ;
             [sock readDataToLength:sock.dataLen withTimeout:10.0f tag:( tag % 10 )+ JMS_DATA_READ_OPERATION_CAM_DATA ] ;
             
             break ;
@@ -536,17 +542,21 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
 }
 
 - (void)socket:(QYGCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
-    if ( tag == -1 ) {
-        QYDebugLog(@"jms login data 已经发送到了jms服务器") ;
-        
-        if ( sock.connectComplection ) {
-            sock.connectComplection(true,nil) ;
-            sock.connectComplection = nil ;
+    
+    switch (tag) {
+        case -1 : {
+            QYDebugLog(@"jms login data 已经发送到了jms服务器") ;
+            if ( sock.connectComplection ) {
+                sock.connectComplection(true,nil) ;
+                sock.connectComplection = nil ;
+            }
+            break ;
         }
-        
-    } else {
-        QYDebugLog(@"data已经发送到了jms服务器") ;
-        [sock readDataToLength:28 withTimeout:10.0f tag:JMS_DATA_READ_OPERATION_JMS_DATA+tag] ;
+        default : {
+            QYDebugLog(@"data已经发送到了jms服务器 tag = %ld",tag) ;
+            [sock readDataToLength:28 withTimeout:10.0f tag:JMS_DATA_READ_OPERATION_JMS_DATA+tag] ;
+            break;
+        }
     }
 }
 
@@ -563,16 +573,44 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
 #pragma mark - JMS 相机
 #warning 测试阶段
 
-//配置
+/**
+ *  读取配置
+ *
+ *  @param cameraId    <#cameraId description#>
+ *  @param complection <#complection description#>
+ */
 - (void)getCameraConfigParameterById:(NSString *)cameraId complection:(QYInfoBlock)complection {
     assert(complection) ;
-    NSUInteger type ;
-    NSUInteger time ;
+    NSUInteger type = 6010 ;
+    NSUInteger time = 0 ;
     NSData *jmsData = [self getJmsDataByCameraId:cameraId type:type time:time] ;
+    NSData *lenData ;
+    NSMutableData *camData = [NSMutableData data] ;
+    {
+        //len
+        [camData appendData:[JRMDataFormatUtils formatIntegerValueData:4
+                                                                 toLen:JMS_DATA_LEN_OF_KEY_CAMDATA_LENGTH]] ;
+        //cmd
+        [camData appendData:[JRMDataFormatUtils formatIntegerValueData:1450
+                                                                 toLen:JMS_DATA_LEN_OF_KEY_CMD]] ;
+        lenData = [JRMDataFormatUtils formatIntegerValueData:camData.length
+                                                       toLen:JMS_DATA_LEN_OF_KEY_LENGTH] ;
+    }
+    NSMutableData *sendData = [NSMutableData data] ;
+    [@[jmsData,lenData,camData] enumerateObjectsUsingBlock:^(NSData *data, NSUInteger idx, BOOL *stop) {
+        [sendData appendData:data] ;
+    }] ;
+    
+    QYGCDAsyncSocket *socket = [self getASocket] ;
+    socket.complection = complection ;
+    [self.sockets addObject:socket] ;
+    [self startWorkWithData:sendData socket:socket operation:JMS_SERVICE_OPERATION_GET_CAMERA_CONFIG] ;
 }
 
 - (void)configImageQualityForCameraId:(NSString *)cameraId quality:(NSUInteger)quality complection:(QYInfoBlock)complection {
-    
+//    NSUInteger type = 6010 ;
+//    NSUInteger time = 0 ;
+//    
 }
 
 

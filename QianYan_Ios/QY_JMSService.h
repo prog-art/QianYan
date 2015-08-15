@@ -60,4 +60,12 @@
 
 #pragma mark - JMS 相机
 
+/**
+ *  读取配置
+ *
+ *  @param cameraId    <#cameraId description#>
+ *  @param complection <#complection description#>
+ */
+- (void)getCameraConfigParameterById:(NSString *)cameraId complection:(QYInfoBlock)complection ;
+
 @end
