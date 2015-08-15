@@ -14,16 +14,33 @@
 #import "QY_Common.h"
 
 @interface GroupManageViewController () {
-    NSMutableArray *_testArray ;
     UIRefreshControl *_refreshControl ;
 }
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView ;
 @property (nonatomic, strong) UIRefreshControl *refreshControl ;
 
+@property (nonatomic) NSMutableArray *dataSource ;
+@property (weak) QY_user *curUser ;
+
 @end
 
 @implementation GroupManageViewController
+
+#pragma mark - getter && setter
+
+- (NSMutableArray *)dataSource {
+    return _dataSource ? : ( _dataSource = [NSMutableArray array] ) ;
+}
+
+- (NSArray *)rightButtons {
+    NSMutableArray *rightUtilityButtons = [NSMutableArray array] ;
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:251/255.0 green:70/255.0 blue:78/255.0 alpha:1.0f]
+                                                 icon:[UIImage imageNamed:@"群组管理-删除按钮.png"]] ;
+    
+    return rightUtilityButtons ;
+}
 
 - (UIRefreshControl *)refreshControl {
     if ( !_refreshControl ) {
@@ -35,22 +52,12 @@
     return _refreshControl ;
 }
 
-
 #pragma mark - UIRefreshControl Selector
 
 - (void)toggleCells:(UIRefreshControl*)refreshControl {
-    [refreshControl beginRefreshing] ;
-    //    self.useCustomCells = !self.useCustomCells ;
-    //    if (self.useCustomCells)
-    //    {
-    //        self.refreshControl.tintColor = [UIColor yellowColor] ;
-    //    }
-    //    else
-    //    {
-    //        self.refreshControl.tintColor = [UIColor blueColor] ;
-    //    }
-    [self.tableView reloadData] ;
+    self.dataSource = [NSMutableArray arrayWithArray:[self.curUser.friendGroups allObjects] ] ;
     [refreshControl endRefreshing] ;
+    [self.tableView reloadData] ;
 }
 
 #pragma mark - life Cycle
@@ -58,6 +65,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad] ;
     
+    self.curUser = [QYUser currentUser].coreUser ;
     //self.navigationItem.leftBarButtonItem = self.editButtonItem ; //左侧选择按钮
     self.tableView.rowHeight = 90 ;
     self.view.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:245/255.0 alpha:1] ;
@@ -66,13 +74,8 @@
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
         self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0) ; // Makes the horizontal row seperator stretch the entire length of the table view
     }
-    
-    _testArray = [NSMutableArray array] ;
-    
-    for (int i = 0 ; i < 100 ; ++i) {
-        NSString *string = [NSString stringWithFormat:@"%d", i] ;
-        [_testArray addObject:string] ;
-    }
+
+    self.dataSource = [NSMutableArray arrayWithArray:[self.curUser.friendGroups allObjects]] ;
 }
 
 #pragma mark UITableViewDataSource
@@ -82,23 +85,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_testArray count] ;
+    return self.dataSource.count ;
 }
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"cell selected at index path %ld:%ld", (long)indexPath.section, (long)indexPath.row) ;
-    NSLog(@"selected cell index path is %@", [self.tableView indexPathForSelectedRow]) ;
-    
-    [self.navigationController pushViewController:[[AppDelegate globalDelegate] GroupInfoViewController] animated:YES] ;
-    
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES] ;
-    
-    if (!tableView.isEditing) {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES] ;
-    }
-}
-
-#pragma mark - UIScrollViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GroupManageTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"UMCell" forIndexPath:indexPath] ;
@@ -107,18 +95,22 @@
     [cell setRightUtilityButtons:[self rightButtons] WithButtonWidth:85.0f] ;
     cell.delegate = self ;
     
-    cell.numberOfFriendsLabel.text = _testArray[indexPath.row] ;
+    QY_friendGroup *group = self.dataSource[indexPath.row] ;
+    cell.groupNameLabel.text = group.groupName ;
+    cell.numberOfFriendsLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)group.containUsers.count] ;
     
     return cell ;
 }
 
-- (NSArray *)rightButtons {
-    NSMutableArray *rightUtilityButtons = [NSMutableArray array] ;
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:251/255.0 green:70/255.0 blue:78/255.0 alpha:1.0f]
-                                                    icon:[UIImage imageNamed:@"群组管理-删除按钮.png"]] ;
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"cell selected at index path %ld:%ld", (long)indexPath.section, (long)indexPath.row) ;
+    NSLog(@"selected cell index path is %@", [self.tableView indexPathForSelectedRow]) ;
     
-    return rightUtilityButtons ;
+    [self.navigationController pushViewController:[[AppDelegate globalDelegate] GroupInfoViewController] animated:YES] ;
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES] ;
 }
 
 // Set row height on an individual basis
@@ -148,8 +140,8 @@
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell] ;
     
-    [_testArray removeObjectAtIndex:cellIndexPath.row] ;
-    [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft] ;
+    [QYUtils alert:@"点击了删除～正在施工！"] ;
+//    [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft] ;
 }
 
 - (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell {
@@ -158,11 +150,11 @@
 
 - (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state {
     switch (state) {
-        case 1:
+        case 1 :
             // set to NO to disable all left utility buttons appearing
             return YES ;
             break ;
-        case 2:
+        case 2 :
             // set to NO to disable all right utility buttons appearing
             return YES ;
             break ;

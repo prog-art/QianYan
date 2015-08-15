@@ -1075,6 +1075,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="EPr-Yu-cDB" id="zit-cs-h13"/>
+                        <outlet property="tableView" destination="8Xn-gQ-Pcs" id="O8e-BE-i4i"/>
                         <segue destination="cdc-re-mrD" kind="show" id="iJx-Ix-6x0"/>
                     </connections>
                 </tableViewController>

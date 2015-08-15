@@ -70,10 +70,10 @@
     </entity>
     <entity name="QY_friendGroup" representedClassName="QY_friendGroup" syncable="YES">
         <attribute name="groupDate" attributeType="Date" syncable="YES"/>
-        <attribute name="groupName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="groupName" attributeType="String" syncable="YES"/>
         <attribute name="iosGroupId" attributeType="String" syncable="YES"/>
         <attribute name="remark" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="containUsers" toMany="YES" deletionRule="Nullify" destinationEntity="QY_user" inverseName="inGroups" inverseEntity="QY_user" syncable="YES"/>
+        <relationship name="containUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QY_user" inverseName="inGroups" inverseEntity="QY_user" syncable="YES"/>
         <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="QY_user" inverseName="friendGroups" inverseEntity="QY_user" syncable="YES"/>
     </entity>
     <entity name="QY_friendSetting" representedClassName="QY_friendSetting" syncable="YES">
@@ -118,8 +118,8 @@
         <element name="QY_cameraSetting" positionX="-225" positionY="-162" width="128" height="90"/>
         <element name="QY_comment" positionX="-2" positionY="-210" width="128" height="120"/>
         <element name="QY_feed" positionX="358" positionY="-108" width="128" height="253"/>
-        <element name="QY_friendGroup" positionX="-63" positionY="261" width="128" height="135"/>
-        <element name="QY_friendSetting" positionX="-261" positionY="327" width="128" height="150"/>
+        <element name="QY_friendGroup" positionX="241" positionY="243" width="128" height="133"/>
+        <element name="QY_friendSetting" positionX="-198" positionY="480" width="128" height="150"/>
         <element name="QY_user" positionX="531" positionY="171" width="128" height="375"/>
     </elements>
 </model>
