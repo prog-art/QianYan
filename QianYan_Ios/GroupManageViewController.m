@@ -92,6 +92,17 @@
 
     [self.tableView addSubview:self.refreshControl] ;
     self.dataSource = [NSMutableArray arrayWithArray:[self.curUser.friendGroups allObjects]] ;
+    
+    [[QY_Notify shareInstance] addFriendGroupObserver:self selector:@selector(shouldUpdateGroupsInfo)] ;
+}
+
+- (void)shouldUpdateGroupsInfo {
+    self.dataSource = [NSMutableArray arrayWithArray:[self.curUser.friendGroups allObjects]] ;
+    [self.tableView reloadData] ;
+}
+
+- (void)dealloc {
+    [[QY_Notify shareInstance] removeFriendGroupObserver:self] ;
 }
 
 #pragma mark UITableViewDataSource

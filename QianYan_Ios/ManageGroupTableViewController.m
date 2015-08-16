@@ -53,7 +53,6 @@
         [self.dataSource addObject:@{@"user":user,
                                      @"choosed":@(FALSE)}] ;
     }] ;
-    
 }
 
 #pragma mark - Table view data source
@@ -136,6 +135,7 @@
         if ( success ) {
             [QYUtils alert:@"保存成功"] ;
             [QY_appDataCenter saveObject:nil error:NULL] ;
+            [[QY_Notify shareInstance] postFriendGroupNotify] ;
             [self.navigationController popViewControllerAnimated:YES] ;
         } else {
             [QY_appDataCenter undo] ;

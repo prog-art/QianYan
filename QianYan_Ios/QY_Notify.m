@@ -15,6 +15,7 @@
 #define kNOTIFICATION_AVATAR_UPDATED @"NOTIFICATION_AVATAR_UPDATED"
 #define kNOTIFICATION_USERINFO_UPDATED @"NOTIFICATION_USERINFO_UPDATED"
 #define kNOTIFICATION_LOGOUT_UPDATED @"NOTIFICATION_LOGOUT_UPDATED"
+#define kNOTIFICATION_FRIENDGROUP_UPDATED @"NOTIFICATION_FRIENDGROUP_UPDATED"
 
 @interface QY_Notify ()
 
@@ -109,6 +110,20 @@
 
 - (void)postLogoutNotify {
     [_center postNotificationName:kNOTIFICATION_LOGOUT_UPDATED object:nil] ;
+}
+
+#pragma mark - FriendGroup
+
+- (void)addFriendGroupObserver:(id)target selector:(SEL)selector {
+    [_center addObserver:target selector:selector name:kNOTIFICATION_FRIENDGROUP_UPDATED object:nil] ;
+}
+
+- (void)removeFriendGroupObserver:(id)target {
+    [_center removeObserver:target name:kNOTIFICATION_FRIENDGROUP_UPDATED object:nil] ;
+}
+
+- (void)postFriendGroupNotify {
+    [_center postNotificationName:kNOTIFICATION_FRIENDGROUP_UPDATED object:nil] ;
 }
 
 @end

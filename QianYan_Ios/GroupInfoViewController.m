@@ -78,13 +78,21 @@
     [self.view addSubview:self.tableView] ;
     
     self.rightBarBtn.title = @"管理" ;
+    
+    [[QY_Notify shareInstance] addFriendGroupObserver:self selector:@selector(shouldUpdateGroupInfo)] ;
+}
+
+- (void)shouldUpdateGroupInfo {
+    self.memberArray = [NSMutableArray arrayWithArray:[self.group.containUsers allObjects]] ;
+    [self.memberCollectionView reloadData] ;
+}
+
+- (void)dealloc {
+    [[QY_Notify shareInstance] removeFriendGroupObserver:self] ;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated] ;
-    self.memberArray = [NSMutableArray arrayWithArray:[self.group.containUsers allObjects]] ;
-    
-    [self.tableView reloadData] ;
 }
 
 #pragma mark - UITableViewDatasource
@@ -127,14 +135,6 @@
     GroupInfoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath] ;
     
     [cell setUp] ;
-//    
-//    {
-//        cell.name = @"test" ;
-//        cell.avatarImage = [UIImage imageNamed:@"群组信息-删除成员头像.png"] ;
-//        cell.canDelete = self.state == VCSttate_View ? NO : YES ;
-//        cell.delegate = self ;
-//        cell.backgroundColor = [UIColor yellowColor] ;
-//    }
     
     QY_user *user = self.memberArray[indexPath.row] ;
     

@@ -52,4 +52,12 @@
 
 - (void)postLogoutNotify ;
 
+#pragma mark - FriendGroup 
+
+- (void)addFriendGroupObserver:(id)target selector:(SEL)selector ;
+
+- (void)removeFriendGroupObserver:(id)target ;
+
+- (void)postFriendGroupNotify ;
+
 @end
