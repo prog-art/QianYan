@@ -200,6 +200,7 @@
     if ( [segue.identifier isEqualToString:@"groupInfo2chooseMemeberSegueId"]) {
         ManageGroupTableViewController *vc = segue.destinationViewController ;
         vc.friends = self.memberArray ;
+        vc.group = self.group ;
     }
 }
 

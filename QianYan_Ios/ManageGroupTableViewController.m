@@ -48,11 +48,12 @@
         [self.dataSource addObject:@{@"user":user,
                                      @"choosed":@(true)}] ;
     }] ;
-    
+
     [friends enumerateObjectsUsingBlock:^(QY_user *user, BOOL *stop) {
         [self.dataSource addObject:@{@"user":user,
                                      @"choosed":@(FALSE)}] ;
     }] ;
+    
 }
 
 #pragma mark - Table view data source
@@ -107,10 +108,10 @@
         
         QY_user *user = self.dataSource[indexPath.row-1][@"user"] ;
         
+        cell.isChosen = choosed ;
+        
         [self.dataSource replaceObjectAtIndex:(indexPath.row - 1) withObject:@{@"user":user,
                                                                                @"choosed":@(choosed)}] ;
-        
-        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic] ;
     }
 
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];

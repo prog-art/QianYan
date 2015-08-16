@@ -108,9 +108,13 @@
             dateStr = [formatter stringFromDate:group.groupDate] ;
         }
         GDataXMLElement *groupdateTag = [GDataXMLNode elementWithName:@"groupdate" stringValue:dateStr] ;
-        
-        NSString *userIds = [[group.containUsers allObjects] componentsJoinedByString:@";"] ? : @"" ;
-        GDataXMLElement *friendidsTag = [GDataXMLNode elementWithName:@"friendids" stringValue:userIds] ;
+
+        NSMutableArray *userIds = [NSMutableArray array] ;
+        [group.containUsers enumerateObjectsUsingBlock:^(QY_user *user, BOOL *stop) {
+            [userIds addObject:user.userId] ;
+        }] ;
+        NSString *userIdStr = [userIds componentsJoinedByString:@";"] ;
+        GDataXMLElement *friendidsTag = [GDataXMLNode elementWithName:@"friendids" stringValue:userIdStr] ;
         
         NSString *remark = group.remark ? : @"" ;
         GDataXMLElement *remarkTag = [GDataXMLNode elementWithName:@"remark" stringValue:remark] ;
@@ -297,6 +301,7 @@
         setting.shield = @([[self getStringValueForElement:root name:@"shield"] integerValue]) ;
         setting.remarkName = [self getStringValueForElement:root name:@"remarkname"] ;
         setting.toFriend.userName = [self getStringValueForElement:root name:@"username"] ;
+        QYDebugLog(@"setting.toFriend = %@",setting.toFriend) ;
     }
 }
 
@@ -333,10 +338,9 @@
     GDataXMLElement *userTag = [GDataXMLNode elementWithName:@"user"] ;
     [userTag addAttribute:[GDataXMLNode attributeWithName:@"id" stringValue:setting.toFriend.userId]] ;
     
-#warning nickname界面没有，暂时用userName代替。
-    NSArray *childs = @[@{@"username":setting.owner.userName},
-                        @{@"nickname":setting.owner.nickname},
-                        @{@"remarkname":setting.remarkName?:setting.owner.userName},
+    NSArray *childs = @[@{@"username":setting.toFriend.userName},
+                        @{@"nickname":setting.toFriend.nickname},
+                        @{@"remarkname":setting.remarkName?:setting.toFriend.userName},
                         @{@"follow":[setting.follow stringValue]},
                         @{@"fans":[setting.fans stringValue]},
                         @{@"black":[setting.black stringValue]},

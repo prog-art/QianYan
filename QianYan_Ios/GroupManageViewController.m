@@ -155,10 +155,24 @@
 }
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
-    NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell] ;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell] ;
     
-    [QYUtils alert:@"点击了删除～正在施工！"] ;
-//    [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft] ;
+    QY_friendGroup *group = self.dataSource[indexPath.row] ;
+    [self.curUser removeFriendGroupsObject:group] ;
+    [SVProgressHUD show] ;
+    WEAKSELF
+    [self.curUser saveFriendGroupInBackGroundComplection:^(BOOL success, NSError *error) {
+        [SVProgressHUD dismiss] ;
+        if ( success ) {
+            [QYUtils alert:@"删除成功"] ;
+            [QY_appDataCenter saveObject:nil error:NULL] ;
+            [weakSelf.dataSource removeObjectAtIndex:indexPath.row] ;
+            [weakSelf.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic] ;
+        } else {
+            [QYUtils alertError:error] ;
+            [QY_appDataCenter undo] ;
+        }
+    }] ;
 }
 
 - (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell {
