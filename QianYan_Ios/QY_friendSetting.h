@@ -10,10 +10,11 @@
 #import <CoreData/CoreData.h>
 
 #import "QY_Block_Define.h"
+#import "QY_ChineseString.h"
 
 @class QY_user;
 
-@interface QY_friendSetting : NSManagedObject
+@interface QY_friendSetting : NSManagedObject<ChineseString>
 
 @property (nonatomic, retain) NSNumber * black;
 @property (nonatomic, retain) NSNumber * fans;

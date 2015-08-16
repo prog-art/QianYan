@@ -39,6 +39,7 @@ lineBreakMode:mode].height : 0.f ;
 
 #define kSocial2WordSharingSegueId @"Social2WordSharingSegueId"
 #define kSocial2PictureSharingSegueId @"Social2PictureSharingSegueId"
+#define kSocial2VideoSharingSegueId @"Social2VideoSharingSegueId"
 
 @interface QYSocialViewController ()<UITableViewDataSource,UITableViewDelegate,QYSocialCellDelegate,QY_commentDelegate,UIAlertViewDelegate,UIActionSheetDelegate> {
 //    NSMutableArray *_imageDataSource ;
@@ -325,7 +326,8 @@ lineBreakMode:mode].height : 0.f ;
 }
 
 - (void)videoShareButtonClicked:(id)sender {
-    [QYUtils alert:@"视频分享～正在施工"] ;
+    //[QYUtils alert:@"视频分享～正在施工"] ;
+    [self performSegueWithIdentifier:kSocial2VideoSharingSegueId sender:self] ;
     
     [_svm slideViewOut] ;
     _isShow = NO ;

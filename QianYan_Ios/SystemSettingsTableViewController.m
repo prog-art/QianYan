@@ -133,7 +133,7 @@
         case 2:
             switch (indexPath.row) {
                 case 0:
-                    [self.navigationController pushViewController:[[AppDelegate globalDelegate] settingsViewController] animated:YES];
+                    [self.navigationController pushViewController:[[AppDelegate globalDelegate] SettingsChooseCameraTableViewController] animated:YES];
                     break;
                     
                 case 1:

@@ -51,6 +51,7 @@
         [[QYUser currentUser].coreUser.friendSettings enumerateObjectsUsingBlock:^(QY_friendSetting *setting, BOOL *stop) {
             [_myFriends setObject:setting forKey:setting.toFriend.userId] ;
         }] ;
+        
     }
     return _myFriends ;
 }

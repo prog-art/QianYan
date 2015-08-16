@@ -63,6 +63,7 @@ static NSMutableArray *_ChineseStringArr = nil ;
     NSMutableArray *arrayForArrays = [NSMutableArray array] ;
     
     BOOL checkValueAtIndex = NO ;
+#warning 返回值有问题！
     NSMutableArray *TempArrForGrouping = [NSMutableArray array] ;
     for (NSInteger index = 0 ; index < [chineseStringsArray count] ; index++ ) {
         ChineseString *chineseStr = chineseStringsArray[index] ;

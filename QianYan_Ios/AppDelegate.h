@@ -70,6 +70,7 @@
 @property (nonatomic, strong) UIViewController *InfoSettingViewController;
 @property (nonatomic, strong) UICollectionViewController *ImageSelectCollectionViewController;
 @property (nonatomic, strong) UIViewController *GroupInfoViewController;
+@property (nonatomic, strong) UITableViewController *SettingsChooseCameraTableViewController;
 
 
 - (void)toggleLeftDrawer:(id)sender animated:(BOOL)animated;

@@ -138,4 +138,13 @@
     return self.remarkName ? : self.toFriend.displayName ;
 }
 
+#pragma mark - ChineseString
+
+/**
+ *  源字符串
+ */
+- (NSString *)sourceStr {
+    return self.displayName ;
+}
+
 @end

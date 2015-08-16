@@ -39,6 +39,7 @@
 #define InfoSettingViewControllerStoryBoardID @"InfoSettingViewControllerStoryBoardID"
 #define ImageSelectCollectionViewControllerStoryBoardID @"ImageSelectCollectionViewControllerStoryBoardID"
 #define GroupInfoViewControllerStoryBoardID @"GroupInfoViewControllerStoryBoardID"
+#define SettingsChooseCameraTableViewControllerStoryBoardID @"SettingsChooseCameraTableViewControllerStoryBoardID"
 
 
 //static NSString * const kJVDrawersStoryboardName = @"Drawers";
@@ -426,6 +427,12 @@ static NSString * const kJVDrawerSettingsViewControllerStoryboardID = @"JVDrawer
 
 - (UIViewController *)GroupInfoViewController {
     return [self.drawersStoryboard instantiateViewControllerWithIdentifier:GroupInfoViewControllerStoryBoardID] ;
+}
+
+#pragma mark -- Settings Choose Camera Table View Controller
+
+- (UITableViewController *)SettingsChooseCameraTableViewController {
+    return [self.drawersStoryboard instantiateViewControllerWithIdentifier:SettingsChooseCameraTableViewControllerStoryBoardID] ;
 }
 
 #pragma mark - Global Access Helper

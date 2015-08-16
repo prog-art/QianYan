@@ -659,6 +659,7 @@
                         <segue destination="MpV-VB-Cfx" kind="show" identifier="Social2WordSharingSegueId" id="NDu-5U-IwU"/>
                         <segue destination="w5b-5B-hyt" kind="show" id="bn0-AM-g3A"/>
                         <segue destination="38t-m6-shj" kind="show" identifier="Social2PictureSharingSegueId" id="3ab-D2-F1R"/>
+                        <segue destination="h7i-BG-fzY" kind="show" identifier="Social2VideoSharingSegueId" id="0Xx-va-64I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Vn-aw-bFT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -783,7 +784,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2mf-Td-5Se" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="795" y="-1827"/>
+            <point key="canvasLocation" x="1225" y="-1739"/>
         </scene>
         <!--密码管理-->
         <scene sceneID="eVH-OK-fyw">
@@ -1165,9 +1166,9 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <segue destination="p4a-7Y-9SH" kind="show" id="kS3-oJ-Shh"/>
                         <segue destination="ujK-Ij-ye7" kind="show" id="i1A-mc-6GG"/>
                         <segue destination="oNB-xV-fvP" kind="show" id="iPE-Hp-CLS"/>
+                        <segue destination="3lO-Cl-5ix" kind="show" id="Lgh-Vy-Ll8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eoZ-mF-Plq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1235,7 +1236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkT-rY-UpC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="795" y="-2488"/>
+            <point key="canvasLocation" x="819" y="-2820"/>
         </scene>
         <!--摄像机权限管理-->
         <scene sceneID="KUM-1e-Rbu">
@@ -1427,7 +1428,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zqC-zr-mgX" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1399" y="-2729"/>
+            <point key="canvasLocation" x="1423" y="-3061"/>
         </scene>
         <!--昵称-->
         <scene sceneID="6AZ-2H-9zL">
@@ -1464,7 +1465,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x27-yZ-1PB" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1399" y="-3369"/>
+            <point key="canvasLocation" x="1423" y="-3701"/>
         </scene>
         <!--个性签名-->
         <scene sceneID="f9y-qo-goV">
@@ -1502,7 +1503,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ueY-4q-06C" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1399" y="-2077"/>
+            <point key="canvasLocation" x="1423" y="-2409"/>
         </scene>
         <!--意见反馈-->
         <scene sceneID="YAl-0K-exz">
@@ -2044,6 +2045,127 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vzW-Yn-m4J" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2749" y="1917"/>
+        </scene>
+        <!--选择相机-->
+        <scene sceneID="LZd-Gj-Ray">
+            <objects>
+                <tableViewController storyboardIdentifier="SettingsChooseCameraTableViewControllerStoryBoardID" id="3lO-Cl-5ix" customClass="SettingsChooseCameraTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="A0O-cf-Y9v">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="WY6-d9-lsX" customClass="SettingsChooseCemeraTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WY6-d9-lsX" id="HUE-32-LQn">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mE0-Bs-TfB">
+                                            <rect key="frame" x="8" y="2" width="100" height="75"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="相机名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcz-C9-rq4">
+                                            <rect key="frame" x="122" y="29" width="143" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cameraImageView" destination="mE0-Bs-TfB" id="Wud-4V-paH"/>
+                                    <outlet property="cameraNameLabel" destination="dcz-C9-rq4" id="c9F-dr-dsi"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="3lO-Cl-5ix" id="iI0-IW-ZRn"/>
+                            <outlet property="delegate" destination="3lO-Cl-5ix" id="BWC-MS-jXY"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="选择相机" id="ebz-Ce-GtI"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="p4a-7Y-9SH" kind="show" id="D2Q-d2-lR9"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xOl-eL-5oX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="783" y="-1739"/>
+        </scene>
+        <!--选择视频-->
+        <scene sceneID="nhq-ep-Iz1">
+            <objects>
+                <tableViewController id="h7i-BG-fzY" customClass="VideoShareTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="XMf-ak-psu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="100" id="rXW-nl-PPu" customClass="VideoShareTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rXW-nl-PPu" id="V0a-Uc-yq1">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="报警通知-视频截图1" translatesAutoresizingMaskIntoConstraints="NO" id="azA-t2-Dmc">
+                                            <rect key="frame" x="8" y="10" width="120" height="80"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="17:50" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hgo-ej-cVl">
+                                            <rect key="frame" x="150" y="10" width="114" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="家里客厅" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCh-kD-NAg">
+                                            <rect key="frame" x="150" y="39" width="114" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="移动侦测事件" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uff-UB-0nJ">
+                                            <rect key="frame" x="150" y="68" width="114" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0:42" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWQ-ZU-UQw">
+                                            <rect key="frame" x="97" y="74" width="30" height="15"/>
+                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yPv-K8-z7M">
+                                            <rect key="frame" x="286" y="37" width="26" height="26"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="durationLabel" destination="LWQ-ZU-UQw" id="Fye-v5-VMX"/>
+                                    <outlet property="eventTypeLabel" destination="uff-UB-0nJ" id="GP0-dG-AaK"/>
+                                    <outlet property="imageView" destination="azA-t2-Dmc" id="Mkh-KR-42v"/>
+                                    <outlet property="isChosenImageView" destination="yPv-K8-z7M" id="Z6A-kr-rR6"/>
+                                    <outlet property="locationLabel" destination="oCh-kD-NAg" id="WIP-Gc-jsY"/>
+                                    <outlet property="timeLabel" destination="Hgo-ej-cVl" id="RVj-A6-JMC"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="h7i-BG-fzY" id="1I6-gt-UfA"/>
+                            <outlet property="delegate" destination="h7i-BG-fzY" id="w3d-ww-hBe"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="选择视频" id="wwN-fJ-q8Q">
+                        <barButtonItem key="rightBarButtonItem" title="确定" id="ZgP-rg-sCC">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="doneBtnClicked:" destination="h7i-BG-fzY" id="sRy-op-3BL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yRe-zm-wgc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1988" y="2589"/>
         </scene>
     </scenes>
     <resources>
