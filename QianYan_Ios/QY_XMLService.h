@@ -24,7 +24,11 @@
 
 + (NSString *)getProfileXMLFromUser:(QY_user *)user ;
 
++ (NSString *)getFriendGroupsXMLFromGroups:(NSSet *)groups ;
+
 #pragma mark - xml Str --> obj 
+
++ (NSSet *)getGroupsFromXMLStr:(NSString *)xmlStr ;
 
 #pragma mark - Core Data Model
 

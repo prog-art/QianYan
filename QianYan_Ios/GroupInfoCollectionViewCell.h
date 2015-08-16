@@ -12,6 +12,8 @@
 
 @interface GroupInfoCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic, strong) UIImageView *avatarImageView ;
+
 @property (strong, nonatomic) UIImage *avatarImage;
 
 @property (assign, nonatomic) BOOL canDelete;

@@ -152,4 +152,14 @@
     return path ;
 }
 
+/**
+ *  33 @"user/userId/friendgroup.xml"
+ */
++ (NSString *)pathForFriendGroupWithUserId:(NSString *)userId {
+    NSString *path = PATH_USER ;
+    path = [path stringByAppendingPathComponent:userId] ;
+    path = [path stringByAppendingPathComponent:@"friendgroup.xml"] ;
+    return path ;
+}
+
 @end

@@ -10,10 +10,11 @@
 #import "SWTableViewCell.h"
 #import "GroupManageTableViewCell.h"
 #import "AppDelegate.h"
+#import "GroupInfoViewController.h"
 
 #import "QY_Common.h"
 
-@interface GroupManageViewController () {
+@interface GroupManageViewController () <UIAlertViewDelegate>{
     UIRefreshControl *_refreshControl ;
 }
 
@@ -52,12 +53,26 @@
     return _refreshControl ;
 }
 
-#pragma mark - UIRefreshControl Selector
+#pragma mark - IBActions
 
 - (void)toggleCells:(UIRefreshControl*)refreshControl {
-    self.dataSource = [NSMutableArray arrayWithArray:[self.curUser.friendGroups allObjects] ] ;
-    [refreshControl endRefreshing] ;
-    [self.tableView reloadData] ;
+    
+    [self.curUser fetchFriendGroupComplection:^(BOOL success, NSError *error) {
+        [refreshControl endRefreshing] ;
+        if ( success ) {
+            self.dataSource = [NSMutableArray arrayWithArray:[self.curUser.friendGroups allObjects]] ;
+            [self.tableView reloadData] ;
+        } else {
+            [QYUtils alertError:error] ;
+        }
+    }] ;
+}
+
+- (IBAction)createGroupBtnClicked:(id)sender {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"新建群组" message:@"请输入群组名" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil] ;
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput ;
+    
+    [alertView show] ;
 }
 
 #pragma mark - life Cycle
@@ -75,6 +90,7 @@
         self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0) ; // Makes the horizontal row seperator stretch the entire length of the table view
     }
 
+    [self.tableView addSubview:self.refreshControl] ;
     self.dataSource = [NSMutableArray arrayWithArray:[self.curUser.friendGroups allObjects]] ;
 }
 
@@ -105,10 +121,11 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"cell selected at index path %ld:%ld", (long)indexPath.section, (long)indexPath.row) ;
-    NSLog(@"selected cell index path is %@", [self.tableView indexPathForSelectedRow]) ;
+    QY_friendGroup *group = self.dataSource[indexPath.row] ;
     
-    [self.navigationController pushViewController:[[AppDelegate globalDelegate] GroupInfoViewController] animated:YES] ;
+    GroupInfoViewController *vc = (id)[[AppDelegate globalDelegate] GroupInfoViewController] ;
+    vc.group = group ;
+    [self.navigationController pushViewController:vc animated:YES] ;
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES] ;
 }
@@ -163,6 +180,30 @@
     }
     
     return YES ;
+}
+
+#pragma mark - UIAlertViewDelegate 
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if ( buttonIndex != alertView.cancelButtonIndex ) {
+        NSString *groupName = [alertView textFieldAtIndex:0].text ;
+        if ( groupName.length == 0 ) {
+            [QYUtils alert:@"请输入群组名称"] ;
+            return ;
+        }
+        
+        [SVProgressHUD show] ;
+        [self.curUser createAFriendGroupWithGroupName:groupName complection:^(BOOL success, NSError *error) {
+            [SVProgressHUD dismiss] ;
+            if ( success ) {
+                self.dataSource = [NSMutableArray arrayWithArray:[self.curUser.friendGroups allObjects]] ; ;
+                [self.tableView reloadData] ;
+            } else {
+                QYDebugLog(@"error = %@",error) ;
+                [QYUtils alertError:error] ;
+            }
+        }] ;
+    }
 }
 
 @end

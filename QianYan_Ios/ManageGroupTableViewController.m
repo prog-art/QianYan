@@ -9,23 +9,50 @@
 #import "ManageGroupTableViewController.h"
 #import "ManageGroupTableViewCell.h"
 #import "ManageGroupSearchTableViewCell.h"
+#import "QY_Common.h"
 
 @interface ManageGroupTableViewController ()
 
-@property (nonatomic, strong) NSMutableArray *isChosenArray;
+
+@property (nonatomic,strong) NSMutableArray *dataSource ;
 
 @end
 
 @implementation ManageGroupTableViewController
 
+#pragma mark - getter && setter 
+
+- (NSMutableArray *)friends {
+    return _friends ? : (_friends = [NSMutableArray array] ) ;
+}
+
+- (NSMutableArray *)dataSource {
+    return _dataSource ? : (_dataSource = [NSMutableArray array] ) ;
+}
+
+#pragma mark - Life Cycle
+
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad] ;
     
-    self.isChosenArray = [NSMutableArray array];
+    NSMutableSet *friends = [[[QYUser currentUser].coreUser friends] mutableCopy] ;
     
-    for (int i=0; i<20; i++) {
-        [self.isChosenArray addObject:[NSNumber numberWithInt:0]];
-    }
+    NSSet *groups = [[QYUser currentUser].coreUser friendGroups] ;
+    [groups enumerateObjectsUsingBlock:^(QY_friendGroup *group, BOOL *stop) {
+        [group.containUsers enumerateObjectsUsingBlock:^(QY_user *user, BOOL *stop) {
+            [friends removeObject:user] ;
+        }] ;
+    }] ;
+    
+    [self.friends enumerateObjectsUsingBlock:^(QY_user *user, NSUInteger idx, BOOL *stop) {
+        [self.dataSource addObject:@{@"user":user,
+                                     @"choosed":@(true)}] ;
+    }] ;
+    
+    [friends enumerateObjectsUsingBlock:^(QY_user *user, BOOL *stop) {
+        [self.dataSource addObject:@{@"user":user,
+                                     @"choosed":@(FALSE)}] ;
+    }] ;
 }
 
 #pragma mark - Table view data source
@@ -43,7 +70,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 21;
+    return self.dataSource.count + 1 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -53,13 +80,17 @@
         return searchCell;
     } else {
         ManageGroupTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-        cell.name = @"Emma Watson";
-        cell.avatarImage = [UIImage imageNamed:@"群组管理-选择成员头像.png"];
-        if ([[self.isChosenArray objectAtIndex:indexPath.row-1] intValue] == 0) {
-            cell.isChosen = NO;
-        } else {
-            cell.isChosen = YES;
-        }
+        
+        QY_user *user = self.dataSource[indexPath.row-1][@"user"] ;
+        BOOL choosed = [self.dataSource[indexPath.row-1][@"choosed"] boolValue] ;
+        
+        
+        cell.name = user.displayName ;
+        [user displayCycleAvatarAtImageView:cell.avatarImageView] ;
+        
+        
+        cell.isChosen = choosed ;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone ;
         return cell;
     }
 }
@@ -70,65 +101,48 @@
     
     ManageGroupTableViewCell *cell = (ManageGroupTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.row > 0) {
-        if ([[self.isChosenArray objectAtIndex:indexPath.row-1] intValue] == 0) {
-            
-            cell.isChosen = YES;
-            
-            [self.isChosenArray replaceObjectAtIndex:indexPath.row-1 withObject:[NSNumber numberWithInt:1]];
-            
-        } else {
-            cell.isChosen = NO;
-            
-            [self.isChosenArray replaceObjectAtIndex:indexPath.row-1 withObject:[NSNumber numberWithInt:0]];
-            
-        }
+        
+        BOOL choosed = [self.dataSource[indexPath.row-1][@"choosed"] boolValue] ;
+        choosed = choosed ^ 1 ;
+        
+        QY_user *user = self.dataSource[indexPath.row-1][@"user"] ;
+        
+        [self.dataSource replaceObjectAtIndex:(indexPath.row - 1) withObject:@{@"user":user,
+                                                                               @"choosed":@(choosed)}] ;
+        
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic] ;
     }
 
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (IBAction)saveBtnClicked:(id)sender {
+    
+    NSMutableSet *choosedFriends = [NSMutableSet set] ;
+    [self.dataSource enumerateObjectsUsingBlock:^(NSDictionary *dic, NSUInteger idx, BOOL *stop) {
+        BOOL choosed = [dic[@"choosed"] boolValue] ;
+        if ( choosed ) {
+            QY_user *user = dic[@"user"] ;
+            [choosedFriends addObject:user] ;
+        }
+    }] ;
+    
+    [self.group setContainUsers:choosedFriends] ;
+    
+    [SVProgressHUD show] ;
+    [[QYUser currentUser].coreUser saveFriendGroupInBackGroundComplection:^(BOOL success, NSError *error) {
+        [SVProgressHUD dismiss] ;
+        if ( success ) {
+            [QYUtils alert:@"保存成功"] ;
+            [QY_appDataCenter saveObject:nil error:NULL] ;
+            [self.navigationController popViewControllerAnimated:YES] ;
+        } else {
+            [QY_appDataCenter undo] ;
+            [QYUtils alertError:error] ;
+        }
+    }] ;
+    
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

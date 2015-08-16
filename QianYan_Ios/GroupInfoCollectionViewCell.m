@@ -10,8 +10,6 @@
 
 @interface GroupInfoCollectionViewCell ()
 
-@property (nonatomic, strong) UIImageView *avatarImageView;
-
 @property (nonatomic, strong) UIButton *deleteBtn;
 
 @property (nonatomic, strong) UILabel *nameLabel;
@@ -49,10 +47,7 @@
     [self addSubview:self.deleteBtn];
     
     [self addSubview:self.nameLabel];
-
-    
 }
-
 
 
 #pragma setters and getters

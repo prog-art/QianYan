@@ -9,6 +9,10 @@
 #import "GroupInfoViewController.h"
 #import "GroupInfoCollectionViewCell.h"
 #import "GroupInfoTableViewCell.h"
+#import "AppDelegate.h"
+#import "ManageGroupTableViewController.h"
+
+#import "QY_Common.h"
 
 @interface GroupInfoViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate, cellDelegate>
 
@@ -18,9 +22,37 @@
 
 @property (nonatomic, strong) UITableView *tableView ;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *rightBarBtn;
+
 @end
 
 @implementation GroupInfoViewController
+
+#pragma mark - getter && setter 
+
+- (void)setGroup:(QY_friendGroup *)group {
+    _group = group ;
+    self.memberArray = [NSMutableArray arrayWithArray:[group.containUsers allObjects]] ;
+    [self.tableView reloadData] ;
+}
+
+- (NSMutableArray *)memberArray {
+    return _memberArray ? : [NSMutableArray array] ;
+}
+
+- (UITableView *)tableView {
+    if ( !_tableView ) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 420, 320, 90)] ;
+        _tableView.dataSource = self ;
+        _tableView.delegate = self ;
+        [_tableView registerClass:[GroupInfoTableViewCell class] forCellReuseIdentifier:@"TableViewCell"] ;
+        [self.tableView setScrollEnabled:NO] ;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone ;
+    }
+    return _tableView ;
+}
+
+#pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad] ;
@@ -43,19 +75,16 @@
     
     [self.view addSubview:self.memberCollectionView] ;
     
-    self.memberArray = [NSMutableArray array] ;
-    for (int i=0 ; i<9 ; i++) {
-        [self.memberArray addObject:[NSNumber numberWithInt:i]] ;
-    }
-    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 420, 320, 90)] ;
-    self.tableView.dataSource = self ;
-    self.tableView.delegate = self ;
-    [self.tableView registerClass:[GroupInfoTableViewCell class] forCellReuseIdentifier:@"TableViewCell"] ;
     [self.view addSubview:self.tableView] ;
-    [self.tableView setScrollEnabled:NO] ;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone ;
     
+    self.rightBarBtn.title = @"管理" ;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated] ;
+    self.memberArray = [NSMutableArray arrayWithArray:[self.group.containUsers allObjects]] ;
+    
+    [self.tableView reloadData] ;
 }
 
 #pragma mark - UITableViewDatasource
@@ -73,10 +102,10 @@
     [cell setUp] ;
     if (indexPath.row == 0) {
         cell.title = @"群组名称" ;
-        cell.content = @"同学" ;
+        cell.content = self.group.groupName ? : @"" ;
     } else {
         cell.title = @"相机分配" ;
-        cell.content = @"明星" ;
+        cell.content = @"" ;
     }
     
     return cell ;
@@ -91,22 +120,35 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.memberArray count] ;
+    return self.memberArray.count ;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GroupInfoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath] ;
     
     [cell setUp] ;
-    cell.name = [NSString stringWithFormat:@"Cell %d", [[self.memberArray objectAtIndex:indexPath.row] intValue]] ;
-    cell.avatarImage = [UIImage imageNamed:@"群组信息-删除成员头像.png"] ;
-    cell.canDelete = YES ;
+//    
+//    {
+//        cell.name = @"test" ;
+//        cell.avatarImage = [UIImage imageNamed:@"群组信息-删除成员头像.png"] ;
+//        cell.canDelete = self.state == VCSttate_View ? NO : YES ;
+//        cell.delegate = self ;
+//        cell.backgroundColor = [UIColor yellowColor] ;
+//    }
+    
+    QY_user *user = self.memberArray[indexPath.row] ;
+    
+    cell.name = user.userName ;
+
+    [user displayCycleAvatarAtImageView:cell.avatarImageView] ;
+    
+    cell.canDelete = NO ;
     cell.delegate = self ;
     cell.backgroundColor = [UIColor yellowColor] ;
     return cell ;
 }
 
-#pragma mark - UICollectionView Delegate
+#pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.memberCollectionView deselectItemAtIndexPath:indexPath animated:YES] ;
@@ -143,6 +185,22 @@
     [self.memberArray removeObjectAtIndex:index] ;
     [self.memberCollectionView deleteItemsAtIndexPaths:@[indexPath]] ;
     
+}
+
+#pragma mark - IBActions 
+
+- (IBAction)rightBarBtnClicked:(UIBarButtonItem *)sender {
+    //groupInfo2chooseMemeberSegueId
+//    UIViewController *vc = [[AppDelegate globalDelegate] controllerWithId:@"groupInfo2chooseMemeberSegueId"] ;
+    NSString *segueId = @"groupInfo2chooseMemeberSegueId" ;
+    [self performSegueWithIdentifier:segueId sender:self] ;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ( [segue.identifier isEqualToString:@"groupInfo2chooseMemeberSegueId"]) {
+        ManageGroupTableViewController *vc = segue.destinationViewController ;
+        vc.friends = self.memberArray ;
+    }
 }
 
 @end

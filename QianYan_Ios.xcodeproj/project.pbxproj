@@ -87,6 +87,7 @@
 		19C4E1371B6FB93E0003C67A /* QRCodeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E1361B6FB93E0003C67A /* QRCodeDetailViewController.m */; };
 		19C4E13D1B6FC68F0003C67A /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 19C4E13A1B6FC68F0003C67A /* SVProgressHUD.bundle */; };
 		19C4E13E1B6FC68F0003C67A /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C4E13C1B6FC68F0003C67A /* SVProgressHUD.m */; };
+		19E20C621B7F8071005A61C2 /* QY_friendGroup+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E20C611B7F8071005A61C2 /* QY_friendGroup+Operations.m */; };
 		19ED2EE41AECF84F00E9DBEA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EE31AECF84F00E9DBEA /* main.m */; };
 		19ED2EE71AECF84F00E9DBEA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EE61AECF84F00E9DBEA /* AppDelegate.m */; };
 		19ED2EED1AECF84F00E9DBEA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19ED2EEC1AECF84F00E9DBEA /* ViewController.m */; };
@@ -383,6 +384,8 @@
 		19C4E13A1B6FC68F0003C67A /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		19C4E13B1B6FC68F0003C67A /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		19C4E13C1B6FC68F0003C67A /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		19E20C601B7F8071005A61C2 /* QY_friendGroup+Operations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QY_friendGroup+Operations.h"; sourceTree = "<group>"; };
+		19E20C611B7F8071005A61C2 /* QY_friendGroup+Operations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QY_friendGroup+Operations.m"; sourceTree = "<group>"; };
 		19ED2EDE1AECF84F00E9DBEA /* QianYan_Ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QianYan_Ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19ED2EE21AECF84F00E9DBEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19ED2EE31AECF84F00E9DBEA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1402,6 +1405,8 @@
 			children = (
 				19B4DC3D1B7B3A08002DCFE7 /* QY_user+Operations.h */,
 				19B4DC3E1B7B3A08002DCFE7 /* QY_user+Operations.m */,
+				19E20C601B7F8071005A61C2 /* QY_friendGroup+Operations.h */,
+				19E20C611B7F8071005A61C2 /* QY_friendGroup+Operations.m */,
 			);
 			name = "用户";
 			sourceTree = "<group>";
@@ -2495,6 +2500,7 @@
 				6E1A9BA41B50A4CB0046B8AB /* NSArray+NSArray_ILExtension.m in Sources */,
 				6E1A9B921B50A4410046B8AB /* QYSocialTextView.m in Sources */,
 				6E1A9B951B50A4410046B8AB /* QYButton.m in Sources */,
+				19E20C621B7F8071005A61C2 /* QY_friendGroup+Operations.m in Sources */,
 				198530351B272C3300EB96F7 /* QYUser.m in Sources */,
 				196900EC1B6E6B250059E737 /* FeedbackViewController.m in Sources */,
 				19ED2EED1AECF84F00E9DBEA /* ViewController.m in Sources */,

@@ -32,6 +32,16 @@
     [super tearDown];
 }
 
+- (void)testDateFormat {
+    NSString *dateStr ;
+    {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+        [formatter setDateFormat:@"yyyy//M/d/H/m/s"] ;
+        dateStr = [formatter stringFromDate:[NSDate date]] ;
+    }
+    NSLog(@"dateStr = %@",dateStr) ;
+}
+
 //- (void)testFilePathAndFileExtension {
 //    NSString *urlStr = @"http://qycam.com:50551/files/upload/?path=user/10000001/profile.xml" ;
 //    

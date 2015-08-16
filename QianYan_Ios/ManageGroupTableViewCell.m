@@ -10,8 +10,6 @@
 
 @interface ManageGroupTableViewCell ()
 
-@property (strong, nonatomic) IBOutlet UIImageView *avatarImageView;
-
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 
 @property (strong, nonatomic) IBOutlet UIImageView *selectImageView;

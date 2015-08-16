@@ -35,4 +35,6 @@
 #import "QY_CacheService.h"
 #import "QY_FileService.h"
 
+#import "QY_XMLService.h"
+
 #endif

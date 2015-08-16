@@ -354,6 +354,54 @@
     }) ;
 }
 
+#pragma mark - jpro_friendGroup
+
+- (void)createAFriendGroupWithGroupName:(NSString *)groupName complection:(QYResultBlock)complection {
+    assert(complection) ;
+    assert(groupName) ;
+    
+    QY_friendGroup *group = [QY_friendGroup groupWithName:groupName owner:self] ;
+    [self addFriendGroupsObject:group] ;
+    [self saveFriendGroupInBackGroundComplection:^(BOOL success, NSError *error) {
+        if ( success ) {
+            [QY_appDataCenter saveObject:nil error:NULL] ;
+            complection(true,nil) ;
+        } else {
+            [QY_appDataCenter undo] ;
+            complection(false,error) ;
+        }
+    }] ;
+}
+
+- (void)saveFriendGroupInBackGroundComplection:(QYResultBlock)complection {
+    assert(complection) ;
+    
+    NSString *xmlStr = [QY_friendGroup getXMLStrWithGroups:self.friendGroups] ;
+    QYDebugLog(@"xmlStr = %@",xmlStr) ;
+    
+    NSData *fileData = [xmlStr dataUsingEncoding:NSUTF8StringEncoding] ;
+    NSString *path = [QY_JPROUrlFactor pathForFriendGroupWithUserId:self.userId] ;
+    
+    [[QY_JPROHttpService shareInstance] uploadFileToPath:path FileData:fileData fileName:@"friendgroup.xml" mimeType:MIMETYPE Complection:complection] ;
+}
+
+- (void)fetchFriendGroupComplection:(QYResultBlock)complection {
+    assert(complection) ;
+    
+    NSString *path = [QY_JPROUrlFactor pathForFriendGroupWithUserId:self.userId];
+    [[QY_JPROHttpService shareInstance] downloadFileFromPath:path complection:^(NSString *xmlStr, NSError *error) {
+        if ( xmlStr ) {
+            NSSet *groups = [QY_friendGroup getGroupsWithXMLStr:xmlStr] ;
+            [self setFriendGroups:groups] ;
+            [QY_appDataCenter saveObject:nil error:NULL] ;
+            
+            complection(true,nil) ;
+        } else {
+            complection(false,error) ;
+        }
+    }] ;
+}
+
 #pragma mark - jpro_camera
 
 - (void)fetchCamerasSettingsComplection:(QYArrayBlock)complection {

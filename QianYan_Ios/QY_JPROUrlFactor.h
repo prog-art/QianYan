@@ -118,4 +118,9 @@
  */
 + (NSString *)pathForCameraSharelist:(NSString *)cameraId sharedUserId:(NSString *)userId ;
 
+/**
+ *  33 @"user/userId/friendgroup.xml"
+ */
++ (NSString *)pathForFriendGroupWithUserId:(NSString *)userId ;
+
 @end

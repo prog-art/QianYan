@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class QY_friendGroup ;
+
 @interface ManageGroupTableViewController : UITableViewController
+
+@property (strong,nonatomic) NSMutableArray *friends ;
+@property (strong,nonatomic) QY_friendGroup *group ;
 
 @end

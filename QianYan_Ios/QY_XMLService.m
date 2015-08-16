@@ -75,80 +75,106 @@
             GDataXMLElement *jproTag = [GDataXMLElement elementWithName:@"jpro" stringValue:user.jpro] ;
             [userTag addChild:jproTag] ;
         }
-
     }
     
     return [self xmlStrWithRootElement:userTag] ;
 }
-//
-//+ (NSString *)getUserProfileXML:(id<user2ProfileXMLInterface>)user {
-//    GDataXMLElement *userTag = [GDataXMLNode elementWithName:@"user"] ;
-//    {
-//        GDataXMLElement *userIdAttr = [GDataXMLNode attributeWithName:@"id" stringValue:[user userId]] ;
-//        [userTag addAttribute:userIdAttr] ;
-//        
-//        GDataXMLElement *usernameTag = [GDataXMLNode elementWithName:@"username" stringValue:[user username]] ;
-//        [userTag addChild:usernameTag] ;
-//        
-//        GDataXMLElement *genderTag = [GDataXMLElement elementWithName:@"gender" stringValue:[user gender]] ;
-//        [userTag addChild:genderTag] ;
-//        
-//        GDataXMLElement *locationTag = [GDataXMLElement elementWithName:@"location" stringValue:[user location]] ;
-//        [userTag addChild:locationTag] ;
-//        
-//        NSString *birthdayStr ;
-//        {
-//            NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
-//            [formatter setDateFormat:@"yyyy年MM月dd日"] ;
-//            birthdayStr = [formatter stringFromDate:[user birthday]] ;
-//        }
-//        
-//        GDataXMLElement *birthdayTag = [GDataXMLElement elementWithName:@"birthday" stringValue:birthdayStr] ;
-//        [userTag addChild:birthdayTag] ;
-//        
-//        GDataXMLElement *signTag = [GDataXMLElement elementWithName:@"signature" stringValue:[user signature]] ;
-//        [userTag addChild:signTag] ;
-//    }
-//    
-//    return [self xmlStrWithRootElement:userTag] ;
-//}
-//
-//+ (NSString *)getUserIdXML:(id<user2userIdXMLInterface>)user {
-//    GDataXMLElement *userTag = [GDataXMLNode elementWithName:@"user"] ;
-//    {
-//        GDataXMLElement *userIdAttr = [GDataXMLNode attributeWithName:@"id" stringValue:[user userId]] ;
-//        [userTag addAttribute:userIdAttr] ;
-//        
-//        GDataXMLElement *usernameTag = [GDataXMLNode elementWithName:@"username" stringValue:[user username]] ;
-//        [userTag addChild:usernameTag] ;
-//        
-//        GDataXMLElement *nicknameTag = [GDataXMLElement elementWithName:@"nickname" stringValue:[user nickname]] ;
-//        [userTag addChild:nicknameTag] ;
-//        
-//        GDataXMLElement *remarknameTag = [GDataXMLElement elementWithName:@"remarkname" stringValue:[user remarkname]] ;
-//        [userTag addChild:remarknameTag] ;
-//        
-//        GDataXMLElement *followTag = [GDataXMLElement elementWithName:@"follow" stringValue:QY_STR([user follow])] ;
-//        [userTag addChild:followTag] ;
-//        
-//        GDataXMLElement *fansTag = [GDataXMLElement elementWithName:@"fans" stringValue:QY_STR([user fans])] ;
-//        [userTag addChild:fansTag] ;
-//        
-//        GDataXMLElement *blackTag = [GDataXMLElement elementWithName:@"black" stringValue:QY_STR([user black])] ;
-//        [userTag addChild:blackTag] ;
-//        
-//        GDataXMLElement *shieldTag = [GDataXMLElement elementWithName:@"shield" stringValue:QY_STR([user shield])] ;
-//        [userTag addChild:shieldTag] ;
-//        
-//        GDataXMLElement *jproTag = [GDataXMLElement elementWithName:@"jpro" stringValue:[user jpro]] ;
-//        [userTag addChild:jproTag] ;
-//        
-//    }
-//    
-//    return [self xmlStrWithRootElement:userTag] ;
-//}
+
++ (NSString *)getFriendGroupsXMLFromGroups:(NSSet *)groups {
+    GDataXMLElement *friendgroupsTag = [GDataXMLNode elementWithName:@"friendgroups"] ;
+    
+    [groups enumerateObjectsUsingBlock:^(QY_friendGroup *group, BOOL *stop) {
+        [friendgroupsTag addChild:[self getFriendGroupXMLTagFromGroup:group]] ;
+    }] ;
+    
+    return [self xmlStrWithRootElement:friendgroupsTag] ;
+}
+
++ (GDataXMLElement *)getFriendGroupXMLTagFromGroup:(QY_friendGroup *)group {
+    assert(group) ;
+    
+    GDataXMLElement *groupTag = [GDataXMLNode elementWithName:@"group"] ;
+    
+    GDataXMLElement *iosId = [GDataXMLElement elementWithName:@"iosGroupId" stringValue:group.iosGroupId] ;
+    [groupTag addAttribute:iosId] ;
+    
+    {
+        GDataXMLElement *groupnameTag = [GDataXMLNode elementWithName:@"groupname" stringValue:group.groupName] ;
+        
+        NSString *dateStr ;
+        {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+            [formatter setDateFormat:@"yyyy/M/d/H/m/s"] ;
+            dateStr = [formatter stringFromDate:group.groupDate] ;
+        }
+        GDataXMLElement *groupdateTag = [GDataXMLNode elementWithName:@"groupdate" stringValue:dateStr] ;
+        
+        NSString *userIds = [[group.containUsers allObjects] componentsJoinedByString:@";"] ? : @"" ;
+        GDataXMLElement *friendidsTag = [GDataXMLNode elementWithName:@"friendids" stringValue:userIds] ;
+        
+        NSString *remark = group.remark ? : @"" ;
+        GDataXMLElement *remarkTag = [GDataXMLNode elementWithName:@"remark" stringValue:remark] ;
+        
+        //ios增加
+        
+        [@[groupnameTag,groupdateTag,friendidsTag,remarkTag] enumerateObjectsUsingBlock:^(GDataXMLElement *tag, NSUInteger idx, BOOL *stop) {
+            [groupTag addChild:tag] ;
+        }] ;
+    }
+    
+    return groupTag ;
+}
 
 #pragma mark - xml Str --> obj
+
++ (NSSet *)getGroupsFromXMLStr:(NSString *)xmlStr {
+    NSMutableSet *groups = [NSMutableSet set] ;
+    
+    NSError *error ;
+    GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:&error] ;
+    if ( error ) {
+#warning 这里修改接口！
+        [QYUtils alertError:error] ;
+        return nil ;
+    } else {
+        GDataXMLElement *root = [xmlDoc rootElement] ;
+        
+        NSArray *groupTags = [root elementsForName:@"group"] ;
+        
+        [groupTags enumerateObjectsUsingBlock:^(GDataXMLElement *groupTag, NSUInteger idx, BOOL *stop) {
+            QY_friendGroup *group ;
+            NSString *iosGroupId = [[groupTag attributeForName:@"iosGroupId"] stringValue] ;
+            group = [QY_friendGroup insertGroupWithGroupId:iosGroupId] ;
+            {
+                group.groupName = [self getStringValueForElement:groupTag name:@"groupname"] ;
+                
+                NSString *groupDateStr = [self getStringValueForElement:groupTag name:@"groupdate"] ;
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+                [formatter setDateFormat:@"yyyy/M/d/H/m/s"] ;
+                group.groupDate = [formatter dateFromString:groupDateStr] ;
+                
+                group.remark = [self getStringValueForElement:groupTag name:@"remark"] ;
+                //userIds
+                NSString *userIdsStr = [self getStringValueForElement:groupTag name:@"friendids"] ;
+                NSArray *userIds = [userIdsStr componentsSeparatedByString:@";"] ;
+                
+                //users
+                NSMutableSet *containUser = [NSMutableSet set] ;
+                [userIds enumerateObjectsUsingBlock:^(NSString *userId, NSUInteger idx, BOOL *stop) {
+                    if ( userId.length > 6 ) {
+                        QY_user *user = [QY_user insertUserById:userId] ;
+                        [containUser addObject:user] ;
+                    }
+
+                }] ;
+                [group setContainUsers:containUser] ;
+            }
+            [groups addObject:group] ;
+        }] ;
+    }
+    
+    return groups ;
+}
 
 #pragma mark -
 
@@ -177,37 +203,37 @@
 }
 
 
-+ (QY_camera *)getCameraFromIdXML:(NSString *)xmlStr {
-    NSError *error ;
-    GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:&error] ;
-    
-    if ( error ) {
-        [QYUtils alertError:error] ;
-        return nil ;
-    } else {
-        QY_camera *camera = [QY_camera camera] ;
-        
-        GDataXMLElement *root = [xmlDoc rootElement] ;
-        
-        camera.cameraId = [[root attributeForName:@"id"] stringValue] ;
-        NSString *ownerId = [self getStringValueForElement:root name:@"owner"] ;
-        camera.jpro = [self getStringValueForElement:root name:@"jpro"] ;
-        
-        [camera setOwner:[QY_appDataCenter userWithId:ownerId]] ;
-        
-        NSError *savingError ;
-        [QY_appDataCenter saveObject:camera error:&savingError] ;
-        
-        if ( savingError ) {
-            QYDebugLog(@"保存失败 error = %@",savingError) ;
-            [QYUtils alertError:error] ;
-        } else {
-            QYDebugLog(@"保存成功 camera = %@",camera) ;
-        }
-        
-        return camera ;
-    }
-}
+//+ (QY_camera *)getCameraFromIdXML:(NSString *)xmlStr {
+//    NSError *error ;
+//    GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:&error] ;
+//    
+//    if ( error ) {
+//        [QYUtils alertError:error] ;
+//        return nil ;
+//    } else {
+//        QY_camera *camera = [QY_camera camera] ;
+//        
+//        GDataXMLElement *root = [xmlDoc rootElement] ;
+//        
+//        camera.cameraId = [[root attributeForName:@"id"] stringValue] ;
+//        NSString *ownerId = [self getStringValueForElement:root name:@"owner"] ;
+//        camera.jpro = [self getStringValueForElement:root name:@"jpro"] ;
+//        
+//        [camera setOwner:[QY_appDataCenter userWithId:ownerId]] ;
+//        
+//        NSError *savingError ;
+//        [QY_appDataCenter saveObject:camera error:&savingError] ;
+//        
+//        if ( savingError ) {
+//            QYDebugLog(@"保存失败 error = %@",savingError) ;
+//            [QYUtils alertError:error] ;
+//        } else {
+//            QYDebugLog(@"保存成功 camera = %@",camera) ;
+//        }
+//        
+//        return camera ;
+//    }
+//}
 
 + (void)initCameraSetting:(QY_cameraSetting *)setting withCameraIdXMLStr:(NSString *)xmlStr error:(NSError **)error {
     GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr encoding:NSUTF8StringEncoding error:error] ;

@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class QY_friendGroup ;
+
 @interface GroupInfoViewController : UIViewController
 
+@property (nonatomic) QY_friendGroup *group ;
 
 @end
 

@@ -14,6 +14,7 @@
 #pragma makr - 用户
 
 #import "QY_user+Operations.h"
+#import "QY_friendGroup+Operations.h"
 
 #pragma mark - 朋友圈
 

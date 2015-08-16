@@ -38,6 +38,14 @@
 
 - (void)fetchFriendsComplection:(QYArrayBlock)complection ;
 
+#pragma mark - jpro_friendGroup
+
+- (void)createAFriendGroupWithGroupName:(NSString *)groupName complection:(QYResultBlock)complection ;
+
+- (void)saveFriendGroupInBackGroundComplection:(QYResultBlock)complection ;
+
+- (void)fetchFriendGroupComplection:(QYResultBlock)complection ;
+
 #pragma mark - jpro_camera
 
 //用户只能通过setting获取到他所能看到的所有相机。

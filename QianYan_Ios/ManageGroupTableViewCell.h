@@ -10,6 +10,8 @@
 
 @interface ManageGroupTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *avatarImageView;
+
 @property (nonatomic, strong) UIImage *avatarImage;
 
 @property (nonatomic, assign) BOOL isChosen;

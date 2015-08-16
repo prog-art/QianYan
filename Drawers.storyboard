@@ -1067,7 +1067,7 @@
                     <navigationItem key="navigationItem" title="群组管理" id="6GX-X7-VHm">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="SOP-Pm-Yba">
                             <connections>
-                                <segue destination="dcd-JH-MRm" kind="show" id="NFh-hX-Uir"/>
+                                <action selector="createGroupBtnClicked:" destination="qYO-w9-AQX" id="iar-fi-dcf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1077,6 +1077,7 @@
                         <outlet property="searchDisplayController" destination="EPr-Yu-cDB" id="zit-cs-h13"/>
                         <outlet property="tableView" destination="8Xn-gQ-Pcs" id="O8e-BE-i4i"/>
                         <segue destination="cdc-re-mrD" kind="show" id="iJx-Ix-6x0"/>
+                        <segue destination="dcd-JH-MRm" kind="show" identifier="groupManage2chooseGroupMemberSegueId" id="6rS-Pp-ORH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7GI-24-OhQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2000,7 +2001,11 @@
                         <barButtonItem title="Item" id="PLc-QS-71M"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="选择成员" id="0vW-fb-wU2">
-                        <barButtonItem key="rightBarButtonItem" title="确定" id="GdP-aH-ig7"/>
+                        <barButtonItem key="rightBarButtonItem" title="确定" id="GdP-aH-ig7">
+                            <connections>
+                                <action selector="saveBtnClicked:" destination="dcd-JH-MRm" id="wFG-G4-mju"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -2025,9 +2030,16 @@
                     <navigationItem key="navigationItem" title="群组信息" id="fNz-YX-94A">
                         <barButtonItem key="rightBarButtonItem" title="确定" id="lqI-ar-j7M">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="rightBarBtnClicked:" destination="cdc-re-mrD" id="YVa-DW-z7v"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="rightBarBtn" destination="lqI-ar-j7M" id="tIs-MG-CsQ"/>
+                        <segue destination="dcd-JH-MRm" kind="show" identifier="groupInfo2chooseMemeberSegueId" id="2Jm-xm-SYg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vzW-Yn-m4J" sceneMemberID="firstResponder"/>
             </objects>
@@ -2075,5 +2087,8 @@
         <image name="资料设置-背景" width="320" height="568"/>
         <image name="通知（Tabbar）" width="20" height="20"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="2Jm-xm-SYg"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
