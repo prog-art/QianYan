@@ -26,6 +26,7 @@
 
 @implementation VideoShareTableViewCell
 
+@synthesize isChosen = _isChosen ;
 @synthesize imageView;
 
 - (void)setImage:(UIImage *)image {
@@ -61,6 +62,8 @@
 }
 
 - (void)setIsChosen:(BOOL)isChosen {
+    _isChosen = isChosen ;
+    
     if (isChosen) {
         self.isChosenImageView.image = [UIImage imageNamed:@"群组管理-成员选中"];
     } else {
@@ -69,7 +72,7 @@
 }
 
 - (BOOL)isChosen {
-    return self.isChosen;
+    return _isChosen ;
 }
 
 

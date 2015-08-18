@@ -10,6 +10,19 @@
 
 #import "QY_Block_Define.h"
 
+
+#define CameraLedStateKey @"LED"
+#define CameraResolutionKey @"RESOLUTION"
+#define CameraMoveTriggerKey @"MOVETRIGGER"
+#define CameraBritnessKey @"BRITNESS"
+#define CameraContrastKey @"CONTRAST"
+#define CameraSpeakerKey @"SPEAKER"
+#define CameraSpeakerVolumeKey @"SPEAKERVOLUME"
+#define CameraMicrophoneKey @"MICROPHONE"
+#define CameraMicrophoneVolumeKey @"MICROPHONEVOLUME"
+#define CameraImageQualityKey @"IMAGEQUALITY"
+#define CameraCodeRateUpperKey @"CODERATEUPPER"
+
 @interface QY_JMSService : NSObject
 
 + (instancetype)shareInstance ;
@@ -67,5 +80,18 @@
  *  @param complection <#complection description#>
  */
 - (void)getCameraConfigParameterById:(NSString *)cameraId complection:(QYInfoBlock)complection ;
+
+/**
+ *  配置相机图片质量
+ *
+ *  @param cameraId    <#cameraId description#>
+ *  @param quality     1-100
+ *  @param complection <#complection description#>
+ */
+- (void)configImageQualityForCameraId:(NSString *)cameraId quality:(NSUInteger)quality complection:(QYInfoBlock)complection ;
+
+- (void)configCameraId:(NSString *)cameraId MoveTriggerToState:(BOOL)open complection:(QYResultBlock)complection ;
+
+- (void)restartCameraId:(NSString *)cameraId complection:(QYResultBlock)complection ;
 
 @end

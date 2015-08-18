@@ -104,9 +104,12 @@
     
     jmsCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-201 获取单个摄像机的状态" cmd:@(-201)],
                 [NSDictionary dictionaryWithDesc:@"[ok]-202 获取多个摄像机的状态" cmd:@(-202)],
-                [NSDictionary dictionaryWithDesc:@"-203 获取摄像机的缩略图" cmd:@(-203)],
-                [NSDictionary dictionaryWithDesc:@"-204 发送心跳包" cmd:@(-204)],
-                [NSDictionary dictionaryWithDesc:@"-210 获取相机配置" cmd:@(-210)]] ;
+                [NSDictionary dictionaryWithDesc:@"[ok]-203 获取摄像机的缩略图" cmd:@(-203)],
+                [NSDictionary dictionaryWithDesc:@"[ok]-204 发送心跳包" cmd:@(-204)],
+                [NSDictionary dictionaryWithDesc:@"[ok]-210 获取相机配置" cmd:@(-210)],
+                [NSDictionary dictionaryWithDesc:@"[无效]-211 配置相机图片质量" cmd:@(-211)],
+                [NSDictionary dictionaryWithDesc:@"[无效]-212 打开相机的移动trigger" cmd:@(-212)],
+                [NSDictionary dictionaryWithDesc:@"[ok]-213 重启摄像机" cmd:@(-213)]] ;
     
     jproCmds = @[[NSDictionary dictionaryWithDesc:@"[ok]-90 测试下载文件到内存" cmd:@(-90)],
                  [NSDictionary dictionaryWithDesc:@"[ok]-91 测试下载图片到内存" cmd:@(-91)],
@@ -358,7 +361,9 @@
             
         case -202 : {
             [[QY_JMSService shareInstance] getCamerasStateByIds:[NSSet setWithArray:@[testCameraId,testCameraId2,testCameraId3]] complection:^(NSArray *objects, NSError *error) {
-                
+                if ( objects ) {
+                    QYDebugLog(@"objects = %@",objects) ;
+                }
             }] ;
             //<74303030 30303030 30303030 31313200 0000177d 00000000 0000000f 74303030 30303030 30303030 313132>
             break ;
@@ -376,7 +381,34 @@
             
         case -210 : {
             [[QY_JMSService shareInstance] getCameraConfigParameterById:testCameraId2 complection:^(NSDictionary *info, NSError *error) {
-                
+                QYDebugLog(@"%@",info) ;
+            }] ;
+            break ;
+        }
+            
+        case -211 : {
+            [[QY_JMSService shareInstance] configImageQualityForCameraId:testCameraId2 quality:45 complection:^(NSDictionary *info, NSError *error) {
+                QYDebugLog(@"info = %@",info) ;
+            }] ;
+            break ;
+        }
+            
+        case -212 : {
+            [[QY_JMSService shareInstance] configCameraId:testCameraId2 MoveTriggerToState:TRUE complection:^(BOOL success, NSError *error) {
+                QYDebugLog(@"%@",success?@"success":@"false") ;
+                if ( error ) {
+                    QYDebugLog(@"error = %@",error) ;
+                }
+            }] ;
+            break ;
+        }
+            
+        case -213 : {
+            [[QY_JMSService shareInstance] restartCameraId:testCameraId2 complection:^(BOOL success, NSError *error) {
+                QYDebugLog(@"%@",success?@"success":@"false") ;
+                if ( error ) {
+                    QYDebugLog(@"error = %@",error) ;
+                }
             }] ;
             break ;
         }

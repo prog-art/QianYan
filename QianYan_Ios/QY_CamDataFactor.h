@@ -11,6 +11,9 @@
 
 @interface QY_CamDataFactor : NSObject
 
++ (NSData *)getCamDataOfCmd:(NSUInteger)cmd param:(NSUInteger)param ;
++ (NSData *)getCamDataOfCmd:(NSUInteger)cmd ;
+
 #pragma mark - 相机参数配置
 
 /**

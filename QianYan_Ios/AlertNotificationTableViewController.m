@@ -245,7 +245,7 @@
 #warning 这个图片哪里来的？
     cell.image = [UIImage imageNamed:@"报警通知-视频截图1.png"] ;
     //都是两段视频，一段5秒
-    cell.totalTime = @"0:10" ;
+    cell.totalTime = @"00:10" ;
     
     NSDate *date = msg.pubDate ;
     

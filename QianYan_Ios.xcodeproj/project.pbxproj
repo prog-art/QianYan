@@ -1534,8 +1534,7 @@
 		19DB9D5B1B80ED0E00F6EA3B /* 视频分享 */ = {
 			isa = PBXGroup;
 			children = (
-				19DB9D5C1B80ED1D00F6EA3B /* VideoShareTableViewCell.h */,
-				19DB9D5D1B80ED1D00F6EA3B /* VideoShareTableViewCell.m */,
+				19F83AA91B839E2500286D18 /* cell */,
 				19DB9D5E1B80ED1D00F6EA3B /* VideoShareTableViewController.h */,
 				19DB9D5F1B80ED1D00F6EA3B /* VideoShareTableViewController.m */,
 			);
@@ -1667,6 +1666,15 @@
 				19F091961B7D074200568C83 /* GroupInfoCollectionViewCell.m */,
 				19F091971B7D074200568C83 /* GroupInfoTableViewCell.h */,
 				19F091981B7D074200568C83 /* GroupInfoTableViewCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		19F83AA91B839E2500286D18 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				19DB9D5C1B80ED1D00F6EA3B /* VideoShareTableViewCell.h */,
+				19DB9D5D1B80ED1D00F6EA3B /* VideoShareTableViewCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";

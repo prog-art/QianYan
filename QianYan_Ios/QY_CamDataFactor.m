@@ -15,6 +15,20 @@
 
 @implementation QY_CamDataFactor
 
++ (NSData *)getCamDataOfCmd:(NSUInteger)cmd {
+    NSMutableData *camData = [NSMutableData data] ;
+    {
+        NSData *cam_lengthData = [JRMDataFormatUtils formatIntegerValueData:(JMS_DATA_LEN_OF_KEY_CMD )
+                                                                      toLen:JMS_DATA_LEN_OF_KEY_CAMDATA_LENGTH] ;
+        NSData *cam_cmdData = [JRMDataFormatUtils formatIntegerValueData:cmd toLen:JMS_DATA_LEN_OF_KEY_CMD] ;
+        [@[cam_lengthData,cam_cmdData] enumerateObjectsUsingBlock:^(NSData *data, NSUInteger idx, BOOL *stop) {
+            [camData appendData:data] ;
+        }] ;
+    }
+    
+    return camData ;
+}
+
 + (NSData *)getCamDataOfCmd:(NSUInteger)cmd param:(NSUInteger)param {
     NSMutableData *camData = [NSMutableData data] ;
     {

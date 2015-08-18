@@ -33,6 +33,9 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     JMS_SERVICE_OPERATION_GET_CAMERA_THUMBNAIL = 3 ,//去读单个相机的缩略图
     
     JMS_SERVICE_OPERATION_GET_CAMERA_CONFIG = 10 ,//读取相机的设置。
+    JMS_SERVICE_OPERATION_CONFIG_IMAGE_QUALITY ,//配置相机参数
+    JMS_SERVICE_OPERATION_CONFIG_MOVE_TRIGGER_VIDEO ,//移动报警侦测
+    JMS_SERVICE_OPERATION_RESTART_CAMERA ,//重启相机
 } ;
 
 @interface QY_JMSService ()<GCDAsyncSocketDelegate,GCDAsyncUdpSocketDelegate>
@@ -91,9 +94,9 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
 }
 
 - (NSString *)device_id {
-#warning test ;
-    return @"10000133" ;
-//    return [QYUser currentUser].coreUser.userId ;
+//#warning test ;
+//    return @"10000133" ;
+    return [QYUser currentUser].coreUser.userId ;
 }
 
 #pragma mark - helper 
@@ -167,12 +170,16 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     NSArray *cameraIdArr = [cameraIds allObjects] ;
     
     //生成各部分的数据
-    NSData *cameraIdData = [JRMDataFormatUtils formatStringValueData:cameraIdArr[0]
-                                                               toLen:JMS_DATA_LEN_OF_KEY_CAMID] ;
-    NSData *typeData = [JRMDataFormatUtils formatIntegerValueData:type
-                                                            toLen:JMS_DATA_LEN_OF_KEY_TYPE] ;
-    NSData *timeData = [JRMDataFormatUtils formatIntegerValueData:0
-                                                            toLen:JMS_DATA_LEN_OF_KEY_TIME] ;
+//    NSData *cameraIdData = [JRMDataFormatUtils formatStringValueData:cameraIdArr[0]
+//                                                               toLen:JMS_DATA_LEN_OF_KEY_CAMID] ;
+//    NSData *typeData = [JRMDataFormatUtils formatIntegerValueData:type
+//                                                            toLen:JMS_DATA_LEN_OF_KEY_TYPE] ;
+//    NSData *timeData = [JRMDataFormatUtils formatIntegerValueData:0
+//                                                            toLen:JMS_DATA_LEN_OF_KEY_TIME] ;
+    NSData *jmsData = [self getJmsDataByCameraId:cameraIdArr[0] type:type time:0] ;
+    
+    
+    
     NSString *cameraIdsStr = [cameraIdArr componentsJoinedByString:@"&"] ;
     cameraIdsStr = [cameraIdsStr stringByAppendingString:@"&"] ;
     
@@ -180,7 +187,9 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     NSData *lengthData = [JRMDataFormatUtils formatIntegerValueData:[CamData length]
                                                               toLen:JMS_DATA_LEN_OF_KEY_LENGTH] ;
     
-    NSArray *dataArr = @[cameraIdData,typeData,timeData,lengthData,CamData] ;
+    NSArray *dataArr =
+//    @[cameraIdData,typeData,timeData,lengthData,CamData] ;
+    dataArr = @[jmsData,lengthData,CamData] ;
     
     NSMutableData *packageData = [NSMutableData data] ;
     
@@ -399,6 +408,7 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
     if ([cmd isEqualToString:@"LOGIN"]) {
         //发送登录jms的data
         
+        
     } else
     if ([cmd isEqualToString:@"LOGOUT"]) {
         //退出登录！
@@ -484,17 +494,15 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
             sock.dataLen = [JRMDataParseUtils getIntegerValue:data range:NSMakeRange(24, 4)] ;
             
             QYDebugLog(@"接下来去读camData ,长度 = %ld",(long)sock.dataLen) ;
-            [sock readDataToLength:sock.dataLen withTimeout:10.0f tag:( tag % 10 )+ JMS_DATA_READ_OPERATION_CAM_DATA ] ;
+            [sock readDataToLength:sock.dataLen withTimeout:10.0f tag:( tag % 100 )+ JMS_DATA_READ_OPERATION_CAM_DATA ] ;
             
             break ;
         }
             
         case JMS_DATA_READ_OPERATION_CAM_DATA : {
             NSData *camData = data ;
-            QYDebugLog(@"CamData = %@",camData) ;
-            
-            JMS_SERVICE_OPERATION JMSOperation = tag % 10 ;
-            
+            JMS_SERVICE_OPERATION JMSOperation = tag % 100 ;
+            QYDebugLog(@"CamData = %@ operation = %ld",camData,JMSOperation) ;
             switch (JMSOperation) {
                 case 1 : {
                     NSString *state = [JRMDataParseUtils getStringValue:camData range:NSMakeRange(6, 2)] ;
@@ -524,6 +532,57 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
                     }
                     
                     sock.Obj = camData ;
+                    break ;
+                }
+                    
+                case 10 : {
+                    QYDebugLog(@"data = %@",data) ;
+                    
+                    NSInteger dataLen = [JRMDataParseUtils getIntegerValue:data range:NSMakeRange(0, 2)] ;
+//                    NSInteger cmd = [JRMDataParseUtils getIntegerValue:data range:NSMakeRange(2, 4)] ;
+                    NSString *dataStr = [JRMDataParseUtils getStringValue:data range:NSMakeRange(6, dataLen - 2 - 4)] ;
+                    
+                    NSArray *keys = @[CameraLedStateKey,
+                                      CameraResolutionKey,
+                                      CameraMoveTriggerKey,
+                                      CameraBritnessKey,
+                                      CameraContrastKey,
+                                      CameraSpeakerKey,
+                                      CameraSpeakerVolumeKey,
+                                      CameraMicrophoneKey,
+                                      CameraMicrophoneVolumeKey,
+                                      CameraImageQualityKey,
+                                      CameraCodeRateUpperKey] ;
+                    
+                    NSDictionary *configInfoDic = [NSDictionary dictionaryWithObjects:[dataStr componentsSeparatedByString:@","]
+                                                                              forKeys:keys] ;
+                    
+                    sock.Obj = configInfoDic ;
+                    break ;
+                }
+                    
+                case JMS_SERVICE_OPERATION_CONFIG_IMAGE_QUALITY : {
+                    QYDebugLog(@"data = %@",data) ;//<00060000 00f16f6b>
+                    QYDebugLog(@"str = %@",[[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(6, 2)]
+                                                                 encoding:NSUTF8StringEncoding]) ;
+                    sock.Obj = data ;
+                    break ;
+                }
+                    
+                case JMS_SERVICE_OPERATION_CONFIG_MOVE_TRIGGER_VIDEO : {
+                    QYDebugLog(@"data = %@",data) ;
+                    QYDebugLog(@"str = %@",[[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(6, data.length - 6)]
+                                                               encoding:NSUTF8StringEncoding]) ;
+                    sock.Obj = data ;
+                    break ;
+                }
+                    
+                case JMS_SERVICE_OPERATION_RESTART_CAMERA : {
+                    QYDebugLog(@"data = %@",data) ;
+                    QYDebugLog(@"str = %@",[[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(6, data.length - 6)]
+                                                                 encoding:NSUTF8StringEncoding]) ;//ok
+                    sock.Obj = data ;
+                    
                     break ;
                 }
                     
@@ -608,10 +667,92 @@ typedef NS_ENUM(NSInteger, JMS_SERVICE_OPERATION ) {
 }
 
 - (void)configImageQualityForCameraId:(NSString *)cameraId quality:(NSUInteger)quality complection:(QYInfoBlock)complection {
-//    NSUInteger type = 6010 ;
-//    NSUInteger time = 0 ;
-//    
+    assert(0<=quality<=100) ;
+    assert(complection) ;
+    NSUInteger type = 6010 ;
+    NSUInteger time = 0 ;
+    NSData *jmsData = [self getJmsDataByCameraId:cameraId type:type time:time] ;
+    NSData *lenData ;
+    NSData *camData = [QY_CamDataFactor getCamDataOfImageQuality:quality] ;
+    lenData = [JRMDataFormatUtils formatIntegerValueData:camData.length toLen:JMS_DATA_LEN_OF_KEY_LENGTH] ;
+    
+    NSMutableData *sendData = [NSMutableData data] ;
+    
+    [@[jmsData,lenData,camData] enumerateObjectsUsingBlock:^(NSData *data, NSUInteger idx, BOOL *stop) {
+        [sendData appendData:data] ;
+    }] ;
+    
+    QYGCDAsyncSocket *socket = [self getASocket] ;
+    socket.complection = complection ;
+    [self.sockets addObject:socket] ;
+    [self startWorkWithData:sendData socket:socket operation:JMS_SERVICE_OPERATION_CONFIG_IMAGE_QUALITY] ;
 }
 
+- (void)configCameraId:(NSString *)cameraId MoveTriggerToState:(BOOL)open complection:(QYResultBlock)complection {
+    assert(cameraId) ;
+    assert(complection) ;
+    
+    NSUInteger type = 6010 ;
+    NSUInteger time = 0 ;
+    NSData *jmsData = [self getJmsDataByCameraId:cameraId type:type time:time] ;
+    NSData *lenData ;
+    NSData *camData = [QY_CamDataFactor getCamDataOfCmd:MOVE_TRIGGER_VIDEOTAPE_ISOPEN_SET
+                                                  param:open] ;
+    lenData = [JRMDataFormatUtils formatIntegerValueData:camData.length
+                                                   toLen:JMS_DATA_LEN_OF_KEY_LENGTH] ;
+    
+    NSMutableData *sendData = [NSMutableData data] ;
+    
+    [@[jmsData,lenData,camData] enumerateObjectsUsingBlock:^(NSData *data, NSUInteger idx, BOOL *stop) {
+        [sendData appendData:data] ;
+    }] ;
+    
+    QYGCDAsyncSocket *socket = [self getASocket] ;
+    socket.complection = ^(id object,NSError *error) {
+        QYDebugLog(@"object = %@",object) ;
+        BOOL result = FALSE ;
+        
+        if ( !error ) {
+            result = TRUE ;
+        }
+        
+        complection(result,error) ;
+    } ;
+    [self.sockets addObject:socket] ;
+    [self startWorkWithData:sendData socket:socket operation:JMS_SERVICE_OPERATION_CONFIG_MOVE_TRIGGER_VIDEO]  ;;
+}
+
+- (void)restartCameraId:(NSString *)cameraId complection:(QYResultBlock)complection {
+    assert(cameraId) ;
+    assert(complection) ;
+    
+    NSUInteger type = 6010 ;
+    NSUInteger time = 0 ;
+    NSData *jmsData = [self getJmsDataByCameraId:cameraId type:type time:time] ;
+    NSData *lenData ;
+    NSData *camData = [QY_CamDataFactor getCamDataOfCmd:IPNC_RESTART_AV] ;
+    lenData = [JRMDataFormatUtils formatIntegerValueData:camData.length
+                                                   toLen:JMS_DATA_LEN_OF_KEY_LENGTH] ;
+    
+    NSMutableData *sendData = [NSMutableData data] ;
+    
+    [@[jmsData,lenData,camData] enumerateObjectsUsingBlock:^(NSData *data, NSUInteger idx, BOOL *stop) {
+        [sendData appendData:data] ;
+    }] ;
+    
+    QYGCDAsyncSocket *socket = [self getASocket] ;
+    socket.complection = ^(id object,NSError *error) {
+        QYDebugLog(@"object = %@",object) ;
+        BOOL result = FALSE ;
+        
+        if ( !error ) {
+            result = TRUE ;
+        }
+        
+        complection(result,error) ;
+    } ;
+    [self.sockets addObject:socket] ;
+    [self startWorkWithData:sendData socket:socket operation:JMS_SERVICE_OPERATION_RESTART_CAMERA]  ;;
+}
 
 @end
